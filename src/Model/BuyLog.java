@@ -1,4 +1,4 @@
 package Model;
 
-public class BuyLog {
+public class BuyLog extends Log {
 }
