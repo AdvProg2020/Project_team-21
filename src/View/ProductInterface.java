@@ -1,4 +1,5 @@
 package View;
 
-public class ProductInterface {
+public class ProductInterface extends Menu {
+
 }

@@ -1,4 +1,4 @@
 package View;
 
-public class UserInterface {
+public class UserInterface extends Menu {
 }

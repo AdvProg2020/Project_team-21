@@ -1,4 +1,4 @@
 package View;
 
-public class ShowProducts {
+public class ShowProducts extends Menu {
 }

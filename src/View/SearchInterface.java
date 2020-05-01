@@ -1,4 +1,4 @@
 package View;
 
-public class SearchInterface {
+public class SearchInterface extends Menu {
 }

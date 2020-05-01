@@ -1,4 +1,4 @@
 package View;
 
-public class UserSignup {
+public class UserSignup extends Menu {
 }
