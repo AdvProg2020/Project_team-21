@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Control;
 import Model.Account;
 import Model.Customer;
 import com.sun.tools.javac.Main;
@@ -11,7 +12,7 @@ public class ConsoleView{
     private UI currentMenu;
     private UI previousMenu;
     private static ConsoleView instance;
-    private Account user;
+    private Account user = Control.getInstance().getUser();
 
     private ConsoleView()
     {
@@ -37,22 +38,31 @@ public class ConsoleView{
 
     public void processInput(String input)
     {
-        if(input.trim().matches("(?i)main\\s*menu")){
+        if(input.trim().matches("(?i)main\\s*menu"))
+        {
             previousMenu = currentMenu;
             currentMenu = MainMenuUI.getInstance();
-        }else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)")){
-            if(user != null && user instanceof Customer == false)
+        }
+        else if(input.trim().matches("(?i)(login|signup)") && currentMenu.equals(MainMenuUI.getInstance()))
+        {
+            previousMenu = currentMenu;
+            currentMenu = UserInfoUI.getInstance();
+        }
+        else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)"))
+        {
+            if(user != null && !(user instanceof Customer))
             {
                 errorInput("you can't make a new user");
             }
             else
             {
-
+                previousMenu = currentMenu;
+                currentMenu = UserSignupUI.getInstance();
             }
-        }else if(input.trim().matches("(?i)main\\s*menu")){
-
-        }else{
-           errorInput("wrong input");
+        }
+        else
+        {
+            errorInput("Wrong Input");
         }
         this.run(currentMenu);
     }
@@ -61,7 +71,6 @@ public class ConsoleView{
         System.out.println(message);
         processInput(scanner.nextLine());
     }
-
     public void run(UI menu)
     {
         menu.run();
