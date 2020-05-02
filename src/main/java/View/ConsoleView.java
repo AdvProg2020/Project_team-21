@@ -5,6 +5,7 @@ import Model.Account;
 import Model.Customer;
 import com.sun.tools.javac.Main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleView{
@@ -13,10 +14,12 @@ public class ConsoleView{
     private UI previousMenu;
     private static ConsoleView instance;
     private Account user = Control.getInstance().getUser();
+    private ArrayList<UI> seenPages;
 
     private ConsoleView()
     {
         scanner = new Scanner(System.in);
+        seenPages = new ArrayList<>();
     }
     public static ConsoleView getInstance() {
         if(instance == null)
@@ -40,12 +43,12 @@ public class ConsoleView{
     {
         if(input.trim().matches("(?i)main\\s*menu"))
         {
-            previousMenu = currentMenu;
+            seenPages.add(currentMenu);
             currentMenu = MainMenuUI.getInstance();
         }
         else if(input.trim().matches("(?i)(login|signup)") && currentMenu.equals(MainMenuUI.getInstance()))
         {
-            previousMenu = currentMenu;
+            seenPages.add(currentMenu);
             currentMenu = UserInfoUI.getInstance();
         }
         else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)"))
@@ -56,9 +59,14 @@ public class ConsoleView{
             }
             else
             {
-                previousMenu = currentMenu;
+                seenPages.add(currentMenu);
                 currentMenu = UserSignupUI.getInstance();
             }
+        }
+        else if(input.trim().matches("(?i)back"))
+        {
+            currentMenu = seenPages.get(seenPages.size()-1);
+            seenPages.set(seenPages.size()-1 , null);
         }
         else
         {
