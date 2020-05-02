@@ -1,11 +1,2 @@
 package Model;
-
-public enum LogStatus {
-    InTheStore,
-    PreparingInProgress,
-    DeliveredToThePost,
-    Received,
-    CheckingInProgress,
-    Registered;
-
-}
+public enum LogStatus {processing,received,sending;}
