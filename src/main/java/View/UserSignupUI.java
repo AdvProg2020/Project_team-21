@@ -15,6 +15,7 @@ public class UserSignupUI extends UI {
 
     @Override
     public void run() {
-
+        System.out.println("enter your password: ");
+        String password = ConsoleView.getScanner().nextLine();
     }
 }

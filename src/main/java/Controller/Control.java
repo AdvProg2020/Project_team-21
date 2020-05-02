@@ -21,4 +21,9 @@ public class Control {
     public void setUser(Account user) {
         this.user = user;
     }
+
+    public void createNewAccount()
+    {
+
+    }
 }
