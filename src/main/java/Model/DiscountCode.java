@@ -21,12 +21,14 @@ public class DiscountCode {
     }
 
     public DiscountCode(String discountId, LocalDateTime startTime, LocalDateTime endTime, int discountPercentage, double maxDiscountAmount, int discountNumberForEachUser){
-        this.discountId = discountId;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.discountPercentage = discountPercentage;
-        this.maxDiscountAmount = maxDiscountAmount;
-        this.discountNumberForEachUser = discountNumberForEachUser;
+
+        setDiscountId(discountId);
+        setStartTime(startTime);
+        setEndTime(endTime);
+        setDiscountPercentage(discountPercentage);
+        setMaxDiscountAmount(maxDiscountAmount);
+        setDiscountNumberForEachUser(discountNumberForEachUser);
+        allDiscountCodes.add(this);
     }
 
     public String getDiscountId() {
@@ -63,5 +65,13 @@ public class DiscountCode {
 
     public void setMaxDiscountAmount(double maxDiscountAmount) {
         this.maxDiscountAmount = maxDiscountAmount;
+    }
+
+    private void setDiscountId(String discountId) {
+        this.discountId = discountId;
+    }
+
+    private void setDiscountNumberForEachUser(int discountNumberForEachUser) {
+        this.discountNumberForEachUser = discountNumberForEachUser;
     }
 }
