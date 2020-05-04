@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<>();
     private String name;
