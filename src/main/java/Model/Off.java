@@ -72,9 +72,9 @@ public class Off {
         return endTime;
     }
 
-    public boolean doesProductExistWithId(int id){
+    public boolean doesProductExistWithId(String id){
         for (Product product : productsList) {
-            if(product.getProductId()==id){
+            if(product.getProductId().equals(id)){
                 return true;
             }
         }

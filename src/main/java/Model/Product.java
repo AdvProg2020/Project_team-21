@@ -2,9 +2,9 @@ package Model;
 
 public class Product {
 
-    private int productId;
+    private String productId;
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 }
