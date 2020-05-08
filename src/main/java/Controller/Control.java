@@ -26,4 +26,12 @@ public class Control {
     {
 
     }
+    public void showPopularProducts()
+    {
+
+    }
+    public void showSales()
+    {
+
+    }
 }

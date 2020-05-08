@@ -5,7 +5,8 @@ import Model.Account;
 
 public class MainMenuUI extends UI {
     private static MainMenuUI instance;
-    private Account user = Control.getInstance().getUser();
+    Control controller = Control.getInstance();
+    private Account user = controller.getUser();
     private MainMenuUI()
     {
 
@@ -26,6 +27,10 @@ public class MainMenuUI extends UI {
         {
             System.out.println("welcome"+user.getFirstName()+"            Advanced Idiots Market inc.                     ");
         }
+        System.out.println("       Most Popular Products By Our Users     ");
+        controller.showPopularProducts();
+        System.out.println("        Recent Sales For you        ");
+        controller.showSales();
         ConsoleView.getInstance().processInput(ConsoleView.getScanner().nextLine());
     }
 }

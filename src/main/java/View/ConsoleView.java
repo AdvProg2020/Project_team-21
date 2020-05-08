@@ -3,7 +3,6 @@ package View;
 import Controller.Control;
 import Model.Account;
 import Model.Customer;
-import com.sun.tools.javac.Main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,10 +10,9 @@ import java.util.Scanner;
 public class ConsoleView{
     private static Scanner scanner;
     private UI currentMenu;
-    private UI previousMenu;
+    private ArrayList<UI> seenPages;
     private static ConsoleView instance;
     private Account user = Control.getInstance().getUser();
-    private ArrayList<UI> seenPages;
 
     private ConsoleView()
     {
@@ -39,17 +37,20 @@ public class ConsoleView{
         return scanner;
     }
 
+    private void goToNextPage(UI menu)
+    {
+        seenPages.add(currentMenu);
+        currentMenu = menu;
+    }
     public void processInput(String input)
     {
         if(input.trim().matches("(?i)main\\s*menu"))
         {
-            seenPages.add(currentMenu);
-            currentMenu = MainMenuUI.getInstance();
+            goToNextPage(MainMenuUI.getInstance());
         }
         else if(input.trim().matches("(?i)(login|signup)") && currentMenu.equals(MainMenuUI.getInstance()))
         {
-            seenPages.add(currentMenu);
-            currentMenu = UserInfoUI.getInstance();
+            goToNextPage(UserInfoUI.getInstance());
         }
         else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)"))
         {
@@ -59,9 +60,12 @@ public class ConsoleView{
             }
             else
             {
-                seenPages.add(currentMenu);
-                currentMenu = UserSignupUI.getInstance();
+                goToNextPage(UserSignupUI.getInstance());
             }
+        }
+        else if(input.trim().matches("(?i)(login|signup)") && currentMenu.equals(MainMenuUI.getInstance()))
+        {
+            goToNextPage(UserInfoUI.getInstance());
         }
         else if(input.trim().matches("(?i)back"))
         {
