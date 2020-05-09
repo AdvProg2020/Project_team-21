@@ -48,11 +48,11 @@ public class ConsoleView{
         {
             goToNextPage(MainMenuUI.getInstance());
         }
-        else if(input.trim().matches("(?i)(login|signup)") && currentMenu.equals(MainMenuUI.getInstance()))
+        else if(input.trim().matches("(?i)(login|signup|view\\s*personal\\s*info)"))
         {
             goToNextPage(UserInfoUI.getInstance());
         }
-        else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)"))
+        else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)") && currentMenu.equals(UserLoginUI.getInstance()))
         {
             if(user != null && !(user instanceof Customer))
             {
@@ -63,8 +63,9 @@ public class ConsoleView{
                 goToNextPage(UserSignupUI.getInstance());
             }
         }
-        else if(input.trim().matches("(?i)(login|signup)") && currentMenu.equals(MainMenuUI.getInstance()))
+        else if(input.trim().matches("(?i)login\\s+(.+)") && currentMenu.equals(UserSignupUI.getInstance()))
         {
+            UserLoginUI.getInstance().login(input.trim().split("\\s+")[1]);
             goToNextPage(UserInfoUI.getInstance());
         }
         else if(input.trim().matches("(?i)back"))
@@ -78,7 +79,7 @@ public class ConsoleView{
         }
         this.run(currentMenu);
     }
-    private void errorInput(String message)
+    public void errorInput(String message)
     {
         System.out.println(message);
         processInput(scanner.nextLine());
@@ -86,6 +87,7 @@ public class ConsoleView{
     public void run(UI menu)
     {
         menu.run();
+        processInput(scanner.nextLine());
     }
 
 }

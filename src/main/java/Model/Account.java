@@ -1,16 +1,17 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Account {
-    private ArrayList<Account> allAccounts =new ArrayList<Account>();
+    private static HashMap<String, Account> allAccounts = new HashMap<>();
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
     private String password;
-    private ArrayList<DiscountCode> discountList = new ArrayList<DiscountCode>();
+    private ArrayList<DiscountCode> discountList;
     private double credit;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit) {
@@ -22,7 +23,7 @@ public abstract class Account {
         this.password = password;
         this.discountList = discountList;
         this.credit = credit;
-        allAccounts.add(this);
+        allAccounts.put(username,this);
     }
 
     public String getUsername() {
@@ -51,6 +52,10 @@ public abstract class Account {
 
     public double getCredit() {
         return credit;
+    }
+
+    public static HashMap<String, Account> getAllAccounts() {
+        return allAccounts;
     }
 
     public void setFirstName(String firstName) {
