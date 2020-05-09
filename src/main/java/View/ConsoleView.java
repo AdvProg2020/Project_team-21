@@ -52,14 +52,16 @@ public class ConsoleView{
         {
             goToNextPage(UserInfoUI.getInstance());
         }
-        else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(.+)") && currentMenu.equals(UserLoginUI.getInstance()))
+        else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(\\S+)") && currentMenu.equals(UserLoginUI.getInstance()))
         {
-            if(user != null && !(user instanceof Customer))
+            if(UserSignupUI.getInstance().checkIfCustomer())
             {
                 errorInput("you can't make a new user");
             }
             else
             {
+                UserSignupUI.getInstance().setType(input.trim().split("\\s+")[2]);
+                UserSignupUI.getInstance().setUserName(input.trim().split("\\s+")[3]);
                 goToNextPage(UserSignupUI.getInstance());
             }
         }

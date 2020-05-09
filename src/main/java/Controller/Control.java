@@ -47,6 +47,10 @@ public class Control {
         }
         user = Account.getAllAccounts().get(userName);
     }
+    public void createAccount ()
+    {
+
+    }
     class notFoundUserOrPass extends Exception
     {
         notFoundUserOrPass(String message)
