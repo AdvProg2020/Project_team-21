@@ -23,5 +23,16 @@ public class DataBase <Public> {
         fileWriter.close();
     }
 
+    public void saveProduct (Product product) throws IOException {
+        Gson gson= new GsonBuilder().setPrettyPrinting().create();
+//        String Id=product.getId();    //product remains
+        String filePath= "Product Data: "+ File.separator;
+//        String fileName= Id + "'s json";
+//        File file = new File (filePath + File.separator+fileName);
+//        FileWriter fileWriter = new FileWriter(file);
+//        fileWriter.write(gson.toJson(product));
+//        fileWriter.close();
+    }
+
 
 }
