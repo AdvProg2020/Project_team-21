@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DataBase <Public> {
     private static DataBase dataBase;
@@ -84,6 +85,20 @@ public class DataBase <Public> {
 //        String fileName=category.getName() + "'s json";
 //        File file=new File(filePath+File.separator+fileName);
 //        file.delete();
+    }
+
+
+
+    public ArrayList<String> printFolderContent(String folderName){
+        ArrayList<String> fileNames=new ArrayList();
+        String path="Resource"+File.separator+folderName;
+        File[] files = new File(path).listFiles();
+        for (File file : files) {
+            if (file.isFile()) {
+                fileNames.add(file.getName().replace(".json",""));
+            }
+        }
+        return fileNames;
     }
 
 }
