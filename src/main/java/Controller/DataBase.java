@@ -23,6 +23,14 @@ public class DataBase <Public> {
         fileWriter.close();
     }
 
+    public  void deleteAccount(Account account){
+        String Username=account.getUsername();
+        String filePath="Account Data: "+File.separator;
+        String fileName=Username+"'s json";
+        File file=new File(filePath+File.separator+fileName);
+        file.delete();
+    }
+
     public void saveProduct (Product product) throws IOException {
         Gson gson= new GsonBuilder().setPrettyPrinting().create();
 //        String Id=product.getId();    //product remains
@@ -32,6 +40,14 @@ public class DataBase <Public> {
 //        FileWriter fileWriter = new FileWriter(file);
 //        fileWriter.write(gson.toJson(product));
 //        fileWriter.close();
+    }
+
+    public  void deleteProduct(Product product){
+//        String Id=product.getId();
+        String filePath="Product Data: "+File.separator;
+//        String fileName=Id+"'s json";
+//        File file=new File(filePath+File.separator+fileName);
+//        file.delete();
     }
 
     public void saveDiscountCode (DiscountCode discountCode) throws IOException {
@@ -45,6 +61,14 @@ public class DataBase <Public> {
 //        fileWriter.close();
     }
 
+    public  void deleteDiscountCode(DiscountCode discountCode){
+//        String Id=product.getId();
+        String filePath="DiscountCode Data: "+File.separator;
+//        String fileName=Id+"'s json";
+//        File file=new File(filePath+File.separator+fileName);
+//        file.delete();
+    }
+
     public void saveCategory (Category category) throws IOException {
         Gson gson= new GsonBuilder().setPrettyPrinting().create();
         String filePath= "Account Data: "+ File.separator;
@@ -55,5 +79,11 @@ public class DataBase <Public> {
         fileWriter.close();
     }
 
+    public  void deleteCategory(Category category){
+        String filePath="Category Data: "+File.separator;
+//        String fileName=category.getName() + "'s json";
+//        File file=new File(filePath+File.separator+fileName);
+//        file.delete();
+    }
 
 }
