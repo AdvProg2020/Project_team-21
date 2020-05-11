@@ -87,8 +87,6 @@ public class DataBase <Public> {
 //        file.delete();
     }
 
-
-
     public ArrayList<String> printFolderContent(String folderName){
         ArrayList<String> fileNames=new ArrayList();
         String path="Resource"+File.separator+folderName;
