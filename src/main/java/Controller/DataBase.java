@@ -34,5 +34,17 @@ public class DataBase <Public> {
 //        fileWriter.close();
     }
 
+    public void saveDiscountCode (DiscountCode discountCode) throws IOException {
+        Gson gson= new GsonBuilder().setPrettyPrinting().create();
+//        String Id=discountCode.getUsername();
+        String filePath= "DiscountCode Data: "+ File.separator;
+//        String fileName= Id + "'s json";
+//        File file = new File (filePath + File.separator+fileName);
+//        FileWriter fileWriter = new FileWriter(file);
+//        fileWriter.write(gson.toJson(discountCode));
+//        fileWriter.close();
+    }
+
+
 
 }
