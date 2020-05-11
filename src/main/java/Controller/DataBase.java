@@ -1,0 +1,27 @@
+package Controller;
+
+import Model.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class DataBase <Public> {
+    private static DataBase dataBase;
+    private DataBase(){}
+
+    public void saveAccount (Account account) throws IOException {
+        Gson gson= new GsonBuilder().setPrettyPrinting().create();
+        String Username=account.getUsername();
+        String filePath= "Account Data: "+ File.separator;
+        String fileName= Username + "'s json";
+        File file = new File (filePath + File.separator+fileName);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(gson.toJson(account));
+        fileWriter.close();
+    }
+
+
+}
