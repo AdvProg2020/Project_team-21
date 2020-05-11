@@ -45,6 +45,15 @@ public class DataBase <Public> {
 //        fileWriter.close();
     }
 
+    public void saveCategory (Category category) throws IOException {
+        Gson gson= new GsonBuilder().setPrettyPrinting().create();
+        String filePath= "Account Data: "+ File.separator;
+        String fileName= category.getName() + "'s json";
+        File file = new File (filePath + File.separator+fileName);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(gson.toJson(category));
+        fileWriter.close();
+    }
 
 
 }
