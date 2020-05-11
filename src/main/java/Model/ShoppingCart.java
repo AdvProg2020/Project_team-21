@@ -20,8 +20,8 @@ public class ShoppingCart {
         return customer;
     }
 
-    public void addProduct(Product product){
-//        products.put(product, product.getProductId());
+    public void addProduct(Product product, int num){
+        products.put(product, num);
     }
 
     public void removeProduct(Product product){
