@@ -1,14 +1,18 @@
 package View;
 
 import Controller.Control;
+import Model.Account;
 import Model.Customer;
+import Model.Manager;
 
+import java.io.Console;
 import java.util.Scanner;
 
 public class UserSignupUI extends UI {
     private static UserSignupUI instance;
     private String type;
     private String userName;
+    private Account user = Control.getInstance().getUser();
     public static UserSignupUI getInstance() {
         if(instance == null)
             instance = new UserSignupUI();
@@ -26,13 +30,17 @@ public class UserSignupUI extends UI {
     @Override
     public void run()
     {
+        if(checkIfCustomer())
+        {
+            ConsoleView.getInstance().errorInput("");
+        }
         Scanner scanner = ConsoleView.getScanner();
+        System.out.println("Enter your password: ");
+        String password = scanner.nextLine();
         System.out.println("Enter your first name: ");
         String firstName = scanner.nextLine();
         System.out.println("Enter your last name: ");
         String lastName = scanner.nextLine();
-        System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
         System.out.println("Re-Enter your password: ");
         String checkPassword = scanner.nextLine();
         System.out.println("Enter your email: ");
@@ -40,7 +48,7 @@ public class UserSignupUI extends UI {
         System.out.println("Enter your phone number: ");
         String phone = scanner.nextLine();
 
-        //now do the control method
+        Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone);
 
     }
     public boolean checkIfCustomer()
@@ -50,5 +58,11 @@ public class UserSignupUI extends UI {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void help()
+    {
+        System.out.println("Just enter what console wants from you.");
     }
 }

@@ -47,8 +47,12 @@ public class Control {
         }
         user = Account.getAllAccounts().get(userName);
     }
-    public void createAccount ()
+    public void createAccount (String type,String username, String password, String firstName, String lastName, String email, String phoneNumber)
     {
+        if(type.equalsIgnoreCase("manager"))
+        {
+            ControlManager.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber);
+        }
 
     }
     class notFoundUserOrPass extends Exception

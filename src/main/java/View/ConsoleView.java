@@ -48,6 +48,11 @@ public class ConsoleView{
         {
             goToNextPage(MainMenuUI.getInstance());
         }
+        else if(input.trim().equalsIgnoreCase("help"))
+        {
+            currentMenu.help();
+            processInput(scanner.nextLine());
+        }
         else if(input.trim().matches("(?i)(login|signup|view\\s*personal\\s*info)"))
         {
             goToNextPage(UserInfoUI.getInstance());
@@ -89,6 +94,7 @@ public class ConsoleView{
     public void run(UI menu)
     {
         menu.run();
+        System.out.println("For commands on this page please enter Help.");
         processInput(scanner.nextLine());
     }
 

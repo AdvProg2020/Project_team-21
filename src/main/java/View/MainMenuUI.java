@@ -31,6 +31,11 @@ public class MainMenuUI extends UI {
         controller.showPopularProducts();
         System.out.println("        Recent Sales For you        ");
         controller.showSales();
-        ConsoleView.getInstance().processInput(ConsoleView.getScanner().nextLine());
+    }
+
+    @Override
+    public void help()
+    {
+        System.out.println("Login: login\nSignup: signup\nSee sales: sales\nSee all products: products\nSee all categories: categories");
     }
 }
