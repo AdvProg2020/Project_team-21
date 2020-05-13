@@ -32,6 +32,10 @@ public class ConsoleView{
     public UI getCurrentMenu() {
         return currentMenu;
     }
+    public UI getLastMenu()
+    {
+        return seenPages.get(seenPages.size()-2);
+    }
 
     public static Scanner getScanner() {
         return scanner;
@@ -59,16 +63,9 @@ public class ConsoleView{
         }
         else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(\\S+)") && currentMenu.equals(UserLoginUI.getInstance()))
         {
-            if(UserSignupUI.getInstance().checkIfCustomer())
-            {
-                errorInput("you can't make a new user");
-            }
-            else
-            {
                 UserSignupUI.getInstance().setType(input.trim().split("\\s+")[2]);
                 UserSignupUI.getInstance().setUserName(input.trim().split("\\s+")[3]);
                 goToNextPage(UserSignupUI.getInstance());
-            }
         }
         else if(input.trim().matches("(?i)login\\s+(.+)") && currentMenu.equals(UserSignupUI.getInstance()))
         {
@@ -77,19 +74,22 @@ public class ConsoleView{
         }
         else if(input.trim().matches("(?i)back"))
         {
-            currentMenu = seenPages.get(seenPages.size()-1);
+            if(seenPages.size()<=1)
+                errorInput("you can't get back from here!" , currentMenu);
+            currentMenu = seenPages.get(seenPages.size()-2);
             seenPages.set(seenPages.size()-1 , null);
         }
         else
         {
-            errorInput("Wrong Input");
+            errorInput("Wrong Input",currentMenu);
         }
         this.run(currentMenu);
     }
-    public void errorInput(String message)
+    public void errorInput(String message,UI landing)
     {
         System.out.println(message);
         processInput(scanner.nextLine());
+        currentMenu = landing;
     }
     public void run(UI menu)
     {

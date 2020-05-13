@@ -30,9 +30,22 @@ public class UserSignupUI extends UI {
     @Override
     public void run()
     {
+        //three exceptions
         if(checkIfCustomer())
         {
-            ConsoleView.getInstance().errorInput("");
+            ConsoleView.getInstance().errorInput("You are a customer and can't make a new user",ConsoleView.getInstance().getLastMenu());
+        }
+        if(!(user instanceof Manager) && type.equalsIgnoreCase("manager") && !Manager.getAllManagers().isEmpty())
+        {
+            ConsoleView.getInstance().errorInput("You should be a manager to create a manager account" , ConsoleView.getInstance().getLastMenu());
+        }
+        if(!(type.matches("(?i)customer|manager|seller")))
+        {
+            ConsoleView.getInstance().errorInput("There is no type of account like that!",ConsoleView.getInstance().getLastMenu());
+        }
+        if(Account.getAllAccounts().containsKey(userName))
+        {
+            ConsoleView.getInstance().errorInput("This username already exists!",ConsoleView.getInstance().getLastMenu());
         }
         Scanner scanner = ConsoleView.getScanner();
         System.out.println("Enter your password: ");

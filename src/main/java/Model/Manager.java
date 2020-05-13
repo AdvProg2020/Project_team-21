@@ -3,25 +3,24 @@ package Model;
 import java.util.ArrayList;
 
 public class Manager extends Account {
-    private ArrayList<Manager> allManagers = new ArrayList<>();
-    private ArrayList <DiscountCode> allDiscountCodes = new ArrayList<>();
-    private ArrayList <Account> allUsers = new ArrayList<>();
-    private ArrayList <Category> allCategories = new ArrayList<>();
+    private static ArrayList<Manager> allManagers = new ArrayList<>();
 
-    public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit) {
-        super(username, firstName, lastName, email, phoneNumber, password, discountList, credit);
+    public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
+        super(username, firstName, lastName, email, phoneNumber, password);
+        addNewManager(this);
     }
 
     public String getType(){
         return "Manager";
     }
 
-    public void addAccount (Account account){
-        allUsers.add(account);
+
+    public void removeManager (Account account){
+        allManagers.remove(account);
     }
 
-    public void removeAccount (Account account){
-        allUsers.remove(account);
+    public static ArrayList<Manager> getAllManagers() {
+        return allManagers;
     }
 
     public void addNewManager (Manager manager){

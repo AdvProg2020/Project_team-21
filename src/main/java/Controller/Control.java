@@ -2,6 +2,7 @@ package Controller;
 
 
 import Model.Account;
+import View.ConsoleView;
 
 public class Control {
 
@@ -23,10 +24,6 @@ public class Control {
         this.user = user;
     }
 
-    public void createNewAccount()
-    {
-
-    }
     public void showPopularProducts()
     {
 
@@ -47,11 +44,20 @@ public class Control {
         }
         user = Account.getAllAccounts().get(userName);
     }
+
     public void createAccount (String type,String username, String password, String firstName, String lastName, String email, String phoneNumber)
     {
         if(type.equalsIgnoreCase("manager"))
         {
             ControlManager.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber);
+        }
+        else if(type.equalsIgnoreCase("seller"))
+        {
+            ControlSeller.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber);
+        }
+        else if(type.equalsIgnoreCase("customer"))
+        {
+            ControlCustomer.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber);
         }
 
     }

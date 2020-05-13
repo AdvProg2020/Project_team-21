@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Manager;
+
 public class ControlManager {
     private static ControlManager instance;
     private ControlManager()
@@ -14,6 +16,6 @@ public class ControlManager {
     }
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber)
     {
-
+        new Manager(username,firstName,lastName,email,phoneNumber,password);
     }
 }

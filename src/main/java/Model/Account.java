@@ -14,15 +14,15 @@ public abstract class Account {
     private ArrayList<DiscountCode> discountList;
     private double credit;
 
-    public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit) {
+    public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.discountList = discountList;
-        this.credit = credit;
+        this.discountList = new ArrayList<>();
+        this.credit = 0;
         allAccounts.put(username,this);
     }
 
