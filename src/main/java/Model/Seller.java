@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Seller extends Account {
     private ArrayList<Seller> allSellers = new ArrayList<>();
     private String companyName;
+    private double balance;
+
+
     private ArrayList<Product> allProducts = new ArrayList<>();
     private ArrayList<Off> allOffs = new ArrayList<>();
     private ArrayList<SellLog> sellLogs = new ArrayList<>();
@@ -49,5 +52,18 @@ public class Seller extends Account {
 
     public void setSellLogs(ArrayList<SellLog> sellLogs) {
         this.sellLogs = sellLogs;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    @Override
+    public String Type(){
+        return "Seller";
     }
 }

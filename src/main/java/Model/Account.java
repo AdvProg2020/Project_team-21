@@ -86,7 +86,9 @@ public abstract class Account {
         return null;
     }
 
-
+    public static ArrayList<Account> getAllAccounts() {
+        return allAccounts;
+    }
 
     @Override
     public String toString() {
@@ -101,4 +103,6 @@ public abstract class Account {
                 ", credit=" + credit +
                 '}';
     }
+
+    public abstract String Type();
 }

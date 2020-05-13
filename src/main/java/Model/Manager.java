@@ -33,4 +33,9 @@ public class Manager extends Account {
     }
 
     public static Manager getManager() { return manager; }
+
+    @Override
+    public String Type(){
+        return "Manager";
+    }
 }

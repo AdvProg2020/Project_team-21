@@ -49,4 +49,9 @@ public class Customer extends Account {
     public void setBalance(int balance) {
         this.balance = balance;
     }
+
+    @Override
+    public String Type(){
+        return "Customer";
+    }
 }
