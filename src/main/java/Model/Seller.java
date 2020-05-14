@@ -62,6 +62,8 @@ public class Seller extends Account {
         this.balance = balance;
     }
 
+    public void addSellLog (SellLog sellLog){sellLogs.add(sellLog);}
+
     @Override
     public String Type(){
         return "Seller";
