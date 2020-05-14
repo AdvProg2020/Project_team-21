@@ -33,12 +33,10 @@ public class ManagerViewUI extends UI {
             System.out.println("Password: " + userTemp.getPassword());
             System.out.println("Email: " + userTemp.getEmail());
             System.out.println("Phone Number: " + userTemp.getPhoneNumber());
-        }catch (Exception e) {
-            ConsoleView.getInstance().errorInput(e.getMessage(), ManagerManageUsersUI.getInstance());
-        }finally {
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
+        }catch (Exception e) {
+            ConsoleView.getInstance().errorInput(e.getMessage(), ConsoleView.getInstance().getLastMenu());
         }
-
     }
 
     @Override

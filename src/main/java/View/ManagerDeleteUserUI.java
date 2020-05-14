@@ -28,12 +28,11 @@ public class ManagerDeleteUserUI extends UI {
         {
             Control.getInstance().deleteUser(username);
             System.out.println("User "+username+" has been deleted succesfuly!");
+            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
         }
         catch (Exception e)
         {
-            ConsoleView.getInstance().errorInput(e.getMessage(),ManagerManageUsersUI.getInstance());
-        }finally {
-            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
+            ConsoleView.getInstance().errorInput(e.getMessage(),ConsoleView.getInstance().getLastMenu());
         }
 
     }

@@ -158,17 +158,8 @@ public class UserInfoUI extends UI {
         System.out.println("To show your password : show password");
         if(user instanceof Manager)
         {
-//                System.out.println("to show information of a user : view [username]");
-//                System.out.println("to delete a user : delete user [username]");
-//                System.out.println("To add a new manager : create manager profile");
-//                System.out.println("to sort by alphabet : sort by alphabet");
-
-                System.out.println("to manager users : manage users");
-
-//            System.out.println("to check off list waiting for you : off list\no check products list waiting for you : product list\no check seller list waiting for you : seller list\n");
-//            System.out.println("to add a new discount code : create discount code\n");
-
-            //System.out.println("to manage products : manage all products\n");
+             System.out.println("to manager users : manage users");
+             System.out.println("to manage products : manage all products\n");
         }
     }
 }

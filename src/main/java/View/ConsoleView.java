@@ -119,11 +119,29 @@ public class ConsoleView{
             }
             else if(user instanceof Manager)
             {
-                if(input.trim().matches("(?i)manage\\s+users") && user instanceof Manager && currentMenu.equals(UserInfoUI.getInstance()))
+                if(input.trim().matches("(?i)manage\\s+users"))
                 {
                     goToNextPage(ManagerManageUsersUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches("(?i)manage\\s+all\\s+products"))
+                {
+                    goToNextPage(ManagerManageProductsUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)create\\s+discount\\s+code"))
+                {
+
+                }
+            }
+        }
+        else if(currentMenu.equals(ManagerManageProductsUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)remove\\s+(.+)"))
+            {
+                ManagerRemoveProductUI.getInstance().setID(input.split("\\s+")[1]);
+                goToNextPage(ManagerManageProductsUI.getInstance());
+                rightInput = true;
             }
         }
         else if(currentMenu.equals(ManagerManageUsersUI.getInstance()))

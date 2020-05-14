@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Account;
 import Model.Manager;
+import Model.Product;
 
 public class ControlManager {
 
@@ -28,5 +29,11 @@ public class ControlManager {
         {
             throw new Exception("This username doesn't exist!");
         }
+    }
+    public void removeProduct(String id) throws Exception
+    {
+        if(!Product.getAllProducts().containsKey(id))
+            throw new Exception("This product doesn't exist!");
+        Product.getAllProducts().remove(id);
     }
 }

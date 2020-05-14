@@ -39,11 +39,9 @@ public class ManagerCreateManagerUI extends UI {
             String phone = scanner.nextLine();
             Control.getInstance().createAccount("manager",username,password,firstName,lastName,email,phone,checkPassword,"",false);
             System.out.println("The account has been created!");
-        }catch (Exception e)
-        {
-            ConsoleView.getInstance().errorInput(e.getMessage(),ManagerManageUsersUI.getInstance());
-        }finally {
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
+        }catch (Exception e) {
+            ConsoleView.getInstance().errorInput(e.getMessage(), ConsoleView.getInstance().getLastMenu());
         }
 
     }
