@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public abstract class Account {
-    private ArrayList<Account> allAccounts =new ArrayList<Account>();
+    private static ArrayList<Account> allAccounts =new ArrayList<Account>();
     private String username;
     private String firstName;
     private String lastName;
@@ -77,6 +77,19 @@ public abstract class Account {
         allAccounts.remove(account);
     }
 
+    public static Account getAccountByUsername(String username) {
+        for (Account account : allAccounts) {
+            if (account.getUsername().equals(username)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Account> getAllAccounts() {
+        return allAccounts;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -90,4 +103,6 @@ public abstract class Account {
                 ", credit=" + credit +
                 '}';
     }
+
+    public abstract String Type();
 }

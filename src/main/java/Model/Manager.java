@@ -3,6 +3,10 @@ package Model;
 import java.util.ArrayList;
 
 public class Manager extends Account {
+    private static Manager manager = null;
+
+
+
     private ArrayList<Manager> allManagers = new ArrayList<>();
     private ArrayList <DiscountCode> allDiscountCodes = new ArrayList<>();
     private ArrayList <Account> allUsers = new ArrayList<>();
@@ -26,5 +30,12 @@ public class Manager extends Account {
 
     public void addNewManager (Manager manager){
         allManagers.add(manager);
+    }
+
+    public static Manager getManager() { return manager; }
+
+    @Override
+    public String Type(){
+        return "Manager";
     }
 }
