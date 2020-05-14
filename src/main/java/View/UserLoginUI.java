@@ -43,10 +43,16 @@ public class UserLoginUI extends UI {
         try {
             Control.getInstance().login(userName,ConsoleView.getScanner().nextLine());
             System.out.println("Wellcome " + Control.getInstance().getUser().getFirstName());
+            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
+            ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
         }catch (Exception e)
         {
-            ConsoleView.getInstance().errorInput(e.getMessage());
+            ConsoleView.getInstance().errorInput(e.getMessage(),ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
         }
+    }
 
+    @Override
+    public void help() {
+        System.out.println("Login: login [Username]\nSignup: create account [type] [username]");
     }
 }

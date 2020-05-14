@@ -10,8 +10,8 @@ public class Seller extends Account {
     private ArrayList<SellLog> sellLogs = new ArrayList<>();
 
 
-    public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit, String companyName) {
-        super(username, firstName, lastName, email, phoneNumber, password, discountList, credit);
+    public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, String companyName) {
+        super(username, firstName, lastName, email, phoneNumber, password);
         this.companyName = companyName;
     }
 
@@ -45,6 +45,11 @@ public class Seller extends Account {
 
     public void addOffs (Off off){
         allOffs.add(off);
+    }
+
+    @Override
+    public String getType() {
+        return "Seller";
     }
 
     public void setSellLogs(ArrayList<SellLog> sellLogs) {

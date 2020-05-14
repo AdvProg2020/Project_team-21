@@ -1,9 +1,14 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Manager extends Account {
     private static ArrayList<Manager> allManagers = new ArrayList<>();
+
+    private static ArrayList<Seller> sellerActivationList = new ArrayList<>();
+    private static HashMap<RequestType,Product> productChangeList = new HashMap<>();
+    private static HashMap<RequestType,Off> offChangeList = new HashMap<>();
 
     public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
@@ -13,7 +18,6 @@ public class Manager extends Account {
     public String getType(){
         return "Manager";
     }
-
 
     public void removeManager (Account account){
         allManagers.remove(account);

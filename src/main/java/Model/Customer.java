@@ -11,8 +11,8 @@ public class Customer extends Account {
     public HashMap<Off , Integer> offs = new HashMap<>();
     public int balance;
 
-    public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit) {
-        super(username, firstName, lastName, email, phoneNumber, password, discountList, credit);
+    public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
+        super(username, firstName, lastName, email, phoneNumber, password);
     }
 
     public ShoppingCart getShoppingCart() {
@@ -44,6 +44,11 @@ public class Customer extends Account {
 
     public int getBalance() {
         return balance;
+    }
+
+    @Override
+    public String getType() {
+        return "Customer";
     }
 
     public void setBalance(int balance) {

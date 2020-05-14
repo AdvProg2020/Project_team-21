@@ -3,6 +3,7 @@ package View;
 import Controller.Control;
 import Model.Account;
 import Model.Customer;
+import Model.Manager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class ConsoleView{
     private ArrayList<UI> seenPages;
     private static ConsoleView instance;
     private Account user = Control.getInstance().getUser();
-
+    private UI landingPageAfterSigninOrSignup;
     private ConsoleView()
     {
         scanner = new Scanner(System.in);
@@ -23,6 +24,14 @@ public class ConsoleView{
         if(instance == null)
             instance = new ConsoleView();
         return instance;
+    }
+
+    public UI getLandingPageAfterSigninOrSignup() {
+        return landingPageAfterSigninOrSignup;
+    }
+
+    public void setLandingPageAfterSigninOrSignup(UI landingPageAfterSigninOrSignup) {
+        this.landingPageAfterSigninOrSignup = landingPageAfterSigninOrSignup;
     }
 
     public void setCurrentMenu(UI currentMenu) {
@@ -41,7 +50,7 @@ public class ConsoleView{
         return scanner;
     }
 
-    private void goToNextPage(UI menu)
+    public void goToNextPage(UI menu)
     {
         seenPages.add(currentMenu);
         currentMenu = menu;
@@ -52,13 +61,9 @@ public class ConsoleView{
         {
             goToNextPage(MainMenuUI.getInstance());
         }
-        else if(input.trim().equalsIgnoreCase("help"))
+        else if(input.trim().matches("(?i)(login|signup|(view\\s*personal\\s*info))"))
         {
-            currentMenu.help();
-            processInput(scanner.nextLine());
-        }
-        else if(input.trim().matches("(?i)(login|signup|view\\s*personal\\s*info)"))
-        {
+            UserInfoUI.getInstance().setNewToInfo(true);
             goToNextPage(UserInfoUI.getInstance());
         }
         else if(input.trim().matches("(?i)create account\\s+(customer|manager|seller)\\s+(\\S+)") && currentMenu.equals(UserLoginUI.getInstance()))
@@ -67,10 +72,23 @@ public class ConsoleView{
                 UserSignupUI.getInstance().setUserName(input.trim().split("\\s+")[3]);
                 goToNextPage(UserSignupUI.getInstance());
         }
-        else if(input.trim().matches("(?i)login\\s+(.+)") && currentMenu.equals(UserSignupUI.getInstance()))
+        else if(input.trim().matches("(?i)login\\s+(.+)") && currentMenu.equals(UserLoginUI.getInstance()))
         {
             UserLoginUI.getInstance().login(input.trim().split("\\s+")[1]);
             goToNextPage(UserInfoUI.getInstance());
+        }
+        else if(input.trim().matches("(?i)show\\s+password") && currentMenu.equals(UserInfoUI.getInstance()))
+        {
+            UserInfoUI.getInstance().setShowPassword(true);
+        }
+        else if(input.trim().matches("(?i)manage\\s+users") && user instanceof Manager && currentMenu.equals(UserInfoUI.getInstance()))
+        {
+            UserInfoUI.getInstance().setManagerUsers(true);
+        }
+        else if(input.trim().matches("(?i)view\\s+(\\S+)"))
+        {
+            UserInfoUI.getInstance().setViewUsername(true);
+            UserInfoUI.getInstance().setViewUsernameUser(input.split("\\s+")[1]);
         }
         else if(input.trim().matches("(?i)back"))
         {
@@ -78,6 +96,11 @@ public class ConsoleView{
                 errorInput("you can't get back from here!" , currentMenu);
             currentMenu = seenPages.get(seenPages.size()-2);
             seenPages.set(seenPages.size()-1 , null);
+        }
+        else if(input.trim().equalsIgnoreCase("help"))
+        {
+            currentMenu.help();
+            processInput(scanner.nextLine());
         }
         else
         {
@@ -89,7 +112,7 @@ public class ConsoleView{
     {
         System.out.println(message);
         processInput(scanner.nextLine());
-        currentMenu = landing;
+        goToNextPage(landing);
     }
     public void run(UI menu)
     {
