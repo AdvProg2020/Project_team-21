@@ -17,4 +17,9 @@ public class SalesUI extends UI {
     public void run() {
 
     }
+
+    @Override
+    public void help() {
+
+    }
 }

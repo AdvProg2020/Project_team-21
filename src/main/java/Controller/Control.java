@@ -7,24 +7,25 @@ import Model.Manager;
 import Model.Seller;
 import View.ConsoleView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Control {
 
-    Account user;
+    Account user = null;
     private static Control instance;
     private Control()
     {
     }
 
     public static Control getInstance() {
+        if(instance == null)
+            instance = new Control();
         return instance;
     }
 
     public Account getUser() {
+        if(user == null)
+            return null;
         return user;
     }
 
@@ -50,7 +51,7 @@ public class Control {
         {
             throw new notFoundUserOrPass("password didn't match!");
         }
-        user = Account.getAllAccounts().get(userName);
+        setUser(Account.getAllAccounts().get(userName));
     }
 
     public void createAccount (String type,String username, String password, String firstName, String lastName, String email, String phoneNumber,String verifyPassword,String companyName) throws Exception
@@ -89,10 +90,11 @@ public class Control {
         {
             ControlCustomer.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber);
         }
+        login(username,password);
     }
     public boolean checkIfCustomer()
     {
-        if(Control.getInstance().getUser() != null && !(Control.getInstance().getUser() instanceof Customer))
+        if(Control.getInstance().getUser() != null && Control.getInstance().getUser() instanceof Customer)
         {
             return true;
         }
@@ -103,6 +105,10 @@ public class Control {
         if(!Account.getAllAccounts().keySet().contains(username))
         {
             throw new Exception("This username doesn't exist!");
+        }
+        if(Account.getAllAccounts().get(username).equals(user))
+        {
+            throw new Exception("you can't delete yourself!");
         }
         if(Account.getAllAccounts().get(username) instanceof Manager)
         {
@@ -125,10 +131,7 @@ public class Control {
         // Copy all data from hashMap into TreeMap
         sorted.putAll(map);
 
-        // Display the TreeMap which is naturally sorted
-        for (Map.Entry<String, Integer> entry : sorted.entrySet())
-            System.out.println("Key = " + entry.getKey() +
-                    ", Value = " + entry.getValue());
+        map.putAll(sorted);
     }
 
     public void sortArraylist(ArrayList list)
