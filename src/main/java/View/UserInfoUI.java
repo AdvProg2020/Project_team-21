@@ -18,6 +18,7 @@ public class UserInfoUI extends UI {
     private boolean viewUsername = false;
     private boolean deleteUser = false;
     private boolean createManagerProfile = false;
+    private boolean manageAllProducts = false;
     private String deleteUserUsername = "";
     private String viewUsernameUser = "";
     private boolean editField = false;
@@ -84,7 +85,10 @@ public class UserInfoUI extends UI {
         user = Control.getInstance().getUser();
         if(user == null)
         {
-            ConsoleView.getInstance().setLandingPageAfterSigninOrSignup(ConsoleView.getInstance().getLastMenu());
+            if(ConsoleView.getInstance().getLastMenu() == null)
+                ConsoleView.getInstance().setLandingPageAfterSigninOrSignup(MainMenuUI.getInstance());
+            else
+                ConsoleView.getInstance().setLandingPageAfterSigninOrSignup(ConsoleView.getInstance().getLastMenu());
             ConsoleView.getInstance().goToNextPage(UserLoginUI.getInstance());
             UserLoginUI.getInstance().run();
         }
@@ -145,77 +149,6 @@ public class UserInfoUI extends UI {
                 }
                 editField = false;
             }
-            if(user instanceof Manager)
-            {
-                if(managerUsers)
-                {
-                    for (String s : Account.getAllAccounts().keySet())
-                    {
-                        System.out.println(s + "     " + Account.getAllAccounts().get(s).getType());
-                    }
-                    managerUsers = false;
-                }
-                if(viewUsername)
-                {
-                    try {
-                        ControlManager.getInstance().viewUsername(viewUsernameUser);
-                        Account userTemp = Account.getAllAccounts().get(viewUsernameUser);
-                        System.out.println("First Name: " + userTemp.getFirstName());
-                        System.out.println("Last Name: " + userTemp.getLastName());
-                        System.out.println("Username: " + userTemp.getUsername());
-                        System.out.println("Password: " + userTemp.getPassword());
-                        System.out.println("Email: " + userTemp.getEmail());
-                        System.out.println("Phone Number: " + userTemp.getPhoneNumber());
-
-                    }catch (Exception e){
-                        ConsoleView.getInstance().errorInput(e.getMessage(),this);
-                    }finally {
-                        viewUsername = false;
-                    }
-                }
-                if(deleteUser)
-                {
-                    try
-                    {
-                        Control.getInstance().deleteUser(deleteUserUsername);
-                        System.out.println("User "+deleteUserUsername+" has been deleted succesfuly!");
-                    }
-                    catch (Exception e)
-                    {
-                        ConsoleView.getInstance().errorInput(e.getMessage(),this);
-                    }
-                    finally {
-                        deleteUser = false;
-                    }
-                }
-                if(createManagerProfile)
-                {
-                    try {
-                        Scanner scanner = ConsoleView.getScanner();
-                        System.out.println("Enter username: ");
-                        String username = scanner.nextLine();
-                        System.out.println("Enter password: ");
-                        String password = scanner.nextLine();
-                        System.out.println("Re-Enter password: ");
-                        String checkPassword = scanner.nextLine();
-                        System.out.println("Enter first name: ");
-                        String firstName = scanner.nextLine();
-                        System.out.println("Enter last name: ");
-                        String lastName = scanner.nextLine();
-                        System.out.println("Enter email: ");
-                        String email = scanner.nextLine();
-                        System.out.println("Enter phone number: ");
-                        String phone = scanner.nextLine();
-                        Control.getInstance().createAccount("manager",username,password,firstName,lastName,email,phone,checkPassword,"");
-                    }catch (Exception e)
-                    {
-                        ConsoleView.getInstance().errorInput(e.getMessage(),this);
-                    }
-                    finally {
-                        createManagerProfile = false;
-                    }
-                }
-            }
         }
     }
 
@@ -225,11 +158,13 @@ public class UserInfoUI extends UI {
         System.out.println("To show your password : show password");
         if(user instanceof Manager)
         {
-                System.out.println("to show information of a user : view [username]");
-                System.out.println("to delete a user : delete user [username]");
-                System.out.println("To add a new manager : create manager profile");
-                System.out.println("to sort by alphabet : sort by alphabet");
+//                System.out.println("to show information of a user : view [username]");
+//                System.out.println("to delete a user : delete user [username]");
+//                System.out.println("To add a new manager : create manager profile");
+//                System.out.println("to sort by alphabet : sort by alphabet");
+
                 System.out.println("to manager users : manage users");
+
 //            System.out.println("to check off list waiting for you : off list\no check products list waiting for you : product list\no check seller list waiting for you : seller list\n");
 //            System.out.println("to add a new discount code : create discount code\n");
 

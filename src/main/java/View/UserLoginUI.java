@@ -34,8 +34,6 @@ public class UserLoginUI extends UI {
     public void run()
     {
         System.out.println("login or SignUp!");
-        String input = ConsoleView.getScanner().nextLine();
-        ConsoleView.getInstance().processInput(input);
     }
     public void login(String userName)
     {

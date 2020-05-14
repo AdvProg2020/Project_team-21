@@ -52,14 +52,15 @@ public class UserSignupUI extends UI {
             companyName = scanner.nextLine();
         }
         try {
-            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,companyName);
+            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,companyName,true);
+            System.out.println("Wellcome "+firstName+"!");
+            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
+            ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
         }catch (Exception e)
         {
+            ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
             ConsoleView.getInstance().errorInput(e.getMessage(),ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
         }
-        System.out.println("Wellcome "+firstName+"!");
-        ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
-        ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
     }
 
 

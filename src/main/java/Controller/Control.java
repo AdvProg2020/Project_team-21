@@ -54,7 +54,7 @@ public class Control {
         setUser(Account.getAllAccounts().get(userName));
     }
 
-    public void createAccount (String type,String username, String password, String firstName, String lastName, String email, String phoneNumber,String verifyPassword,String companyName) throws Exception
+    public void createAccount (String type,String username, String password, String firstName, String lastName, String email, String phoneNumber,String verifyPassword,String companyName, boolean login) throws Exception
     {
         //5 errors
         if(!verifyPassword.equals(password))
@@ -90,7 +90,8 @@ public class Control {
         {
             ControlCustomer.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber);
         }
-        login(username,password);
+        if(login)
+            login(username,password);
     }
     public boolean checkIfCustomer()
     {
