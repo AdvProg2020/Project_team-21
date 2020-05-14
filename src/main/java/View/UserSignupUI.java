@@ -32,7 +32,7 @@ public class UserSignupUI extends UI {
     public void run()
     {
         String companyName = "";
-        //three exceptions
+
         Scanner scanner = ConsoleView.getScanner();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();

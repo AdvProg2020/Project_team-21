@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Customer extends Account {
 
-    private ArrayList<Customer> allCustomer = new ArrayList<Customer>();
+    private static ArrayList<Customer> allCustomer = new ArrayList<Customer>();
     private ShoppingCart shoppingCart;
     public ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
     public HashMap<Off , Integer> offs = new HashMap<>();
@@ -13,6 +13,19 @@ public class Customer extends Account {
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
+        addNewCustomer(this);
+    }
+
+    public static void removeCustomer (Customer customer){
+        allCustomer.remove(customer);
+    }
+
+    public static ArrayList<Customer> getaAllCustomers() {
+        return allCustomer;
+    }
+
+    public static void addNewCustomer(Customer customer){
+        allCustomer.add(customer);
     }
 
     public ShoppingCart getShoppingCart() {

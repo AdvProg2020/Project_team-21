@@ -77,18 +77,38 @@ public class ConsoleView{
             UserLoginUI.getInstance().login(input.trim().split("\\s+")[1]);
             goToNextPage(UserInfoUI.getInstance());
         }
-        else if(input.trim().matches("(?i)show\\s+password") && currentMenu.equals(UserInfoUI.getInstance()))
+        if(currentMenu.equals(UserInfoUI.getInstance()))
         {
-            UserInfoUI.getInstance().setShowPassword(true);
-        }
-        else if(input.trim().matches("(?i)manage\\s+users") && user instanceof Manager && currentMenu.equals(UserInfoUI.getInstance()))
-        {
-            UserInfoUI.getInstance().setManagerUsers(true);
-        }
-        else if(input.trim().matches("(?i)view\\s+(\\S+)"))
-        {
-            UserInfoUI.getInstance().setViewUsername(true);
-            UserInfoUI.getInstance().setViewUsernameUser(input.split("\\s+")[1]);
+            if(input.trim().matches("(?i)show\\s+password") && currentMenu.equals(UserInfoUI.getInstance()))
+            {
+                UserInfoUI.getInstance().setShowPassword(true);
+            }
+            if(user instanceof Manager)
+            {
+                if(input.trim().matches("(?i)manage\\s+users") && user instanceof Manager && currentMenu.equals(UserInfoUI.getInstance()))
+                {
+                    UserInfoUI.getInstance().setManagerUsers(true);
+                }
+                else if(input.trim().matches("(?i)view\\s+(\\S+)"))
+                {
+                    UserInfoUI.getInstance().setViewUsername(true);
+                    UserInfoUI.getInstance().setViewUsernameUser(input.split("\\s+")[1]);
+                }
+                else if(input.trim().matches("(?i)delete\\s+user\\s+(\\S+)"))
+                {
+                    UserInfoUI.getInstance().setDeleteUserUsername(input.split("\\s+")[2]);
+                    UserInfoUI.getInstance().setDeleteUser(true);
+                }
+                else if(input.trim().matches("(?i)sort\\s+by\\s+alphabet") && currentMenu.equals(UserInfoUI.getInstance()))
+                {
+                    UserInfoUI.getInstance().setManagerUsers(true);
+                    Control.getInstance().sortHashmap(Account.getAllAccounts());
+                }
+                else if(input.trim().matches("(?i)create\\s+manager\\s+profile"))
+                {
+                    UserInfoUI.getInstance().setCreateManagerProfile(true);
+                }
+            }
         }
         else if(input.trim().matches("(?i)back"))
         {

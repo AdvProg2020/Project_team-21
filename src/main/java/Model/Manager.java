@@ -19,15 +19,15 @@ public class Manager extends Account {
         return "Manager";
     }
 
-    public void removeManager (Account account){
-        allManagers.remove(account);
+    public static void removeManager (Manager manager){
+        allManagers.remove(manager);
     }
 
     public static ArrayList<Manager> getAllManagers() {
         return allManagers;
     }
 
-    public void addNewManager (Manager manager){
+    public static void addNewManager (Manager manager){
         allManagers.add(manager);
     }
 }

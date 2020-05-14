@@ -7,6 +7,8 @@ import Model.Customer;
 import Model.Manager;
 import Model.Seller;
 
+import java.util.Scanner;
+
 public class UserInfoUI extends UI {
     private static UserInfoUI instance;
     private Control controller = Control.getInstance();
@@ -14,6 +16,9 @@ public class UserInfoUI extends UI {
     private boolean showPassword = false;
     private boolean managerUsers = false;
     private boolean viewUsername = false;
+    private boolean deleteUser = false;
+    private boolean createManagerProfile = false;
+    private String deleteUserUsername = "";
     private String viewUsernameUser = "";
     private boolean newToInfo = true;
     private UserInfoUI()
@@ -24,6 +29,14 @@ public class UserInfoUI extends UI {
         if(instance == null)
             instance = new UserInfoUI();
         return instance;
+    }
+
+    public void setCreateManagerProfile(boolean createManagerProfile) {
+        this.createManagerProfile = createManagerProfile;
+    }
+
+    public void setDeleteUserUsername(String deleteUserUsername) {
+        this.deleteUserUsername = deleteUserUsername;
     }
 
     public void setShowPassword(boolean showPassword) {
@@ -44,6 +57,10 @@ public class UserInfoUI extends UI {
 
     public String getViewUsernameUser() {
         return viewUsernameUser;
+    }
+
+    public void setDeleteUser(boolean deleteUser) {
+        this.deleteUser = deleteUser;
     }
 
     public void setNewToInfo(boolean newToInfo) {
@@ -91,11 +108,53 @@ public class UserInfoUI extends UI {
                 {
                     try {
                         ControlManager.getInstance().viewUsername(viewUsernameUser);
-
                     }catch (Exception e){
                         ConsoleView.getInstance().errorInput(e.getMessage(),this);
+                    }finally {
+                        viewUsername = false;
                     }
-
+                }
+                if(deleteUser)
+                {
+                    try
+                    {
+                        Control.getInstance().deleteUser(deleteUserUsername);
+                        System.out.println("User "+deleteUserUsername+" has been deleted succesfuly!");
+                    }
+                    catch (Exception e)
+                    {
+                        ConsoleView.getInstance().errorInput(e.getMessage(),this);
+                    }
+                    finally {
+                        deleteUser = false;
+                    }
+                }
+                if(createManagerProfile)
+                {
+                    try {
+                        Scanner scanner = ConsoleView.getScanner();
+                        System.out.println("Enter username: ");
+                        String username = scanner.nextLine();
+                        System.out.println("Enter password: ");
+                        String password = scanner.nextLine();
+                        System.out.println("Re-Enter password: ");
+                        String checkPassword = scanner.nextLine();
+                        System.out.println("Enter first name: ");
+                        String firstName = scanner.nextLine();
+                        System.out.println("Enter last name: ");
+                        String lastName = scanner.nextLine();
+                        System.out.println("Enter email: ");
+                        String email = scanner.nextLine();
+                        System.out.println("Enter phone number: ");
+                        String phone = scanner.nextLine();
+                        Control.getInstance().createAccount("manager",username,password,firstName,lastName,email,phone,checkPassword,"");
+                    }catch (Exception e)
+                    {
+                        ConsoleView.getInstance().errorInput(e.getMessage(),this);
+                    }
+                    finally {
+                        createManagerProfile = false;
+                    }
                 }
             }
         }

@@ -7,6 +7,11 @@ import Model.Manager;
 import Model.Seller;
 import View.ConsoleView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Control {
 
     Account user;
@@ -93,7 +98,43 @@ public class Control {
         }
         return false;
     }
+    public void deleteUser(String username) throws Exception
+    {
+        if(!Account.getAllAccounts().keySet().contains(username))
+        {
+            throw new Exception("This username doesn't exist!");
+        }
+        if(Account.getAllAccounts().get(username) instanceof Manager)
+        {
+            Manager.removeManager((Manager) Account.getAllAccounts().get(username));
+        }
+        else if(Account.getAllAccounts().get(username) instanceof Seller)
+        {
+            Seller.removeSeller((Seller) Account.getAllAccounts().get(username));
+        }
+        else if(Account.getAllAccounts().get(username) instanceof Customer)
+        {
+            Customer.removeCustomer((Customer) Account.getAllAccounts().get(username));
+        }
+        Account.getAllAccounts().remove(username);
+    }
+    public void sortHashmap(HashMap map)
+    {
+        TreeMap<String, Integer> sorted = new TreeMap<>();
 
+        // Copy all data from hashMap into TreeMap
+        sorted.putAll(map);
+
+        // Display the TreeMap which is naturally sorted
+        for (Map.Entry<String, Integer> entry : sorted.entrySet())
+            System.out.println("Key = " + entry.getKey() +
+                    ", Value = " + entry.getValue());
+    }
+
+    public void sortArraylist(ArrayList list)
+    {
+
+    }
     class notFoundUserOrPass extends Exception
     {
         notFoundUserOrPass(String message)
