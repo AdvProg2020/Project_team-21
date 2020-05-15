@@ -134,6 +134,30 @@ public class ConsoleView{
                     goToNextPage(ManagerCreateDiscountCodeUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches(("(?i)view\\s+discount\\s+codes")))
+                {
+                    goToNextPage(ManagerViewDiscountCodesUI.getInstance());
+                    rightInput = true;
+                }
+            }
+        }
+        else if(currentMenu.equals(ManagerViewDiscountCodesUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(\\S+)"))
+            {
+                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)sort\\s+by\\s+alphabet\\s+(\\S+)"))
+            {
+                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(\\S+)"))
+            {
+                ManagerViewDiscountCodeUI.getInstance().setCode(input.split("\\s+")[3]);
+                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+                rightInput = true;
             }
         }
         else if(currentMenu.equals(ManagerManageProductsUI.getInstance()))

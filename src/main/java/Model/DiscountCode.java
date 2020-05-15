@@ -39,6 +39,10 @@ public class DiscountCode {
         return discountId;
     }
 
+    public int getDiscountNumberForEachUser() {
+        return discountNumberForEachUser;
+    }
+
     public LocalDateTime getStartTime() {
         return startTime;
     }

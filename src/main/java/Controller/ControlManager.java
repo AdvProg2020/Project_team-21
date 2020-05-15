@@ -82,4 +82,10 @@ public class ControlManager {
         LocalDateTime endDateDate = LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4]));
         new DiscountCode(discountID,startDateDate,endDateDate,makeDouble(percentage),makeDouble(maxDiscount),makeInt(maxNumber));
     }
+    public boolean checkDiscountCodeExistance(String id)
+    {
+        if(DiscountCode.getAllDiscountCodes().containsKey(id))
+            return true;
+        return false;
+    }
 }
