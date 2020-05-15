@@ -125,6 +125,7 @@ public class Control {
         }
         Account.getAllAccounts().remove(username);
     }
+
     public void sortHashmap(HashMap map)
     {
         TreeMap<String, Integer> sorted = new TreeMap<>();
@@ -133,6 +134,11 @@ public class Control {
         sorted.putAll(map);
 
         map.putAll(sorted);
+    }
+
+    public void sortHashmapByFeature(HashMap map)
+    {
+
     }
 
     public void sortArraylist(ArrayList list)

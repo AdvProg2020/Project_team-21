@@ -1,11 +1,10 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Controller.ControlManager;
-import Model.DiscountCode;
+import View.ConsoleView;
+import View.UI;
 
 import java.nio.charset.Charset;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.Scanner;
 

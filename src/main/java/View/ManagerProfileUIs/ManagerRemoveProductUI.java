@@ -1,7 +1,8 @@
-package View;
+package View.ManagerProfileUIs;
 
-import Controller.Control;
 import Controller.ControlManager;
+import View.ConsoleView;
+import View.UI;
 
 public class ManagerRemoveProductUI extends UI {
     private static ManagerRemoveProductUI instance;

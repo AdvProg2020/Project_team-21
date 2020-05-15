@@ -1,6 +1,8 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Controller.Control;
+import View.ConsoleView;
+import View.UI;
 
 import java.util.Scanner;
 

@@ -1,7 +1,9 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Controller.ControlManager;
 import Model.DiscountCode;
+import View.ConsoleView;
+import View.UI;
 
 public class ManagerViewDiscountCodeUI extends UI {
     private static ManagerViewDiscountCodeUI instance;

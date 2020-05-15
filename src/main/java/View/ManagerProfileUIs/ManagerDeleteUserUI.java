@@ -1,7 +1,8 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Controller.Control;
-import Model.Manager;
+import View.ConsoleView;
+import View.UI;
 
 public class ManagerDeleteUserUI extends UI {
     private static ManagerDeleteUserUI instance;
