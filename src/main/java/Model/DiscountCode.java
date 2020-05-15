@@ -6,11 +6,11 @@ import java.util.HashMap;
 
 public class DiscountCode {
 
-    private static ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
+    private static HashMap<String, DiscountCode> allDiscountCodes = new HashMap<>();
     private String discountId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private int discountPercentage;
+    private double discountPercentage;
     private double maxDiscountAmount;
     private int discountNumberForEachUser;
     private HashMap<Account, Integer> discountUsers;
@@ -20,7 +20,7 @@ public class DiscountCode {
         discountUsers = new HashMap<>();
     }
 
-    public DiscountCode(String discountId, LocalDateTime startTime, LocalDateTime endTime, int discountPercentage, double maxDiscountAmount, int discountNumberForEachUser){
+    public DiscountCode(String discountId, LocalDateTime startTime, LocalDateTime endTime, double discountPercentage, double maxDiscountAmount, int discountNumberForEachUser){
 
         setDiscountId(discountId);
         setStartTime(startTime);
@@ -28,11 +28,19 @@ public class DiscountCode {
         setDiscountPercentage(discountPercentage);
         setMaxDiscountAmount(maxDiscountAmount);
         setDiscountNumberForEachUser(discountNumberForEachUser);
-        allDiscountCodes.add(this);
+        allDiscountCodes.put(discountId,this);
+    }
+
+    public static HashMap<String, DiscountCode> getAllDiscountCodes() {
+        return allDiscountCodes;
     }
 
     public String getDiscountId() {
         return discountId;
+    }
+
+    public int getDiscountNumberForEachUser() {
+        return discountNumberForEachUser;
     }
 
     public LocalDateTime getStartTime() {
@@ -51,11 +59,11 @@ public class DiscountCode {
         this.endTime = endTime;
     }
 
-    public int getDiscountPercentage() {
+    public double getDiscountPercentage() {
         return discountPercentage;
     }
 
-    public void setDiscountPercentage(int discountPercentage) {
+    public void setDiscountPercentage(double discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 

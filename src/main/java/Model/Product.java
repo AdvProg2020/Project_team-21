@@ -3,10 +3,12 @@ package Model;
 import View.ProductsUI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Product {
 
-    private static ArrayList<Product> allProducts = new ArrayList<>();
+    //private static ArrayList<Product> allProducts = new ArrayList<>();
+    private static HashMap<String , Product> allProducts = new HashMap<>();
     private String productId;
     private ProductState productState;
     private String name;
@@ -34,34 +36,13 @@ public class Product {
         setProductState(productState);
         setCompany(company);
         setPrice(price);
-        allProducts.add(this);
+        allProducts.put(productId,this);
     }
 
     public String getProductId() {
         return productId;
     }
 
-    public boolean DoesProductExistWithId(String id){
-        for (Product allProduct : allProducts) {
-            if(allProduct.getProductId().equals(id)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Product findProductById(String id){
-        for (Product allProduct : allProducts) {
-            if(allProduct.getProductId().equals(id)){
-                return allProduct;
-            }
-        }
-        return null;
-    }
-
-    public void removeProduct(Product product){
-        allProducts.remove(product);
-    }
 
     public String getName() {
         return name;
@@ -134,6 +115,10 @@ public class Product {
 
     public void addReview(Review review){
         reviewsList.add(review);
+    }
+
+    public static HashMap<String, Product> getAllProducts() {
+        return allProducts;
     }
 
     private double calculateScore() {

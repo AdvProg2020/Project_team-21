@@ -82,6 +82,11 @@ public abstract class Account {
         allAccounts.remove(account);
     }
 
+    public void addDiscountCode(DiscountCode discountCode)
+    {
+        discountList.add(discountCode);
+    }
+    public abstract String getType();
     @Override
     public String toString() {
         return "Account{" +

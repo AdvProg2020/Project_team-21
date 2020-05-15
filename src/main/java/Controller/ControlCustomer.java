@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Customer;
+
 public class ControlCustomer {
     private static ControlCustomer instance;
     private ControlCustomer()
@@ -14,6 +16,7 @@ public class ControlCustomer {
     }
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber)
     {
-
+        new Customer(username,firstName,lastName,email,phoneNumber,password);
     }
+
 }

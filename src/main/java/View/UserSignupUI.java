@@ -4,6 +4,7 @@ import Controller.Control;
 import Model.Account;
 import Model.Customer;
 import Model.Manager;
+import com.sun.tools.javac.Main;
 
 import java.io.Console;
 import java.util.Scanner;
@@ -30,48 +31,38 @@ public class UserSignupUI extends UI {
     @Override
     public void run()
     {
-        //three exceptions
-        if(checkIfCustomer())
-        {
-            ConsoleView.getInstance().errorInput("You are a customer and can't make a new user",ConsoleView.getInstance().getLastMenu());
-        }
-        if(!(user instanceof Manager) && type.equalsIgnoreCase("manager") && !Manager.getAllManagers().isEmpty())
-        {
-            ConsoleView.getInstance().errorInput("You should be a manager to create a manager account" , ConsoleView.getInstance().getLastMenu());
-        }
-        if(!(type.matches("(?i)customer|manager|seller")))
-        {
-            ConsoleView.getInstance().errorInput("There is no type of account like that!",ConsoleView.getInstance().getLastMenu());
-        }
-        if(Account.getAllAccounts().containsKey(userName))
-        {
-            ConsoleView.getInstance().errorInput("This username already exists!",ConsoleView.getInstance().getLastMenu());
-        }
+        String companyName = "";
+
         Scanner scanner = ConsoleView.getScanner();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
+        System.out.println("Re-Enter your password: ");
+        String checkPassword = scanner.nextLine();
         System.out.println("Enter your first name: ");
         String firstName = scanner.nextLine();
         System.out.println("Enter your last name: ");
         String lastName = scanner.nextLine();
-        System.out.println("Re-Enter your password: ");
-        String checkPassword = scanner.nextLine();
         System.out.println("Enter your email: ");
         String email = scanner.nextLine();
         System.out.println("Enter your phone number: ");
         String phone = scanner.nextLine();
-
-        Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone);
-
-    }
-    public boolean checkIfCustomer()
-    {
-        if(Control.getInstance().getUser() != null && !(Control.getInstance().getUser() instanceof Customer))
+        if(type.equalsIgnoreCase("seller"))
         {
-            return true;
+            System.out.println("Enter your Company name");
+            companyName = scanner.nextLine();
         }
-        return false;
+        try {
+            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,companyName,true);
+            System.out.println("Wellcome "+firstName+"!");
+            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
+            ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
+        }catch (Exception e)
+        {
+            ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
+            ConsoleView.getInstance().errorInput(e.getMessage(),ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
+        }
     }
+
 
     @Override
     public void help()

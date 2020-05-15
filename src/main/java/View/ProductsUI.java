@@ -17,4 +17,9 @@ public class ProductsUI extends UI {
     public void run() {
 
     }
+
+    @Override
+    public void help() {
+
+    }
 }
