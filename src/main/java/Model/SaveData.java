@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SaveData {
 
@@ -24,59 +25,56 @@ public class SaveData {
     private static final String sellLogFile = "SellLog.txt";
     private static final String shoppingCartFile = "ShoppingCart.txt";
 
-    private static ArrayList<String> allFilesAdd = new ArrayList<>();
+    private static HashMap<String, Class> fileToClassMap = new HashMap<>();
     private static Gson gson = new Gson();
 
-//    {
-//        allFilesAdd.add("Account.txt");
-//        allFilesAdd.add("BuyLog.txt");
-//        allFilesAdd.add("Category.txt");
-//        allFilesAdd.add("Customer.txt");
-//        allFilesAdd.add("DiscountCode.txt");
-//        allFilesAdd.add("Manager.txt");
-//        allFilesAdd.add("Off.txt");
-//        allFilesAdd.add("Product.txt");
-//        allFilesAdd.add("Review.txt");
-//        allFilesAdd.add("Score.txt");
-//        allFilesAdd.add("Seller.txt");
-//        allFilesAdd.add("SellLog.txt");
-//        allFilesAdd.add("ShoppingCart.txt");
-//    }
-
-    public void findFileNames(String fileAdds){
-        try {
-            FileReader reader = new FileReader(fileAdds);
-            int character;
-            StringBuilder fileName = new StringBuilder();
-
-            while ((character = reader.read())!='\n') {
-                fileName.append(character);
-            }
-            allFilesAdd.add(fileName.toString());
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    {
+        fileToClassMap.put(accountFile, Account.class);
+        fileToClassMap.put(buyLogFile, BuyLog.class);
+        fileToClassMap.put(categoryFile, Category.class);
+        fileToClassMap.put(customerFile, Customer.class);
+        fileToClassMap.put(discountCodeFile, DiscountCode.class);
+        fileToClassMap.put(managerFile, Manager.class);
+        fileToClassMap.put(offFile, Off.class);
+        fileToClassMap.put(productFile, Product.class);
+        fileToClassMap.put(reviewFile, Review.class);
+        fileToClassMap.put(scoreFile, Score.class);
+        fileToClassMap.put(sellerFile, Seller.class);
+        fileToClassMap.put(sellLogFile, SellLog.class);
+        fileToClassMap.put(shoppingCartFile, ShoppingCart.class);
     }
 
-    public void reloadData(String fileAdds){
-        for (String file : allFilesAdd) {
+    public void reloadData(){
+        reloadObject(accountFile);
+        reloadObject(buyLogFile);
+        reloadObject(categoryFile);
+        reloadObject(customerFile);
+        reloadObject(discountCodeFile);
+        reloadObject(managerFile);
+        reloadObject(offFile);
+        reloadObject(productFile);
+        reloadObject(reviewFile);
+        reloadObject(scoreFile);
+        reloadObject(sellerFile);
+        reloadObject(sellLogFile);
+        reloadObject(shoppingCartFile);
+    }
+
+    public void reloadObject(String fileName){
             try {
-                FileReader reader = new FileReader(fileAdds);
+                FileReader reader = new FileReader(fileName);
                 int character;
                 StringBuilder jsonString = new StringBuilder();
 
                 while ((character = reader.read())!=-1) {
                     jsonString.append(character);
                 }
-//                readData(jsonString.toString(), fileAdds);
+                readData(jsonString.toString(), fileToClassMap.get(fileName));
                 reader.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
     }
 
     public void readData(String jsonString, Class className){
@@ -85,8 +83,9 @@ public class SaveData {
     }
 
 
-    public void writeData(Object object, String name, String fileAdds){
+    public void writeData(Object object, String name, String typeClass){
 
+        typeClass += ".txt";
         String json = gson.toJson(object);
 
         try {
@@ -94,12 +93,15 @@ public class SaveData {
             FileWriter writer = new FileWriter(name, false);
             writer.write(json);
 
-            FileWriter writer2 = new FileWriter(fileAdds, true);
+            FileWriter writer2 = new FileWriter(typeClass, true);
             writer2.write((name+'\n'));
 
             writer.close();
+            writer2.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
