@@ -169,6 +169,12 @@ public class ConsoleView{
                 goToNextPage(ManagerEditDiscountCodeUI.getInstance());
                 rightInput = true;
             }
+            else if(input.trim().matches("(?i)remove\\s+discount\\s+code\\s+(\\S+)"))
+            {
+                ManagerRemoveDiscountCodeUI.getInstance().setId(input.split("\\s+")[3]);
+                goToNextPage(ManagerRemoveDiscountCodeUI.getInstance());
+                rightInput = true;
+            }
         }
         else if(currentMenu.equals(ManagerManageProductsUI.getInstance()))
         {

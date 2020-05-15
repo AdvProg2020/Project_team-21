@@ -150,6 +150,17 @@ public class ControlManager {
             }
         }
     }
+    public void removeDiscountCode(String id) throws Exception
+    {
+        if(!DiscountCode.getAllDiscountCodes().containsKey(id))
+        {
+            throw new Exception("This id doesn't exist!");
+        }
+        else
+        {
+            DiscountCode.getAllDiscountCodes().remove(id);
+        }
+    }
     public boolean checkDiscountCodeExistance(String id)
     {
         if(DiscountCode.getAllDiscountCodes().containsKey(id))
