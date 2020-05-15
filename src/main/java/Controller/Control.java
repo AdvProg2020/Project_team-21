@@ -7,11 +7,12 @@ import Model.Account;
 import Model.*;
 
 import javax.swing.text.View;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Control {
-    Account currentAccount;
+    static Account currentAccount;
     ShoppingCart shoppingCart = new ShoppingCart();
 
     private static Control instance;
@@ -34,6 +35,51 @@ public class Control {
         if (!account.getPassword().equals(password))
             throw new ErrorsAndExceptions.WrongPasswordException();
         this.currentAccount = account;
+    }
+
+    public void logout(){
+        currentAccount=null;
+        shoppingCart= new ShoppingCart(null);
+    }
+
+    public void createAccount (String type, String username , String password , String firstname , String lastname,
+                               String email , String phone , double balance , String companyName , ArrayList<DiscountCode> discountCodes) throws ErrorsAndExceptions.ExistedUsernameException , ErrorsAndExceptions.AdminRegisterException{
+        if(Account.getAccountByUsername(username)!=null)
+            throw new ErrorsAndExceptions.ExistedUsernameException(username);
+        if (type == "Customer")
+            new Customer(username,firstname,lastname,email,phone,password,discountCodes,balance);
+        else if (type == "Manager"){
+            if (Manager.getManager() != null){
+                throw new ErrorsAndExceptions.AdminRegisterException();
+            }
+            else {
+                new Manager(username,firstname,lastname,email,phone,password,discountCodes,balance);
+            }
+        }
+        else if(type =="Seller"){
+            new Seller(username,firstname,lastname,email,phone,password,discountCodes,balance,companyName);
+        }
+    }
+
+    public void changeInfo (String info , String newInfo) throws ErrorsAndExceptions.InvalidFieldException{
+        if(info == "firstname"){
+            currentAccount.setFirstName(newInfo);
+        }
+        else if(info=="lastname"){
+            currentAccount.setLastName(newInfo);
+        }
+        else if(info=="phoneNumber"){
+            currentAccount.setPhoneNumber(newInfo);
+        }
+        else if(info=="email"){
+            currentAccount.setEmail(newInfo);
+        }
+        else if(info=="password"){
+            currentAccount.setPassword(newInfo);
+        }
+        else {
+            throw new ErrorsAndExceptions.InvalidFieldException();
+        }
     }
 
     public ShoppingCart getShoppingCart() {
