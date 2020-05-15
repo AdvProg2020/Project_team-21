@@ -131,7 +131,8 @@ public class ConsoleView{
                 }
                 else if(input.trim().matches("(?i)create\\s+discount\\s+code"))
                 {
-
+                    goToNextPage(ManagerCreateDiscountCodeUI.getInstance());
+                    rightInput = true;
                 }
             }
         }
