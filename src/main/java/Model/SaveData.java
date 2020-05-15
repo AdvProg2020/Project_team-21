@@ -44,7 +44,7 @@ public class SaveData {
         fileToClassMap.put(shoppingCartFile, ShoppingCart.class);
     }
 
-    public void reloadData(){
+    public void retrieveData(){
         reloadObject(accountFile);
         reloadObject(buyLogFile);
         reloadObject(categoryFile);
@@ -83,7 +83,7 @@ public class SaveData {
     }
 
 
-    public void writeData(Object object, String name, String typeClass){
+    public void saveData(Object object, String name, String typeClass){
 
         typeClass += ".txt";
         String json = gson.toJson(object);
