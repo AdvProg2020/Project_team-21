@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<>();
     private String name;
@@ -13,7 +15,8 @@ public class Category {
     }
 
     public Category(String name){
-        this.name = name;
+
+        setName(name);
         allCategories.add(this);
     }
 
@@ -48,6 +51,10 @@ public class Category {
 
     public void removeCategory(Category category){
         allCategories.remove(category);
+    }
+
+    private void setName(String name){
+        this.name = name;
     }
 
 }
