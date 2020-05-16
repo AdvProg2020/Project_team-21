@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Account.Seller;
 import Model.Company;
+import Model.Product;
 import Model.Request.Request;
 import Model.Request.RequestType;
 import Model.Request.SellerRequest;
@@ -23,5 +24,17 @@ public class ControlSeller {
     {
         new SellerRequest(Control.getInstance().randomString(10),username,firstName,lastName,email,phoneNumber,password,company, RequestType.ADD);
     }
-
+    public boolean checkProductExists(String productID)
+    {
+        if(Product.getAllProducts().containsKey(productID))
+            return true;
+        return false;
+    }
+    public boolean checkSellerGotProduct(String productID, Seller seller)
+    {
+        Product product = Product.getAllProducts().get(productID);
+        if(seller.getAllProducts().contains(product))
+            return true;
+        return false;
+    }
 }
