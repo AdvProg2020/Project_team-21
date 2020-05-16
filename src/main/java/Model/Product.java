@@ -48,6 +48,10 @@ public class Product {
         allProducts.put(product.getProductId(),product);
     }
 
+    public static void removeProduct(Product product)
+    {
+        allProducts.remove(product.getProductId());
+    }
     public String getName() {
         return name;
     }
@@ -77,7 +81,7 @@ public class Product {
     }
 
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -93,7 +97,7 @@ public class Product {
         this.company = company;
     }
 
-    private void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

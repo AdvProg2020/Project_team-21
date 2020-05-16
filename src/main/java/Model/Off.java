@@ -36,6 +36,10 @@ public class Off {
     {
         allOffs.put(off.getOffId(),off);
     }
+    public static void removeOff(Off off)
+    {
+        allOffs.remove(off.getOffId());
+    }
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }

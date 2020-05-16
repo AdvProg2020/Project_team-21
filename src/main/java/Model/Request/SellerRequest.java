@@ -7,10 +7,10 @@ import Model.Product;
 public class SellerRequest extends Request {
     public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType)
     {
+        super(requestType);
         Seller seller = new Seller(userName,firstName,lastName,email,phoneNumber,password,company);
         Request.addRequest(requestId,this);
         requestedSellers.put(requestId,seller);
-        this.setRequestType(requestType);
     }
 
     @Override

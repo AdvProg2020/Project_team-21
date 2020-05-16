@@ -6,6 +6,8 @@ import Model.Account.Manager;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
 import View.ManagerProfileUIs.ManageProducts.ManagerRemoveProductUI;
+import View.ManagerProfileUIs.ManageRequests.ManagerAcceptRequestUI;
+import View.ManagerProfileUIs.ManageRequests.ManagerDeclineRequestUI;
 import View.ManagerProfileUIs.ManageRequests.ManagerDetailsRequestUI;
 import View.ManagerProfileUIs.ManageRequests.ManagerRequestsUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
@@ -160,6 +162,18 @@ public class ConsoleView{
             {
                 ManagerDetailsRequestUI.getInstance().setRequestId(input.split("\\s+")[1]);
                 goToNextPage(ManagerDetailsRequestUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)accept\\s+(.+)"))
+            {
+                ManagerAcceptRequestUI.getInstance().setRequestId(input.split("\\s+")[1]);
+                goToNextPage(ManagerAcceptRequestUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)decline\\s+(.+)"))
+            {
+                ManagerDeclineRequestUI.getInstance().setRequestId(input.split("\\s+")[1]);
+                goToNextPage(ManagerDeclineRequestUI.getInstance());
                 rightInput = true;
             }
         }

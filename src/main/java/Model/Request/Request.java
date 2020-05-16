@@ -13,6 +13,10 @@ public abstract class Request {
     protected static HashMap<String, Seller> requestedSellers = new HashMap<>();
     private RequestType requestType;
     private String requestId;
+    public Request(RequestType requestType)
+    {
+        this.requestType = requestType;
+    }
     public static HashMap<String, Off> getRequestedOffs() {
         return requestedOffs;
     }
