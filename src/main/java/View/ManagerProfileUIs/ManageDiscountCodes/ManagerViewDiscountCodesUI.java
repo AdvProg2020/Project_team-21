@@ -1,4 +1,4 @@
-package View.ManagerProfileUIs;
+package View.ManagerProfileUIs.ManageDiscountCodes;
 
 import Model.DiscountCode;
 import View.UI;

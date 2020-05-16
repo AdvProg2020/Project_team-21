@@ -3,7 +3,14 @@ package View;
 import Controller.Control;
 import Model.Account.Account;
 import Model.Account.Manager;
-import View.ManagerProfileUIs.*;
+import View.ManagerProfileUIs.ManageDiscountCodes.*;
+import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
+import View.ManagerProfileUIs.ManageProducts.ManagerRemoveProductUI;
+import View.ManagerProfileUIs.ManageRequests.ManagerRequestsUI;
+import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
+import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
+import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
+import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;

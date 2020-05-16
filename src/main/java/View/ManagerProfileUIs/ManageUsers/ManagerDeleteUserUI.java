@@ -1,4 +1,4 @@
-package View.ManagerProfileUIs;
+package View.ManagerProfileUIs.ManageUsers;
 
 import Controller.Control;
 import View.ConsoleView;

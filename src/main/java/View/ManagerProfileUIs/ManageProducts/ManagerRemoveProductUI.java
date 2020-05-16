@@ -1,4 +1,4 @@
-package View.ManagerProfileUIs;
+package View.ManagerProfileUIs.ManageProducts;
 
 import Controller.ControlManager;
 import View.ConsoleView;

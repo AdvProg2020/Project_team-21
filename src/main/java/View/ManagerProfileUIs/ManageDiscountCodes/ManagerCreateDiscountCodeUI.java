@@ -1,12 +1,10 @@
-package View.ManagerProfileUIs;
+package View.ManagerProfileUIs.ManageDiscountCodes;
 
 import Controller.Control;
 import Controller.ControlManager;
 import View.ConsoleView;
 import View.UI;
 
-import java.nio.charset.Charset;
-import java.util.Random;
 import java.util.Scanner;
 
 public class ManagerCreateDiscountCodeUI extends UI {

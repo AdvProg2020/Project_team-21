@@ -1,4 +1,4 @@
-package View.ManagerProfileUIs;
+package View.ManagerProfileUIs.ManageProducts;
 
 import Model.Product;
 import View.UI;
