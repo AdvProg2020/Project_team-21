@@ -1,5 +1,8 @@
 package View.ManagerProfileUIs.ManageCategories;
 
+import Model.Category;
+import Model.Product;
+import View.ConsoleView;
 import View.UI;
 
 public class ManagerRemoveProductFromCategoryUI extends UI {
@@ -24,7 +27,20 @@ public class ManagerRemoveProductFromCategoryUI extends UI {
     @Override
     public void run()
     {
-
+        if(!Product.getAllProducts().containsKey(productId))
+        {
+            ConsoleView.getInstance().errorInput("This product doesn't exist!", ConsoleView.getInstance().getLastMenu());
+        }
+        else
+        {
+            for (Category category : Category.getAllCategories()) {
+                if(category.getName().equalsIgnoreCase(ManagerEditCategoryUI.getInstance().getCategoryName()))
+                {
+                    category.removeProductFromCategory(Product.getAllProducts().get(productId));
+                }
+            }
+            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
+        }
     }
 
     @Override
