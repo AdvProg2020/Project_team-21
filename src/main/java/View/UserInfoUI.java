@@ -3,8 +3,10 @@ package View;
 import Controller.Control;
 import Model.Account.Account;
 import Model.Account.Manager;
+import Model.Account.Seller;
 
 import java.util.Scanner;
+import java.util.ServiceConfigurationError;
 
 public class UserInfoUI extends UI {
     private static UserInfoUI instance;
@@ -155,9 +157,15 @@ public class UserInfoUI extends UI {
         System.out.println("To show your password : show password");
         if(user instanceof Manager)
         {
-             System.out.println("To manager and see users : manage users");
-             System.out.println("To manage and see products : manage all products");
+            System.out.println("To manager and see users : manage users");
+            System.out.println("To manage and see products : manage all products");
             System.out.println("To manage and see discount codes : view discount codes");
+            System.out.println("To manage and see requests : manage requests");
+            System.out.println("To manage and see categories : manage categories");
+        }
+        else if(user instanceof Seller)
+        {
+            System.out.println("To view user's company information : view company information");
         }
     }
 }

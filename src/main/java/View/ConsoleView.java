@@ -3,6 +3,7 @@ package View;
 import Controller.Control;
 import Model.Account.Account;
 import Model.Account.Manager;
+import Model.Account.Seller;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
@@ -15,6 +16,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.SellerProfileUIs.SellerViewCompanyUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -127,6 +129,14 @@ public class ConsoleView{
                 UserInfoUI.getInstance().setEditField(true);
                 UserInfoUI.getInstance().setEditFieldField(input.split("\\s+")[1]);
                 rightInput = true;
+            }
+            else if(user instanceof Seller)
+            {
+                if(input.trim().matches("(?i)view\\s+company\\s+information"))
+                {
+                    goToNextPage(SellerViewCompanyUI.getInstance());
+                    rightInput = true;
+                }
             }
             else if(user instanceof Manager)
             {
