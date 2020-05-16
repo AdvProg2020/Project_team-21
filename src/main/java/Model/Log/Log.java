@@ -1,4 +1,7 @@
-package Model;
+package Model.Log;
+
+import Model.LogStatus;
+import Model.Product;
 
 import java.util.ArrayList;
 import java.util.Date;

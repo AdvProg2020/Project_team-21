@@ -3,7 +3,7 @@ package Model.Account;
 import Model.Company;
 import Model.Off;
 import Model.Product;
-import Model.SellLog;
+import Model.Log.SellLog;
 
 import java.util.ArrayList;
 

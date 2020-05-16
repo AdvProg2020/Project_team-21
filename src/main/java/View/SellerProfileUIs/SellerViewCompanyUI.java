@@ -3,6 +3,7 @@ package View.SellerProfileUIs;
 import Controller.Control;
 import Model.Account.Account;
 import Model.Account.Seller;
+import View.ConsoleView;
 import View.UI;
 
 public class SellerViewCompanyUI extends UI {
@@ -24,6 +25,7 @@ public class SellerViewCompanyUI extends UI {
         Seller user = (Seller)Control.getInstance().getUser();
         System.out.println("Company name: " + user.getCompany().getName());
         System.out.println("Company location: " + user.getCompany().getLocation());
+        ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
     }
 
     @Override

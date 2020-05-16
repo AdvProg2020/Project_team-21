@@ -17,6 +17,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
 import View.SellerProfileUIs.SellerViewCompanyUI;
+import View.SellerProfileUIs.SellerViewSalesUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -135,6 +136,11 @@ public class ConsoleView{
                 if(input.trim().matches("(?i)view\\s+company\\s+information"))
                 {
                     goToNextPage(SellerViewCompanyUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)view\\s+sales\\s+history"))
+                {
+                    goToNextPage(SellerViewSalesUI.getInstance());
                     rightInput = true;
                 }
             }

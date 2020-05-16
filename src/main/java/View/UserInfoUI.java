@@ -166,6 +166,7 @@ public class UserInfoUI extends UI {
         else if(user instanceof Seller)
         {
             System.out.println("To view user's company information : view company information");
+            System.out.println("To see history of sales : view sales history");
         }
     }
 }

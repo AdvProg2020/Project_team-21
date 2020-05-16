@@ -1,6 +1,6 @@
 package Model.Account;
 
-import Model.BuyLog;
+import Model.Log.BuyLog;
 import Model.Off;
 import Model.ShoppingCart;
 
