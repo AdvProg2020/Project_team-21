@@ -106,5 +106,42 @@ public class ErrorsAndExceptions {
             super("There is no sale with Id: " + saleId +" for you!");
         }
     }
+
+    public static class SetUserNameError extends Exception{
+        public SetUserNameError(String username){
+            super("Invalid Username!");
+        }
+    }
+
+    public static class SetFirstNameError extends Exception{
+        public SetFirstNameError(String firstName){
+            super("Invalid FirstName!");
+        }
+    }
+
+    public static class SetLastNameError extends Exception{
+        public SetLastNameError(String lastName){
+            super("Invalid LastName!");
+        }
+    }
+
+    public static class SetPasswordError extends Exception{
+        public SetPasswordError(String username){
+            super("Invalid Password!");
+        }
+    }
+
+    public static class SetEmailError extends Exception{
+        public SetEmailError(String username){
+            super("Invalid Email!");
+        }
+    }
+
+    public static class SetPhoneError extends Exception{
+        public SetPhoneError(String phoneNumber){
+            super("Invalid PhoneNumber!");
+        }
+    }
+
 }
 

@@ -1,5 +1,7 @@
 package Model;
 
+import View.ErrorsAndExceptions;
+
 import java.util.ArrayList;
 
 public abstract class Account {
@@ -53,24 +55,49 @@ public abstract class Account {
         return credit;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) throws ErrorsAndExceptions.SetFirstNameError {
+        if(!firstName.matches("[A-Za-z]+"))
+            throw new ErrorsAndExceptions.SetFirstNameError(firstName);
+        else
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lastName) throws ErrorsAndExceptions.SetLastNameError {
+        if(!firstName.matches("[A-Za-z]+"))
+            throw new ErrorsAndExceptions.SetLastNameError(lastName);
+        else
+            this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws ErrorsAndExceptions.SetEmailError{
+        if (!email.matches("\\S+@\\S+\\.\\S+")){
+            throw new ErrorsAndExceptions.SetEmailError("Invalid Email");
+        }
+        else
+            this.email = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws ErrorsAndExceptions.SetPhoneError{
+        if (!phoneNumber.matches("\\d+"))
+            throw new ErrorsAndExceptions.SetPhoneError("Invalid PhoneNumber");
+        else
+            this.phoneNumber = phoneNumber;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws ErrorsAndExceptions.SetPasswordError{
+        if (password.length() < 5 || !password.matches("\\S+")){
+            throw new ErrorsAndExceptions.SetPasswordError("Weak or Invalid Password");
+        }
+        else
+            this.password = password;
+    }
+
+    public void setUsername(String username) throws ErrorsAndExceptions.SetUserNameError {
+        if (!username.matches("[A-Za-z_0-9]+")){
+            throw new ErrorsAndExceptions.SetUserNameError("Invalid Username");
+        }
+        else
+            this.username = username;
     }
 
     public void removeAccount (Account account){
