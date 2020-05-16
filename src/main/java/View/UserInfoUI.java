@@ -1,11 +1,8 @@
 package View;
 
 import Controller.Control;
-import Controller.ControlManager;
-import Model.Account;
-import Model.Customer;
-import Model.Manager;
-import Model.Seller;
+import Model.Account.Account;
+import Model.Account.Manager;
 
 import java.util.Scanner;
 

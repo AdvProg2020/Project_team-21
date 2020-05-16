@@ -1,7 +1,7 @@
 package View.ManagerProfileUIs;
 
 import Controller.ControlManager;
-import Model.Account;
+import Model.Account.Account;
 import View.ConsoleView;
 import View.UI;
 

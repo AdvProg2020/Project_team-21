@@ -1,4 +1,8 @@
-package Model;
+package Model.Account;
+
+import Model.BuyLog;
+import Model.Off;
+import Model.ShoppingCart;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +12,7 @@ public class Customer extends Account {
     private static ArrayList<Customer> allCustomer = new ArrayList<Customer>();
     private ShoppingCart shoppingCart;
     public ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
-    public HashMap<Off , Integer> offs = new HashMap<>();
+    public HashMap<Off, Integer> offs = new HashMap<>();
     public int balance;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {

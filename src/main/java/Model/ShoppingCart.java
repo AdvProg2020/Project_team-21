@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Account.Account;
+
 import java.util.HashMap;
 
 public class ShoppingCart {

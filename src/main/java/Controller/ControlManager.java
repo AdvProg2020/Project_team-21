@@ -1,12 +1,10 @@
 package Controller;
 
-import Model.Account;
+import Model.Account.Account;
 import Model.DiscountCode;
-import Model.Manager;
+import Model.Account.Manager;
 import Model.Product;
 
-import javax.swing.tree.ExpandVetoException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ControlManager {

@@ -1,7 +1,8 @@
 package Model;
 
+import Model.Account.Account;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DiscountCode {

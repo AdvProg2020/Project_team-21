@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Account.Account;
+
 public class Score {
 
     private Account user;

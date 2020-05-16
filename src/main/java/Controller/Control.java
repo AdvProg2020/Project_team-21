@@ -1,11 +1,10 @@
 package Controller;
 
 
-import Model.Account;
-import Model.Customer;
-import Model.Manager;
-import Model.Seller;
-import View.ConsoleView;
+import Model.Account.Account;
+import Model.Account.Customer;
+import Model.Account.Manager;
+import Model.Account.Seller;
 
 import java.util.*;
 

@@ -2,10 +2,12 @@ package Model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Off {
 
-    private static ArrayList<Off> allOffs = new ArrayList<>();
+    //private static ArrayList<Off> allOffs = new ArrayList<>();
+    private static HashMap<String, Off> allOffs = new HashMap<>();
     private String offId;
     private ArrayList<Product> productsList;
     private OffState offState;
@@ -18,20 +20,22 @@ public class Off {
         productsList = new ArrayList<>();
     }
 
-    public Off(String offId, ArrayList<Product> productsList, OffState offState, LocalDateTime startTime, LocalDateTime endTime, double offAmount){
+    public Off(String offId, ArrayList<Product> productsList, LocalDateTime startTime, LocalDateTime endTime, double offAmount){
         setOffId(offId);
         setProductsList(productsList);
-        setOffState(offState);
         setStartTime(startTime);
         setEndTime(endTime);
         setOffAmount(offAmount);
-        allOffs.add(this);
     }
 
     private void setOffId(String offId) {
         this.offId = offId;
     }
 
+    public static void addOff(Off off)
+    {
+        allOffs.put(off.getOffId(),off);
+    }
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
@@ -52,7 +56,7 @@ public class Off {
         this.offState = offState;
     }
 
-    public static ArrayList<Off> getAllOffs() {
+    public static HashMap<String, Off> getAllOffs() {
         return allOffs;
     }
 

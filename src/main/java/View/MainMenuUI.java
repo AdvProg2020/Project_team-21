@@ -1,7 +1,7 @@
 package View;
 
 import Controller.Control;
-import Model.Account;
+import Model.Account.Account;
 
 public class MainMenuUI extends UI {
     private static MainMenuUI instance;

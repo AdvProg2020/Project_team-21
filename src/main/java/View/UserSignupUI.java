@@ -1,12 +1,8 @@
 package View;
 
 import Controller.Control;
-import Model.Account;
-import Model.Customer;
-import Model.Manager;
-import com.sun.tools.javac.Main;
+import Model.Account.Account;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class UserSignupUI extends UI {

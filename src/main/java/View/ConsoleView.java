@@ -1,8 +1,8 @@
 package View;
 
 import Controller.Control;
-import Model.Account;
-import Model.Manager;
+import Model.Account.Account;
+import Model.Account.Manager;
 import View.ManagerProfileUIs.*;
 
 import java.util.ArrayList;
@@ -137,6 +137,11 @@ public class ConsoleView{
                 else if(input.trim().matches(("(?i)view\\s+discount\\s+codes")))
                 {
                     goToNextPage(ManagerViewDiscountCodesUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches(("(?i)manage\\s+requests")))
+                {
+                    goToNextPage(ManagerRequestsUI.getInstance());
                     rightInput = true;
                 }
             }

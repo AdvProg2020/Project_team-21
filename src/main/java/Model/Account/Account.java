@@ -1,4 +1,6 @@
-package Model;
+package Model.Account;
+
+import Model.DiscountCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;

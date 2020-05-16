@@ -1,7 +1,7 @@
 package View.ManagerProfileUIs;
 
 import Controller.Control;
-import Model.Account;
+import Model.Account.Account;
 import View.UI;
 
 public class ManagerManageUsersUI extends UI {

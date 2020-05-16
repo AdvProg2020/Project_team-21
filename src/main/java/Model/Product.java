@@ -1,6 +1,6 @@
 package Model;
 
-import View.ProductsUI;
+import Model.Account.Seller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ public class Product {
     private String productId;
     private ProductState productState;
     private String name;
-    private String company;
+    private Company company;
     private double price;
     private ArrayList<Seller> sellers;
     private boolean doesExist;
@@ -29,26 +29,30 @@ public class Product {
         reviewsList = new ArrayList<>();
     }
 
-    public Product(String productId, String name, ProductState productState, String company, double price){
-
+    public Product(String productId, String name, Company company, double price, Category category){
         setProductId(productId);
         setName(name);
         setProductState(productState);
         setCompany(company);
         setPrice(price);
-        allProducts.put(productId,this);
+        setCategory(category);
     }
+
 
     public String getProductId() {
         return productId;
     }
 
+    public static void addProduct(Product product)
+    {
+        allProducts.put(product.getProductId(),product);
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getCompany() {
+    public Company getCompany() {
         return company;
     }
 
@@ -85,7 +89,7 @@ public class Product {
         this.productState = productState;
     }
 
-    private void setCompany(String company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 

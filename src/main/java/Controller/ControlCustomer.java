@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Customer;
+import Model.Account.Customer;
 
 public class ControlCustomer {
     private static ControlCustomer instance;
