@@ -192,11 +192,15 @@ public class ConsoleView{
             }
             else if(input.trim().matches("(?i)add\\s+(.+)"))
             {
-
+                ManagerAddProductToCategoryUI.getInstance().setProductId(input.split("\\s+")[1]);
+                goToNextPage(ManagerAddProductToCategoryUI.getInstance());
+                rightInput = true;
             }
             else if(input.trim().matches("(?i)remove\\s+(.+)"))
             {
-
+                ManagerRemoveProductFromCategoryUI.getInstance().setProductId(input.split("\\s+")[1]);
+                goToNextPage(ManagerRemoveProductFromCategoryUI.getInstance());
+                rightInput = true;
             }
         }
         else if(currentMenu.equals(ManagerRequestsUI.getInstance()))

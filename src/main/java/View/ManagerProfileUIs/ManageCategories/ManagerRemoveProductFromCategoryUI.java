@@ -15,8 +15,15 @@ public class ManagerRemoveProductFromCategoryUI extends UI {
             instance = new ManagerRemoveProductFromCategoryUI();
         return instance;
     }
+    String productId;
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
-    public void run() {
+    public void run()
+    {
 
     }
 
