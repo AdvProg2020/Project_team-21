@@ -1,7 +1,9 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Controller.ControlManager;
 import Model.Account;
+import View.ConsoleView;
+import View.UI;
 
 public class ManagerViewUI extends UI {
     private static ManagerViewUI instance;

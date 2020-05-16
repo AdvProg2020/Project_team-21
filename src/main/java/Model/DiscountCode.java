@@ -43,6 +43,10 @@ public class DiscountCode {
         return discountNumberForEachUser;
     }
 
+    public static void setAllDiscountCodes(HashMap<String, DiscountCode> allDiscountCodes) {
+        DiscountCode.allDiscountCodes = allDiscountCodes;
+    }
+
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -79,7 +83,7 @@ public class DiscountCode {
         this.discountId = discountId;
     }
 
-    private void setDiscountNumberForEachUser(int discountNumberForEachUser) {
+    public void setDiscountNumberForEachUser(int discountNumberForEachUser) {
         this.discountNumberForEachUser = discountNumberForEachUser;
     }
 }

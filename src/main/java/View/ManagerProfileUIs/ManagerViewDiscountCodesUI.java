@@ -1,6 +1,7 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Model.DiscountCode;
+import View.UI;
 
 public class ManagerViewDiscountCodesUI extends UI {
     private static ManagerViewDiscountCodesUI instance;
@@ -14,6 +15,18 @@ public class ManagerViewDiscountCodesUI extends UI {
         if(instance == null)
             instance = new ManagerViewDiscountCodesUI();
         return instance;
+    }
+    public void sortByEndDate()
+    {
+
+    }
+    public void sortByStartDate()
+    {
+
+    }
+    public void sortByPercentage()
+    {
+
     }
     @Override
     public void run()

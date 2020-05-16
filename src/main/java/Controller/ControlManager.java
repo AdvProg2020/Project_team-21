@@ -82,6 +82,85 @@ public class ControlManager {
         LocalDateTime endDateDate = LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4]));
         new DiscountCode(discountID,startDateDate,endDateDate,makeDouble(percentage),makeDouble(maxDiscount),makeInt(maxNumber));
     }
+    public boolean editDiscountCodeValidField(String field)
+    {
+        if(field.matches("(?i)start\\s*time|end\\s*time|percentage|discount\\*percentage|max\\s*discount|max\\s*for\\s*each"))
+        {
+            return true;
+        }
+        return false;
+    }
+    public void editDiscountCode(String field,String newValue, String id) throws Exception
+    {
+        if(field.equals("Start date"))
+        {
+            if(!newValue.matches("\\d{4}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}"))
+            {
+                throw new Exception("Your start date format isn't allowed!");
+            }
+            else
+            {
+                String[] startDateParsed = newValue.split("\\s+");
+                DiscountCode.getAllDiscountCodes().get(id).setStartTime(LocalDateTime.of(makeInt(startDateParsed[0]),makeInt(startDateParsed[1]),makeInt(startDateParsed[2]),makeInt(startDateParsed[3]),makeInt(startDateParsed[4])));
+            }
+        }
+        else if(field.equals("End date"))
+        {
+            if(!newValue.matches("\\d{4}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}"))
+            {
+                throw new Exception("Your end date format isn't allowed!");
+            }
+            else
+            {
+                String[] endDateParsed = newValue.split("\\s+");
+                DiscountCode.getAllDiscountCodes().get(id).setEndTime(LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4])));
+            }
+        }
+        else if(field.equals("Percentage"))
+        {
+            if(!newValue.matches("\\d+.?(\\d+)?"))
+            {
+                throw new Exception("Your percentage should be a double!");
+            }
+            else
+            {
+                DiscountCode.getAllDiscountCodes().get(id).setDiscountPercentage(makeDouble(newValue));
+            }
+        }
+        else if(field.equals("Max amount"))
+        {
+            if(!newValue.matches("\\d+.?(\\d+)?"))
+            {
+                throw new Exception("Your maximum amount of discount should be a double!");
+            }
+            else
+            {
+                DiscountCode.getAllDiscountCodes().get(id).setMaxDiscountAmount(makeDouble(newValue));
+            }
+        }
+        else if(field.equals("Max times"))
+        {
+            if(!newValue.matches("\\d+"))
+            {
+                throw new Exception("Your maximum amount of number of usage should be an Integer!");
+            }
+            else
+            {
+                DiscountCode.getAllDiscountCodes().get(id).setDiscountNumberForEachUser(makeInt(newValue));
+            }
+        }
+    }
+    public void removeDiscountCode(String id) throws Exception
+    {
+        if(!DiscountCode.getAllDiscountCodes().containsKey(id))
+        {
+            throw new Exception("This id doesn't exist!");
+        }
+        else
+        {
+            DiscountCode.getAllDiscountCodes().remove(id);
+        }
+    }
     public boolean checkDiscountCodeExistance(String id)
     {
         if(DiscountCode.getAllDiscountCodes().containsKey(id))

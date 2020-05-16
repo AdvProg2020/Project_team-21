@@ -1,8 +1,9 @@
-package View;
+package View.ManagerProfileUIs;
 
 import Model.Product;
+import View.UI;
 
-public class ManagerManageProductsUI extends UI{
+public class ManagerManageProductsUI extends UI {
     private static ManagerManageProductsUI instance;
     private ManagerManageProductsUI()
     {

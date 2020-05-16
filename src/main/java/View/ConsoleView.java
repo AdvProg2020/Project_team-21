@@ -2,8 +2,8 @@ package View;
 
 import Controller.Control;
 import Model.Account;
-import Model.Customer;
 import Model.Manager;
+import View.ManagerProfileUIs.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -143,12 +143,16 @@ public class ConsoleView{
         }
         else if(currentMenu.equals(ManagerViewDiscountCodesUI.getInstance()))
         {
-            if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(\\S+)"))
+            if(input.trim().matches("(?i)sort\\s+by\\s+percentage"))
+            {
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)sort\\s+by\\s+start\\s*date"))
             {
                 goToNextPage(ManagerViewDiscountCodeUI.getInstance());
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)sort\\s+by\\s+alphabet\\s+(\\S+)"))
+            else if(input.trim().matches("(?i)sort\\s+by\\s+end\\s*date"))
             {
                 goToNextPage(ManagerViewDiscountCodeUI.getInstance());
                 rightInput = true;
@@ -157,6 +161,18 @@ public class ConsoleView{
             {
                 ManagerViewDiscountCodeUI.getInstance().setCode(input.split("\\s+")[3]);
                 goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)edit\\s+discount\\s+code\\s+(\\S+)"))
+            {
+                ManagerEditDiscountCodeUI.getInstance().setId(input.split("\\s+")[3]);
+                goToNextPage(ManagerEditDiscountCodeUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)remove\\s+discount\\s+code\\s+(\\S+)"))
+            {
+                ManagerRemoveDiscountCodeUI.getInstance().setId(input.split("\\s+")[3]);
+                goToNextPage(ManagerRemoveDiscountCodeUI.getInstance());
                 rightInput = true;
             }
         }
