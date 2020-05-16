@@ -1,5 +1,6 @@
 package View.ManagerProfileUIs;
 
+import Controller.Control;
 import Controller.ControlManager;
 import View.ConsoleView;
 import View.UI;
@@ -20,45 +21,12 @@ public class ManagerCreateDiscountCodeUI extends UI {
             instance = new ManagerCreateDiscountCodeUI();
         return instance;
     }
-    private String randomString(int n)
-    {
 
-        // length is bounded by 256 Character
-        byte[] array = new byte[256];
-        new Random().nextBytes(array);
-
-        String randomString
-                = new String(array, Charset.forName("UTF-8"));
-
-        // Create a StringBuffer to store the result
-        StringBuffer r = new StringBuffer();
-
-        // remove all spacial char
-        String  AlphaNumericString
-                = randomString
-                .replaceAll("[^A-Za-z0-9]", "");
-
-        // Append first 20 alphanumeric characters
-        // from the generated random String into the result
-        for (int k = 0; k < AlphaNumericString.length(); k++) {
-
-            if (Character.isLetter(AlphaNumericString.charAt(k))
-                    && (n > 0)
-                    || Character.isDigit(AlphaNumericString.charAt(k))
-                    && (n > 0)) {
-
-                r.append(AlphaNumericString.charAt(k));
-                n--;
-            }
-        }
-        // return the resultant string
-        return r.toString();
-    }
     @Override
     public void run()
     {
         Scanner scanner = ConsoleView.getScanner();
-        String discountID = randomString(10);
+        String discountID = Control.getInstance().randomString(10);
         System.out.println("Enter start date in [year month day hour minute]: ");
         String startDate = scanner.nextLine();
         System.out.println("Enter end date in [year month day hour minute]: ");

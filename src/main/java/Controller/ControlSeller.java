@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.Account.Seller;
+import Model.Company;
+import Model.Request.Request;
+import Model.Request.SellerRequest;
 
 public class ControlSeller {
     private static ControlSeller instance;
@@ -14,9 +17,9 @@ public class ControlSeller {
             instance = new ControlSeller();
         return instance;
     }
-    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber,String companyName)
+    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company)
     {
-        new Seller(username,firstName,lastName,email,phoneNumber,password,companyName);
+        new SellerRequest(Control.getInstance().randomString(10),username,firstName,lastName,email,phoneNumber,password,company);
     }
 
 }

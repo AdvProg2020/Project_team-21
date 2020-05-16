@@ -5,7 +5,9 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.Company;
 
+import java.nio.charset.Charset;
 import java.util.*;
 
 public class Control {
@@ -16,6 +18,40 @@ public class Control {
     {
     }
 
+    public String randomString(int n)
+    {
+
+        // length is bounded by 256 Character
+        byte[] array = new byte[256];
+        new Random().nextBytes(array);
+
+        String randomString
+                = new String(array, Charset.forName("UTF-8"));
+
+        // Create a StringBuffer to store the result
+        StringBuffer r = new StringBuffer();
+
+        // remove all spacial char
+        String  AlphaNumericString
+                = randomString
+                .replaceAll("[^A-Za-z0-9]", "");
+
+        // Append first 20 alphanumeric characters
+        // from the generated random String into the result
+        for (int k = 0; k < AlphaNumericString.length(); k++) {
+
+            if (Character.isLetter(AlphaNumericString.charAt(k))
+                    && (n > 0)
+                    || Character.isDigit(AlphaNumericString.charAt(k))
+                    && (n > 0)) {
+
+                r.append(AlphaNumericString.charAt(k));
+                n--;
+            }
+        }
+        // return the resultant string
+        return r.toString();
+    }
     public static Control getInstance() {
         if(instance == null)
             instance = new Control();
@@ -53,7 +89,7 @@ public class Control {
         setUser(Account.getAllAccounts().get(userName));
     }
 
-    public void createAccount (String type,String username, String password, String firstName, String lastName, String email, String phoneNumber,String verifyPassword,String companyName, boolean login) throws Exception
+    public void createAccount (String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login) throws Exception
     {
         //5 errors
         if(!verifyPassword.equals(password))
@@ -83,7 +119,7 @@ public class Control {
         }
         else if(type.equalsIgnoreCase("seller"))
         {
-            ControlSeller.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber,companyName);
+            ControlSeller.getInstance().createAccount(username,password,firstName,lastName,email,phoneNumber, company);
         }
         else if(type.equalsIgnoreCase("customer"))
         {

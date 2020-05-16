@@ -3,9 +3,11 @@ package Model;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Company {
-    private static ArrayList<Company> allCompanies = new ArrayList<>();
+    private static HashMap<String,Company> allCompanies = new HashMap<>();
     private String name;
     private String location;
     private ArrayList<Seller> allSellers = new ArrayList<>();
@@ -14,13 +16,12 @@ public class Company {
     public Company(String name, String location) {
         this.name = name;
         this.location = location;
-        allCompanies.add(this);
+        allCompanies.put(name,this);
     }
 
-    public static ArrayList<Company> getAllCompanies() {
+    public static HashMap<String, Company> getAllCompanies() {
         return allCompanies;
     }
-
 
     public String getName() {
         return name;
