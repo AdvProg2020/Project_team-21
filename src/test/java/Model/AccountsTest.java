@@ -12,7 +12,7 @@ public class AccountsTest {
 
     @Test
     public void usernameTest(){
-        expected="Invalid Username";
+        expected="Invalid Username!";
         try {
             new Customer("ss&&" , "" ,"","","","",null,0);
         }
@@ -24,7 +24,7 @@ public class AccountsTest {
 
     @Test
     public void firstnameTest(){
-        expected="Invalid Firstname";
+        expected="Invalid FirstName!";
         try {
             new Customer("Tizi","7869","","","","",null,0);
         }
@@ -36,7 +36,7 @@ public class AccountsTest {
 
     @Test
     public void weakPasswordTest(){
-        expected="Weak Pass!";
+        expected="Invalid Password!";
         try {
             new Customer("Tizi","Babak","","","","salam chetori?",null,0);
         }
@@ -48,7 +48,7 @@ public class AccountsTest {
 
     @Test
     public void invalidEmail(){
-        expected="Invalid Email";
+        expected="Invalid Email!";
         try {
             new Customer("Tizi","Babak","Ghahremani","BabakTizi@nadaram","","1234",null,0);
         }
