@@ -9,10 +9,12 @@ public class ProductRequest extends Request {
     private Seller provider;
     private String editField;
     private String newValueEdit;
-    public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType)
+    private Seller seller;
+    public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product)
     {
         super(requestType);
-        Product product = new Product(productId,name,company,price,category);
+        if(!requestType.equals(RequestType.ADD_SELLER))
+             product = new Product(productId,name,company,price,category,seller);
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);
          this.provider = provider;
@@ -47,7 +49,6 @@ public class ProductRequest extends Request {
             Product.removeProduct(product);
         else if(this.getRequestType().equals(RequestType.EDIT))
         {
-
             if(editField.equalsIgnoreCase("price"))
             {
                 product.setPrice(Double.parseDouble(newValueEdit));
@@ -57,6 +58,8 @@ public class ProductRequest extends Request {
                 product.setName(newValueEdit);
             }
         }
+        else if(this.getRequestType().equals(RequestType.ADD_SELLER))
+            product.addSeller(seller);
         declineReq(requestId);
     }
 }

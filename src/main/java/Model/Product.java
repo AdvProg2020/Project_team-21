@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Account.Customer;
 import Model.Account.Seller;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class Product {
 
     //private static ArrayList<Product> allProducts = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
+    private ArrayList<Customer> buyers = new ArrayList<>();
     private String productId;
     private ProductState productState;
     private String name;
@@ -29,13 +31,14 @@ public class Product {
         reviewsList = new ArrayList<>();
     }
 
-    public Product(String productId, String name, Company company, double price, Category category){
+    public Product(String productId, String name, Company company, double price, Category category,Seller seller){
         setProductId(productId);
         setName(name);
         setProductState(productState);
         setCompany(company);
         setPrice(price);
         setCategory(category);
+        addSeller(seller);
     }
 
 
@@ -127,6 +130,15 @@ public class Product {
 
     public static HashMap<String, Product> getAllProducts() {
         return allProducts;
+    }
+
+    public void addBuyer(Customer customer)
+    {
+        buyers.add(customer);
+    }
+
+    public ArrayList<Customer> getBuyers() {
+        return buyers;
     }
 
     private double calculateScore() {

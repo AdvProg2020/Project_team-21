@@ -16,6 +16,8 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.SellerProfileUIs.ManageProducts.SellerManageProductsUI;
+import View.SellerProfileUIs.ManageProducts.SellerViewProductUI;
 import View.SellerProfileUIs.SellerViewCompanyUI;
 import View.SellerProfileUIs.SellerViewSalesUI;
 
@@ -131,19 +133,6 @@ public class ConsoleView{
                 UserInfoUI.getInstance().setEditFieldField(input.split("\\s+")[1]);
                 rightInput = true;
             }
-            else if(user instanceof Seller)
-            {
-                if(input.trim().matches("(?i)view\\s+company\\s+information"))
-                {
-                    goToNextPage(SellerViewCompanyUI.getInstance());
-                    rightInput = true;
-                }
-                else if(input.trim().matches("(?i)view\\s+sales\\s+history"))
-                {
-                    goToNextPage(SellerViewSalesUI.getInstance());
-                    rightInput = true;
-                }
-            }
             else if(user instanceof Manager)
             {
                 if(input.trim().matches("(?i)manage\\s+users"))
@@ -176,6 +165,32 @@ public class ConsoleView{
                     goToNextPage(ManagerManageCategoriesUI.getInstance());
                     rightInput = true;
                 }
+            }
+            else if(user instanceof Seller)
+            {
+                if(input.trim().matches("(?i)view\\s+company\\s+information"))
+                {
+                    goToNextPage(SellerViewCompanyUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)view\\s+sales\\s+history"))
+                {
+                    goToNextPage(SellerViewSalesUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)manage\\s+products"))
+                {
+                    goToNextPage(SellerManageProductsUI.getInstance());
+                    rightInput = true;
+                }
+            }
+        }
+        else if(currentMenu.equals(SellerManageProductsUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)view\\s+(.+)"))
+            {
+                SellerViewProductUI.getInstance().setProductID(input.split("\\s+")[1]);
+                rightInput = true;
             }
         }
         else if(currentMenu.equals(ManagerManageCategoriesUI.getInstance()))
