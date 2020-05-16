@@ -3,6 +3,8 @@ package View;
 import Controller.Control;
 import Model.Account.Account;
 import Model.Account.Manager;
+import View.ManagerProfileUIs.ManageCategories.ManagerAddCategoryUI;
+import View.ManagerProfileUIs.ManageCategories.ManagerManageCategoriesUI;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
 import View.ManagerProfileUIs.ManageProducts.ManagerRemoveProductUI;
@@ -156,8 +158,26 @@ public class ConsoleView{
                 }
                 else if(input.trim().matches("(?i)manage\\s+categories"))
                 {
-
+                    goToNextPage(ManagerManageCategoriesUI.getInstance());
+                    rightInput = true;
                 }
+            }
+        }
+        else if(currentMenu.equals(ManagerManageCategoriesUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)edit\\s+(.+)"))
+            {
+
+            }
+            else if(input.trim().matches("(?i)add\\s+(.+)"))
+            {
+                ManagerAddCategoryUI.getInstance().setCategoryName(input.split("\\s+")[1]);
+                goToNextPage(ManagerAddCategoryUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)remove\\s+(.+)"))
+            {
+
             }
         }
         else if(currentMenu.equals(ManagerRequestsUI.getInstance()))

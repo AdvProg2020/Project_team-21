@@ -14,8 +14,9 @@ public class Category {
         subCategories = new ArrayList<>();
     }
 
-    public Category(String name){
-
+    public Category(String name, ArrayList<Product> products)
+    {
+        productsList = products;
         setName(name);
         allCategories.add(this);
     }

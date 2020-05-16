@@ -1,12 +1,14 @@
 package Controller;
 
 import Model.Account.Account;
+import Model.Category;
 import Model.DiscountCode;
 import Model.Account.Manager;
 import Model.Product;
 import Model.Request.Request;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class ControlManager {
 
@@ -159,6 +161,14 @@ public class ControlManager {
         {
             DiscountCode.getAllDiscountCodes().remove(id);
         }
+    }
+    public void addCategory(String name, ArrayList<Product> products) throws Exception
+    {
+        for (Category category : Category.getAllCategories()) {
+            if(category.getName().equalsIgnoreCase(name))
+                throw new Exception("This category already exists!");
+        }
+        new Category(name, products);
     }
     public boolean checkDiscountCodeExistance(String id)
     {
