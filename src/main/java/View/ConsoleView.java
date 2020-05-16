@@ -5,6 +5,7 @@ import Model.Account.Account;
 import Model.Account.Manager;
 import View.ManagerProfileUIs.ManageCategories.ManagerAddCategoryUI;
 import View.ManagerProfileUIs.ManageCategories.ManagerManageCategoriesUI;
+import View.ManagerProfileUIs.ManageCategories.ManagerRemoveCategoryUI;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
 import View.ManagerProfileUIs.ManageProducts.ManagerRemoveProductUI;
@@ -167,7 +168,9 @@ public class ConsoleView{
         {
             if(input.trim().matches("(?i)edit\\s+(.+)"))
             {
-
+                ManagerRemoveCategoryUI.getInstance().setCategoryName(input.split("\\s+")[1]);
+                goToNextPage(ManagerRemoveCategoryUI.getInstance());
+                rightInput = true;
             }
             else if(input.trim().matches("(?i)add\\s+(.+)"))
             {

@@ -54,7 +54,7 @@ public class Category {
         subCategories.remove(category);
     }
 
-    public void removeCategory(Category category){
+    public static void removeCategory(Category category){
         allCategories.remove(category);
     }
 
