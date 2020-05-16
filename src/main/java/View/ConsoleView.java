@@ -154,6 +154,10 @@ public class ConsoleView{
                     goToNextPage(ManagerRequestsUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches("(?i)manage\\s+categories"))
+                {
+
+                }
             }
         }
         else if(currentMenu.equals(ManagerRequestsUI.getInstance()))
