@@ -7,12 +7,13 @@ import Model.Product;
 
 public class ProductRequest extends Request {
     Seller provider;
-    public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider)
+    public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType)
     {
         Product product = new Product(productId,name,company,price,category);
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);
          this.provider = provider;
+         this.setRequestType(requestType);
     }
 
     public Seller getProvider() {

@@ -28,7 +28,7 @@ public class ManagerRequestsUI extends UI {
         }
 
         System.out.println("Product requests :");
-        for (String s : Request.getRequestedOffs().keySet())
+        for (String s : Request.getRequestedProducts().keySet())
         {
             System.out.println("From: " + ((ProductRequest)Request.getAllRequests().get(s)).getProvider().getUsername() + "  request id: " + s);
         }

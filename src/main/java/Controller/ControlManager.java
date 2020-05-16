@@ -4,6 +4,7 @@ import Model.Account.Account;
 import Model.DiscountCode;
 import Model.Account.Manager;
 import Model.Product;
+import Model.Request.Request;
 
 import java.time.LocalDateTime;
 
@@ -163,6 +164,14 @@ public class ControlManager {
     {
         if(DiscountCode.getAllDiscountCodes().containsKey(id))
             return true;
+        return false;
+    }
+    public boolean checkRequestIdExistance(String id)
+    {
+        if(Request.getAllRequests().containsKey(id))
+        {
+            return true;
+        }
         return false;
     }
 }

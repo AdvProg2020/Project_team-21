@@ -11,7 +11,7 @@ public abstract class Request {
     protected static HashMap<String, Product> requestedProducts = new HashMap<>();
     protected static HashMap<String, Off> requestedOffs = new HashMap<>();
     protected static HashMap<String, Seller> requestedSellers = new HashMap<>();
-
+    private RequestType requestType;
     private String requestId;
     public static HashMap<String, Off> getRequestedOffs() {
         return requestedOffs;
@@ -19,6 +19,14 @@ public abstract class Request {
 
     public void setRequestId(String requestId) {
         this.requestId = requestId;
+    }
+
+    public void setRequestType(RequestType requestType) {
+        this.requestType = requestType;
+    }
+
+    public RequestType getRequestType() {
+        return requestType;
     }
 
     public String getRequestId() {

@@ -9,12 +9,13 @@ import java.util.ArrayList;
 
 public class OffRequest extends Request {
     Seller provider;
-    public OffRequest(String requestId, String offId, ArrayList<Product> productList, LocalDateTime startTime, LocalDateTime endTime, double percentage, Seller provider)
+    public OffRequest(String requestId, String offId, ArrayList<Product> productList, LocalDateTime startTime, LocalDateTime endTime, double percentage, Seller provider, RequestType requestType)
     {
         Off off = new Off(offId,productList,startTime,endTime,percentage);
         requestedOffs.put(requestId,off);
         Request.addRequest(requestId,this);
         this.provider = provider;
+        this.setRequestType(requestType);
     }
 
     public Seller getProvider() {

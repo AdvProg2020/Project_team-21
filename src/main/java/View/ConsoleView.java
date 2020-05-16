@@ -6,6 +6,7 @@ import Model.Account.Manager;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
 import View.ManagerProfileUIs.ManageProducts.ManagerRemoveProductUI;
+import View.ManagerProfileUIs.ManageRequests.ManagerDetailsRequestUI;
 import View.ManagerProfileUIs.ManageRequests.ManagerRequestsUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
@@ -153,6 +154,15 @@ public class ConsoleView{
                 }
             }
         }
+        else if(currentMenu.equals(ManagerRequestsUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)details\\s+(.+)"))
+            {
+                ManagerDetailsRequestUI.getInstance().setRequestId(input.split("\\s+")[1]);
+                goToNextPage(ManagerDetailsRequestUI.getInstance());
+                rightInput = true;
+            }
+        }
         else if(currentMenu.equals(ManagerViewDiscountCodesUI.getInstance()))
         {
             if(input.trim().matches("(?i)sort\\s+by\\s+percentage"))
@@ -169,19 +179,19 @@ public class ConsoleView{
                 goToNextPage(ManagerViewDiscountCodeUI.getInstance());
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(\\S+)"))
+            else if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(.+)"))
             {
                 ManagerViewDiscountCodeUI.getInstance().setCode(input.split("\\s+")[3]);
                 goToNextPage(ManagerViewDiscountCodeUI.getInstance());
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)edit\\s+discount\\s+code\\s+(\\S+)"))
+            else if(input.trim().matches("(?i)edit\\s+discount\\s+code\\s+(.+)"))
             {
                 ManagerEditDiscountCodeUI.getInstance().setId(input.split("\\s+")[3]);
                 goToNextPage(ManagerEditDiscountCodeUI.getInstance());
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)remove\\s+discount\\s+code\\s+(\\S+)"))
+            else if(input.trim().matches("(?i)remove\\s+discount\\s+code\\s+(.+)"))
             {
                 ManagerRemoveDiscountCodeUI.getInstance().setId(input.split("\\s+")[3]);
                 goToNextPage(ManagerRemoveDiscountCodeUI.getInstance());
