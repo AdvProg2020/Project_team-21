@@ -3,9 +3,7 @@ package View;
 import Controller.Control;
 import Model.Account.Account;
 import Model.Account.Manager;
-import View.ManagerProfileUIs.ManageCategories.ManagerAddCategoryUI;
-import View.ManagerProfileUIs.ManageCategories.ManagerManageCategoriesUI;
-import View.ManagerProfileUIs.ManageCategories.ManagerRemoveCategoryUI;
+import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
 import View.ManagerProfileUIs.ManageProducts.ManagerRemoveProductUI;
@@ -168,8 +166,8 @@ public class ConsoleView{
         {
             if(input.trim().matches("(?i)edit\\s+(.+)"))
             {
-                ManagerRemoveCategoryUI.getInstance().setCategoryName(input.split("\\s+")[1]);
-                goToNextPage(ManagerRemoveCategoryUI.getInstance());
+                ManagerEditCategoryUI.getInstance().setCategoryName(input.split("\\s+")[1]);
+                goToNextPage(ManagerEditCategoryUI.getInstance());
                 rightInput = true;
             }
             else if(input.trim().matches("(?i)add\\s+(.+)"))
@@ -177,6 +175,24 @@ public class ConsoleView{
                 ManagerAddCategoryUI.getInstance().setCategoryName(input.split("\\s+")[1]);
                 goToNextPage(ManagerAddCategoryUI.getInstance());
                 rightInput = true;
+            }
+            else if(input.trim().matches("(?i)remove\\s+(.+)"))
+            {
+                ManagerRemoveCategoryUI.getInstance().setCategoryName(input.split("\\s+")[1]);
+                goToNextPage(ManagerRemoveCategoryUI.getInstance());
+                rightInput = true;
+            }
+        }
+        else if(currentMenu.equals(ManagerEditCategoryUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)name"))
+            {
+                goToNextPage(ManagerEditCategoryNameUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)add\\s+(.+)"))
+            {
+
             }
             else if(input.trim().matches("(?i)remove\\s+(.+)"))
             {

@@ -6,6 +6,7 @@ import Model.DiscountCode;
 import Model.Account.Manager;
 import Model.Product;
 import Model.Request.Request;
+import View.ManagerProfileUIs.ManageCategories.ManagerEditCategoryUI;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -169,6 +170,19 @@ public class ControlManager {
                 throw new Exception("This category already exists!");
         }
         new Category(name, products);
+    }
+    public void changeCategoryName(String newName) throws Exception
+    {
+        if(ControlManager.getInstance().checkCategoryExistance(newName))
+        {
+            throw new Exception("This category already exists!");
+        }
+        for (Category category : Category.getAllCategories()) {
+            if(category.getName().equalsIgnoreCase(ManagerEditCategoryUI.getInstance().getCategoryName()))
+            {
+                category.setName(newName);
+            }
+        }
     }
     public boolean checkDiscountCodeExistance(String id)
     {

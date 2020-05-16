@@ -16,7 +16,9 @@ public class Category {
 
     public Category(String name, ArrayList<Product> products)
     {
-        productsList = products;
+        for (Product product : products) {
+            addProductToCategory(product);
+        }
         setName(name);
         allCategories.add(this);
     }
@@ -40,9 +42,15 @@ public class Category {
 
     public void addProductToCategory(Product product){
         productsList.add(product);
+        product.setCategory(this);
+    }
+
+    public ArrayList<Product> getProductsList() {
+        return productsList;
     }
 
     public void removeProductFromCategory(Product product){
+        product.setCategory(null);
         productsList.remove(product);
     }
 
@@ -55,10 +63,14 @@ public class Category {
     }
 
     public static void removeCategory(Category category){
+        for (Product product : category.getProductsList())
+        {
+            product.setCategory(null);
+        }
         allCategories.remove(category);
     }
 
-    private void setName(String name){
+    public void setName(String name){
         this.name = name;
     }
 
