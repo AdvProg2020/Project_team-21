@@ -5,7 +5,8 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
-import View.CustomerProfileUIs.CustomerViewCartUI;
+import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
+import View.CustomerProfileUIs.CustomerCartUIs.CustomerViewCartUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
@@ -228,7 +229,11 @@ public class ConsoleView{
         }
         else if(currentMenu.equals(CustomerViewCartUI.getInstance()))
         {
-
+            if(input.trim().matches("(?i)show\\s+products"))
+            {
+                goToNextPage(CustomerCartShowProductsUI.getInstance());
+                rightInput = true;
+            }
         }
         else if(currentMenu.equals(SellerViewOffsUI.getInstance()))
         {

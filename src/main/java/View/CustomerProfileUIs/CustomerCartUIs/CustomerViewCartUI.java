@@ -1,4 +1,4 @@
-package View.CustomerProfileUIs;
+package View.CustomerProfileUIs.CustomerCartUIs;
 
 import View.UI;
 

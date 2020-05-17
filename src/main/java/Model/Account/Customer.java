@@ -18,6 +18,7 @@ public class Customer extends Account {
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
         addNewCustomer(this);
+        setShoppingCart(new ShoppingCart(this));
     }
 
     public static void removeCustomer (Customer customer){
