@@ -68,8 +68,9 @@ public class Customer extends Account implements Comparable<Customer>{
         this.balance = balance;
     }
 
-    public int compareTo(Customer customer) {
-        return getUsername().compareTo(customer.getUsername());
+    @Override
+    public int compareTo(Customer o) {
+        return getUsername().compareTo(o.getUsername());
     }
 
 }

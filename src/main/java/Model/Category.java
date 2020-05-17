@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Category {
+public class Category implements Comparable<Category>{
     private static ArrayList<Category> allCategories = new ArrayList<>();
     private String name;
     private ArrayList<Product> productsList;
@@ -59,6 +59,11 @@ public class Category {
 
     public static ArrayList<Category> getAllCategories() {
         return allCategories;
+    }
+
+    @Override
+    public int compareTo(Category o) {
+        return getName().compareTo(o.getName());
     }
 }
 

@@ -35,10 +35,9 @@ public class Sort {
     // Category
 
     public ArrayList<Category> sortAllCategories(){
-        List<Category> allCategories = new ArrayList<>(Category.getAllCategories());
-        Collections.sort(allCategories.);
-
-        allCategories.sort(allCategories.get().getName());
+        ArrayList<Category> allCategories = Category.getAllCategories();
+        Collections.sort(allCategories);
+        return allCategories;
     }
 
     // Customer
