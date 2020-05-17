@@ -13,7 +13,7 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product)
     {
         super(requestType);
-        if(!requestType.equals(RequestType.ADD_SELLER))
+        if(requestType.equals(RequestType.ADD))
              product = new Product(productId,name,company,price,category,seller);
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);

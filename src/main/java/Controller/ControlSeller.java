@@ -3,6 +3,7 @@ package Controller;
 import Model.Account.Seller;
 import Model.Company;
 import Model.Product;
+import Model.Request.ProductRequest;
 import Model.Request.Request;
 import Model.Request.RequestType;
 import Model.Request.SellerRequest;
@@ -36,5 +37,34 @@ public class ControlSeller {
         if(seller.getAllProducts().contains(product))
             return true;
         return false;
+    }
+    public String sendProductEditReq(String productID , String field , String value) throws Exception
+    {
+        String requestID = Control.getInstance().randomString(10);
+        Seller user = (Seller) Control.getInstance().getUser();
+        if(!checkProductExists(productID))
+        {
+            throw new Exception("This product doesn't exist");
+        }
+        else if(!checkSellerGotProduct(productID,user))
+        {
+            throw new Exception("You don't have this product!");
+        }
+        if(!field.matches("(?i)name|price"))
+        {
+            throw new Exception("You entered the wrong field");
+        }
+        if(field.matches("(?i)price"))
+        {
+            if(!value.matches("\\d+.?\\d*"))
+            {
+                throw new Exception("Your price value isn't correct");
+            }
+        }
+        Product product = Product.getAllProducts().get(productID);
+        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,null,RequestType.EDIT,null,product);
+        req.setEditField(field);
+        req.setNewValueEdit(value);
+        return requestID;
     }
 }
