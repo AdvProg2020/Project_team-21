@@ -11,6 +11,10 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.ProductsUIs.FilteringUI.FilteringUI;
+import View.ProductsUIs.ProductsMainUI.ProductsMainUI;
+import View.ProductsUIs.ProductsMainUI.ViewCategoriesUI;
+import View.ProductsUIs.SortingUI.SortingUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -220,6 +224,31 @@ public class ConsoleView{
             {
                 goToNextPage(ManagerCreateManagerUI.getInstance());
                 rightInput = true;
+            }
+        }
+        else if(currentMenu.equals(ProductsMainUI.getInstance())){
+
+            if (input.trim().matches("(?i)view\\s+categories")){
+                goToNextPage(ViewCategoriesUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)filtering\\s+")){
+                goToNextPage(FilteringUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)sorting\\s+")){
+                goToNextPage(SortingUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)show\\s+products")){
+
+            }
+
+            else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
+
             }
         }
         if(input.trim().matches("(?i)back"))
