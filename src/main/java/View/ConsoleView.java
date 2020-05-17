@@ -16,14 +16,11 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageProducts.SellerEditProductUI;
 import View.SellerProfileUIs.ManageProducts.SellerManageProductsUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductBuyersUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductUI;
-import View.SellerProfileUIs.SellerAddProductReqUI;
-import View.SellerProfileUIs.SellerRemoveProductReqUI;
-import View.SellerProfileUIs.SellerViewCompanyUI;
-import View.SellerProfileUIs.SellerViewSalesUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -196,6 +193,11 @@ public class ConsoleView{
                 {
                     SellerRemoveProductReqUI.getInstance().setProductID(input.split("\\s+")[2]);
                     goToNextPage(SellerRemoveProductReqUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)show\\s+categories"))
+                {
+                    goToNextPage(SellerShowCategoriesUI.getInstance());
                     rightInput = true;
                 }
             }
