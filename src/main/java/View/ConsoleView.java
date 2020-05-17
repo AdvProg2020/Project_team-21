@@ -209,6 +209,11 @@ public class ConsoleView{
                     goToNextPage(SellerViewOffsUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches("(?i)view\\s+balance"))
+                {
+                    goToNextPage(SellerViewBalanceUI.getInstance());
+                    rightInput = true;
+                }
             }
         }
         else if(currentMenu.equals(SellerViewOffsUI.getInstance()))
