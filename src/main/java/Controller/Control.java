@@ -6,12 +6,14 @@ import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
 import Model.Company;
+import Model.Filters.Filter;
 
 import java.nio.charset.Charset;
 import java.util.*;
 
 public class Control {
 
+    public static ArrayList<Filter> currentFilters = new ArrayList<>();
     Account user = null;
     private static Control instance;
     private Control()
@@ -186,6 +188,26 @@ public class Control {
         {
             super(message + "\ntry again");
         }
+    }
+
+    public String showAvailableFilters(){
+        //TODO
+        return showAvailableFilters();
+    }
+
+    public String createFilter(String filterType,String filterInput){
+        //TODO
+        return "Filter was created";
+    }
+
+    public String showCurrentFilters(){
+        //TODO
+        return Filter.showCurrentFilters();
+    }
+
+    public String disableFilter(String filterType){
+        //TODO
+        return "Could not disable filter";
     }
 
 
