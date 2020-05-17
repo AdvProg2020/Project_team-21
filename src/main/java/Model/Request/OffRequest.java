@@ -11,10 +11,14 @@ public class OffRequest extends Request {
     private Seller provider;
     private String editField;
     private String newValueForField;
+    Product product;
     public OffRequest(String requestId, String offId, ArrayList<Product> productList, LocalDateTime startTime, LocalDateTime endTime, double percentage, Seller provider, RequestType requestType)
     {
         super(requestType);
-        Off off = new Off(offId,productList,startTime,endTime,percentage);
+        Off off;
+        if(requestType.equals(RequestType.ADD))
+            off = new Off(offId,productList,startTime,endTime,percentage);
+        off = Off.getAllOffs().get(offId);
         requestedOffs.put(requestId,off);
         Request.addRequest(requestId,this);
         this.provider = provider;
@@ -26,6 +30,10 @@ public class OffRequest extends Request {
 
     public void setNewValueForField(String newValueForField) {
         this.newValueForField = newValueForField;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Seller getProvider() {
@@ -68,6 +76,14 @@ public class OffRequest extends Request {
                 String[] endDateParsed = newValueForField.split("\\s+");
                 LocalDateTime endDateDate = LocalDateTime.of(Integer.parseInt(endDateParsed[0]),Integer.parseInt(endDateParsed[1]),Integer.parseInt(endDateParsed[2]),Integer.parseInt(endDateParsed[3]),Integer.parseInt(endDateParsed[4]));
                 off.setEndTime(endDateDate);
+            }
+            else if(editField.equalsIgnoreCase("add product"))
+            {
+                off.addProduct(product);
+            }
+            else if(editField.equalsIgnoreCase("remove product"))
+            {
+                off.removeProduct(product);
             }
         }
         declineReq(requestId);

@@ -5,10 +5,7 @@ import Model.Category;
 import Model.Company;
 import Model.Off;
 import Model.Product;
-import Model.Request.ProductRequest;
-import Model.Request.Request;
-import Model.Request.RequestType;
-import Model.Request.SellerRequest;
+import Model.Request.*;
 import View.ConsoleView;
 import jdk.jfr.Frequency;
 
@@ -143,6 +140,43 @@ public class ControlSeller {
                 return true;
         }
         return false;
+    }
+    public String sendEditOffRequest(String offID,String field,String value,String productID) throws Exception
+    {
+        Seller seller = (Seller) Control.getInstance().getUser();
+        String requestID = Control.getInstance().randomString(10);
+        if(!checkOffExistance(offID) || !checkSellerGotOff(offID,seller))
+        {
+            throw new Exception("This off doesn't Exist!");
+        }
+        if(!productID.equalsIgnoreCase("null") && !Product.getAllProducts().containsKey(productID))
+        {
+            throw new Exception("This product doesn't exist!");
+        }
+        if(!field.matches("add product|remove product|start|end|amount"))
+        {
+            throw new Exception("The field is wrong!");
+        }
+        if(field.matches("end|start") && !Control.getInstance().timeCorrectMatch(value))
+        {
+            throw new Exception("Time format is wrong!");
+        }
+        if(field.equalsIgnoreCase("amount") && !Control.getInstance().doubleCheck(value))
+        {
+            throw new Exception("Amount format is wrong!");
+        }
+        if(!seller.getAllProducts().contains(Product.getAllProducts().get(productID)))
+        {
+            throw new Exception("You don't have this product!");
+        }
+        OffRequest req = new OffRequest(requestID,offID,null,null,null,0,seller,RequestType.EDIT);
+        req.setEditField(field);
+        req.setNewValueForField(value);
+        if(field.matches("add product|remove product"))
+        {
+            req.setProduct(Product.getAllProducts().get(productID));
+        }
+        return requestID;
     }
     public String sendAddOffRequest()
     {

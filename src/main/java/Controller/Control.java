@@ -160,6 +160,19 @@ public class Control {
         }
         Account.getAllAccounts().remove(username);
     }
+    public boolean timeCorrectMatch(String time)
+    {
+        if(time.matches("\\d{4}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}")) {
+            return true;
+        }
+        return false;
+    }
+    public boolean doubleCheck(String string)
+    {
+        if(string.matches("\\d+.?\\d*"))
+            return true;
+        return false;
+    }
 
     public void sortHashmap(HashMap map)
     {
