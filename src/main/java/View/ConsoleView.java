@@ -17,6 +17,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
 import View.SellerProfileUIs.*;
+import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
 import View.SellerProfileUIs.ManageOffs.SellerEditOffUI;
 import View.SellerProfileUIs.ManageOffs.SellerViewOffInfoUI;
 import View.SellerProfileUIs.ManageOffs.SellerViewOffsUI;
@@ -224,7 +225,11 @@ public class ConsoleView{
                 goToNextPage(SellerEditOffUI.getInstance());
                 rightInput = true;
             }
-
+            else if(input.trim().matches("(?i)add\\s+off"))
+            {
+                goToNextPage(SellerAddOffUI.getInstance());
+                rightInput = true;
+            }
         }
         else if(currentMenu.equals(SellerManageProductsUI.getInstance()))
         {

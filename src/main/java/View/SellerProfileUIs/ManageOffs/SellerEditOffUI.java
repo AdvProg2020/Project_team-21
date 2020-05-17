@@ -45,7 +45,8 @@ public class SellerEditOffUI extends UI {
         }
         try
         {
-            ControlSeller.getInstance().sendEditOffRequest(offID,field,value,productID);
+            String reqID = ControlSeller.getInstance().sendEditOffRequest(offID,field,value,productID);
+            System.out.println("Your request with ID " + reqID + " has been sent!");
         }
         catch (Exception e)
         {

@@ -9,6 +9,8 @@ import Model.Request.*;
 import View.ConsoleView;
 import jdk.jfr.Frequency;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.zip.CheckedOutputStream;
 
 public class ControlSeller {
@@ -178,21 +180,28 @@ public class ControlSeller {
         }
         return requestID;
     }
-    public String sendAddOffRequest()
+    private int makeInt(String string)
     {
+        return Integer.parseInt(string);
+    }
+    public String sendAddOfRequest(ArrayList<Product> products,String amount,String start,String end) throws Exception
+    {
+        Seller seller = (Seller) Control.getInstance().getUser();
         String requestID = Control.getInstance().randomString(10);
         String offID = Control.getInstance().randomString(10);
-        Seller seller = (Seller) Control.getInstance().getUser();
-        if(ControlSeller.getInstance().checkOffExistance(offID) && ControlSeller.getInstance().checkSellerGotOff(offID,seller))
+        if(!Control.getInstance().timeCorrectMatch(start) || !Control.getInstance().timeCorrectMatch(end))
         {
-
-            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
+            throw new Exception("Your time format is wrong!");
         }
-        else
+        if(!Control.getInstance().doubleCheck(amount))
         {
-            ConsoleView.getInstance().errorInput("You don't have this off!" , ConsoleView.getInstance().getLastMenu());
+            throw new Exception("Your amount format is wrong!");
         }
+        String[] startParse = start.split("\\s+");
+        String[] endParse = end.split("\\s+");
+        LocalDateTime startTime = LocalDateTime.of(makeInt(startParse[0]),makeInt(startParse[1]),makeInt(startParse[2]),makeInt(startParse[3]),makeInt(startParse[4]));
+        LocalDateTime endTime = LocalDateTime.of(makeInt(endParse[0]),makeInt(endParse[1]),makeInt(endParse[2]),makeInt(endParse[3]),makeInt(endParse[4]));
+        new OffRequest(requestID,offID,products,startTime,endTime,Double.parseDouble(amount),seller,RequestType.ADD);
         return requestID;
     }
-
 }
