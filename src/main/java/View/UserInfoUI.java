@@ -2,6 +2,7 @@ package View;
 
 import Controller.Control;
 import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
 
@@ -172,6 +173,11 @@ public class UserInfoUI extends UI {
             System.out.println("To send a request for removing a product : remove product [productID]");
             System.out.println("To see all categories : Show categories");
             System.out.println("To see and manage your offs : view offs");
+            System.out.println("To view your balance : view balance");
+        }
+        else if(user instanceof Customer)
+        {
+            System.out.println("To view your cart : view cart");
         }
     }
 }

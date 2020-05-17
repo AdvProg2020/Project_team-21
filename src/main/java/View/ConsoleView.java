@@ -2,8 +2,10 @@ package View;
 
 import Controller.Control;
 import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
+import View.CustomerProfileUIs.CustomerViewCartUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
@@ -215,6 +217,18 @@ public class ConsoleView{
                     rightInput = true;
                 }
             }
+            else if(user instanceof Customer)
+            {
+                if(input.trim().matches("(?i)view\\s+cart"))
+                {
+                    goToNextPage(CustomerViewCartUI.getInstance());
+                    rightInput = true;
+                }
+            }
+        }
+        else if(currentMenu.equals(CustomerViewCartUI.getInstance()))
+        {
+
         }
         else if(currentMenu.equals(SellerViewOffsUI.getInstance()))
         {
