@@ -20,6 +20,7 @@ import View.SellerProfileUIs.ManageProducts.SellerEditProductUI;
 import View.SellerProfileUIs.ManageProducts.SellerManageProductsUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductBuyersUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductUI;
+import View.SellerProfileUIs.SellerAddProductReqUI;
 import View.SellerProfileUIs.SellerViewCompanyUI;
 import View.SellerProfileUIs.SellerViewSalesUI;
 
@@ -183,6 +184,11 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)manage\\s+products"))
                 {
                     goToNextPage(SellerManageProductsUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)add\\s+product"))
+                {
+                    goToNextPage(SellerAddProductReqUI.getInstance());
                     rightInput = true;
                 }
             }

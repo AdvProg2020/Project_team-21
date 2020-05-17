@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Account.Seller;
+import Model.Category;
 import Model.Company;
 import Model.Product;
 import Model.Request.ProductRequest;
@@ -8,6 +9,8 @@ import Model.Request.Request;
 import Model.Request.RequestType;
 import Model.Request.SellerRequest;
 import jdk.jfr.Frequency;
+
+import java.util.zip.CheckedOutputStream;
 
 public class ControlSeller {
     private static ControlSeller instance;
@@ -65,6 +68,53 @@ public class ControlSeller {
         ProductRequest req = new ProductRequest(requestID,"","",null,0,null,null,RequestType.EDIT,null,product);
         req.setEditField(field);
         req.setNewValueEdit(value);
+        return requestID;
+    }
+    public String sendAddProductReq(String name, String companyName, String categoryName, String price,String companyLocation) throws Exception
+    {
+        Seller seller = (Seller) Control.getInstance().getUser();
+        Category category = null;
+        Company company = null;
+        double priceNum = 0;
+        String productID = Control.getInstance().randomString(10);
+        String requesID = Control.getInstance().randomString(10);
+        for (Category category1 : Category.getAllCategories()) {
+            if(category1.getName().equalsIgnoreCase(categoryName))
+                category = category1;
+        }
+        if(category == null)
+        {
+            throw new Exception("Category wasn't found");
+        }
+        if(Company.getAllCompanies().containsKey(companyName))
+        {
+            company = Company.getAllCompanies().get(companyName);
+        }
+        else
+        {
+            company = new Company(companyName,companyLocation);
+        }
+        if(!price.matches("\\d+.?\\d*"))
+        {
+            throw new Exception("Your price format is wrong!");
+        }
+        else
+        {
+            priceNum = Double.parseDouble(price);
+        }
+        new ProductRequest(requesID,productID,name,company,priceNum,category,seller,RequestType.ADD,seller,null);
+        return requesID;
+    }
+    public String sendAddSellerProductReq(String productID) throws Exception
+    {
+        if(!Product.getAllProducts().containsKey(productID))
+        {
+            new Exception("This product doesn't exist!");
+        }
+        String requestID = Control.getInstance().randomString(10);
+        Seller seller = (Seller) Control.getInstance().getUser();
+        Product product = Product.getAllProducts().get(productID);
+        new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.ADD_SELLER,seller,product);
         return requestID;
     }
 }

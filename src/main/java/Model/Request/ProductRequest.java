@@ -44,7 +44,9 @@ public class ProductRequest extends Request {
     {
         Product product = Request.getRequestedProducts().get(requestId);
         if(this.getRequestType().equals(RequestType.ADD))
+        {
             Product.addProduct(product);
+        }
         else if(this.getRequestType().equals(RequestType.DELETE))
             Product.removeProduct(product);
         else if(this.getRequestType().equals(RequestType.EDIT))
@@ -59,7 +61,11 @@ public class ProductRequest extends Request {
             }
         }
         else if(this.getRequestType().equals(RequestType.ADD_SELLER))
+        {
             product.addSeller(seller);
+            seller.addProduct(product);
+        }
+
         declineReq(requestId);
     }
 }

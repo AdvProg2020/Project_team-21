@@ -35,8 +35,8 @@ public class SellerEditProductUI extends UI {
         String value = scanner.nextLine();
         try
         {
-            ControlSeller.getInstance().sendProductEditReq(productID,field,value);
-            System.out.println("Your request with request ID");
+            String reqID = ControlSeller.getInstance().sendProductEditReq(productID,field,value);
+            System.out.println("Your request with request ID " + reqID + " has been sent!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
         }
         catch (Exception e)
