@@ -14,7 +14,7 @@ public class AccountsTest {
     public void usernameTest(){
         expected="Invalid Username!";
         try {
-            new Customer("ss&&" , "" ,"","","","",null,0);
+            new Customer("ss&&" , "" ,"","","","",0,0);
         }
         catch (Exception e){
             real=e.getMessage();
@@ -26,7 +26,7 @@ public class AccountsTest {
     public void firstnameTest(){
         expected="Invalid FirstName!";
         try {
-            new Customer("Tizi","7869","","","","",null,0);
+            new Customer("Tizi","7869","","","","",0,0);
         }
         catch (Exception e){
             real=e.getMessage();
@@ -38,7 +38,7 @@ public class AccountsTest {
     public void weakPasswordTest(){
         expected="Invalid Password!";
         try {
-            new Customer("Tizi","Babak","","","","salam chetori?",null,0);
+            new Customer("Tizi","Babak","","","","salam chetori?",0,0);
         }
         catch (Exception e){
             real= e.getMessage();
@@ -50,7 +50,7 @@ public class AccountsTest {
     public void invalidEmail(){
         expected="Invalid Email!";
         try {
-            new Customer("Tizi","Babak","Ghahremani","BabakTizi@nadaram","","1234",null,0);
+            new Customer("Tizi","Babak","Ghahremani","BabakTizi@nadaram","","1234",0,0);
         }
         catch (Exception e){
             real=e.getMessage();
