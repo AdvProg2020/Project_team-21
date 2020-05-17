@@ -86,4 +86,5 @@ public class DiscountCode {
     public void setDiscountNumberForEachUser(int discountNumberForEachUser) {
         this.discountNumberForEachUser = discountNumberForEachUser;
     }
+
 }

@@ -1,6 +1,6 @@
 package Model;
 
-public class Score {
+public class Score implements Comparable<Score>{
 
     private Account user;
     private Product product;
@@ -35,5 +35,10 @@ public class Score {
 
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public int compareTo(Score o) {
+        return (getScore() - o.getScore());
     }
 }

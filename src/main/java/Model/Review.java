@@ -1,6 +1,6 @@
 package Model;
 
-public class Review {
+public class Review implements Comparable<Review> {
 
     private Account user;
     private Product product;
@@ -45,5 +45,10 @@ public class Review {
 
     public boolean hasBought(){
         return hasBought;
+    }
+
+    @Override
+    public int compareTo(Review o) {
+        return getReviewText().compareTo(o.getReviewText());
     }
 }

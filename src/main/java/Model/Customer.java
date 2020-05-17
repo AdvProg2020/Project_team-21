@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 public class Customer extends Account implements Comparable<Customer>{
 
-    private static ArrayList<Customer> allCustomer = new ArrayList<Customer>();
+    private static ArrayList<Customer> allCustomer = new ArrayList<>();
     private ShoppingCart shoppingCart;
-    public ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
+    public ArrayList <BuyLog> buyLogs = new ArrayList<>();
     public HashMap<Off , Integer> offs = new HashMap<>();
     public int balance;
 

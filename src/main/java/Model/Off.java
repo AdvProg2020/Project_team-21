@@ -3,7 +3,7 @@ package Model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Off {
+public class Off implements Comparable<Off>{
 
     private static ArrayList<Off> allOffs = new ArrayList<>();
     private String offId;
@@ -87,5 +87,10 @@ public class Off {
 
     public void removeProduct(Product product){
         productsList.remove(product);
+    }
+
+    @Override
+    public int compareTo(Off o) {
+        return getOffId().compareTo(o.getOffId());
     }
 }

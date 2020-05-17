@@ -1,10 +1,8 @@
 package Controller;
 
-import Model.Account;
-import Model.Category;
-import Model.Customer;
-import Model.DiscountCode;
+import Model.*;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -12,14 +10,13 @@ public class Sort {
 
     // Account
 
-    public Map<String, Account> sortAllAccounts() {
-        Map<String, Account> allAccounts = Account.getAllAccounts();
+    public Map<String, Account> sortAccountHashMap(Map<String, Account> accountMap) {
         /* Sort statement */
-        allAccounts = sortByKey(allAccounts);
-        return allAccounts;
+        accountMap = sortAccountMapByKey(accountMap);
+        return accountMap;
     }
 
-    public Map<String, Account> sortByKey(Map map) {
+    public Map<String, Account> sortAccountMapByKey(Map map) {
         // TreeMap to store values of HashMap
         TreeMap<String, Account> sorted = new TreeMap<>();
 
@@ -34,20 +31,97 @@ public class Sort {
 
     // Category
 
-    public ArrayList<Category> sortAllCategories(){
-        ArrayList<Category> allCategories = Category.getAllCategories();
-        Collections.sort(allCategories);
-        return allCategories;
+    public ArrayList<Category> sortCategoryArrayList(ArrayList<Category> categories){
+        Collections.sort(categories);
+        return categories;
     }
 
     // Customer
 
-    public ArrayList<Customer> sortAllCustomers(){
-        ArrayList<Customer> allCustomers = Customer.getaAllCustomers();
-        Collections.sort(allCustomers);
-        return allCustomers;
+    public ArrayList<Customer> sortCustomerArrayList(ArrayList<Customer> customers){
+        Collections.sort(customers);
+        return customers;
     }
 
+
+    // Discount Codes
+
+    public Map<String, DiscountCode> sortDiscountCodeHashMap(Map<String, DiscountCode> discountCodeMap) {
+        /* Sort statement */
+        discountCodeMap = sortDiscountCodeMapByKey(discountCodeMap);
+        return discountCodeMap;
+    }
+
+    public Map<String, DiscountCode> sortDiscountCodeMapByKey(Map map) {
+        // TreeMap to store values of HashMap
+        TreeMap<String, DiscountCode> sorted = new TreeMap<>();
+
+        // Copy all data from hashMap into TreeMap
+        sorted.putAll(map);
+
+        return sorted;
+    }
+
+    // Log
+
+    // Manager
+
+    public ArrayList<Manager> sortManagerArrayList(ArrayList<Manager> managers){
+        Collections.sort(managers);
+        return managers;
+    }
+
+
+    // Off
+
+    public ArrayList<Off> sortOffArrayList(ArrayList<Off> offs){
+        Collections.sort(offs);
+        return offs;
+    }
+
+    // Product
+
+    public Map<String, Product> sortProductHashMap(Map<String, Product> productMap) {
+        /* Sort statement */
+        productMap = sortProductMapByKey(productMap);
+        return productMap;
+    }
+
+    public Map<String, Product> sortProductMapByKey(Map map) {
+        // TreeMap to store values of HashMap
+        TreeMap<String, Product> sorted = new TreeMap<>();
+
+        // Copy all data from hashMap into TreeMap
+        sorted.putAll(map);
+
+        return sorted;
+    }
+
+    // Review
+
+    public ArrayList<Review> sortReviewArrayList(ArrayList<Review> reviews){
+        Collections.sort(reviews);
+        return reviews;
+    }
+
+
+    // Score
+
+    public ArrayList<Score> sortScoreArrayList(ArrayList<Score> scores){
+        Collections.sort(scores);
+        return scores;
+    }
+
+    // Seller
+
+    public ArrayList<Seller> sortSellerArrayList(ArrayList<Seller> sellers){
+        Collections.sort(sellers);
+        return sellers;
+    }
+
+    // SellLog
+
+    // Shopping Cart
 
 
 }

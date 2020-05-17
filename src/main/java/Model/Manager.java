@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Manager extends Account {
+public class Manager extends Account implements Comparable<Manager>{
     private static ArrayList<Manager> allManagers = new ArrayList<>();
 
     private static ArrayList<Seller> sellerActivationList = new ArrayList<>();
@@ -29,5 +29,10 @@ public class Manager extends Account {
 
     public static void addNewManager (Manager manager){
         allManagers.add(manager);
+    }
+
+    @Override
+    public int compareTo(Manager o) {
+        return getUsername().compareTo(o.getUsername());
     }
 }
