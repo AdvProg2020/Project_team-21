@@ -64,5 +64,9 @@ public class Category {
     public ArrayList<Category> getSubCategories() {
         return subCategories;
     }
+
+    public ArrayList<Product> getProductsList() {
+        return productsList;
+    }
 }
 
