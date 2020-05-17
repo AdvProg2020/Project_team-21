@@ -168,6 +168,9 @@ public class UserInfoUI extends UI {
             System.out.println("To view user's company information : view company information");
             System.out.println("To see history of sales : view sales history");
             System.out.println("To see and manage products : manage products");
+            System.out.println("To send a request for adding a product : add product");
+            System.out.println("To send a request for removing a product : remove product [productID]");
+            System.out.println("To see all categories : Show categories");
         }
     }
 }

@@ -8,6 +8,7 @@ import Model.Request.ProductRequest;
 import Model.Request.Request;
 import Model.Request.RequestType;
 import Model.Request.SellerRequest;
+import View.ConsoleView;
 import jdk.jfr.Frequency;
 
 import java.util.zip.CheckedOutputStream;
@@ -115,6 +116,17 @@ public class ControlSeller {
         Seller seller = (Seller) Control.getInstance().getUser();
         Product product = Product.getAllProducts().get(productID);
         new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.ADD_SELLER,seller,product);
+        return requestID;
+    }
+    public String sendRemoveProductReq(String productID) throws Exception
+    {
+        if(!ControlSeller.getInstance().checkProductExists(productID)) {
+            throw new Exception("This product doesn't exist! So you can see it as a deleted one :)");
+        }
+            Seller seller = (Seller) Control.getInstance().getUser();
+            Product product = Product.getAllProducts().get(productID);
+            String requestID = Control.getInstance().randomString(10);
+            new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.DELETE,seller,product);
         return requestID;
     }
 }

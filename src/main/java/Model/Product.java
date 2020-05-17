@@ -54,6 +54,10 @@ public class Product {
     public static void removeProduct(Product product)
     {
         allProducts.remove(product.getProductId());
+        for (Seller seller : product.getSellers())
+        {
+            seller.getAllProducts().remove(product);
+        }
     }
     public String getName() {
         return name;

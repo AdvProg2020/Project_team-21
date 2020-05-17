@@ -71,7 +71,8 @@ public class SellerAddProductReqUI extends UI {
     }
 
     @Override
-    public void help() {
-
+    public void help()
+    {
+        System.out.println("1.make a new product\n2.add a new product to your sell list");
     }
 }
