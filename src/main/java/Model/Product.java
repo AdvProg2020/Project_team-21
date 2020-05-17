@@ -7,8 +7,8 @@ import java.util.HashMap;
 
 public class Product {
 
-    public static ArrayList<Product> allProducts = new ArrayList<>();
-    private static HashMap<String , Product> allProductsMap = new HashMap<>();
+    public static ArrayList<Product> allProductsList = new ArrayList<>();
+    private static HashMap<String , Product> allProducts = new HashMap<>();
     private String productId;
     private ProductState productState;
     private String name;
@@ -36,12 +36,12 @@ public class Product {
         setCompany(company);
         setPrice(price);
         setCategory(category);
-        allProducts.add(this);
-        allProductsMap.put(productId,this);
+        allProductsList.add(this);
+        allProducts.put(productId,this);
     }
 
-    public static ArrayList<Product> getAllProducts() {
-        return allProducts;
+    public static ArrayList<Product> getAllProductsList() {
+        return allProductsList;
     }
 
     public String getProductId() {
@@ -50,7 +50,7 @@ public class Product {
 
     public static void addProduct(Product product)
     {
-        allProductsMap.put(product.getProductId(),product);
+        allProducts.put(product.getProductId(),product);
     }
 
     public String getName() {
@@ -126,8 +126,8 @@ public class Product {
         reviewsList.add(review);
     }
 
-    public static HashMap<String, Product> getAllProductsMap() {
-        return allProductsMap;
+    public static HashMap<String, Product> getAllProducts() {
+        return allProducts;
     }
 
     private double calculateScore() {

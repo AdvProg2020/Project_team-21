@@ -180,18 +180,18 @@ public class Control {
     public String createFilter(String filterType, String filterInput) {
         Filter filter = null;
         if (filterType.equalsIgnoreCase("Brand")) {
-            filter = new BrandFilter(filterInput, currentCategory == null ? Product.allProducts : currentCategory.getProductsList());
+            filter = new BrandFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Price")) {
             String[] words = filterInput.split("[\\s-,_]");
-            filter = new PriceFilter(Double.parseDouble(words[0]), Double.parseDouble(words[1]), currentCategory == null ? Product.allProducts : currentCategory.getProductsList());
+            filter = new PriceFilter(Double.parseDouble(words[0]), Double.parseDouble(words[1]), currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Name")) {
-            filter = new ProductNameFilter(filterInput, currentCategory == null ? Product.allProducts : currentCategory.getProductsList());
+            filter = new ProductNameFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Seller")) {
-            filter = new SellerFilter(filterInput, currentCategory == null ? Product.allProducts : currentCategory.getProductsList());
+            filter = new SellerFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Available")) {
-            filter = new InStockFilter(currentCategory == null ? Product.allProducts : currentCategory.getProductsList());
+            filter = new InStockFilter(currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (currentCategory == null && filterType.equalsIgnoreCase("Category")) {
-            filter = new CategoryFilter(filterInput, Product.allProducts);
+            filter = new CategoryFilter(filterInput, Product.allProductsList);
         }
         if (filter == null)
             return "Wrong Filter!";
