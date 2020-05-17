@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Account;
+import Model.Category;
+import Model.Customer;
 import Model.DiscountCode;
 
 import java.math.BigDecimal;
@@ -30,4 +32,25 @@ public class Sort {
 
     // BuyLog
 
+    // Category
+
+    public ArrayList<Category> sortAllCategories(){
+        List<Category> allCategories = new ArrayList<>(Category.getAllCategories());
+        Collections.sort(allCategories.);
+
+        allCategories.sort(allCategories.get().getName());
+    }
+
+    // Customer
+
+    public ArrayList<Customer> sortAllCustomers(){
+        ArrayList<Customer> allCustomers = Customer.getaAllCustomers();
+        Collections.sort(allCustomers);
+        return allCustomers;
+    }
+
+
+
 }
+
+

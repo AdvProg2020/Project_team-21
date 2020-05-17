@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Customer extends Account {
+public class Customer extends Account implements Comparable<Customer>{
 
     private static ArrayList<Customer> allCustomer = new ArrayList<Customer>();
     private ShoppingCart shoppingCart;
@@ -67,4 +67,9 @@ public class Customer extends Account {
     public void setBalance(int balance) {
         this.balance = balance;
     }
+
+    public int compareTo(Customer customer) {
+        return getUsername().compareTo(customer.getUsername());
+    }
+
 }

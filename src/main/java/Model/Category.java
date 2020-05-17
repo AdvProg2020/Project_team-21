@@ -57,5 +57,8 @@ public class Category {
         this.name = name;
     }
 
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
 }
 
