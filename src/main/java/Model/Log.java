@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Log {
+public class Log implements Comparable<Log>{
     private String logId;
     private Date date;
     private double totalDiscountAmount;
@@ -87,6 +87,11 @@ public class Log {
 
     public void setReceiverUserName(String receiverUserName) {
         this.receiverUserName = receiverUserName;
+    }
+
+    @Override
+    public int compareTo(Log o) {
+        return getLogId().compareTo(o.getLogId());
     }
 //    public boolean hasProductWithId (String Id){
 //

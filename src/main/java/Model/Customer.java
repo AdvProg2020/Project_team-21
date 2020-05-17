@@ -8,7 +8,7 @@ public class Customer extends Account implements Comparable<Customer>{
     private static ArrayList<Customer> allCustomer = new ArrayList<>();
     private ShoppingCart shoppingCart;
     public ArrayList <BuyLog> buyLogs = new ArrayList<>();
-    public HashMap<Off , Integer> offs = new HashMap<>();
+    public HashMap<String , Off> offs = new HashMap<>();
     public int balance;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
@@ -36,7 +36,7 @@ public class Customer extends Account implements Comparable<Customer>{
         return buyLogs;
     }
 
-    public HashMap<Off, Integer> getOffs() {
+    public HashMap<String, Off> getOffs() {
         return offs;
     }
 

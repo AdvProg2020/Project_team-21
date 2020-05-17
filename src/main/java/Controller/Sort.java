@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Sort {
 
-    // Account
+    // *************      Account        ***************
 
     public Map<String, Account> sortAccountHashMap(Map<String, Account> accountMap) {
         /* Sort statement */
@@ -26,17 +26,15 @@ public class Sort {
         return sorted;
     }
 
-
-    // BuyLog
-
-    // Category
+    // *************      Category        ***************
 
     public ArrayList<Category> sortCategoryArrayList(ArrayList<Category> categories){
         Collections.sort(categories);
         return categories;
     }
 
-    // Customer
+
+    // *************      Customer        ***************
 
     public ArrayList<Customer> sortCustomerArrayList(ArrayList<Customer> customers){
         Collections.sort(customers);
@@ -44,7 +42,7 @@ public class Sort {
     }
 
 
-    // Discount Codes
+    // *************      DiscountCode        ***************
 
     public Map<String, DiscountCode> sortDiscountCodeHashMap(Map<String, DiscountCode> discountCodeMap) {
         /* Sort statement */
@@ -62,9 +60,17 @@ public class Sort {
         return sorted;
     }
 
-    // Log
 
-    // Manager
+    // *************      Log        ***************
+    // ****   SellLog     ****    BuyLog     ****
+
+    public ArrayList<Log> sortBuyLogArrayList(ArrayList<Log> logs){
+        Collections.sort(logs);
+        return logs;
+    }
+
+
+    // *************      Manager        ***************
 
     public ArrayList<Manager> sortManagerArrayList(ArrayList<Manager> managers){
         Collections.sort(managers);
@@ -72,14 +78,31 @@ public class Sort {
     }
 
 
-    // Off
+    // *************      Off        ***************
 
     public ArrayList<Off> sortOffArrayList(ArrayList<Off> offs){
         Collections.sort(offs);
         return offs;
     }
 
-    // Product
+    public Map<String, Off> sortOffHashMap(Map<String, Off> offMap) {
+        /* Sort statement */
+        offMap = sortOffMapByKey(offMap);
+        return offMap;
+    }
+
+    public Map<String, Off> sortOffMapByKey(Map map) {
+        // TreeMap to store values of HashMap
+        TreeMap<String, Off> sorted = new TreeMap<>();
+
+        // Copy all data from hashMap into TreeMap
+        sorted.putAll(map);
+
+        return sorted;
+    }
+
+
+    // *************      Product        ***************
 
     public Map<String, Product> sortProductHashMap(Map<String, Product> productMap) {
         /* Sort statement */
@@ -97,7 +120,8 @@ public class Sort {
         return sorted;
     }
 
-    // Review
+
+    // *************      Review        ***************
 
     public ArrayList<Review> sortReviewArrayList(ArrayList<Review> reviews){
         Collections.sort(reviews);
@@ -105,24 +129,23 @@ public class Sort {
     }
 
 
-    // Score
+    // *************      Score        ***************
 
     public ArrayList<Score> sortScoreArrayList(ArrayList<Score> scores){
         Collections.sort(scores);
         return scores;
     }
 
-    // Seller
+
+    // *************      Seller        ***************
 
     public ArrayList<Seller> sortSellerArrayList(ArrayList<Seller> sellers){
         Collections.sort(sellers);
         return sellers;
     }
 
-    // SellLog
 
-    // Shopping Cart
-
+    // *************      ShoppingCart        ***************
 
 }
 

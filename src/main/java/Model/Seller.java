@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Seller extends Account implements Comparable<Seller>{
+
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private String companyName;
     private ArrayList<Product> allProducts = new ArrayList<>();
