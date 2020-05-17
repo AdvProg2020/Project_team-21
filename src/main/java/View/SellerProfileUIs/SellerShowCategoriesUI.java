@@ -1,6 +1,7 @@
 package View.SellerProfileUIs;
 
 import Model.Category;
+import View.ConsoleView;
 import View.UI;
 
 public class SellerShowCategoriesUI extends UI {
@@ -24,6 +25,7 @@ public class SellerShowCategoriesUI extends UI {
             System.out.println(i + " " + category.getName());
             i++;
         }
+        ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
     }
 
     @Override

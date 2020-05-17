@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public class Off {
 
-    //private static ArrayList<Off> allOffs = new ArrayList<>();
     private static HashMap<String, Off> allOffs = new HashMap<>();
     private String offId;
     private ArrayList<Product> productsList;
@@ -40,6 +39,11 @@ public class Off {
     {
         allOffs.remove(off.getOffId());
     }
+
+    public ArrayList<Product> getProductsList() {
+        return productsList;
+    }
+
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }

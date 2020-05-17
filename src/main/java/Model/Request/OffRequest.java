@@ -44,9 +44,15 @@ public class OffRequest extends Request {
     {
         Off off = Request.getRequestedOffs().get(requestId);
         if(this.getRequestType().equals(RequestType.ADD))
+        {
             Off.addOff(Request.getRequestedOffs().get(requestId));
+            provider.addOffs(off);
+        }
         else if(this.getRequestType().equals(RequestType.DELETE))
+        {
             Off.removeOff(Request.getRequestedOffs().get(requestId));
+            provider.removeOff(off);
+        }
         else if(this.getRequestType().equals(RequestType.EDIT))
         {
             if(editField.equalsIgnoreCase("amount"))

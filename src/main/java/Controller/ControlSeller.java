@@ -3,6 +3,7 @@ package Controller;
 import Model.Account.Seller;
 import Model.Category;
 import Model.Company;
+import Model.Off;
 import Model.Product;
 import Model.Request.ProductRequest;
 import Model.Request.Request;
@@ -78,7 +79,7 @@ public class ControlSeller {
         Company company = null;
         double priceNum = 0;
         String productID = Control.getInstance().randomString(10);
-        String requesID = Control.getInstance().randomString(10);
+        String requestID = Control.getInstance().randomString(10);
         for (Category category1 : Category.getAllCategories()) {
             if(category1.getName().equalsIgnoreCase(categoryName))
                 category = category1;
@@ -103,8 +104,8 @@ public class ControlSeller {
         {
             priceNum = Double.parseDouble(price);
         }
-        new ProductRequest(requesID,productID,name,company,priceNum,category,seller,RequestType.ADD,seller,null);
-        return requesID;
+        new ProductRequest(requestID,productID,name,company,priceNum,category,seller,RequestType.ADD,seller,null);
+        return requestID;
     }
     public String sendAddSellerProductReq(String productID) throws Exception
     {
@@ -129,4 +130,35 @@ public class ControlSeller {
             new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.DELETE,seller,product);
         return requestID;
     }
+    public boolean checkOffExistance (String offID)
+    {
+        if(Off.getAllOffs().containsKey(offID))
+            return true;
+        return false;
+    }
+    public boolean checkSellerGotOff (String offID , Seller seller)
+    {
+        for (Off off : seller.getAllOffs()) {
+            if(off.getOffId().equals(offID))
+                return true;
+        }
+        return false;
+    }
+    public String sendAddOffRequest()
+    {
+        String requestID = Control.getInstance().randomString(10);
+        String offID = Control.getInstance().randomString(10);
+        Seller seller = (Seller) Control.getInstance().getUser();
+        if(ControlSeller.getInstance().checkOffExistance(offID) && ControlSeller.getInstance().checkSellerGotOff(offID,seller))
+        {
+
+            ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
+        }
+        else
+        {
+            ConsoleView.getInstance().errorInput("You don't have this off!" , ConsoleView.getInstance().getLastMenu());
+        }
+        return requestID;
+    }
+
 }

@@ -23,6 +23,10 @@ public class Seller extends Account {
     public static void removeSeller (Seller seller){
         allSellers.remove(seller);
     }
+    public void removeOff(Off off)
+    {
+        allOffs.remove(off);
+    }
 
     public static ArrayList<Seller> getAllSeller() {
         return allSellers;
