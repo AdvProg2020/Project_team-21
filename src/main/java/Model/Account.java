@@ -3,9 +3,16 @@ package Model;
 import View.ErrorsAndExceptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import Model.ModelBase;
+import Model.Methods;
 
-public abstract class Account {
+public abstract class Account implements ModelBase {
     private static ArrayList<Account> allAccounts =new ArrayList<Account>();
+    protected static HashMap<String,Account> allAccountsMap = new HashMap<>();
+    protected String accountID;
+    protected boolean suspended;
     private String username;
     private String firstName;
     private String lastName;
@@ -15,15 +22,15 @@ public abstract class Account {
     private ArrayList<DiscountCode> discountList = new ArrayList<DiscountCode>();
     private double credit;
 
-    public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit) {
+    public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double credit) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.discountList = discountList;
         this.credit = credit;
+        suspended=false;
         allAccounts.add(this);
     }
 
@@ -114,7 +121,36 @@ public abstract class Account {
     }
 
     public static ArrayList<Account> getAllAccounts() {
+
         return allAccounts;
+    }
+
+    public static List<Account> getAllAccountsList (boolean... suspense){
+        return Methods.getInstances(allAccountsMap.values(), suspense);
+    }
+
+    public static Account getAccountById(String id , boolean... suspense){
+//        if(id.equals(Manager.MANAGER_ID))
+//            return Manager.Manager;
+
+        return Methods.getInstanceById(allAccountsMap,id,suspense);
+    }
+
+    @Override
+    public String getId() {
+        return accountID;
+    }
+
+    @Override
+    public abstract void Initialize() ;
+
+    @Override
+    public boolean isSuspend() {
+        return suspended;
+    }
+
+    public void suspend(){
+        suspended=true;
     }
 
     @Override

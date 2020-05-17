@@ -3,11 +3,13 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
-
-public class SellLog {
+import Model.*;
+public class SellLog implements ModelBase{
 
     private static HashMap<String, SellLog> allSellLogs = new HashMap<>();
+    private static int lastNum=1;
     private String sellLogId;
     private String parentBuyLogId;
     private String sellerId;
@@ -20,33 +22,44 @@ public class SellLog {
         this.sellerId = sellerId;
         receivedMoney = 0;
         totalSaleAmount = 0;
-        allSellLogs.put(sellLogId, this);
-        ((Seller)Seller.getAccountByUsername(sellerId)).addSellLog(this);
+        Initialize();
     }
 
-    public static String generateNewId(String sellerId) {
-        //TODO: implement
-        return null;
+    public static List<SellLog> getAllSellLogs(){
+        return new ArrayList<>(allSellLogs.values());
     }
 
     public static SellLog getSellLogById(String sellLogId) {
         return allSellLogs.get(sellLogId);
     }
 
-    public void initialize() {
-        if (sellLogId == null) {
-            sellLogId = generateNewId(sellerId);
-        }
-        allSellLogs.put(sellLogId, this);
-        logIds = new ArrayList<>();
-    }
-
+    @Override
     public String getId() {
         return sellLogId;
     }
 
+    @Override
+    public void Initialize() {
+        if (sellLogId == null)
+            sellLogId = Methods.generateId(getClass().getSimpleName(),lastNum);
+        allSellLogs.put(sellerId,this);
+        lastNum++;
+
+        allSellLogs.put(sellLogId, this);
+        logIds = new ArrayList<>();
+    }
+
+    @Override
+    public boolean isSuspend() {
+        return false;
+    }
+
     private BuyLog getParentBuyLog() {
         return BuyLog.getBuyLogById(parentBuyLogId);
+    }
+
+    public Seller getSeller(){
+        return Seller.getSellerById(sellerId,false);
     }
 
 
@@ -82,20 +95,17 @@ public class SellLog {
         getParentBuyLog().setLogStatus(status);
     }
 
-//    public ArrayList<Log> getLog() {
-//        ArrayList<Log> log = new ArrayList<>();
-//        for (String logId : logIds) {
-//            log.add(Log.getLogById(logId));
-//        }
-//        return log;
-//    }
+    public List<Log> getLog() {
+        List<Log> logs = new ArrayList<>();
+        for (String logId : logIds){
+            logs.add(Log.getLogById(logId));
+        }
+        return logs;
+    }
 
-//    public void addLogItem(String logItemId) {
-//        logItemIds.add(logItemId);
-//        Log item = Log.getLogItemById(logItemId);
-//        receivedMoney += (item.getPrice() - item.getSaleAmount()) * item.getCount();
-//        totalSaleAmount += item.getSaleAmount() * item.getCount();
-//    }
+    public void addLog(String logId){
+        logIds.add(logId);
+    }
 
 
 
