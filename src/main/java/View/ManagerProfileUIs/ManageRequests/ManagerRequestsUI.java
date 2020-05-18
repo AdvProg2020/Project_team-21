@@ -36,7 +36,7 @@ public class ManagerRequestsUI extends UI {
         System.out.println("Seller activation requests: ");
         for (String s : Request.getRequestedSellers().keySet())
         {
-            System.out.println("Username: " + Request.getRequestedSellers().get(s).getUsername());
+            System.out.println("Username: " + Request.getRequestedSellers().get(s).getUsername() + "  request id: " + s);
         }
     }
 

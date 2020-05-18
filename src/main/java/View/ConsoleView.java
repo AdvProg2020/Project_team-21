@@ -44,6 +44,7 @@ import View.ProductsUIs.ProductsMainUI.ProductsMainUI;
 import View.ProductsUIs.ProductsMainUI.ShowProductsAfterUI;
 import View.ProductsUIs.ProductsMainUI.ViewCategoriesUI;
 import View.ProductsUIs.SortingUI.*;
+import com.sun.tools.javac.Main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -127,6 +128,7 @@ public class ConsoleView{
                 System.out.println("Goodbye " + user.getFirstName());
                 Control.getInstance().setUser(null);
                 Control.getInstance().setSignOutCart(new ShoppingCart(null));
+                goToNextPage(MainMenuUI.getInstance());
             }
             rightInput = true;
         }
