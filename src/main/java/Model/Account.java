@@ -105,4 +105,12 @@ public abstract class Account {
     }
 
     public abstract String Type();
+
+    public void sortAllAccounts(){
+//        setAllAccounts();
+    }
+
+    private static void setAllAccounts(ArrayList<Account> allAccounts) {
+        Account.allAccounts = allAccounts;
+    }
 }
