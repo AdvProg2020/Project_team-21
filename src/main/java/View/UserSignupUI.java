@@ -1,12 +1,9 @@
 package View;
 
 import Controller.Control;
-import Model.Account;
-import Model.Customer;
-import Model.Manager;
-import com.sun.tools.javac.Main;
+import Model.Account.Account;
+import Model.Company;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class UserSignupUI extends UI {
@@ -31,8 +28,8 @@ public class UserSignupUI extends UI {
     @Override
     public void run()
     {
-        String companyName = "";
 
+        Company company = null;
         Scanner scanner = ConsoleView.getScanner();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
@@ -49,10 +46,20 @@ public class UserSignupUI extends UI {
         if(type.equalsIgnoreCase("seller"))
         {
             System.out.println("Enter your Company name");
-            companyName = scanner.nextLine();
+            String companyName = scanner.nextLine();
+            if(Company.getAllCompanies().containsKey(companyName))
+            {
+                company = Company.getAllCompanies().get(companyName);
+            }
+            else
+            {
+                System.out.println("Enter location of this company: ");
+                String companyLocation = scanner.nextLine();
+                company = new Company(companyName,companyLocation);
+            }
         }
         try {
-            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,companyName,true);
+            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,company,true);
             System.out.println("Wellcome "+firstName+"!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
             ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();

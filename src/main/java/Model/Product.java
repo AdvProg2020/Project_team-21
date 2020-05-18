@@ -1,18 +1,20 @@
 package Model;
 
-import View.ProductsUI;
+import Model.Account.Customer;
+import Model.Account.Seller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Product {
 
-    //private static ArrayList<Product> allProducts = new ArrayList<>();
+    public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
+    private ArrayList<Customer> buyers = new ArrayList<>();
     private String productId;
     private ProductState productState;
     private String name;
-    private String company;
+    private Company company;
     private double price;
     private ArrayList<Seller> sellers;
     private boolean doesExist;
@@ -21,6 +23,7 @@ public class Product {
     private double buyersAverageScore;
     ArrayList<Score> scoresList;
     ArrayList<Review> reviewsList;
+    private Off off;
 
 
     // Initialization Block
@@ -29,26 +32,53 @@ public class Product {
         reviewsList = new ArrayList<>();
     }
 
-    public Product(String productId, String name, ProductState productState, String company, double price){
-
+    public Product(String productId, String name, Company company, double price, Category category,Seller seller){
         setProductId(productId);
         setName(name);
         setProductState(productState);
         setCompany(company);
         setPrice(price);
+        setCategory(category);
+        addSeller(seller);
+        allProductsList.add(this);
         allProducts.put(productId,this);
+    }
+
+    public static ArrayList<Product> getAllProductsList() {
+        return allProductsList;
     }
 
     public String getProductId() {
         return productId;
     }
 
+    public static void addProduct(Product product)
+    {
+        allProducts.put(product.getProductId(),product);
+    }
+
+    public static void removeProduct(Product product)
+    {
+        allProducts.remove(product.getProductId());
+        for (Seller seller : product.getSellers())
+        {
+            seller.getAllProducts().remove(product);
+        }
+    }
+
+    public void setOff(Off off) {
+        this.off = off;
+    }
+
+    public Off getOff() {
+        return off;
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getCompany() {
+    public Company getCompany() {
         return company;
     }
 
@@ -64,8 +94,8 @@ public class Product {
         return price;
     }
 
-    public double getBuyersAverageScore() {
-        return buyersAverageScore;
+    public Double getBuyersAverageScore() {
+        return calculateScore();
     }
 
     public ArrayList<Review> getReviewsList() {
@@ -73,7 +103,7 @@ public class Product {
     }
 
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -85,11 +115,11 @@ public class Product {
         this.productState = productState;
     }
 
-    private void setCompany(String company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 
-    private void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -121,6 +151,24 @@ public class Product {
         return allProducts;
     }
 
+    public void addBuyer(Customer customer)
+    {
+        buyers.add(customer);
+    }
+
+    public ArrayList<Customer> getBuyers() {
+        return buyers;
+    }
+
+    public Double getProductFinalPriceConsideringOff() {
+//        if (off != null && off.getDiscountOrOffStat().equals(DiscountAndOffStat.EXPIRED)) {
+//            off.removeOff();
+//        }
+//        if (off != null && off.getOffStatus().equals(OffStatus.APPROVED_OFF)) {
+            return price * ((double) 1 - (off.getOffAmount() / (double) 100));
+//        } else return price;
+    }
+
     private double calculateScore() {
         double totalScore = 0;
         for (Score score : scoresList) {
@@ -130,6 +178,28 @@ public class Product {
 
         return totalScore;
     }
+
+    public static Product getProductById (String productId) throws Exception{
+        for (Product product : allProductsList){
+            if (product.getProductId().equals(productId))
+                return product;
+        }
+        throw new Exception("There is no product with this ID");
+    }
+
+    public String showProductDigest() {
+        return
+                "name: " + name +
+                        "\n\tid: " + productId +
+                        "\n\tdeta: " + details  +
+                        "\n\tprice: " + price +
+                        "\n\toff amount: " + off.getOffAmount()+
+                        "\n\tcategory: " + category.getName() +
+                        "\n\tseller(s): " + sellers.toString() +
+                        "\n\taverage score: " + calculateScore();
+    }
+
+
 
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();

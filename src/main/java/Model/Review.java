@@ -1,6 +1,9 @@
 package Model;
 
 public class Review implements Comparable<Review> {
+import Model.Account.Account;
+
+public class Review {
 
     private Account user;
     private Product product;

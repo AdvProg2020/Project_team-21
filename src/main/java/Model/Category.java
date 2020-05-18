@@ -14,8 +14,11 @@ public class Category implements Comparable<Category>{
         subCategories = new ArrayList<>();
     }
 
-    public Category(String name){
-
+    public Category(String name, ArrayList<Product> products)
+    {
+        for (Product product : products) {
+            addProductToCategory(product);
+        }
         setName(name);
         allCategories.add(this);
     }
@@ -33,11 +36,21 @@ public class Category implements Comparable<Category>{
         return null;
     }
 
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
+
     public void addProductToCategory(Product product){
         productsList.add(product);
+        product.setCategory(this);
+    }
+
+    public ArrayList<Product> getProductsList() {
+        return productsList;
     }
 
     public void removeProductFromCategory(Product product){
+        product.setCategory(null);
         productsList.remove(product);
     }
 
@@ -49,11 +62,15 @@ public class Category implements Comparable<Category>{
         subCategories.remove(category);
     }
 
-    public void removeCategory(Category category){
+    public static void removeCategory(Category category){
+        for (Product product : category.getProductsList())
+        {
+            product.setCategory(null);
+        }
         allCategories.remove(category);
     }
 
-    private void setName(String name){
+    public void setName(String name){
         this.name = name;
     }
 
@@ -65,5 +82,10 @@ public class Category implements Comparable<Category>{
     public int compareTo(Category o) {
         return getName().compareTo(o.getName());
     }
+
+    public ArrayList<Category> getSubCategories() {
+        return subCategories;
+    }
+
 }
 

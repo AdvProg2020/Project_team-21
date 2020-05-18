@@ -1,7 +1,8 @@
 package Model;
 
+import Model.Account.Customer;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DiscountCode {
@@ -13,15 +14,19 @@ public class DiscountCode {
     private double discountPercentage;
     private double maxDiscountAmount;
     private int discountNumberForEachUser;
-    private HashMap<Account, Integer> discountUsers;
-
+    private HashMap<String, Customer> discountOwners;
     // Initialization Block
     {
-        discountUsers = new HashMap<>();
+        discountOwners = new HashMap<>();
     }
 
-    public DiscountCode(String discountId, LocalDateTime startTime, LocalDateTime endTime, double discountPercentage, double maxDiscountAmount, int discountNumberForEachUser){
-
+    public DiscountCode(String discountId, LocalDateTime startTime, LocalDateTime endTime, double discountPercentage, double maxDiscountAmount, int discountNumberForEachUser,HashMap <String,Customer> codeOwners)
+    {
+        for (String s : codeOwners.keySet())
+        {
+            discountOwners.put(s,codeOwners.get(s));
+            codeOwners.get(s).addDiscountCode(this);
+        }
         setDiscountId(discountId);
         setStartTime(startTime);
         setEndTime(endTime);
@@ -45,6 +50,21 @@ public class DiscountCode {
 
     public static void setAllDiscountCodes(HashMap<String, DiscountCode> allDiscountCodes) {
         DiscountCode.allDiscountCodes = allDiscountCodes;
+    }
+
+    public void addDiscountOwner(Customer customer)
+    {
+        discountOwners.put(customer.getUsername(),customer);
+        customer.addDiscountCode(this);
+    }
+    public void removeDiscountOwner(Customer customer)
+    {
+        discountOwners.remove(customer.getUsername(),customer);
+        customer.removeDiscountCode(this);
+    }
+
+    public HashMap<String, Customer> getDiscountOwners() {
+        return discountOwners;
     }
 
     public LocalDateTime getStartTime() {

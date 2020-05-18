@@ -1,13 +1,13 @@
 package View;
 
 import Controller.Control;
-import Controller.ControlManager;
-import Model.Account;
-import Model.Customer;
-import Model.Manager;
-import Model.Seller;
+import Model.Account.Account;
+import Model.Account.Customer;
+import Model.Account.Manager;
+import Model.Account.Seller;
 
 import java.util.Scanner;
+import java.util.ServiceConfigurationError;
 
 public class UserInfoUI extends UI {
     private static UserInfoUI instance;
@@ -158,9 +158,29 @@ public class UserInfoUI extends UI {
         System.out.println("To show your password : show password");
         if(user instanceof Manager)
         {
-             System.out.println("To manager and see users : manage users");
-             System.out.println("To manage and see products : manage all products");
+            System.out.println("To manager and see users : manage users");
+            System.out.println("To manage and see products : manage all products");
             System.out.println("To manage and see discount codes : view discount codes");
+            System.out.println("To manage and see requests : manage requests");
+            System.out.println("To manage and see categories : manage categories");
+        }
+        else if(user instanceof Seller)
+        {
+            System.out.println("To view user's company information : view company information");
+            System.out.println("To see history of sales : view sales history");
+            System.out.println("To see and manage products : manage products");
+            System.out.println("To send a request for adding a product : add product");
+            System.out.println("To send a request for removing a product : remove product [productID]");
+            System.out.println("To see all categories : Show categories");
+            System.out.println("To see and manage your offs : view offs");
+            System.out.println("To view your balance : view balance");
+        }
+        else if(user instanceof Customer)
+        {
+            System.out.println("To view your cart : view cart");
+            System.out.println("To view your orders : view orders");
+            System.out.println("To view your balance : view balance");
+            System.out.println("To view your discount codes : view discount codes");
         }
     }
 

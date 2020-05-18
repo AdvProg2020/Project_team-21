@@ -2,10 +2,11 @@ package Model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Off implements Comparable<Off>{
 
-    private static ArrayList<Off> allOffs = new ArrayList<>();
+    private static HashMap<String, Off> allOffs = new HashMap<>();
     private String offId;
     private ArrayList<Product> productsList;
     private OffState offState;
@@ -18,18 +19,29 @@ public class Off implements Comparable<Off>{
         productsList = new ArrayList<>();
     }
 
-    public Off(String offId, ArrayList<Product> productsList, OffState offState, LocalDateTime startTime, LocalDateTime endTime, double offAmount){
+    public Off(String offId, ArrayList<Product> productsList, LocalDateTime startTime, LocalDateTime endTime, double offAmount){
         setOffId(offId);
         setProductsList(productsList);
-        setOffState(offState);
         setStartTime(startTime);
         setEndTime(endTime);
         setOffAmount(offAmount);
-        allOffs.add(this);
     }
 
     private void setOffId(String offId) {
         this.offId = offId;
+    }
+
+    public static void addOff(Off off)
+    {
+        allOffs.put(off.getOffId(),off);
+    }
+    public static void removeOff(Off off)
+    {
+        allOffs.remove(off.getOffId());
+    }
+
+    public ArrayList<Product> getProductsList() {
+        return productsList;
     }
 
     public void setStartTime(LocalDateTime startTime) {
@@ -52,7 +64,7 @@ public class Off implements Comparable<Off>{
         this.offState = offState;
     }
 
-    public static ArrayList<Off> getAllOffs() {
+    public static HashMap<String, Off> getAllOffs() {
         return allOffs;
     }
 
@@ -79,6 +91,10 @@ public class Off implements Comparable<Off>{
             }
         }
         return false;
+    }
+
+    public OffState getOffState() {
+        return offState;
     }
 
     public void addProduct(Product product){
