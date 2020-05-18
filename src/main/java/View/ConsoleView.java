@@ -35,6 +35,12 @@ import View.SellerProfileUIs.ManageProducts.SellerEditProductUI;
 import View.SellerProfileUIs.ManageProducts.SellerManageProductsUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductBuyersUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductUI;
+import View.ProductsUIs.FilteringUI.*;
+import View.ProductsUIs.ProductsMainUI.ProductsMainUI;
+import View.ProductsUIs.ProductsMainUI.SelectedProductUI;
+import View.ProductsUIs.ProductsMainUI.ShowProductsAfterUI;
+import View.ProductsUIs.ProductsMainUI.ViewCategoriesUI;
+import View.ProductsUIs.SortingUI.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -469,6 +475,78 @@ public class ConsoleView{
                 goToNextPage(ManagerCreateManagerUI.getInstance());
                 rightInput = true;
             }
+        }
+        else if(currentMenu.equals(ProductsMainUI.getInstance())){
+
+            if (input.trim().matches("(?i)view\\s+categories")){
+                goToNextPage(ViewCategoriesUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)filtering\\s+")){
+                goToNextPage(FilteringUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)sorting\\s+")){
+                goToNextPage(SortingUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)show\\s+products")){
+                goToNextPage(ShowProductsAfterUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
+                goToNextPage(SelectedProductUI.getInstance());
+                SelectedProductUI.getInstance().setProductId(input.split("\\s+")[2]);
+                rightInput=true;
+            }
+        }
+        else if (currentMenu.equals(FilteringUI.getInstance())){
+
+            if (input.trim().matches("(?i)show\\s+available\\s+filters")){
+                goToNextPage(AvailableFilterUI.getInstance());
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)filter\\s+(\\S+)\\s+(\\S+)")){
+                goToNextPage(SelectedFilterUI.getInstance());
+                SelectedFilterUI.getInstance().setFilterInput(input.split("\\s+")[1]);
+                SelectedFilterUI.getInstance().setFilterType(input.split("\\s+")[2]);
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)current\\s+filters")){
+                goToNextPage(CurrentFiltersUI.getInstance());
+                rightInput=true;
+            }
+            else if(input.trim().matches("(?i)disable\\s+filter\\s+(\\S+)")){
+                goToNextPage(DisableFilterUI.getInstance());
+                DisableFilterUI.getInstance().setDisablingFilter(input.split("\\s+")[2]);
+                rightInput=true;
+            }
+
+        }
+        else if (currentMenu.equals(SortingUI.getInstance())){
+
+            if (input.trim().matches("(?i)show\\s+available\\s+sorts")){
+                goToNextPage(AvailableSortUI.getInstance());
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)sort\\s+(\\S+)")){
+                goToNextPage(SelectedSortUI.getInstance());
+                SelectedSortUI.getInstance().setSortType(input.split("\\s+")[1]);
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)current\\s+sorts")){
+                goToNextPage(CurrentSortUI.getInstance());
+                rightInput=true;
+            }
+            else if(input.trim().matches("(?i)disable\\s+sort")){
+                goToNextPage(DisableSortUI.getInstance());
+                rightInput=true;
+            }
+
         }
         if(input.trim().matches("(?i)back"))
         {

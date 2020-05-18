@@ -88,4 +88,9 @@ public class OffRequest extends Request {
         }
         declineReq(requestId);
     }
+
+    @Override
+    public String getType() {
+        return "Off Request";
+    }
 }

@@ -68,4 +68,9 @@ public class ProductRequest extends Request {
 
         declineReq(requestId);
     }
+
+    @Override
+    public String getType() {
+        return "Product Request";
+    }
 }

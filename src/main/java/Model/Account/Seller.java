@@ -72,6 +72,14 @@ public class Seller extends Account {
         allOffs.add(off);
     }
 
+    public static Seller getSellerWithUsername(String username)throws Exception{
+        for (Seller seller : allSellers){
+            if (seller.getUsername().equals(username))
+                return seller;
+        }
+        throw new Exception("There is no seller with user name : " + username + "\n");
+    }
+
     @Override
     public String getType() {
         return "Seller";

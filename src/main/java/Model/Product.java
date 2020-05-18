@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Product {
 
-    //private static ArrayList<Product> allProducts = new ArrayList<>();
+    public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
     private ArrayList<Customer> buyers = new ArrayList<>();
     private String productId;
@@ -23,6 +23,7 @@ public class Product {
     private double buyersAverageScore;
     ArrayList<Score> scoresList;
     ArrayList<Review> reviewsList;
+    private Off off;
 
 
     // Initialization Block
@@ -39,8 +40,13 @@ public class Product {
         setPrice(price);
         setCategory(category);
         addSeller(seller);
+        allProductsList.add(this);
+        allProducts.put(productId,this);
     }
 
+    public static ArrayList<Product> getAllProductsList() {
+        return allProductsList;
+    }
 
     public String getProductId() {
         return productId;
@@ -79,8 +85,8 @@ public class Product {
         return price;
     }
 
-    public double getBuyersAverageScore() {
-        return buyersAverageScore;
+    public Double getBuyersAverageScore() {
+        return calculateScore();
     }
 
     public ArrayList<Review> getReviewsList() {
@@ -145,6 +151,15 @@ public class Product {
         return buyers;
     }
 
+    public Double getProductFinalPriceConsideringOff() {
+//        if (off != null && off.getDiscountOrOffStat().equals(DiscountAndOffStat.EXPIRED)) {
+//            off.removeOff();
+//        }
+//        if (off != null && off.getOffStatus().equals(OffStatus.APPROVED_OFF)) {
+            return price * ((double) 1 - (off.getOffAmount() / (double) 100));
+//        } else return price;
+    }
+
     private double calculateScore() {
         double totalScore = 0;
         for (Score score : scoresList) {
@@ -154,6 +169,28 @@ public class Product {
 
         return totalScore;
     }
+
+    public static Product getProductById (String productId) throws Exception{
+        for (Product product : allProductsList){
+            if (product.getProductId().equals(productId))
+                return product;
+        }
+        throw new Exception("There is no product with this ID");
+    }
+
+    public String showProductDigest() {
+        return
+                "name: " + name +
+                        "\n\tid: " + productId +
+                        "\n\tdeta: " + details  +
+                        "\n\tprice: " + price +
+                        "\n\toff amount: " + off.getOffAmount()+
+                        "\n\tcategory: " + category.getName() +
+                        "\n\tseller(s): " + sellers.toString() +
+                        "\n\taverage score: " + calculateScore();
+    }
+
+
 
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();
