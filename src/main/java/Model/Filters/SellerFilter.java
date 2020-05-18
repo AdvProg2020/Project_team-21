@@ -15,10 +15,10 @@ public class SellerFilter extends Filter {
         this.sellerUserName = sellerUserName;
     }
 
-    public void apply(ArrayList<Product> filterdProducts, ArrayList<Product> products) throws Exception {
+    public void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception {
         for (Product product : products) {
             if (product.getSellers().contains(Seller.getSellerWithUsername(sellerUserName)))
-                filterdProducts.add(product);
+                filteredProducts.add(product);
         }
     }
 

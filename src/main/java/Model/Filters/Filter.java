@@ -28,7 +28,7 @@ public abstract class Filter {
         return filteredProducts;
     }
 
-    public abstract void apply(ArrayList<Product> filterdProducts, ArrayList<Product> products) throws Exception;
+    public abstract void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception;
 
     public abstract void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception;
 

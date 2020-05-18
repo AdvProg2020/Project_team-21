@@ -13,8 +13,10 @@ import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
 import View.ProductsUIs.FilteringUI.*;
 import View.ProductsUIs.ProductsMainUI.ProductsMainUI;
+import View.ProductsUIs.ProductsMainUI.SelectedProductUI;
+import View.ProductsUIs.ProductsMainUI.ShowProductsAfterUI;
 import View.ProductsUIs.ProductsMainUI.ViewCategoriesUI;
-import View.ProductsUIs.SortingUI.SortingUI;
+import View.ProductsUIs.SortingUI.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -244,11 +246,13 @@ public class ConsoleView{
             }
 
             else if (input.trim().matches("(?i)show\\s+products")){
-
+                goToNextPage(ShowProductsAfterUI.getInstance());
+                //TODO
             }
 
             else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
-
+                goToNextPage(SelectedProductUI.getInstance());
+                //TODO
             }
         }
         else if (currentMenu.equals(FilteringUI.getInstance())){
@@ -258,7 +262,8 @@ public class ConsoleView{
                 rightInput=true;
             }
             else if (input.trim().matches("(?i)filter\\s+(\\S+)")){
-
+                goToNextPage(SelectedFilterUI.getInstance());
+                //TODO
             }
             else if (input.trim().matches("(?i)current\\s+filters")){
                 goToNextPage(CurrentFiltersUI.getInstance());
@@ -267,6 +272,26 @@ public class ConsoleView{
             else if(input.trim().matches("(?i)disable\\s+filter\\s+(\\S+)")){
                 goToNextPage(DisableFilterUI.getInstance());
                 DisableFilterUI.getInstance().setDisablingFilter(input.split("\\s+")[2]);
+                rightInput=true;
+            }
+
+        }
+        else if (currentMenu.equals(SortingUI.getInstance())){
+
+            if (input.trim().matches("(?i)show\\s+available\\s+sorts")){
+                goToNextPage(AvailableSortUI.getInstance());
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)sort\\s+(\\S+)")){
+                goToNextPage(SelectedSortUI.getInstance());
+                //TODO
+            }
+            else if (input.trim().matches("(?i)current\\s+sorts")){
+                goToNextPage(CurrentSortUI.getInstance());
+                rightInput=true;
+            }
+            else if(input.trim().matches("(?i)disable\\s+sort")){
+                goToNextPage(DisableSortUI.getInstance());
                 rightInput=true;
             }
 
