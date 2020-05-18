@@ -17,14 +17,18 @@ public class SelectedFilterUI extends UI {
     }
 
     private String filterInput;
+    private String filterType;
 
     public void setFilterInput(String filterInput) {
         this.filterInput = filterInput;
     }
+    public void setFilterType(String filterType) {
+        this.filterType = filterType;
+    }
 
     @Override
     public void run() {
-        //TODO
+        System.out.println(Control.getInstance().createFilter(filterType,filterInput));
     }
 
     @Override

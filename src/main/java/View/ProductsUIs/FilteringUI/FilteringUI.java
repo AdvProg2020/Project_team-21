@@ -25,7 +25,7 @@ public class FilteringUI extends UI {
     @Override
     public void help() {
         System.out.println("show available filters");
-        System.out.println("filter [an available filter]");
+        System.out.println("filter [an available filter] [filterInput/filterType] ");
         System.out.println("current filters");
         System.out.println("disable filter [a selected filter]");
     }

@@ -150,6 +150,14 @@ public class Product {
         return totalScore;
     }
 
+    public static Product getProductById (String productId) throws Exception{
+        for (Product product : allProductsList){
+            if (product.getProductId().equals(productId))
+                return product;
+        }
+        throw new Exception("There is no product with this ID");
+    }
+
     public String showProductDigest() {
         return
                 "name: " + name +

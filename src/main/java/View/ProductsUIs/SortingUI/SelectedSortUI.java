@@ -18,10 +18,15 @@ public class SelectedSortUI extends UI {
         return instance;
     }
 
+    private String sortType;
+
+    public void setSortType(String sortType) {
+        this.sortType = sortType;
+    }
+
     @Override
     public void run() {
-        //TODO
-//        System.out.println(Control.getInstance().makeSort());
+        System.out.println(Control.getInstance().makeSort(sortType,"product"));
     }
 
     @Override

@@ -17,9 +17,15 @@ public class SelectedProductUI extends UI {
         return instance;
     }
 
+    private String productId;
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
     public void run()  {
-
+//        System.out.println(Product.getProductById(productId));
     }
 
     @Override

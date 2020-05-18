@@ -247,11 +247,14 @@ public class ConsoleView{
 
             else if (input.trim().matches("(?i)show\\s+products")){
                 goToNextPage(ShowProductsAfterUI.getInstance());
+                rightInput=true;
                 //TODO
             }
 
             else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
                 goToNextPage(SelectedProductUI.getInstance());
+                SelectedProductUI.getInstance().setProductId(input.split("\\s+")[2]);
+                rightInput=true;
                 //TODO
             }
         }
@@ -263,7 +266,10 @@ public class ConsoleView{
             }
             else if (input.trim().matches("(?i)filter\\s+(\\S+)")){
                 goToNextPage(SelectedFilterUI.getInstance());
+//                SelectedFilterUI.getInstance().setFilterInput();
+//                SelectedFilterUI.getInstance().setFilterType();
                 //TODO
+                rightInput=true;
             }
             else if (input.trim().matches("(?i)current\\s+filters")){
                 goToNextPage(CurrentFiltersUI.getInstance());
@@ -284,7 +290,8 @@ public class ConsoleView{
             }
             else if (input.trim().matches("(?i)sort\\s+(\\S+)")){
                 goToNextPage(SelectedSortUI.getInstance());
-                //TODO
+                SelectedSortUI.getInstance().setSortType(input.split("\\s+")[1]);
+                rightInput=true;
             }
             else if (input.trim().matches("(?i)current\\s+sorts")){
                 goToNextPage(CurrentSortUI.getInstance());
