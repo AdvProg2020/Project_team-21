@@ -34,4 +34,9 @@ public class OffRequest extends Request {
         Off.addOff(Request.getRequestedOffs().get(requestId));
         declineReq(requestId);
     }
+
+    @Override
+    public String getType() {
+        return "Off Request";
+    }
 }

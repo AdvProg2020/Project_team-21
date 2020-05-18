@@ -21,6 +21,7 @@ public class Product {
     private double buyersAverageScore;
     ArrayList<Score> scoresList;
     ArrayList<Review> reviewsList;
+    private Off off;
 
 
     // Initialization Block
@@ -73,8 +74,8 @@ public class Product {
         return price;
     }
 
-    public double getBuyersAverageScore() {
-        return buyersAverageScore;
+    public Double getBuyersAverageScore() {
+        return calculateScore();
     }
 
     public ArrayList<Review> getReviewsList() {
@@ -130,6 +131,15 @@ public class Product {
         return allProducts;
     }
 
+    public Double getProductFinalPriceConsideringOff() {
+//        if (off != null && off.getDiscountOrOffStat().equals(DiscountAndOffStat.EXPIRED)) {
+//            off.removeOff();
+//        }
+//        if (off != null && off.getOffStatus().equals(OffStatus.APPROVED_OFF)) {
+            return price * ((double) 1 - (off.getOffAmount() / (double) 100));
+//        } else return price;
+    }
+
     private double calculateScore() {
         double totalScore = 0;
         for (Score score : scoresList) {
@@ -139,6 +149,20 @@ public class Product {
 
         return totalScore;
     }
+
+    public String showProductDigest() {
+        return
+                "name: " + name +
+                        "\n\tid: " + productId +
+                        "\n\tdeta: " + details  +
+                        "\n\tprice: " + price +
+                        "\n\toff amount: " + off.getOffAmount()+
+                        "\n\tcategory: " + category.getName() +
+                        "\n\tseller(s): " + sellers.toString() +
+                        "\n\taverage score: " + calculateScore();
+    }
+
+
 
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();

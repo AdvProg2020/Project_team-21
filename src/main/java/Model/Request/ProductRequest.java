@@ -32,4 +32,9 @@ public class ProductRequest extends Request {
         Product.addProduct(Request.getRequestedProducts().get(requestId));
         declineReq(requestId);
     }
+
+    @Override
+    public String getType() {
+        return "Product Request";
+    }
 }

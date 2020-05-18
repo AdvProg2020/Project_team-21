@@ -41,6 +41,8 @@ public abstract class Request {
 
     public abstract void acceptReq(String requestId);
 
+    public abstract String getType();
+
     public static HashMap<String, Seller> getRequestedSellers() {
         return requestedSellers;
     }

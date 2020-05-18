@@ -26,4 +26,9 @@ public class SellerRequest extends Request {
         Seller.addNewSeller(requestedSellers.get(requestId));
         declineReq(requestId);
     }
+
+    @Override
+    public String getType() {
+        return "Seller Request";
+    }
 }

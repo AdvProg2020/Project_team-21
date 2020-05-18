@@ -85,6 +85,10 @@ public class Off {
         return false;
     }
 
+    public OffState getOffState() {
+        return offState;
+    }
+
     public void addProduct(Product product){
         productsList.add(product);
     }
