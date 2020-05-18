@@ -242,6 +242,11 @@ public class ConsoleView{
                     goToNextPage(CustomerViewBalanceUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches("(?i)view\\s+discount\\s+codes"))
+                {
+                    goToNextPage(CustomerViewBalanceUI.getInstance());
+                    rightInput = true;
+                }
             }
         }
         else if(currentMenu.equals(CustomerViewOrdersUI.getInstance()))
