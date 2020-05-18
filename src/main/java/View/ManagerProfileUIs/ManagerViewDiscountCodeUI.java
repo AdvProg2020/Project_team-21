@@ -1,12 +1,18 @@
 package View.ManagerProfileUIs;
 
 import Controller.ControlManager;
+import Controller.Sort;
 import Model.DiscountCode;
 import View.ConsoleView;
 import View.UI;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ManagerViewDiscountCodeUI extends UI {
     private static ManagerViewDiscountCodeUI instance;
+    private SortDiscountCodesType sortDiscountCodesType;
     private ManagerViewDiscountCodeUI()
     {
 
@@ -46,8 +52,26 @@ public class ManagerViewDiscountCodeUI extends UI {
 
     }
 
+    public void setSortDiscountCodesType(SortDiscountCodesType sortDiscountCodesType) {
+        this.sortDiscountCodesType = sortDiscountCodesType;
+    }
+
+    private SortDiscountCodesType getSortDiscountCodesType() {
+        return sortDiscountCodesType;
+    }
+
     @Override
     public void sort() {
-
+        if(getSortDiscountCodesType()==SortDiscountCodesType.DISCOUNT_ID){
+            Map<String, DiscountCode> discountCodes = Sort.sortDiscountCodeHashMap(DiscountCode.getAllDiscountCodes());
+            for (String s : discountCodes.keySet()) {
+                System.out.println(s);
+            }
+        } else if(getSortDiscountCodesType()==SortDiscountCodesType.DISCOUNT_PERCENTAGE){
+            ArrayList<DiscountCode> discountCodes = Sort.sortDiscountCodesByDiscountPercentage(new ArrayList<>(DiscountCode.getAllDiscountCodes().values()));
+            for (DiscountCode discountCode : discountCodes) {
+                System.out.println(discountCode.getDiscountId() + ": " + discountCode.getDiscountPercentage());
+            }
+        }
     }
 }

@@ -145,6 +145,7 @@ public class ConsoleView{
         {
             if(input.trim().matches("(?i)sort\\s+by\\s+percentage"))
             {
+                ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_PERCENTAGE);
                 rightInput = true;
             }
             else if(input.trim().matches("(?i)sort\\s+by\\s+start\\s*date"))

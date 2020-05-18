@@ -10,13 +10,13 @@ public class Sort {
 
     // *************      Account        ***************
 
-    public Map<String, Account> sortAccountHashMap(Map<String, Account> accountMap) {
+    public static Map<String, Account> sortAccountHashMap(Map<String, Account> accountMap) {
         /* Sort statement */
         accountMap = sortAccountMapByKey(accountMap);
         return accountMap;
     }
 
-    public Map<String, Account> sortAccountMapByKey(Map map) {
+    public static Map<String, Account> sortAccountMapByKey(Map map) {
         // TreeMap to store values of HashMap
         TreeMap<String, Account> sorted = new TreeMap<>();
 
@@ -28,7 +28,7 @@ public class Sort {
 
     // *************      Category        ***************
 
-    public ArrayList<Category> sortCategoryArrayList(ArrayList<Category> categories){
+    public static ArrayList<Category> sortCategoryArrayList(ArrayList<Category> categories){
         Collections.sort(categories);
         return categories;
     }
@@ -36,7 +36,7 @@ public class Sort {
 
     // *************      Customer        ***************
 
-    public ArrayList<Customer> sortCustomerArrayList(ArrayList<Customer> customers){
+    public static ArrayList<Customer> sortCustomerArrayList(ArrayList<Customer> customers){
         Collections.sort(customers);
         return customers;
     }
@@ -44,13 +44,13 @@ public class Sort {
 
     // *************      DiscountCode        ***************
 
-    public Map<String, DiscountCode> sortDiscountCodeHashMap(Map<String, DiscountCode> discountCodeMap) {
+    public static Map<String, DiscountCode> sortDiscountCodeHashMap(Map<String, DiscountCode> discountCodeMap) {
         /* Sort statement */
         discountCodeMap = sortDiscountCodeMapByKey(discountCodeMap);
         return discountCodeMap;
     }
 
-    public Map<String, DiscountCode> sortDiscountCodeMapByKey(Map map) {
+    public static Map<String, DiscountCode> sortDiscountCodeMapByKey(Map map) {
         // TreeMap to store values of HashMap
         TreeMap<String, DiscountCode> sorted = new TreeMap<>();
 
@@ -61,7 +61,7 @@ public class Sort {
     }
 
 
-    public ArrayList<DiscountCode> sortDiscountCodesByDiscountPercentage(ArrayList<DiscountCode> discountCodes){
+    public static ArrayList<DiscountCode> sortDiscountCodesByDiscountPercentage(ArrayList<DiscountCode> discountCodes){
         discountCodes.sort(Comparator.comparingDouble(DiscountCode::getDiscountPercentage));
         return discountCodes;
     }
@@ -69,7 +69,7 @@ public class Sort {
     // *************      Log        ***************
     // ****   SellLog     ****    BuyLog     ****
 
-    public ArrayList<Log> sortBuyLogArrayList(ArrayList<Log> logs){
+    public static ArrayList<Log> sortBuyLogArrayList(ArrayList<Log> logs){
         Collections.sort(logs);
         return logs;
     }
@@ -77,7 +77,7 @@ public class Sort {
 
     // *************      Manager        ***************
 
-    public ArrayList<Manager> sortManagerArrayList(ArrayList<Manager> managers){
+    public static ArrayList<Manager> sortManagerArrayList(ArrayList<Manager> managers){
         Collections.sort(managers);
         return managers;
     }
@@ -85,18 +85,18 @@ public class Sort {
 
     // *************      Off        ***************
 
-    public ArrayList<Off> sortOffArrayList(ArrayList<Off> offs){
+    public static ArrayList<Off> sortOffArrayList(ArrayList<Off> offs){
         Collections.sort(offs);
         return offs;
     }
 
-    public Map<String, Off> sortOffHashMap(Map<String, Off> offMap) {
+    public static Map<String, Off> sortOffHashMap(Map<String, Off> offMap) {
         /* Sort statement */
         offMap = sortOffMapByKey(offMap);
         return offMap;
     }
 
-    public Map<String, Off> sortOffMapByKey(Map map) {
+    public static Map<String, Off> sortOffMapByKey(Map map) {
         // TreeMap to store values of HashMap
         TreeMap<String, Off> sorted = new TreeMap<>();
 
@@ -109,13 +109,13 @@ public class Sort {
 
     // *************      Product        ***************
 
-    public Map<String, Product> sortProductHashMap(Map<String, Product> productMap) {
+    public static Map<String, Product> sortProductHashMap(Map<String, Product> productMap) {
         /* Sort statement */
         productMap = sortProductMapByKey(productMap);
         return productMap;
     }
 
-    public Map<String, Product> sortProductMapByKey(Map map) {
+    public static Map<String, Product> sortProductMapByKey(Map map) {
         // TreeMap to store values of HashMap
         TreeMap<String, Product> sorted = new TreeMap<>();
 
@@ -128,7 +128,7 @@ public class Sort {
 
     // *************      Review        ***************
 
-    public ArrayList<Review> sortReviewArrayList(ArrayList<Review> reviews){
+    public static ArrayList<Review> sortReviewArrayList(ArrayList<Review> reviews){
         Collections.sort(reviews);
         return reviews;
     }
@@ -136,7 +136,7 @@ public class Sort {
 
     // *************      Score        ***************
 
-    public ArrayList<Score> sortScoreArrayList(ArrayList<Score> scores){
+    public static ArrayList<Score> sortScoreArrayList(ArrayList<Score> scores){
         Collections.sort(scores);
         return scores;
     }
@@ -144,7 +144,7 @@ public class Sort {
 
     // *************      Seller        ***************
 
-    public ArrayList<Seller> sortSellerArrayList(ArrayList<Seller> sellers){
+    public static ArrayList<Seller> sortSellerArrayList(ArrayList<Seller> sellers){
         Collections.sort(sellers);
         return sellers;
     }
