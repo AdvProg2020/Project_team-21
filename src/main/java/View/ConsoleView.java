@@ -27,8 +27,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
-import View.ProductPageUI.ProductDigestUI;
-import View.ProductPageUI.ProductMainUI;
+import View.ProductPageUI.*;
 import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
 import View.SellerProfileUIs.ManageOffs.SellerEditOffUI;
@@ -159,12 +158,30 @@ public class ConsoleView{
                 goToNextPage(ProductDigestUI.getInstance());
                 rightInput = true;
             }
+//            else if(input.trim().matches("(?i)attributes"))
+//            {
+//                goToNextPage(ProductAttributesUI.getInstance());
+//                rightInput = true;
+//            }
+            else if(input.trim().matches("(?i)compare\\s+(.+)"))
+            {
+                ProductCompareUI.getInstance().setCompareProductID(input.split("\\s+")[1]);
+                goToNextPage(ProductCompareUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)comments"))
+            {
+                ProductCompareUI.getInstance().setCompareProductID(input.split("\\s+")[1]);
+                goToNextPage(ProductCompareUI.getInstance());
+                rightInput = true;
+            }
         }
         else if(currentMenu.equals(ProductDigestUI.getInstance()))
         {
             if(input.trim().matches("(?i)add\\s+to\\s+cart"))
             {
-
+                goToNextPage(ProductAddToCartUI.getInstance());
+                rightInput = true;
             }
         }
         else if(currentMenu.equals(UserInfoUI.getInstance()))

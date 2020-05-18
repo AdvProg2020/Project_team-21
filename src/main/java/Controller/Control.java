@@ -1,15 +1,12 @@
 package Controller;
 
 
+import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
-import Model.Category;
-import Model.Company;
 import Model.Filters.*;
-import Model.Product;
-import Model.ShoppingCart;
 import Model.Sorts.ProductsSort;
 
 import java.nio.charset.Charset;
@@ -377,7 +374,15 @@ public class Control {
         }
         return allProducts;
     }
-
+    public String offOutput(Off off)
+    {
+        if(off == null)
+        {
+            return "No off";
+        }
+        else
+            return off.toString();
+    }
 
 
     public Map<String, Account> sortAllAccounts() {
