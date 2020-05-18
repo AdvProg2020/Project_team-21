@@ -27,6 +27,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.ManagerProfileUIs.SortDiscountCodesType;
 import View.ProductPageUI.*;
 import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
@@ -463,24 +464,26 @@ public class ConsoleView{
             if(input.trim().matches("(?i)sort\\s+by\\s+percentage"))
             {
                 ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_PERCENTAGE);
+                currentMenu.sort();
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)sort\\s+by\\s+start\\s*date"))
+            else if(input.trim().matches("(?i)sort\\s+by\\s+discountId alphabet"))
             {
-                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+                ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_ID);
+                currentMenu.sort();
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)sort\\s+by\\s+end\\s*date"))
-            {
-                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
-                rightInput = true;
-            }
-            else if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(.+)"))
-            {
-                ManagerViewDiscountCodeUI.getInstance().setCode(input.split("\\s+")[3]);
-                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
-                rightInput = true;
-            }
+//            else if(input.trim().matches("(?i)sort\\s+by\\s+end\\s*date"))
+//            {
+//                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+//                rightInput = true;
+//            }
+//            else if(input.trim().matches("(?i)view\\s+discount\\s+code\\s+(.+)"))
+//            {
+//                ManagerViewDiscountCodeUI.getInstance().setCode(input.split("\\s+")[3]);
+//                goToNextPage(ManagerViewDiscountCodeUI.getInstance());
+//                rightInput = true;
+//            }
             else if(input.trim().matches("(?i)edit\\s+discount\\s+code\\s+(.+)"))
             {
                 ManagerEditDiscountCodeUI.getInstance().setId(input.split("\\s+")[3]);

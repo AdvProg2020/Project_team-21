@@ -4,6 +4,7 @@ import Controller.ControlManager;
 import Controller.Sort;
 import Model.DiscountCode;
 import View.ConsoleView;
+import View.ManagerProfileUIs.SortDiscountCodesType;
 import View.UI;
 
 import java.util.ArrayList;
@@ -63,15 +64,9 @@ public class ManagerViewDiscountCodeUI extends UI {
     @Override
     public void sort() {
         if(getSortDiscountCodesType()==SortDiscountCodesType.DISCOUNT_ID){
-            Map<String, DiscountCode> discountCodes = Sort.sortDiscountCodeHashMap(DiscountCode.getAllDiscountCodes());
-            for (String s : discountCodes.keySet()) {
-                System.out.println(s);
-            }
+            DiscountCode.sortAllDiscountCodesByDiscountID();
         } else if(getSortDiscountCodesType()==SortDiscountCodesType.DISCOUNT_PERCENTAGE){
-            ArrayList<DiscountCode> discountCodes = Sort.sortDiscountCodesByDiscountPercentage(new ArrayList<>(DiscountCode.getAllDiscountCodes().values()));
-            for (DiscountCode discountCode : discountCodes) {
-                System.out.println(discountCode.getDiscountId() + ": " + discountCode.getDiscountPercentage());
-            }
+            DiscountCode.sortAllDiscountCodesByDiscountPercentage();
         }
     }
 }

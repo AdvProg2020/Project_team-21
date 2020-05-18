@@ -2,6 +2,8 @@ package Model.Account;
 
 import Model.DiscountCode;
 
+import Controller.Sort;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -99,4 +101,13 @@ public abstract class Account {
                 ", credit=" + credit +
                 '}';
     }
+
+    private static void setAllAccounts(HashMap<String, Account> allAccounts) {
+        Account.allAccounts = allAccounts;
+    }
+
+    public void sortAllAccounts(){
+//        Account.setAllAccounts((HashMap<String, Account>) Sort.sortAccountHashMap(getAllAccounts()));
+    }
+
 }
