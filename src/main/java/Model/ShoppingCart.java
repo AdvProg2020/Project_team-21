@@ -37,8 +37,25 @@ public class ShoppingCart {
         price += product.getPrice()*num;
     }
 
-    public void removeProduct(Product product,int num){
+    public void increaseQuantity(Product product)
+    {
+        products.put(product,products.get(product)+1);
+        price += product.getPrice();
+    }
+    public void decreaseQuantity(Product product)
+    {
+        if(products.get(product)<=1)
+        {
+            removeProduct(product);
+        }
+        else
+        {
+            products.put(product,products.get(product)-1);
+            price -= product.getPrice();
+        }
+    }
+    public void removeProduct(Product product){
         products.remove(product);
-        price -= product.getPrice()*num;
+        price -= product.getPrice();
     }
 }

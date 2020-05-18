@@ -6,6 +6,7 @@ import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
+import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerViewCartUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
@@ -232,6 +233,21 @@ public class ConsoleView{
             if(input.trim().matches("(?i)show\\s+products"))
             {
                 goToNextPage(CustomerCartShowProductsUI.getInstance());
+                rightInput = true;
+            }
+//            else if(input.trim().matches("(?i)view\\s+(.+)"))
+//            {
+//                goToNextPage(CustomerCartShowProductsUI.getInstance());
+//                rightInput = true;
+//            }
+            else if(input.trim().matches("(?i)(increase|decrease)\\s+(.+)"))
+            {
+                CustomerIncreaseDecreaseProductCartUI.getInstance().setProductID(input.split("\\s+")[1]);
+                if(input.split("\\s+")[0].equalsIgnoreCase("increase"))
+                    CustomerIncreaseDecreaseProductCartUI.getInstance().setIncrease(true);
+                else
+                    CustomerIncreaseDecreaseProductCartUI.getInstance().setIncrease(false);
+                goToNextPage(CustomerIncreaseDecreaseProductCartUI.getInstance());
                 rightInput = true;
             }
         }
