@@ -5,6 +5,7 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.Category;
 import Model.ShoppingCart;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCartUI;
@@ -27,6 +28,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.ManagerProfileUIs.ManagerAddBalanceUI;
 import View.ProductPageUI.*;
 import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
@@ -126,6 +128,7 @@ public class ConsoleView{
                 Control.getInstance().setUser(null);
                 Control.getInstance().setSignOutCart(new ShoppingCart(null));
             }
+            rightInput = true;
         }
         if(currentMenu.equals(UserLoginUI.getInstance()))
         {
@@ -149,6 +152,12 @@ public class ConsoleView{
             {
                 goToNextPage(ProductsMainUI.getInstance());
                 rightInput = true;
+            }
+            else if(input.trim().matches("(?i)categories"))
+            {
+                for (Category category : Category.getAllCategories()) {
+                    System.out.println(category.getName());
+                }
             }
         }
         else if(currentMenu.equals(ProductMainUI.getInstance()))
@@ -234,6 +243,11 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)manage\\s+categories"))
                 {
                     goToNextPage(ManagerManageCategoriesUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)add\\s+balance"))
+                {
+                    goToNextPage(ManagerAddBalanceUI.getInstance());
                     rightInput = true;
                 }
             }
