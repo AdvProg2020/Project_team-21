@@ -13,6 +13,7 @@ import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerOrderInfoUI;
 import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerRateProductUI;
 import View.CustomerProfileUIs.CustomerPurchaseUI;
 import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerViewOrdersUI;
+import View.CustomerProfileUIs.CustomerViewBalanceUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
@@ -234,6 +235,11 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)view\\s+orders"))
                 {
                     goToNextPage(CustomerViewOrdersUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)view\\s+balance"))
+                {
+                    goToNextPage(CustomerViewBalanceUI.getInstance());
                     rightInput = true;
                 }
             }
