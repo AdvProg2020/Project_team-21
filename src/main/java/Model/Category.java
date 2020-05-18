@@ -7,6 +7,7 @@ public class Category {
     private String name;
     private ArrayList<Product> productsList;
     private ArrayList<Category> subCategories;
+    private ArrayList<String> specialFeatures = new ArrayList<String>();
 
     // Initialization Block
     {
@@ -78,6 +79,49 @@ public class Category {
     public ArrayList<Category> getSubCategories() {
         return subCategories;
     }
+
+    public String showSpecialFeatures(){
+        StringBuilder features = new StringBuilder();
+        features.append("specialFeatures");
+        for (String specialFeature : specialFeatures){
+            features.append("\n").append(specialFeature);
+        }
+        return features.toString();
+    }
+
+    public ArrayList<String> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void addSpecialFeature(String specialFeature){
+        if (!specialFeatures.contains(specialFeature)){
+            specialFeatures.add(specialFeature);
+            addSpecialFeatureToProducts(specialFeature);
+        }
+    }
+
+    public void addSpecialFeatureToProducts(String specialFeature){
+        for (Product product : productsList){
+            product.addSpecialFeature(specialFeature,null);
+        }
+    }
+
+    public void removeSpecialFeature(String specialFeature){
+        specialFeatures.remove(specialFeature);
+        removeSpecialFeatureFromProducts(specialFeature);
+    }
+
+    public void removeSpecialFeatureFromProducts(String specialFeature){
+        for (Product product : productsList){
+            product.removeSpecialFeature(specialFeature);
+        }
+    }
+
+    public boolean isThereSpecialFeature(String specialFeature){
+        return specialFeatures.contains(specialFeature);
+    }
+
+
 
 }
 
