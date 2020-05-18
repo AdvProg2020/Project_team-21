@@ -7,6 +7,7 @@ import Model.Account.Manager;
 import Model.Account.Seller;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCartUI;
+import View.CustomerProfileUIs.CustomerCartUIs.CustomerShowTotalPriceCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerViewCartUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
@@ -248,6 +249,11 @@ public class ConsoleView{
                 else
                     CustomerIncreaseDecreaseProductCartUI.getInstance().setIncrease(false);
                 goToNextPage(CustomerIncreaseDecreaseProductCartUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)show\\s+total\\s+price"))
+            {
+                goToNextPage(CustomerShowTotalPriceCartUI.getInstance());
                 rightInput = true;
             }
         }
