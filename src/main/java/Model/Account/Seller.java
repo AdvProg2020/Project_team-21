@@ -64,6 +64,10 @@ public class Seller extends Account {
         this.company = company;
     }
 
+    public void addSellLog(SellLog sellLog)
+    {
+        sellLogs.add(sellLog);
+    }
     public void addOffs (Off off){
         allOffs.add(off);
     }

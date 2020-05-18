@@ -10,6 +10,7 @@ import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCa
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerShowTotalPriceCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerViewCartUI;
 import View.CustomerProfileUIs.CustomerPurchaseUI;
+import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerViewOrdersUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
@@ -228,7 +229,16 @@ public class ConsoleView{
                     goToNextPage(CustomerViewCartUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches("(?i)view\\s+orders"))
+                {
+                    goToNextPage(CustomerViewOrdersUI.getInstance());
+                    rightInput = true;
+                }
             }
+        }
+        else if(currentMenu.equals(CustomerViewOrdersUI.getInstance()))
+        {
+
         }
         else if(currentMenu.equals(CustomerViewCartUI.getInstance()))
         {

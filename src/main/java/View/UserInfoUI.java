@@ -178,6 +178,9 @@ public class UserInfoUI extends UI {
         else if(user instanceof Customer)
         {
             System.out.println("To view your cart : view cart");
+            System.out.println("To view your orders : view orders");
+            System.out.println("To view your balance : view balance");
+            System.out.println("To view your discount codes : view discount codes");
         }
     }
 }

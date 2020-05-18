@@ -54,6 +54,10 @@ public abstract class Account {
         return credit;
     }
 
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
     public static HashMap<String, Account> getAllAccounts() {
         return allAccounts;
     }

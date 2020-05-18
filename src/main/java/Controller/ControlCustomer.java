@@ -149,6 +149,7 @@ public class ControlCustomer {
         new BuyLog(logID,LocalDateTime.now(),totalDiscountAmount,price-totalDiscountAmount,cartProducts,cartSellers.get(0),
                 customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode,cartSellers);
         customer.addDiscountUse(discount);
+        customer.setBalance(customer.getBalance()-(price-totalDiscountAmount));
 
         double totalOffMoneyPerSeller;
         for (Seller seller : productsSellers.keySet())
@@ -168,6 +169,7 @@ public class ControlCustomer {
             }
             new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),totalOffMoneyPerSeller,calculateTotalPrice(products,totalOffMoneyPerSeller),
                     products,seller.getUsername(),customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
+            seller.setCredit(seller.getCredit() + calculateTotalPrice(products,totalOffMoneyPerSeller));
         }
 
         return logID;

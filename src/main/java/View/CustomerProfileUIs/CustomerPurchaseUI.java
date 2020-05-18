@@ -41,8 +41,8 @@ public class CustomerPurchaseUI extends UI {
         try
         {
             String logID = ControlCustomer.getInstance().purchase(customer,receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode,discountCode);
-            System.out.println("Your pucrhase has been finalized successfully with logID: " + logID);
-            System.out.println("Your new balance is: " + customer.getCredit());
+            System.out.println("Your purchase has been finalized successfully with logID: " + logID);
+            System.out.println("Your new balance is: " + customer.getBalance());
         }
         catch (Exception e)
         {

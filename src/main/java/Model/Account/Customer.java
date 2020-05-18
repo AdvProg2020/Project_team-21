@@ -15,7 +15,7 @@ public class Customer extends Account {
     private ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
     private HashMap<String, DiscountCode> discountCodes = new HashMap<>();
     private HashMap<DiscountCode,Integer> discountCodesUsed = new HashMap<>();
-    public int balance;
+    public double balance;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
@@ -82,7 +82,7 @@ public class Customer extends Account {
 //
 //    }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -91,7 +91,7 @@ public class Customer extends Account {
         return "Customer";
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

@@ -1,5 +1,6 @@
 package Model.Log;
 
+import Model.Account.Seller;
 import Model.Product;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,12 @@ public class SellLog extends Log{
             , String sellerUserName, String receiverUserName, String receiverName, String receiverAddress, String receiverPhoneNo, String receiverPostalCode) {
         super(logId, date, totalDiscountAmount, totalAmount, allProducts, sellerUserName, receiverUserName,receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
         addSellLog(this);
+        for (Seller seller : Seller.getAllSeller()) {
+            if(seller.getUsername().equalsIgnoreCase(sellerUserName))
+            {
+                seller.addSellLog(this);
+            }
+        }
     }
     public void addSellLog(SellLog sellLog)
     {
