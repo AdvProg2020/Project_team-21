@@ -171,8 +171,7 @@ public class ConsoleView{
             }
             else if(input.trim().matches("(?i)comments"))
             {
-                ProductCompareUI.getInstance().setCompareProductID(input.split("\\s+")[1]);
-                goToNextPage(ProductCompareUI.getInstance());
+                goToNextPage(ProductCommentsUI.getInstance());
                 rightInput = true;
             }
         }
