@@ -14,6 +14,7 @@ public class Customer extends Account {
     private ShoppingCart shoppingCart;
     private ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
     private HashMap<String, DiscountCode> discountCodes = new HashMap<>();
+    private HashMap<DiscountCode,Integer> discountCodesUsed = new HashMap<>();
     public int balance;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
@@ -45,11 +46,25 @@ public class Customer extends Account {
     public void addDiscountCode(DiscountCode discountCode)
     {
         discountCodes.put(discountCode.getDiscountId(),discountCode);
+        discountCodesUsed.put(discountCode,0);
+    }
+    public void addDiscountUse(DiscountCode discountCode)
+    {
+        discountCodesUsed.put(discountCode,discountCodesUsed.get(discountCode)+1);
+        if(discountCodesUsed.get(discountCode) >= discountCode.getDiscountNumberForEachUser())
+        {
+            removeDiscountCode(discountCode);
+        }
+    }
+
+    public HashMap<String, DiscountCode> getDiscountCodes() {
+        return discountCodes;
     }
 
     public void removeDiscountCode(DiscountCode discountCode)
     {
         discountCodes.remove(discountCode.getDiscountId());
+        discountCodesUsed.remove(discountCode);
     }
 
     public void addBuyLogs (BuyLog buyLog){

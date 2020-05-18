@@ -9,6 +9,7 @@ import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerShowTotalPriceCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerViewCartUI;
+import View.CustomerProfileUIs.CustomerPurchaseUI;
 import View.ManagerProfileUIs.ManageCategories.*;
 import View.ManagerProfileUIs.ManageDiscountCodes.*;
 import View.ManagerProfileUIs.ManageProducts.ManagerManageProductsUI;
@@ -258,7 +259,7 @@ public class ConsoleView{
             }
             else if(input.trim().matches("(?i)purchase"))
             {
-                goToNextPage(CustomerShowTotalPriceCartUI.getInstance());
+                goToNextPage(CustomerPurchaseUI.getInstance());
                 rightInput = true;
             }
         }
