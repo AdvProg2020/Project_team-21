@@ -53,4 +53,9 @@ public class UserLoginUI extends UI {
     public void help() {
         System.out.println("Login: login [Username]\nSignup: create account [type] [username]");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

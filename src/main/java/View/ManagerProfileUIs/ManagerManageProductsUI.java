@@ -27,4 +27,9 @@ public class ManagerManageProductsUI extends UI {
     public void help() {
         System.out.println("to remove a product : remove [productId]");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

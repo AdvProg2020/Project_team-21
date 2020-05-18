@@ -49,4 +49,9 @@ public class ManagerViewDiscountCodesUI extends UI {
         System.out.println("To sort by alphabet : sort by end date");
         System.out.println("To sort by percentage : sort by percentage");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

@@ -84,4 +84,11 @@ public class ManagerCreateDiscountCodeUI extends UI {
     @Override
     public void help() {
     }
+
+    @Override
+    public void sort() {
+
+    }
+
+
 }

@@ -69,4 +69,9 @@ public class UserSignupUI extends UI {
     {
         System.out.println("Just enter what console wants from you.");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

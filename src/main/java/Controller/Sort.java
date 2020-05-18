@@ -61,6 +61,11 @@ public class Sort {
     }
 
 
+    public ArrayList<DiscountCode> sortDiscountCodesByDiscountPercentage(ArrayList<DiscountCode> discountCodes){
+        discountCodes.sort(Comparator.comparingDouble(DiscountCode::getDiscountPercentage));
+        return discountCodes;
+    }
+
     // *************      Log        ***************
     // ****   SellLog     ****    BuyLog     ****
 
