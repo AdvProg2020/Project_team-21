@@ -75,7 +75,7 @@ public class Log {
     }
 
 
-    public ArrayList<Product> getAllProductsId() {
+    public ArrayList<Product> getAllProducts() {
         return allProducts;
     }
 
@@ -117,6 +117,22 @@ public class Log {
 
     public DiscountCode getUsedDiscountCode() {
         return usedDiscountCode;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
+
+    public String getReceiverPhoneNo() {
+        return receiverPhoneNo;
+    }
+
+    public String getReceiverPostalCode() {
+        return receiverPostalCode;
     }
 
     public void setReceiverUserName(String receiverUserName) {

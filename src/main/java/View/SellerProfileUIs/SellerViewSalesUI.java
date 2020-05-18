@@ -33,7 +33,7 @@ public class SellerViewSalesUI extends UI {
             System.out.println("Price: " + log.getPrice());
             System.out.println("Sold to: " + log.getReceiverUserName());
             j = 1;
-            for (Product product : log.getAllProductsId())
+            for (Product product : log.getAllProducts())
             {
                 System.out.println("Sold Product No. " + j + ": " + product.getProductId());
                 j++;

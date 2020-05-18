@@ -33,7 +33,8 @@ public class CustomerViewOrdersUI extends UI {
     @Override
     public void help()
     {
-        System.out.println("");
+        System.out.println("To show an order's infos: show order [orderID]");
+        System.out.println("To rate a product you have bought: rate [productID] [1-5]");
     }
 
 }

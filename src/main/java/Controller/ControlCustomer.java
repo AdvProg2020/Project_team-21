@@ -171,8 +171,16 @@ public class ControlCustomer {
                     products,seller.getUsername(),customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
             seller.setCredit(seller.getCredit() + calculateTotalPrice(products,totalOffMoneyPerSeller));
         }
-
         return logID;
+    }
+
+    public boolean checkCustomerGotOrder(String orderID,Customer customer)
+    {
+        for (BuyLog log : customer.getBuyLogs()) {
+            if(log.getLogId().equals(orderID))
+                return true;
+        }
+        return false;
     }
 
 }
