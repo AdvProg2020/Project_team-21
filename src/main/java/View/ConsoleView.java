@@ -5,6 +5,7 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.ShoppingCart;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerShowTotalPriceCartUI;
@@ -26,6 +27,8 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.ProductPageUI.ProductDigestUI;
+import View.ProductPageUI.ProductMainUI;
 import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
 import View.SellerProfileUIs.ManageOffs.SellerEditOffUI;
@@ -37,7 +40,6 @@ import View.SellerProfileUIs.ManageProducts.SellerViewProductBuyersUI;
 import View.SellerProfileUIs.ManageProducts.SellerViewProductUI;
 import View.ProductsUIs.FilteringUI.*;
 import View.ProductsUIs.ProductsMainUI.ProductsMainUI;
-import View.ProductsUIs.ProductsMainUI.SelectedProductUI;
 import View.ProductsUIs.ProductsMainUI.ShowProductsAfterUI;
 import View.ProductsUIs.ProductsMainUI.ViewCategoriesUI;
 import View.ProductsUIs.SortingUI.*;
@@ -123,6 +125,7 @@ public class ConsoleView{
             else{
                 System.out.println("Goodbye " + user.getFirstName());
                 Control.getInstance().setUser(null);
+                Control.getInstance().setSignOutCart(new ShoppingCart(null));
             }
         }
         if(currentMenu.equals(UserLoginUI.getInstance()))
@@ -139,6 +142,29 @@ public class ConsoleView{
                 UserLoginUI.getInstance().login(input.trim().split("\\s+")[1]);
                  goToNextPage(UserInfoUI.getInstance());
                  rightInput = true;
+            }
+        }
+        else if(currentMenu.equals(MainMenuUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)products"))
+            {
+                goToNextPage(ProductsMainUI.getInstance());
+                rightInput = true;
+            }
+        }
+        else if(currentMenu.equals(ProductMainUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)digest"))
+            {
+                goToNextPage(ProductDigestUI.getInstance());
+                rightInput = true;
+            }
+        }
+        else if(currentMenu.equals(ProductDigestUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)add\\s+to\\s+cart"))
+            {
+
             }
         }
         else if(currentMenu.equals(UserInfoUI.getInstance()))
@@ -278,11 +304,12 @@ public class ConsoleView{
                 goToNextPage(CustomerCartShowProductsUI.getInstance());
                 rightInput = true;
             }
-//            else if(input.trim().matches("(?i)view\\s+(.+)"))
-//            {
-//                goToNextPage(CustomerCartShowProductsUI.getInstance());
-//                rightInput = true;
-//            }
+            else if(input.trim().matches("(?i)view\\s+(.+)"))
+            {
+                goToNextPage(ProductMainUI.getInstance());
+                ProductMainUI.getInstance().setProductID(input.split("\\s+")[1]);
+                rightInput = true;
+            }
             else if(input.trim().matches("(?i)(increase|decrease)\\s+(.+)"))
             {
                 CustomerIncreaseDecreaseProductCartUI.getInstance().setProductID(input.split("\\s+")[1]);
@@ -497,10 +524,9 @@ public class ConsoleView{
                 goToNextPage(ShowProductsAfterUI.getInstance());
                 rightInput=true;
             }
-
             else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
-                goToNextPage(SelectedProductUI.getInstance());
-                SelectedProductUI.getInstance().setProductId(input.split("\\s+")[2]);
+                goToNextPage(ProductMainUI.getInstance());
+                ProductMainUI.getInstance().setProductID(input.split("\\s+")[2]);
                 rightInput=true;
             }
         }
@@ -525,7 +551,6 @@ public class ConsoleView{
                 DisableFilterUI.getInstance().setDisablingFilter(input.split("\\s+")[2]);
                 rightInput=true;
             }
-
         }
         else if (currentMenu.equals(SortingUI.getInstance())){
 
@@ -546,7 +571,6 @@ public class ConsoleView{
                 goToNextPage(DisableSortUI.getInstance());
                 rightInput=true;
             }
-
         }
         if(input.trim().matches("(?i)back"))
         {

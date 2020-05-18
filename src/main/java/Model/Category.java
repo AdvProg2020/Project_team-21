@@ -74,16 +74,10 @@ public class Category {
         this.name = name;
     }
 
-    public static ArrayList<Category> getAllCategories() {
-        return allCategories;
-    }
 
     public ArrayList<Category> getSubCategories() {
         return subCategories;
     }
 
-    public ArrayList<Product> getProductsList() {
-        return productsList;
-    }
 }
 

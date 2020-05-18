@@ -9,6 +9,7 @@ import Model.Category;
 import Model.Company;
 import Model.Filters.*;
 import Model.Product;
+import Model.ShoppingCart;
 import Model.Sorts.ProductsSort;
 
 import java.nio.charset.Charset;
@@ -22,9 +23,18 @@ public class Control {
     public static String currentUserSort = "";
     public static String currentRequestSort = "";
     Account user = null;
+    ShoppingCart signOutCart = new ShoppingCart(null);
     private static Control instance;
 
     private Control() {
+    }
+
+    public ShoppingCart getSignOutCart() {
+        return signOutCart;
+    }
+
+    public void setSignOutCart(ShoppingCart signOutCart) {
+        this.signOutCart = signOutCart;
     }
 
     public String randomString(int n) {
@@ -91,7 +101,13 @@ public class Control {
         } else if (!(Account.getAllAccounts().get(userName).getPassword().equals(password))) {
             throw new notFoundUserOrPass("password didn't match!");
         }
-        setUser(Account.getAllAccounts().get(userName));
+        Account account = Account.getAllAccounts().get(userName);
+        setUser(account);
+        if(account instanceof Customer)
+        {
+            signOutCart.setCustomer(account);
+            ((Customer) account).setShoppingCart(signOutCart);
+        }
     }
 
     public void createAccount(String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login) throws Exception {
@@ -314,6 +330,40 @@ public class Control {
         if (filtered.equals(""))
             return showAllProducts();
         return filtered;
+    }
+    public void addToCart(Product product,String sellerUsername, String quantity) throws Exception
+    {
+        boolean sellerExists = false;
+        Seller seller = null;
+        for (Seller seller1 : Seller.getAllSeller())
+        {
+            if(seller1.getUsername().equals(sellerUsername))
+            {
+                sellerExists = true;
+                seller = seller1;
+                break;
+            }
+        }
+        if(!sellerExists)
+        {
+            throw new Exception("This seller does not exist!");
+        }
+        if(!quantity.matches("\\d+"))
+        {
+            throw new Exception("Your quantity format is wrong!");
+        }
+        if(user == null)
+        {
+            signOutCart.addProduct(product,Integer.parseInt(quantity),seller);
+        }
+        else if(!(user instanceof Customer))
+        {
+            throw new Exception("You should be a customer to buy stuff.");
+        }
+        else
+        {
+            ((Customer)user).getShoppingCart().addProduct(product,Integer.parseInt(quantity),seller);
+        }
     }
 
     public String showAllProducts(){

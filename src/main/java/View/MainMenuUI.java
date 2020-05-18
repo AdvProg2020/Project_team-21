@@ -36,6 +36,6 @@ public class MainMenuUI extends UI {
     @Override
     public void help()
     {
-        System.out.println("Login: login\nSignup: signup\nSee sales: sales\nSee all products: products\nSee all categories: categories");
+        System.out.println("Login: login\nSignup: signup\nSee sales: offs\nSee all products: products\nSee all categories: categories");
     }
 }

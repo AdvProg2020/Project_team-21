@@ -65,6 +65,15 @@ public class Product {
             seller.getAllProducts().remove(product);
         }
     }
+
+    public void setOff(Off off) {
+        this.off = off;
+    }
+
+    public Off getOff() {
+        return off;
+    }
+
     public String getName() {
         return name;
     }

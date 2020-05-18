@@ -26,8 +26,8 @@ public class CustomerCartShowProductsUI extends UI
     {
         ShoppingCart cart = ((Customer) Control.getInstance().getUser()).getShoppingCart();
         System.out.println("Product Name(ID)                     Quantity                Price per          Total Price");
-        for (Product product : cart.getProducts().keySet()) {
-            System.out.println(product.getName() + "(" + product.getProductId()+")" + "          " + cart.getProducts().get(product) + "           " + product.getPrice() + "        " + product.getPrice()*cart.getProducts().get(product));
+        for (Product product : cart.getProductsQuantity().keySet()) {
+            System.out.println(product.getName() + "(" + product.getProductId()+")" + "          " + cart.getProductsQuantity().get(product) + "           " + product.getPrice() + "        " + product.getPrice()*cart.getProductsQuantity().get(product));
         }
         ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
     }

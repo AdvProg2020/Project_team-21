@@ -55,11 +55,17 @@ public class OffRequest extends Request {
         {
             Off.addOff(Request.getRequestedOffs().get(requestId));
             provider.addOffs(off);
+            for (Product product1 : off.getProductsList()) {
+                product1.setOff(off);
+            }
         }
         else if(this.getRequestType().equals(RequestType.DELETE))
         {
             Off.removeOff(Request.getRequestedOffs().get(requestId));
             provider.removeOff(off);
+            for (Product product1 : off.getProductsList()) {
+                product1.setOff(null);
+            }
         }
         else if(this.getRequestType().equals(RequestType.EDIT))
         {
@@ -80,9 +86,11 @@ public class OffRequest extends Request {
             else if(editField.equalsIgnoreCase("add product"))
             {
                 off.addProduct(product);
+                product.setOff(off);
             }
             else if(editField.equalsIgnoreCase("remove product"))
             {
+                product.setOff(null);
                 off.removeProduct(product);
             }
         }

@@ -5,11 +5,9 @@ import Model.Account.Customer;
 import Model.Account.Seller;
 import Model.Log.BuyLog;
 import Model.Log.SellLog;
-import View.ConsoleView;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class ControlCustomer {
@@ -41,7 +39,7 @@ public class ControlCustomer {
             throw new Exception("This product doesn't exist!");
         }
         Product product = Product.getAllProducts().get(productID);
-        if(!customer.getShoppingCart().getProducts().containsKey(product))
+        if(!customer.getShoppingCart().getProductsQuantity().containsKey(product))
         {
             throw new Exception("You don't have this product");
         }
@@ -106,25 +104,24 @@ public class ControlCustomer {
             throw new Exception("Your postal code format is wrong!");
         }
         HashMap<Seller, ArrayList<Product>> productsSellers = new HashMap<>();
-        for (Product product : cart.getProducts().keySet())
+        for (Product product : cart.getProductSeller().keySet())
         {
-            for (Seller seller : product.getSellers())
+            Seller seller = cart.getProductSeller().get(product);
+            if(productsSellers.containsKey(seller))
             {
-                if(productsSellers.containsKey(seller))
-                {
-                    productsSellers.get(seller).add(product);
-                }
-                else
-                {
-                    ArrayList <Product> products = new ArrayList<>();
-                    products.add(product);
-                    productsSellers.put(seller,products);
-                }
+                productsSellers.get(seller).add(product);
+            }
+            else
+            {
+                ArrayList <Product> products = new ArrayList<>();
+                products.add(product);
+                productsSellers.put(seller,products);
             }
         }
+
         ArrayList<Product> cartProducts = new ArrayList<>();
         ArrayList<String> cartSellers = new ArrayList<>();
-        for (Product product : cart.getProducts().keySet())
+        for (Product product : cart.getProductsQuantity().keySet())
         {
             cartProducts.add(product);
         }
@@ -147,6 +144,9 @@ public class ControlCustomer {
                 customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode,cartSellers);
         customer.addDiscountUse(discount);
         customer.setBalance(customer.getBalance()-(price-totalDiscountAmount));
+        for (Product product : cartProducts) {
+            product.addBuyer(customer);
+        }
 
         double totalOffMoneyPerSeller;
         for (Seller seller : productsSellers.keySet())
@@ -168,6 +168,7 @@ public class ControlCustomer {
                     products,seller.getUsername(),customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
             seller.setCredit(seller.getCredit() + calculateTotalPrice(products,totalOffMoneyPerSeller));
         }
+        cart.clearShoppingCart();
         return logID;
     }
 
