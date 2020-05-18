@@ -2,9 +2,12 @@ package View.ManagerProfileUIs.ManageDiscountCodes;
 
 import Controller.Control;
 import Controller.ControlManager;
+import Model.Account.Account;
+import Model.Account.Customer;
 import View.ConsoleView;
 import View.UI;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ManagerCreateDiscountCodeUI extends UI {
@@ -35,9 +38,30 @@ public class ManagerCreateDiscountCodeUI extends UI {
         String maxDiscount =scanner.nextLine();
         System.out.println("Enter allowed number of times a user can use this code: ");
         String maxNumber = scanner.nextLine();
+        System.out.println("Enter customers' UserNames that you want to have this code and when ended type [end] :");
+        HashMap<String,Customer> codeOwners = new HashMap<>();
+        String username = "";
+        while (!username.equalsIgnoreCase("end"))
+        {
+            username = scanner.nextLine();
+            if(!username.equalsIgnoreCase("end"))
+            {
+                if(!Account.getAllAccounts().containsKey(username))
+                {
+                    System.out.println("This username doesn't exist!");
+                    continue;
+                }
+                if(!(Account.getAllAccounts().get(username) instanceof Customer))
+                {
+                    System.out.println("This username is not a customer.");
+                    continue;
+                }
+                codeOwners.put(username,(Customer) Account.getAllAccounts().get(username));
+            }
+        }
         try
         {
-            ControlManager.getInstance().createDiscountCode(discountID,startDate,endDate,percentage,maxDiscount,maxNumber);
+            ControlManager.getInstance().createDiscountCode(discountID,startDate,endDate,percentage,maxDiscount,maxNumber,codeOwners);
             System.out.println("Discount code with " + discountID + "has been successfully made!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
         }

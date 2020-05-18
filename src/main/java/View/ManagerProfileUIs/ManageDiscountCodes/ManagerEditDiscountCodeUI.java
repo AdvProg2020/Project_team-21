@@ -75,6 +75,18 @@ public class ManagerEditDiscountCodeUI extends UI {
                     value = scanner.nextLine();
                     field ="Max times";
                 }
+                else if(field.matches("(?i)add\\s*owner"))
+                {
+                    System.out.println("Enter a customer's username you want to add: ");
+                    value = scanner.nextLine();
+                    field = "add owner";
+                }
+                else if(field.matches("(?i)remove\\s*owner"))
+                {
+                    System.out.println("Enter a customer's username you want to remove: ");
+                    value = scanner.nextLine();
+                    field = "remove owner";
+                }
                 try {
                     ControlManager.getInstance().editDiscountCode(field,value, id);
                     System.out.println(field + " has been successfully changed to " + value + " for " + id);

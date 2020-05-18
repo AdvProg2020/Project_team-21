@@ -13,7 +13,6 @@ public abstract class Account {
     private String email;
     private String phoneNumber;
     private String password;
-    private ArrayList<DiscountCode> discountList;
     private double credit;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
@@ -23,7 +22,6 @@ public abstract class Account {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.discountList = new ArrayList<>();
         this.credit = 0;
         allAccounts.put(username,this);
     }
@@ -84,10 +82,6 @@ public abstract class Account {
         allAccounts.remove(account);
     }
 
-    public void addDiscountCode(DiscountCode discountCode)
-    {
-        discountList.add(discountCode);
-    }
     public abstract String getType();
     @Override
     public String toString() {
@@ -98,7 +92,6 @@ public abstract class Account {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
-                ", discountList=" + discountList +
                 ", credit=" + credit +
                 '}';
     }

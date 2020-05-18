@@ -256,6 +256,11 @@ public class ConsoleView{
                 goToNextPage(CustomerShowTotalPriceCartUI.getInstance());
                 rightInput = true;
             }
+            else if(input.trim().matches("(?i)purchase"))
+            {
+                goToNextPage(CustomerShowTotalPriceCartUI.getInstance());
+                rightInput = true;
+            }
         }
         else if(currentMenu.equals(SellerViewOffsUI.getInstance()))
         {

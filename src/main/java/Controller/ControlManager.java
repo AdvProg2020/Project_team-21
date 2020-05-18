@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Account.Account;
+import Model.Account.Customer;
 import Model.Category;
 import Model.DiscountCode;
 import Model.Account.Manager;
@@ -10,6 +11,7 @@ import View.ManagerProfileUIs.ManageCategories.ManagerEditCategoryUI;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ControlManager {
 
@@ -51,7 +53,7 @@ public class ControlManager {
     {
         return Double.parseDouble(s);
     }
-    public void createDiscountCode(String discountID , String startDate, String endDate,String percentage,String maxDiscount, String maxNumber) throws Exception
+    public void createDiscountCode(String discountID , String startDate, String endDate, String percentage, String maxDiscount, String maxNumber, HashMap<String, Customer> codeOwners) throws Exception
     {
         //Exceptions
         if(DiscountCode.getAllDiscountCodes().containsKey(discountID))
@@ -82,11 +84,11 @@ public class ControlManager {
         String[] endDateParsed = endDate.split("\\s+");
         LocalDateTime startDateDate = LocalDateTime.of(makeInt(startDateParsed[0]),makeInt(startDateParsed[1]),makeInt(startDateParsed[2]),makeInt(startDateParsed[3]),makeInt(startDateParsed[4]));
         LocalDateTime endDateDate = LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4]));
-        new DiscountCode(discountID,startDateDate,endDateDate,makeDouble(percentage),makeDouble(maxDiscount),makeInt(maxNumber));
+        new DiscountCode(discountID,startDateDate,endDateDate,makeDouble(percentage),makeDouble(maxDiscount),makeInt(maxNumber),codeOwners);
     }
     public boolean editDiscountCodeValidField(String field)
     {
-        if(field.matches("(?i)start\\s*time|end\\s*time|percentage|discount\\*percentage|max\\s*discount|max\\s*for\\s*each"))
+        if(field.matches("(?i)start\\s*time|end\\s*time|percentage|discount\\*percentage|max\\s*discount|max\\s*for\\s*each|add\\s*owner|remove\\s*owner"))
         {
             return true;
         }
@@ -94,6 +96,7 @@ public class ControlManager {
     }
     public void editDiscountCode(String field,String newValue, String id) throws Exception
     {
+        DiscountCode discountCode = DiscountCode.getAllDiscountCodes().get(id);
         if(field.equals("Start date"))
         {
             if(!newValue.matches("\\d{4}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}"))
@@ -103,7 +106,7 @@ public class ControlManager {
             else
             {
                 String[] startDateParsed = newValue.split("\\s+");
-                DiscountCode.getAllDiscountCodes().get(id).setStartTime(LocalDateTime.of(makeInt(startDateParsed[0]),makeInt(startDateParsed[1]),makeInt(startDateParsed[2]),makeInt(startDateParsed[3]),makeInt(startDateParsed[4])));
+                discountCode.setStartTime(LocalDateTime.of(makeInt(startDateParsed[0]),makeInt(startDateParsed[1]),makeInt(startDateParsed[2]),makeInt(startDateParsed[3]),makeInt(startDateParsed[4])));
             }
         }
         else if(field.equals("End date"))
@@ -115,7 +118,7 @@ public class ControlManager {
             else
             {
                 String[] endDateParsed = newValue.split("\\s+");
-                DiscountCode.getAllDiscountCodes().get(id).setEndTime(LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4])));
+                discountCode.setEndTime(LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4])));
             }
         }
         else if(field.equals("Percentage"))
@@ -126,7 +129,7 @@ public class ControlManager {
             }
             else
             {
-                DiscountCode.getAllDiscountCodes().get(id).setDiscountPercentage(makeDouble(newValue));
+                discountCode.setDiscountPercentage(makeDouble(newValue));
             }
         }
         else if(field.equals("Max amount"))
@@ -137,7 +140,7 @@ public class ControlManager {
             }
             else
             {
-                DiscountCode.getAllDiscountCodes().get(id).setMaxDiscountAmount(makeDouble(newValue));
+                discountCode.setMaxDiscountAmount(makeDouble(newValue));
             }
         }
         else if(field.equals("Max times"))
@@ -148,8 +151,42 @@ public class ControlManager {
             }
             else
             {
-                DiscountCode.getAllDiscountCodes().get(id).setDiscountNumberForEachUser(makeInt(newValue));
+                discountCode.setDiscountNumberForEachUser(makeInt(newValue));
             }
+        }
+        else if(field.equalsIgnoreCase("add owner"))
+        {
+            String username = newValue;
+            if(!Account.getAllAccounts().containsKey(username))
+            {
+                throw new Exception("This username doesn't exist!");
+            }
+            if(!(Account.getAllAccounts().get(username) instanceof Customer))
+            {
+                throw new Exception("This user is not a customer.");
+            }
+            if(discountCode.getDiscountOwners().containsKey(username))
+            {
+                throw new Exception("This user already has this code.");
+            }
+            discountCode.addDiscountOwner((Customer) Account.getAllAccounts().get(username));
+        }
+        else if(field.equalsIgnoreCase("remove owner"))
+        {
+            String username = newValue;
+            if(!Account.getAllAccounts().containsKey(username))
+            {
+                throw new Exception("This username doesn't exist!");
+            }
+            if(!(Account.getAllAccounts().get(username) instanceof Customer))
+            {
+                throw new Exception("This user is not a customer.");
+            }
+            if(!discountCode.getDiscountOwners().containsKey(username))
+            {
+                throw new Exception("This user does not have this code");
+            }
+            discountCode.removeDiscountOwner((Customer) Account.getAllAccounts().get(username));
         }
     }
     public void removeDiscountCode(String id) throws Exception
@@ -160,6 +197,12 @@ public class ControlManager {
         }
         else
         {
+            DiscountCode discountCode = DiscountCode.getAllDiscountCodes().get(id);
+            for (String s : discountCode.getDiscountOwners().keySet())
+            {
+                Customer customer = discountCode.getDiscountOwners().get(s);
+                customer.removeDiscountCode(discountCode);
+            }
             DiscountCode.getAllDiscountCodes().remove(id);
         }
     }

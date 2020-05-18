@@ -1,5 +1,6 @@
 package Model.Account;
 
+import Model.DiscountCode;
 import Model.Log.BuyLog;
 import Model.Off;
 import Model.ShoppingCart;
@@ -11,8 +12,8 @@ public class Customer extends Account {
 
     private static ArrayList<Customer> allCustomer = new ArrayList<Customer>();
     private ShoppingCart shoppingCart;
-    public ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
-    public HashMap<Off, Integer> offs = new HashMap<>();
+    private ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
+    private HashMap<String, DiscountCode> discountCodes = new HashMap<>();
     public int balance;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
@@ -41,8 +42,14 @@ public class Customer extends Account {
         return buyLogs;
     }
 
-    public HashMap<Off, Integer> getOffs() {
-        return offs;
+    public void addDiscountCode(DiscountCode discountCode)
+    {
+        discountCodes.put(discountCode.getDiscountId(),discountCode);
+    }
+
+    public void removeDiscountCode(DiscountCode discountCode)
+    {
+        discountCodes.remove(discountCode.getDiscountId());
     }
 
     public void addBuyLogs (BuyLog buyLog){
