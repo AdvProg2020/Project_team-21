@@ -10,6 +10,7 @@ import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCa
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerShowTotalPriceCartUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerViewCartUI;
 import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerOrderInfoUI;
+import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerRateProductUI;
 import View.CustomerProfileUIs.CustomerPurchaseUI;
 import View.CustomerProfileUIs.CustomerOrdersUIs.CustomerViewOrdersUI;
 import View.ManagerProfileUIs.ManageCategories.*;
@@ -243,6 +244,13 @@ public class ConsoleView{
             {
                 CustomerOrderInfoUI.getInstance().setOrderID(input.split("\\s+")[2]);
                 goToNextPage(CustomerOrderInfoUI.getInstance());
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)rate\\s+(.+)\\s+(.+)"))
+            {
+                CustomerRateProductUI.getInstance().setProductID(input.split("\\s+")[1]);
+                CustomerRateProductUI.getInstance().setScore(input.split("\\s+")[2]);
+                goToNextPage(CustomerRateProductUI.getInstance());
                 rightInput = true;
             }
         }

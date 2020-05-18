@@ -1,13 +1,10 @@
 package Controller;
 
+import Model.*;
 import Model.Account.Customer;
 import Model.Account.Seller;
-import Model.DiscountCode;
 import Model.Log.BuyLog;
 import Model.Log.SellLog;
-import Model.Off;
-import Model.Product;
-import Model.ShoppingCart;
 import View.ConsoleView;
 
 import java.time.LocalDateTime;
@@ -181,6 +178,34 @@ public class ControlCustomer {
                 return true;
         }
         return false;
+    }
+
+    public void rateProduct(String productID, String score,Customer customer) throws Exception
+    {
+        boolean hasProduct = false;
+        for (BuyLog buyLog : customer.getBuyLogs())
+        {
+            for (Product product : buyLog.getAllProducts())
+            {
+                if(product.getProductId().equals(productID))
+                {
+                    hasProduct = true;
+                    break;
+                }
+            }
+            if(hasProduct)
+                break;
+        }
+        if(!hasProduct)
+        {
+            throw new Exception("You haven't purchased this product!");
+        }
+        if(!score.matches("[1-5]"))
+        {
+            throw new Exception("Your score format is wrong. It should be number between 1 and 5.");
+        }
+        Product product = Product.getAllProducts().get(productID);
+        product.addScore(new Score(customer,product,Integer.parseInt(score)));
     }
 
 }

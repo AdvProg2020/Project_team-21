@@ -8,8 +8,8 @@ public class Score {
     private Product product;
     private int score;
 
-    public Score(Account user, Product product, int score){
-
+    public Score(Account user, Product product, int score)
+    {
         setUser(user);
         setProduct(product);
         setScore(score);
