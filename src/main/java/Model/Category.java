@@ -8,6 +8,7 @@ public class Category {
     private ArrayList<Product> productsList;
     private ArrayList<Category> subCategories;
 
+
     // Initialization Block
     {
         productsList = new ArrayList<>();
@@ -57,5 +58,8 @@ public class Category {
         this.name = name;
     }
 
+    public ArrayList<Product> getProductsList() {
+        return productsList;
+    }
 }
 

@@ -2,97 +2,90 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
-public class Log {
+import Model.Methods;
+import Model.ModelBase;
+
+
+
+public class Log implements ModelBase {
+    private static HashMap<String,Log> allLogs= new HashMap<>();
+    private static int lastNum = 1;
     private String logId;
-    private Date date;
-    private double totalDiscountAmount;
+    private String buyLogId;
+    private String sellLogId;
+    private String subProductId;
+    private int count;
     private double price;
-    private ArrayList<Product> allProducts= new ArrayList<>();
-    private String sellerUserName;
-    private String receiverUserName;
-    private LogStatus logStatus;
+    private double saleAmount;
 
-    public Log(String logId, Date date, double totalDiscountAmount, double totalAmount, ArrayList<Product> allProducts,
-               String sellerUserName, String receiverUserName) {
-        this.logId = logId;
-        this.date = date;
-        this.totalDiscountAmount = totalDiscountAmount;
-        this.price = totalAmount;
-        this.allProducts = allProducts;
-        this.sellerUserName = sellerUserName;
-        this.receiverUserName = receiverUserName;
+    public Log(String buyLogId, String sellLogId, String subProductId, int count) {
+        this.buyLogId = buyLogId;
+        this.sellLogId = sellLogId;
+        this.count = count;
+        this.subProductId= subProductId;
+//        price=getSubProduct.getRawPrice();
+//        saleAmount=price-getSubProduct.getPriceWithOff();
+
+
+
     }
 
-    public void setLogStatus(LogStatus logStatus) {
-        this.logStatus = logStatus;
+    public static List<Log> getAllLogs(){
+        return new ArrayList<>(allLogs.values());
+    }
+
+    public static Log getLogById (String logId){
+        return allLogs.get(logId);
     }
 
     public String getLogId() {
         return logId;
     }
 
-    public Date getDate() {
-        return date;
+    public BuyLog getBuyLog(){
+        return BuyLog.getBuyLogById(buyLogId);
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public SellLog getSellLog(){
+        return SellLog.getSellLogById(sellLogId);
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public int getCount() {
+        return count;
     }
 
     public double getPrice() {
         return price;
     }
 
-
-    public ArrayList<Product> getAllProductsId() {
-        return allProducts;
+    public double getSaleAmount() {
+        return saleAmount;
     }
 
-    public String getSellerName() {
-        return sellerUserName;
+    @Override
+    public String getId() {
+        return logId;
     }
 
-    public String getReceiverUserName() {
-        return receiverUserName;
+    @Override
+    public void Initialize() {
+        if (logId == null)
+            logId=Methods.generateId(getClass().getSimpleName(),lastNum);
+        allLogs.put(logId,this);
+        lastNum++;
+
+        getBuyLog().addLog(logId);
+        getSellLog().addLog(logId);
+//        getSubProduct().addCustomer(getCustomer().
+
     }
 
-    public double getTotalDiscountAmount() {
-        return totalDiscountAmount;
+    @Override
+    public boolean isSuspend() {
+        return false;
     }
 
-    public String getSellerUserName() {
-        return sellerUserName;
-    }
-
-    public LogStatus getLogStatus() {
-        return logStatus;
-    }
-
-    public void setLogId(String logId) {
-        this.logId = logId;
-    }
-
-    public void setAllProducts(ArrayList<Product> allProducts) {
-        this.allProducts = allProducts;
-    }
-
-    public void setSellerUserName(String sellerUserName) {
-        this.sellerUserName = sellerUserName;
-    }
-
-    public void setReceiverUserName(String receiverUserName) {
-        this.receiverUserName = receiverUserName;
-    }
-//    public boolean hasProductWithId (String Id){
-//
-//    }
-
-//    public Product getProductWithId (String Id){
-//
-//    }
 }

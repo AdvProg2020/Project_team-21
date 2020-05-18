@@ -11,6 +11,8 @@ public class ShoppingCart {
         setCustomer(customer);
     }
 
+    public ShoppingCart() {
+    }
 
     private void setCustomer(Account customer){
         this.customer = customer;

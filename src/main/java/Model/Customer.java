@@ -2,17 +2,29 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Customer extends Account {
 
     private ArrayList<Customer> allCustomer = new ArrayList<Customer>();
     private ShoppingCart shoppingCart;
-    public ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
-    public HashMap<Off , Integer> offs = new HashMap<>();
-    public int balance;
+    private ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
+    private Set<String> buyLogIds;
+    private HashMap<String , Integer> discountIds = new HashMap<>();
+    public double balance;
+    private static int lasNum =1;
 
-    public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, ArrayList<DiscountCode> discountList, double credit) {
-        super(username, firstName, lastName, email, phoneNumber, password, discountList, credit);
+    public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password,
+                    double credit, double balance) {
+        super(username, firstName, lastName, email, phoneNumber, password, credit);
+        this.balance=balance;
+
+
+    }
+
+    public static Customer getCustomerById(String id , boolean... suspense){
+        return (Customer) getAccountById(id,suspense);
     }
 
     public ShoppingCart getShoppingCart() {
@@ -23,9 +35,6 @@ public class Customer extends Account {
         return buyLogs;
     }
 
-    public HashMap<Off, Integer> getOffs() {
-        return offs;
-    }
 
     public void addBuyLogs (BuyLog buyLog){
         buyLogs.add(buyLog);
@@ -35,18 +44,11 @@ public class Customer extends Account {
         this.shoppingCart = shoppingCart;
     }
 
-//    public void addOffs (Off off){
-//
-////    }
-//    public void removeOffs (Off off){
-//
-//    }
-
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -54,4 +56,28 @@ public class Customer extends Account {
     public String Type(){
         return "Customer";
     }
+
+    @Override
+    public void Initialize() {
+        if (accountID==null)
+            accountID=Methods.generateId(getClass().getSimpleName(), lasNum);
+        allAccountsMap.put(accountID,this);
+        lasNum++;
+        buyLogIds=new HashSet<>();
+        if (!suspended){
+            discountIds =new HashMap<>();
+        }
+    }
+
+    @Override
+    public void suspend() {
+        //TODO
+    }
+
+    public void changeBalance(double changeAmount){
+        balance+=changeAmount;
+    }
+
+
+
 }
