@@ -25,7 +25,12 @@ public class SelectedProductUI extends UI {
 
     @Override
     public void run()  {
-//        System.out.println(Product.getProductById(productId));
+        try {
+            System.out.println(Product.getProductById(productId));
+        }catch (Exception e){
+
+        }
+
     }
 
     @Override

@@ -248,14 +248,12 @@ public class ConsoleView{
             else if (input.trim().matches("(?i)show\\s+products")){
                 goToNextPage(ShowProductsAfterUI.getInstance());
                 rightInput=true;
-                //TODO
             }
 
             else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
                 goToNextPage(SelectedProductUI.getInstance());
                 SelectedProductUI.getInstance().setProductId(input.split("\\s+")[2]);
                 rightInput=true;
-                //TODO
             }
         }
         else if (currentMenu.equals(FilteringUI.getInstance())){
@@ -264,11 +262,10 @@ public class ConsoleView{
                 goToNextPage(AvailableFilterUI.getInstance());
                 rightInput=true;
             }
-            else if (input.trim().matches("(?i)filter\\s+(\\S+)")){
+            else if (input.trim().matches("(?i)filter\\s+(\\S+)\\s+(\\S+)")){
                 goToNextPage(SelectedFilterUI.getInstance());
-//                SelectedFilterUI.getInstance().setFilterInput();
-//                SelectedFilterUI.getInstance().setFilterType();
-                //TODO
+                SelectedFilterUI.getInstance().setFilterInput(input.split("\\s+")[1]);
+                SelectedFilterUI.getInstance().setFilterType(input.split("\\s+")[2]);
                 rightInput=true;
             }
             else if (input.trim().matches("(?i)current\\s+filters")){

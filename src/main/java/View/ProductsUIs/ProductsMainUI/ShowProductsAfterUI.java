@@ -21,7 +21,10 @@ public class ShowProductsAfterUI extends UI {
 
     @Override
     public void run()  {
-//        System.out.println(Control.getInstance().showFilteredAndSortedProducts()) ;
+        try {
+            System.out.println(Control.getInstance().showFilteredAndSortedProducts()) ;
+        }catch (Exception e){
+        }
     }
 
     @Override
