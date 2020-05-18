@@ -175,6 +175,14 @@ public class ConsoleView{
                 rightInput = true;
             }
         }
+        else if(currentMenu.equals(ProductCommentsUI.getInstance()))
+        {
+            if(input.trim().matches("(?i)add\\s+comment"))
+            {
+                goToNextPage(ProductAddToCartUI.getInstance());
+                rightInput = true;
+            }
+        }
         else if(currentMenu.equals(ProductDigestUI.getInstance()))
         {
             if(input.trim().matches("(?i)add\\s+to\\s+cart"))
