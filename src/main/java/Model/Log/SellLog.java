@@ -22,6 +22,7 @@ public class SellLog extends Log{
                 seller.addSellLog(this);
             }
         }
+        SaveData.saveData(this, getLogId(), SaveData.sellLogFile);
     }
     public void addSellLog(SellLog sellLog)
     {
@@ -32,7 +33,7 @@ public class SellLog extends Log{
         allSellLogs.remove(sellLog.getLogId(),sellLog);
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allSellLogs.put(((SellLog) SaveData.reloadObject(SaveData.sellLogFile)).getLogId() ,(SellLog) SaveData.reloadObject(SaveData.sellLogFile));
     }
 }

@@ -13,6 +13,7 @@ public class Score implements Comparable<Score>{
         setUser(user);
         setProduct(product);
         setScore(score);
+        SaveData.saveData(this, (getScore()+getUser().getFirstName()), SaveData.scoreFile);
     }
 
     public void setUser(Account user) {

@@ -21,6 +21,7 @@ public class Category implements Comparable<Category>{
         }
         setName(name);
         allCategories.add(this);
+        SaveData.saveData(this, getName(), SaveData.categoryFile);
     }
 
     public String getName() {
@@ -84,7 +85,7 @@ public class Category implements Comparable<Category>{
         return subCategories;
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allCategories.add((Category) SaveData.reloadObject(SaveData.categoryFile));
     }
 

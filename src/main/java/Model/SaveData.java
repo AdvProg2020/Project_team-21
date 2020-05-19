@@ -171,7 +171,7 @@ public class SaveData {
 //            e.printStackTrace();
         }
 
-        typeClass += ".txt";
+//        typeClass += ".txt";
         String json = gson.toJson(object);
 
         try {

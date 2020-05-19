@@ -15,6 +15,7 @@ public class Manager extends Account implements Comparable<Manager>{
     public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
         addNewManager(this);
+        SaveData.saveData(this, getUsername(), SaveData.accountFile);
     }
 
     public String getType(){
@@ -38,7 +39,7 @@ public class Manager extends Account implements Comparable<Manager>{
         return getUsername().compareTo(o.getUsername());
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allManagers.add((Manager) SaveData.reloadObject(SaveData.managerFile));
     }
 }

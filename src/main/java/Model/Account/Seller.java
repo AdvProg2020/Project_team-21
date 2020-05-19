@@ -21,6 +21,7 @@ public class Seller extends Account implements Comparable<Seller>{
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company) {
         super(username, firstName, lastName, email, phoneNumber, password);
         this.company = company;
+        SaveData.saveData(this, getUsername(), SaveData.sellerFile);
     }
 
     public static void removeSeller (Seller seller){
@@ -101,7 +102,7 @@ public class Seller extends Account implements Comparable<Seller>{
         this.setSellLogs(Sort.sortSellLogArrayList(this.getSellLogs()));
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allSellers.add((Seller) SaveData.reloadObject(SaveData.sellerFile));
     }
 }

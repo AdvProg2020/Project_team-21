@@ -38,6 +38,7 @@ public class DiscountCode {
         setMaxDiscountAmount(maxDiscountAmount);
         setDiscountNumberForEachUser(discountNumberForEachUser);
         allDiscountCodes.put(discountId,this);
+        SaveData.saveData(this, getDiscountId(), SaveData.discountCodeFile);
     }
 
     public static HashMap<String, DiscountCode> getAllDiscountCodes() {
@@ -127,7 +128,7 @@ public class DiscountCode {
         return discountCodeHashMap;
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allDiscountCodes.put(((DiscountCode)SaveData.reloadObject(SaveData.discountCodeFile)).getDiscountId() ,(DiscountCode) SaveData.reloadObject(SaveData.discountCodeFile));
     }
 

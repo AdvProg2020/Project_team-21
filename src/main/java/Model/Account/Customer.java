@@ -25,6 +25,7 @@ public class Customer extends Account implements Comparable<Customer>{
         super(username, firstName, lastName, email, phoneNumber, password);
         addNewCustomer(this);
         setShoppingCart(new ShoppingCart(this));
+        SaveData.saveData(this, getUsername(), SaveData.customerFile);
     }
 
     public static void removeCustomer (Customer customer){
@@ -127,7 +128,7 @@ public class Customer extends Account implements Comparable<Customer>{
         this.buyLogs = buyLogs;
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allCustomer.add((Customer) SaveData.reloadObject(SaveData.customerFile));
     }
 }

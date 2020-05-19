@@ -27,6 +27,7 @@ public abstract class Account {
         this.password = password;
         this.credit = 0;
         allAccounts.put(username,this);
+        SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
     }
 
     public String getUsername() {
@@ -111,7 +112,7 @@ public abstract class Account {
 //        Account.setAllAccounts((HashMap<String, Account>) Sort.sortAccountHashMap(getAllAccounts()));
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allAccounts.put(((Account)SaveData.reloadObject(SaveData.accountFile)).getUsername() ,(Account)SaveData.reloadObject(SaveData.accountFile));
     }
 

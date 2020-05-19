@@ -26,6 +26,7 @@ public class BuyLog extends Log{
                 customer.addBuyLogs(this);
             }
         }
+        SaveData.saveData(this, getLogId(), SaveData.buyLogFile);
     }
 
     public ArrayList<String> getSellersUsernames() {
@@ -41,7 +42,7 @@ public class BuyLog extends Log{
         allBuyLogs.remove(buyLog.getLogId(),buyLog);
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allBuyLogs.put(((BuyLog) SaveData.reloadObject(SaveData.buyLogFile)).getLogId() ,(BuyLog) SaveData.reloadObject(SaveData.buyLogFile));
     }
 }

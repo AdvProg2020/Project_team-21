@@ -42,6 +42,7 @@ public class Log implements Comparable<Log>{
         this.receiverPostalCode = receiverPostalCode;
         logStatus = LogStatus.PROCESSING;
         addLog(this);
+//        SaveData.saveData(this, (getLogId()+getReceiverName()), SaveData.log);
     }
 
     public void addLog(Log log)
@@ -153,7 +154,7 @@ public class Log implements Comparable<Log>{
 //
 //    }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allLogs.put(((Log) SaveData.reloadObject(SaveData.buyLogFile)).getLogId() ,(Log) SaveData.reloadObject(SaveData.buyLogFile));
         allLogs.put(((Log) SaveData.reloadObject(SaveData.sellLogFile)).getLogId() ,(Log) SaveData.reloadObject(SaveData.sellLogFile));
     }

@@ -15,6 +15,7 @@ public class Review implements Comparable<Review> {
         setProduct(product);
         setReviewText(reviewText);
         setHasBought(hasBought);
+        SaveData.saveData(this, getReviewText(), SaveData.reviewFile);
     }
 
     private void setUser(Account user) {

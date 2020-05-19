@@ -27,6 +27,7 @@ public class Off implements Comparable<Off>{
         setStartTime(startTime);
         setEndTime(endTime);
         setOffAmount(offAmount);
+        SaveData.saveData(this, getOffId(), SaveData.offFile);
     }
 
     private void setOffId(String offId) {
@@ -133,7 +134,7 @@ public class Off implements Comparable<Off>{
         return offHashMap;
     }
 
-    public void getObjectFromDatabase(){
+    public static void getObjectFromDatabase(){
         allOffs.put(((Off)SaveData.reloadObject(SaveData.offFile)).getOffId() ,(Off) SaveData.reloadObject(SaveData.offFile));
     }
 }
