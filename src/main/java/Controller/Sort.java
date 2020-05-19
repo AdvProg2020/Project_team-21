@@ -7,6 +7,7 @@ import Model.Account.Manager;
 import Model.Account.Seller;
 import Model.Log.BuyLog;
 import Model.Log.Log;
+import Model.Log.SellLog;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -76,6 +77,11 @@ public class Sort {
     // ****   SellLog     ****    BuyLog     ****
 
     public static ArrayList<BuyLog> sortBuyLogArrayList(ArrayList<BuyLog> logs){
+        Collections.sort(logs);
+        return logs;
+    }
+
+    public static ArrayList<SellLog> sortSellLogArrayList(ArrayList<SellLog> logs){
         Collections.sort(logs);
         return logs;
     }

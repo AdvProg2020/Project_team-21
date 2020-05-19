@@ -1,5 +1,6 @@
 package Model.Account;
 
+import Controller.Sort;
 import Model.Company;
 import Model.Off;
 import Model.Product;
@@ -93,5 +94,9 @@ public class Seller extends Account implements Comparable<Seller>{
     @Override
     public int compareTo(Seller o) {
         return getUsername().compareTo(o.getUsername());
+    }
+
+    public void sortSellLogsByLogId(){
+        this.setSellLogs(Sort.sortSellLogArrayList(this.getSellLogs()));
     }
 }

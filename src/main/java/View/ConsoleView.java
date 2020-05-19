@@ -255,9 +255,9 @@ public class ConsoleView{
                     goToNextPage(SellerViewSalesUI.getInstance());
                     rightInput = true;
                 }
-                else if(input.trim().matches("(?i)sort\\s+sales\\s+history\\s+by\\s+"))
+                else if(input.trim().matches("(?i)sort\\s+sales\\s+history"))
                 {
-                    goToNextPage(SellerViewSalesUI.getInstance());
+                    SellerViewSalesUI.getInstance().sort();
                     rightInput = true;
                 }
                 else if(input.trim().matches("(?i)manage\\s+products"))
