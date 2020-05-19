@@ -216,7 +216,7 @@ public class Control {
     public String createFilter(String filterType, String filterInput) {
         Filter filter = null;
         if (filterType.equalsIgnoreCase("Brand")) {
-            filter = new BrandFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
+            filter = new CompanyNameFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Price")) {
             String[] words = filterInput.split("[\\s-,_]");
             filter = new PriceFilter(Double.parseDouble(words[0]), Double.parseDouble(words[1]), currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
@@ -231,7 +231,7 @@ public class Control {
         }else if (currentCategory != null){
             for (String specialFeature : currentCategory.getSpecialFeatures()){
                 if (filterType.equalsIgnoreCase(specialFeature))
-                    filter= new SpecialFeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
+                    filter= new FeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
             }
         }
         if (filter == null)

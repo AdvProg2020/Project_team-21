@@ -15,6 +15,14 @@ public abstract class Filter {
         return current;
     }
 
+    public abstract String show();
+
+    public abstract String getName();
+
+    public abstract void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception;
+
+    public abstract void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception;
+
     public static ArrayList<Product> applyFilter(ArrayList<Product> products) throws Exception {
         ArrayList<Product> filteredProducts = new ArrayList<Product>();
         for (Filter currentFilter : Control.currentFilters) {
@@ -27,12 +35,4 @@ public abstract class Filter {
             return products;
         return filteredProducts;
     }
-
-    public abstract void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception;
-
-    public abstract void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception;
-
-    protected abstract String show();
-
-    public abstract String getName();
 }
