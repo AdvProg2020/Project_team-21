@@ -32,4 +32,9 @@ public class CustomerViewCartUI extends UI {
         System.out.println("To finalize your purchase : purchase");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

@@ -37,4 +37,9 @@ public class CustomerViewOrdersUI extends UI {
         System.out.println("To rate a product you have bought: rate [productID] [1-5]");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

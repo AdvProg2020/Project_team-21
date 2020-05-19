@@ -60,4 +60,9 @@ public class SellerViewProductBuyersUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

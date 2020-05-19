@@ -30,4 +30,9 @@ public class CustomerShowTotalPriceCartUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

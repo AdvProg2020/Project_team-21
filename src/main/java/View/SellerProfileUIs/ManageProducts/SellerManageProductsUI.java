@@ -38,4 +38,9 @@ public class SellerManageProductsUI extends UI {
         System.out.println("To request a change in a product : edit [productID]");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

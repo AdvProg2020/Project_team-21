@@ -36,9 +36,6 @@ public class Category implements Comparable<Category>{
         return null;
     }
 
-    public static ArrayList<Category> getAllCategories() {
-        return allCategories;
-    }
 
     public void addProductToCategory(Product product){
         productsList.add(product);

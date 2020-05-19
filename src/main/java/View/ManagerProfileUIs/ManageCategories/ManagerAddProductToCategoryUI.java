@@ -48,4 +48,9 @@ public class ManagerAddProductToCategoryUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

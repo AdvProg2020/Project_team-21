@@ -48,4 +48,9 @@ public class ManagerRemoveProductFromCategoryUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

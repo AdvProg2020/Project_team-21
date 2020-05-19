@@ -60,4 +60,9 @@ public class ManagerAddCategoryUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

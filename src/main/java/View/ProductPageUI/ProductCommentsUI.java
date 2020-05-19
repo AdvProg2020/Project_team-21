@@ -40,4 +40,9 @@ public class ProductCommentsUI extends UI {
         System.out.println("To add a comment on this product: add comment");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

@@ -41,4 +41,9 @@ public class ManagerEditCategoryUI extends UI {
     {
         System.out.println("If you want to change it's name type [name]\nIf you want to delete or add a product to it type [add/remove productID]");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

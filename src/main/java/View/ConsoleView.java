@@ -250,6 +250,16 @@ public class ConsoleView{
                     goToNextPage(SellerViewSalesUI.getInstance());
                     rightInput = true;
                 }
+                else if(input.trim().matches("(?i)view\\s+sales\\s+history\\s+"))
+                {
+                    goToNextPage(SellerViewSalesUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)sort\\s+sales\\s+history\\s+by\\s+"))
+                {
+                    goToNextPage(SellerViewSalesUI.getInstance());
+                    rightInput = true;
+                }
                 else if(input.trim().matches("(?i)manage\\s+products"))
                 {
                     goToNextPage(SellerManageProductsUI.getInstance());
@@ -274,6 +284,18 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)view\\s+offs"))
                 {
                     goToNextPage(SellerViewOffsUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)sort\\s+offs\\s+by\\s+offId"))
+                {
+                    SellerViewOffsUI.getInstance().setSortOffType(SortOffType.OFF_ID);
+                    currentMenu.sort();
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)sort\\s+offs\\s+by\\s+off\\s+amount"))
+                {
+                    SellerViewOffsUI.getInstance().setSortOffType(SortOffType.OFF_AMOUNT);
+                    currentMenu.sort();
                     rightInput = true;
                 }
                 else if(input.trim().matches("(?i)view\\s+balance"))
@@ -467,7 +489,7 @@ public class ConsoleView{
                 currentMenu.sort();
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)sort\\s+by\\s+discountId alphabet"))
+            else if(input.trim().matches("(?i)sort\\s+by\\s+discountI\\s+alphabet"))
             {
                 ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_ID);
                 currentMenu.sort();

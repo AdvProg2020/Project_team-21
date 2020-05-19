@@ -34,4 +34,9 @@ public class ManagerManageCategoriesUI extends UI {
         System.out.println("To edit a category: edit [category]");
         System.out.println("To remove a category : remove [category]");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

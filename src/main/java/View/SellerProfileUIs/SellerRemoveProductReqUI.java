@@ -46,4 +46,9 @@ public class SellerRemoveProductReqUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

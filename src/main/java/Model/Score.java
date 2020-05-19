@@ -1,9 +1,8 @@
 package Model;
 
-public class Score implements Comparable<Score>{
 import Model.Account.Account;
 
-public class Score {
+public class Score implements Comparable<Score>{
 
     private Account user;
     private Product product;

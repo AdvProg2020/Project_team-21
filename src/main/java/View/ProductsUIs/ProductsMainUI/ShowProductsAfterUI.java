@@ -30,4 +30,9 @@ public class ShowProductsAfterUI extends UI {
     @Override
     public void help() {
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

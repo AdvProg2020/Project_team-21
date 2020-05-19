@@ -12,13 +12,11 @@ public class Customer extends Account implements Comparable<Customer>{
 
     private static ArrayList<Customer> allCustomer = new ArrayList<>();
     private ShoppingCart shoppingCart;
-    private ArrayList <BuyLog> buyLogs = new ArrayList<BuyLog>();
     private HashMap<String, DiscountCode> discountCodes = new HashMap<>();
     private HashMap<DiscountCode,Integer> discountCodesUsed = new HashMap<>();
     public double balance;
     public ArrayList <BuyLog> buyLogs = new ArrayList<>();
     public HashMap<String , Off> offs = new HashMap<>();
-    public int balance;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
@@ -64,10 +62,11 @@ public class Customer extends Account implements Comparable<Customer>{
         return discountCodes;
     }
 
-    public void removeDiscountCode(DiscountCode discountCode)
-    {
+    public void removeDiscountCode(DiscountCode discountCode) {
         discountCodes.remove(discountCode.getDiscountId());
         discountCodesUsed.remove(discountCode);
+    }
+
     public HashMap<String, Off> getOffs() {
         return offs;
     }

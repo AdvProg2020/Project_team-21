@@ -70,4 +70,9 @@ public class CustomerOrderInfoUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

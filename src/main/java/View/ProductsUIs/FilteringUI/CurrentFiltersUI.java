@@ -25,6 +25,11 @@ public class CurrentFiltersUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }
 
 

@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Sort;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,6 +109,27 @@ public class Off implements Comparable<Off>{
 
     @Override
     public int compareTo(Off o) {
-        return getOffId().compareTo(o.getOffId());
+        return (int)(getOffAmount()-o.getOffAmount());
+    }
+
+    private static void setAllOffs(HashMap<String, Off> allOffs) {
+        Off.allOffs = allOffs;
+    }
+
+    public static void sortAllOffsByOffID(){
+        Off.setAllOffs((HashMap<String, Off>) Sort.sortOffHashMap(getAllOffs()));
+    }
+
+    public static void sortAllOffsByOffAmount(){
+        Off.setAllOffs(convertArrayListToHashMap(Sort.sortOffArrayListByAmount(new ArrayList<>(Off.getAllOffs().values()))));
+    }
+
+    private static HashMap<String, Off> convertArrayListToHashMap(ArrayList<Off> offs){
+        HashMap<String, Off> offHashMap = new HashMap<>();
+        for (Off off : offs) {
+            offHashMap.put(off.getOffId(), off);
+        }
+
+        return offHashMap;
     }
 }

@@ -33,4 +33,9 @@ public class SellerViewCompanyUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

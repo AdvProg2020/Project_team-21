@@ -46,4 +46,9 @@ public class ManagerRequestsUI extends UI {
         System.out.println("To see details of a request : details [requestId]");
         System.out.println("To accept or decline a request : accpet/decline [requestId]");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

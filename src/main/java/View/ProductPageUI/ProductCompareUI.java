@@ -54,5 +54,10 @@ public class ProductCompareUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 
 }

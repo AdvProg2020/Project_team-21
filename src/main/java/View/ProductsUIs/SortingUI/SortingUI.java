@@ -30,4 +30,9 @@ public class SortingUI extends UI {
         System.out.println("current sort");
         System.out.println("disable sort");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

@@ -27,5 +27,10 @@ public class AvailableSortUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }
 

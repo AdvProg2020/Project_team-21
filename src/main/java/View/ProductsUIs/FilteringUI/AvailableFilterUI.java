@@ -27,5 +27,10 @@ public class AvailableFilterUI extends UI {
     @Override
     public void help() {
     }
+
+    @Override
+    public void sort() {
+
+    }
 }
 

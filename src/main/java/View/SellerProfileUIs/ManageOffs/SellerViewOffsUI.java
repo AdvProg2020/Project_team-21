@@ -3,10 +3,12 @@ package View.SellerProfileUIs.ManageOffs;
 import Controller.Control;
 import Model.Account.Seller;
 import Model.Off;
+import View.SellerProfileUIs.SortOffType;
 import View.UI;
 
 public class SellerViewOffsUI extends UI {
     private static SellerViewOffsUI instance;
+    private SortOffType sortOffType;
     private SellerViewOffsUI()
     {
 
@@ -37,4 +39,20 @@ public class SellerViewOffsUI extends UI {
         System.out.println("To send an add request for an off : add off");
     }
 
+    public void setSortOffType(SortOffType sortOffType) {
+        this.sortOffType = sortOffType;
+    }
+
+    private SortOffType getSortOffType() {
+        return sortOffType;
+    }
+
+    @Override
+    public void sort() {
+        if(getSortOffType()==SortOffType.OFF_ID){
+            Off.sortAllOffsByOffID();
+        } else if(getSortOffType()==SortOffType.OFF_AMOUNT){
+            Off.sortAllOffsByOffAmount();
+        }
+    }
 }

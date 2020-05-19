@@ -35,4 +35,9 @@ public class CustomerViewDiscountCodesUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

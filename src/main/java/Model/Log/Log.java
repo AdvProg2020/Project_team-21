@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Log implements Comparable<Log>{
-public class Log {
+
     private static HashMap<String, Log> allLogs = new HashMap<>();
     private String logId;
     private LocalDateTime date;

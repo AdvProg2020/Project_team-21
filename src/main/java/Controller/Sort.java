@@ -1,6 +1,11 @@
 package Controller;
 
 import Model.*;
+import Model.Account.Account;
+import Model.Account.Customer;
+import Model.Account.Manager;
+import Model.Account.Seller;
+import Model.Log.Log;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -85,7 +90,7 @@ public class Sort {
 
     // *************      Off        ***************
 
-    public static ArrayList<Off> sortOffArrayList(ArrayList<Off> offs){
+    public static ArrayList<Off> sortOffArrayListByAmount(ArrayList<Off> offs){
         Collections.sort(offs);
         return offs;
     }

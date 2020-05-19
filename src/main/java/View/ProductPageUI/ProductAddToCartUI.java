@@ -49,4 +49,9 @@ public class ProductAddToCartUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }
