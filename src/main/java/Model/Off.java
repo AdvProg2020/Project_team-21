@@ -8,6 +8,7 @@ public class Off {
 
     private static HashMap<String, Off> allOffs = new HashMap<>();
     public static ArrayList<Off> allOffsList = new ArrayList<>();
+
     private String offId;
     private ArrayList<Product> productsList;
     private OffState offState;
@@ -121,6 +122,9 @@ public class Off {
         allOffsList.remove(this);
 
     }
+
+
+
 
     public void removeOffFromProducts(){
         for (Product product : productsList){

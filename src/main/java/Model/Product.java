@@ -10,6 +10,7 @@ public class Product {
 
     public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
+    public static ArrayList<Product> allProductWithOff=new ArrayList<>();
     private ArrayList<Customer> buyers = new ArrayList<>();
     private String productId;
     private ProductState productState;
@@ -43,6 +44,7 @@ public class Product {
         addSeller(seller);
         allProductsList.add(this);
         allProducts.put(productId,this);
+        addProductsWithOff();
     }
 
     public void setSpecialFeatures(ArrayList<String> specialFeatures){
@@ -232,7 +234,19 @@ public class Product {
                         "\n\taverage score: " + calculateScore();
     }
 
+    public boolean hasOff(){
+        for (Product product : allProductsList){
+            if (product.getOff()!=null)
+                return true;
+        }
+        return false;
+    }
 
+    public void addProductsWithOff(){
+        for (Product product : allProductsList)
+            if (product.hasOff())
+                allProductWithOff.add(product);
+    }
 
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();
