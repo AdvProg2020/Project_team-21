@@ -6,8 +6,6 @@ import Model.Product;
 
 public class ProductsMainUI extends UI {
     private static ProductsMainUI instance;
-    private static ProductsMainUI productsMainUI;
-    private String categoryName="Main";
 
     private ProductsMainUI()
     {

@@ -1,15 +1,14 @@
 package Controller;
 
 
+import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
-import Model.Category;
-import Model.Company;
+import Model.DisAndOffStatus;
+import Model.Off;
 import Model.Filters.*;
-import Model.Product;
-import Model.ShoppingCart;
 import Model.Sorts.ProductsSort;
 
 import java.nio.charset.Charset;
@@ -340,6 +339,23 @@ public class Control {
         if (filtered.equals(""))
             return showAllProducts();
         return filtered;
+    }
+
+    public String showAllOffProducts(){
+        String offProducts="";
+        for (Off allOff : Off.allOffsList){
+            if (allOff.getDisAndOffStatus().equals(DisAndOffStatus.Expired))
+                allOff.removeOff();
+            else {
+                for (Product product : allOff.getProductsList()){
+                    offProducts=offProducts.concat(product.showProductDigest());
+                    offProducts = offProducts.concat("\n\n");
+                }
+            }
+        }
+        if (offProducts.equals(""))
+            return "No products with off to show";
+        return offProducts;
     }
     public void addToCart(Product product,String sellerUsername, String quantity) throws Exception
     {

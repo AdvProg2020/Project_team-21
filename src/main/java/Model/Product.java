@@ -212,6 +212,10 @@ public class Product {
         }
     }
 
+    public void removeOff(Off off){
+        setOff(null);
+    }
+
     public void removeSpecialFeature(String specialFeature ){
         specialFeatures.remove(specialFeature);
     }
