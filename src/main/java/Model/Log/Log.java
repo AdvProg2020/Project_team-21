@@ -2,6 +2,7 @@ package Model.Log;
 
 import Model.DiscountCode;
 import Model.Product;
+import Model.SaveData;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -151,4 +152,10 @@ public class Log implements Comparable<Log>{
 //    public Product getProductWithId (String Id){
 //
 //    }
+
+    public void getObjectFromDatabase(){
+        allLogs.put(((Log) SaveData.reloadObject(SaveData.buyLogFile)).getLogId() ,(Log) SaveData.reloadObject(SaveData.buyLogFile));
+        allLogs.put(((Log) SaveData.reloadObject(SaveData.sellLogFile)).getLogId() ,(Log) SaveData.reloadObject(SaveData.sellLogFile));
+    }
+
 }

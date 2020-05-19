@@ -5,6 +5,7 @@ import Model.DiscountCode;
 import Model.Log.BuyLog;
 import Model.Log.Log;
 import Model.Off;
+import Model.SaveData;
 import Model.ShoppingCart;
 
 import java.util.ArrayList;
@@ -124,5 +125,9 @@ public class Customer extends Account implements Comparable<Customer>{
 
     private void setBuyLogs(ArrayList<BuyLog> buyLogs) {
         this.buyLogs = buyLogs;
+    }
+
+    public void getObjectFromDatabase(){
+        allCustomer.add((Customer) SaveData.reloadObject(SaveData.customerFile));
     }
 }

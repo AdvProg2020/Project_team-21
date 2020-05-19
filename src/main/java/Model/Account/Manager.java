@@ -3,6 +3,7 @@ package Model.Account;
 import Model.Off;
 import Model.Product;
 import Model.Request.RequestType;
+import Model.SaveData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,4 +38,7 @@ public class Manager extends Account implements Comparable<Manager>{
         return getUsername().compareTo(o.getUsername());
     }
 
+    public void getObjectFromDatabase(){
+        allManagers.add((Manager) SaveData.reloadObject(SaveData.managerFile));
+    }
 }

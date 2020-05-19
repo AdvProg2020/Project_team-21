@@ -5,6 +5,7 @@ import Model.Company;
 import Model.Off;
 import Model.Product;
 import Model.Log.SellLog;
+import Model.SaveData;
 
 import java.util.ArrayList;
 
@@ -98,5 +99,9 @@ public class Seller extends Account implements Comparable<Seller>{
 
     public void sortSellLogsByLogId(){
         this.setSellLogs(Sort.sortSellLogArrayList(this.getSellLogs()));
+    }
+
+    public void getObjectFromDatabase(){
+        allSellers.add((Seller) SaveData.reloadObject(SaveData.sellerFile));
     }
 }

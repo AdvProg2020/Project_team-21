@@ -132,4 +132,8 @@ public class Off implements Comparable<Off>{
 
         return offHashMap;
     }
+
+    public void getObjectFromDatabase(){
+        allOffs.put(((Off)SaveData.reloadObject(SaveData.offFile)).getOffId() ,(Off) SaveData.reloadObject(SaveData.offFile));
+    }
 }

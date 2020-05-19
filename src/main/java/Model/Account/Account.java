@@ -3,6 +3,7 @@ package Model.Account;
 import Model.DiscountCode;
 
 import Controller.Sort;
+import Model.SaveData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,6 +109,10 @@ public abstract class Account {
 
     public void sortAllAccounts(){
 //        Account.setAllAccounts((HashMap<String, Account>) Sort.sortAccountHashMap(getAllAccounts()));
+    }
+
+    public void getObjectFromDatabase(){
+        allAccounts.put(((Account)SaveData.reloadObject(SaveData.accountFile)).getUsername() ,(Account)SaveData.reloadObject(SaveData.accountFile));
     }
 
 }

@@ -84,5 +84,9 @@ public class Category implements Comparable<Category>{
         return subCategories;
     }
 
+    public void getObjectFromDatabase(){
+        allCategories.add((Category) SaveData.reloadObject(SaveData.categoryFile));
+    }
+
 }
 

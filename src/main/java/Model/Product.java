@@ -204,4 +204,9 @@ public class Product {
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();
     }
+
+    public void getObjectFromDatabase(){
+        allProducts.put(((Product)SaveData.reloadObject(SaveData.productFile)).getProductId() ,(Product) SaveData.reloadObject(SaveData.productFile));
+    }
+
 }

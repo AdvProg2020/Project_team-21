@@ -2,6 +2,7 @@ package Model.Log;
 
 import Model.Account.Seller;
 import Model.Product;
+import Model.SaveData;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,5 +30,9 @@ public class SellLog extends Log{
     public void removeBuyLog(SellLog sellLog)
     {
         allSellLogs.remove(sellLog.getLogId(),sellLog);
+    }
+
+    public void getObjectFromDatabase(){
+        allSellLogs.put(((SellLog) SaveData.reloadObject(SaveData.sellLogFile)).getLogId() ,(SellLog) SaveData.reloadObject(SaveData.sellLogFile));
     }
 }

@@ -127,5 +127,9 @@ public class DiscountCode {
         return discountCodeHashMap;
     }
 
+    public void getObjectFromDatabase(){
+        allDiscountCodes.put(((DiscountCode)SaveData.reloadObject(SaveData.discountCodeFile)).getDiscountId() ,(DiscountCode) SaveData.reloadObject(SaveData.discountCodeFile));
+    }
+
 
 }
