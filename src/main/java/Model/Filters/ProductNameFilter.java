@@ -14,6 +14,17 @@ public class ProductNameFilter extends Filter {
         this.productName = productName;
     }
 
+    @Override
+    public String show() {
+        return name + " : " + productName;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) {
         for (Product product : products) {
             if (product.getName().equals(productName))
@@ -21,20 +32,11 @@ public class ProductNameFilter extends Filter {
         }
     }
 
+    @Override
     public void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) {
         for (Product product : products) {
             if (!product.getName().equals(productName))
                 filteredProducts.remove(product);
         }
     }
-
-    protected String show() {
-        return name + " : " + productName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-
 }

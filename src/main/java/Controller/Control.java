@@ -6,6 +6,8 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.DisAndOffStatus;
+import Model.Off;
 import Model.Filters.*;
 import Model.Sorts.ProductsSort;
 
@@ -88,8 +90,8 @@ public class Control {
     {
     }
 
-    public void showSales()
-    {
+    public void showSales() {
+
     }
 
     public void login(String userName, String password) throws notFoundUserOrPass {
@@ -214,7 +216,7 @@ public class Control {
     public String createFilter(String filterType, String filterInput) {
         Filter filter = null;
         if (filterType.equalsIgnoreCase("Brand")) {
-            filter = new BrandFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
+            filter = new CompanyNameFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Price")) {
             String[] words = filterInput.split("[\\s-,_]");
             filter = new PriceFilter(Double.parseDouble(words[0]), Double.parseDouble(words[1]), currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
@@ -229,7 +231,7 @@ public class Control {
         }else if (currentCategory != null){
             for (String specialFeature : currentCategory.getSpecialFeatures()){
                 if (filterType.equalsIgnoreCase(specialFeature))
-                    filter= new SpecialFeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
+                    filter= new FeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
             }
         }
         if (filter == null)
@@ -337,6 +339,23 @@ public class Control {
         if (filtered.equals(""))
             return showAllProducts();
         return filtered;
+    }
+
+    public String showAllOffProducts(){
+        String offProducts="";
+        for (Off allOff : Off.allOffsList){
+            if (allOff.getDisAndOffStatus().equals(DisAndOffStatus.Expired))
+                allOff.removeOff();
+            else {
+                for (Product product : allOff.getProductsList()){
+                    offProducts=offProducts.concat(product.showProductDigest());
+                    offProducts = offProducts.concat("\n\n");
+                }
+            }
+        }
+        if (offProducts.equals(""))
+            return "No products with off to show";
+        return offProducts;
     }
     public void addToCart(Product product,String sellerUsername, String quantity) throws Exception
     {

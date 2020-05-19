@@ -6,35 +6,35 @@ import java.util.Comparator;
 
 public abstract class UserSort  implements Comparator{
     public static class userSortByFirstNameAscending implements Comparator<Account>{
-        public int compare (Account one , Account two){
-            return one.getFirstName().compareToIgnoreCase(two.getFirstName());
+        public int compare (Account firstOne , Account secondOne){
+            return firstOne.getFirstName().compareToIgnoreCase(secondOne.getFirstName());
         }
     }
 
     public static class usersSortByLastNameAscending implements Comparator<Account> {
-        public int compare(Account one, Account two) {
-            return one.getLastName().compareToIgnoreCase(two.getLastName());
+        public int compare(Account firstOne, Account secondOne) {
+            return firstOne.getLastName().compareToIgnoreCase(secondOne.getLastName());
         }
     }
 
     public static class usersSortByFirstNameDescending implements Comparator<Account> {
-        public int compare(Account one, Account two) {
-            return (-1) * (one.getFirstName().compareToIgnoreCase(two.getFirstName()));
+        public int compare(Account firstOne, Account secondOne) {
+            return (-1) * (firstOne.getFirstName().compareToIgnoreCase(secondOne.getFirstName()));
         }
     }
 
     public static class usersSortByLastNameDescending implements Comparator<Account> {
-        public int compare(Account one, Account two) {
-            return (-1) * (one.getLastName().compareToIgnoreCase(two.getLastName()));
+        public int compare(Account firstOne, Account secondOne) {
+            return (-1) * (firstOne.getLastName().compareToIgnoreCase(secondOne.getLastName()));
         }
     }
 
     public static class productSortByType implements Comparator<Account> {
-        public int compare(Account one, Account two) {
-            if (one.getType().compareToIgnoreCase(two.getType()) == 0)
-                return one.getFirstName().compareToIgnoreCase(two.getFirstName());
+        public int compare(Account firstOne, Account secondONe) {
+            if (firstOne.getType().compareToIgnoreCase(secondONe.getType()) == 0)
+                return firstOne.getFirstName().compareToIgnoreCase(secondONe.getFirstName());
             else
-                return one.getType().compareToIgnoreCase(two.getType());
+                return firstOne.getType().compareToIgnoreCase(secondONe.getType());
         }
     }
 }

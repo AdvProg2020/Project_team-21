@@ -15,6 +15,17 @@ public class SellerFilter extends Filter {
         this.sellerUserName = sellerUserName;
     }
 
+    @Override
+    public String show() {
+        return name + " : " + sellerUserName;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception {
         for (Product product : products) {
             if (product.getSellers().contains(Seller.getSellerWithUsername(sellerUserName)))
@@ -22,18 +33,11 @@ public class SellerFilter extends Filter {
         }
     }
 
-    public void removeDiffs(ArrayList<Product> filterdProducts, ArrayList<Product> products) throws Exception {
+    @Override
+    public void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) throws Exception {
         for (Product product : products) {
             if (!product.getSellers().contains(Seller.getSellerWithUsername(sellerUserName)))
-                filterdProducts.remove(product);
+                filteredProducts.remove(product);
         }
-    }
-
-    protected String show() {
-        return name + " : " + sellerUserName;
-    }
-
-    public String getName() {
-        return name;
     }
 }

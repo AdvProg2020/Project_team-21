@@ -7,12 +7,14 @@ import java.util.HashMap;
 public class Off {
 
     private static HashMap<String, Off> allOffs = new HashMap<>();
+    public static ArrayList<Off> allOffsList = new ArrayList<>();
     private String offId;
     private ArrayList<Product> productsList;
     private OffState offState;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private double offAmount;
+    private DisAndOffStatus disAndOffStatus;
 
     // Initialization Block
     {
@@ -104,4 +106,26 @@ public class Off {
     public void removeProduct(Product product){
         productsList.remove(product);
     }
+
+    public DisAndOffStatus getDisAndOffStatus (){
+        if (startTime.compareTo(LocalDateTime.now())>0){
+            return DisAndOffStatus.Not_Started;
+        }
+        if (endTime.compareTo(LocalDateTime.now())>=0){
+            return DisAndOffStatus.Expired;
+        }
+        return DisAndOffStatus.Active;
+    }
+
+    public void removeOff(){
+        allOffsList.remove(this);
+
+    }
+
+    public void removeOffFromProducts(){
+        for (Product product : productsList){
+            product.removeOff(this);
+        }
+    }
+
 }
