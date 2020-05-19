@@ -24,6 +24,7 @@ public class Product {
     ArrayList<Score> scoresList;
     ArrayList<Review> reviewsList;
     private Off off;
+    private HashMap<String,String> specialFeatures = new HashMap<String, String>();
 
 
     // Initialization Block
@@ -42,6 +43,12 @@ public class Product {
         addSeller(seller);
         allProductsList.add(this);
         allProducts.put(productId,this);
+    }
+
+    public void setSpecialFeatures(ArrayList<String> specialFeatures){
+        for (int i = 0; i < specialFeatures.size(); i++) {
+            this.specialFeatures.put(category.getSpecialFeatures().get(i), specialFeatures.get(i));
+        }
     }
 
     public static ArrayList<Product> getAllProductsList() {
@@ -185,6 +192,28 @@ public class Product {
                 return product;
         }
         throw new Exception("There is no product with this ID");
+    }
+
+    public String showSpecialFeatures(){
+        StringBuilder features = new StringBuilder();
+        for (String key : specialFeatures.keySet()){
+            features.append("\n\t").append(key).append(": ").append(specialFeatures.get(key));
+        }
+        return features.toString();
+    }
+
+    public HashMap<String, String> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void addSpecialFeature(String specialFeature , String specialFeatureValue){
+        if (!specialFeatures.containsKey(specialFeature)){
+            specialFeatures.put(specialFeature,specialFeatureValue);
+        }
+    }
+
+    public void removeSpecialFeature(String specialFeature ){
+        specialFeatures.remove(specialFeature);
     }
 
     public String showProductDigest() {

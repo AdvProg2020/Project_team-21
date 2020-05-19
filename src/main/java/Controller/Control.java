@@ -202,6 +202,11 @@ public class Control {
         if (currentCategory == null) {
             availableFilters = availableFilters.concat("Category\n");
         }
+        else {
+            for (String specialFeature : currentCategory.getSpecialFeatures()){
+                availableFilters=availableFilters.concat(specialFeature+"\n");
+            }
+        }
 
         return availableFilters;
     }
@@ -221,6 +226,11 @@ public class Control {
             filter = new InStockFilter(currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (currentCategory == null && filterType.equalsIgnoreCase("Category")) {
             filter = new CategoryFilter(filterInput, Product.allProductsList);
+        }else if (currentCategory != null){
+            for (String specialFeature : currentCategory.getSpecialFeatures()){
+                if (filterType.equalsIgnoreCase(specialFeature))
+                    filter= new SpecialFeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
+            }
         }
         if (filter == null)
             return "Wrong Filter!";
