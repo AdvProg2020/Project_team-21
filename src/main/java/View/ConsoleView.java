@@ -289,13 +289,13 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)sort\\s+offs\\s+by\\s+offId"))
                 {
                     SellerViewOffsUI.getInstance().setSortOffType(SortOffType.OFF_ID);
-                    currentMenu.sort();
+                    SellerViewOffsUI.getInstance().sort();
                     rightInput = true;
                 }
                 else if(input.trim().matches("(?i)sort\\s+offs\\s+by\\s+off\\s+amount"))
                 {
                     SellerViewOffsUI.getInstance().setSortOffType(SortOffType.OFF_AMOUNT);
-                    currentMenu.sort();
+                    SellerViewOffsUI.getInstance().sort();
                     rightInput = true;
                 }
                 else if(input.trim().matches("(?i)view\\s+balance"))
@@ -314,6 +314,11 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)view\\s+orders"))
                 {
                     goToNextPage(CustomerViewOrdersUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)sort\\s+orders"))
+                {
+                    CustomerViewOrdersUI.getInstance().sort();
                     rightInput = true;
                 }
                 else if(input.trim().matches("(?i)view\\s+balance"))
@@ -412,6 +417,12 @@ public class ConsoleView{
                 goToNextPage(SellerViewProductBuyersUI.getInstance());
                 rightInput = true;
             }
+            else if(input.trim().matches("(?i)sort\\s+buyers\\s+(.+)"))
+            {
+                SellerViewProductBuyersUI.getInstance().setProductID(input.split("\\s+")[2]);
+                goToNextPage(SellerViewProductBuyersUI.getInstance());
+                rightInput = true;
+            }
             else if(input.trim().matches("(?i)edit\\s+(.+)"))
             {
                 SellerEditProductUI.getInstance().setProductID(input.split("\\s+")[1]);
@@ -486,13 +497,13 @@ public class ConsoleView{
             if(input.trim().matches("(?i)sort\\s+by\\s+percentage"))
             {
                 ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_PERCENTAGE);
-                currentMenu.sort();
+                SellerViewOffsUI.getInstance().sort();
                 rightInput = true;
             }
             else if(input.trim().matches("(?i)sort\\s+by\\s+discountI\\s+alphabet"))
             {
                 ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_ID);
-                currentMenu.sort();
+                SellerViewOffsUI.getInstance().sort();
                 rightInput = true;
             }
 //            else if(input.trim().matches("(?i)sort\\s+by\\s+end\\s*date"))

@@ -39,7 +39,8 @@ public class CustomerViewOrdersUI extends UI {
 
     @Override
     public void sort() {
-
+        Customer customer = (Customer) Control.getInstance().getUser();
+        customer.sortBuyLogsByLogId();
     }
 
 }

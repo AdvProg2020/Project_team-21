@@ -1,7 +1,9 @@
 package Model.Account;
 
+import Controller.Sort;
 import Model.DiscountCode;
 import Model.Log.BuyLog;
+import Model.Log.Log;
 import Model.Off;
 import Model.ShoppingCart;
 
@@ -104,4 +106,23 @@ public class Customer extends Account implements Comparable<Customer>{
         return getUsername().compareTo(o.getUsername());
     }
 
+    public static void sortAllCustomersById(){
+        Customer.setAllCustomer(Sort.sortCustomerArrayList(getaAllCustomers()));
+    }
+
+    private static void setAllCustomer(ArrayList<Customer> allCustomer) {
+        Customer.allCustomer = allCustomer;
+    }
+
+    private static ArrayList<Customer> getAllCustomer() {
+        return allCustomer;
+    }
+
+    public void sortBuyLogsByLogId(){
+        this.setBuyLogs(Sort.sortBuyLogArrayList(this.getBuyLogs()));
+    }
+
+    private void setBuyLogs(ArrayList<BuyLog> buyLogs) {
+        this.buyLogs = buyLogs;
+    }
 }
