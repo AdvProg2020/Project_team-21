@@ -29,6 +29,7 @@ import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
 import View.ManagerProfileUIs.ManagerAddBalanceUI;
+import View.OffsUI.OffsUI;
 import View.ProductPageUI.*;
 import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
@@ -160,6 +161,12 @@ public class ConsoleView{
                 for (Category category : Category.getAllCategories()) {
                     System.out.println(category.getName());
                 }
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)offs"))
+            {
+               goToNextPage(OffsUI.getInstance());
+               rightInput = true;
             }
         }
         else if(currentMenu.equals(ProductMainUI.getInstance()))
@@ -543,8 +550,8 @@ public class ConsoleView{
                 rightInput = true;
             }
         }
-        else if(currentMenu.equals(ProductsMainUI.getInstance())){
-
+        else if(currentMenu.equals(ProductsMainUI.getInstance()))
+        {
             if (input.trim().matches("(?i)view\\s+categories")){
                 goToNextPage(ViewCategoriesUI.getInstance());
                 rightInput=true;
@@ -559,7 +566,6 @@ public class ConsoleView{
                 goToNextPage(SortingUI.getInstance());
                 rightInput=true;
             }
-
             else if (input.trim().matches("(?i)show\\s+products")){
                 goToNextPage(ShowProductsAfterUI.getInstance());
                 rightInput=true;
