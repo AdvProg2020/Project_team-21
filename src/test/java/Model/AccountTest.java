@@ -1,11 +1,11 @@
 package Model;
 
-import Controller.Control;
-import Model.*;
-import Model.Account.Customer;
-import Model.Account.Seller;
+import Controller.ControlManager;
+import View.ManagerProfileUIs.ManageCategories.ManagerManageCategoriesUI;
 import org.junit.Test;
 import org.junit.Assert;
+
+import java.util.ArrayList;
 
 public class AccountTest {
 
@@ -14,15 +14,31 @@ public class AccountTest {
     @Test
     public void addToCartTest()
     {
-        try {
-            Control.getInstance().addToCart(new Product("342354634","soup",new Company("apple","california"),
-                    20,new Category("soups",null),new Seller("opo","jkasdj","asdf","asdf",
-                    "32423","asdf",new Company("asdf","dfh"))),"awfsd","34");
+        ArrayList<Product> products = new ArrayList<>();
+        try
+        {
+            ControlManager.getInstance().addCategory("category1",products);
         }catch (Exception e)
         {
-
+            System.out.println(e.getMessage());
         }
-
+        try
+        {
+            ControlManager.getInstance().addCategory("category2",products);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        try
+        {
+            ControlManager.getInstance().addCategory("category3",products);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        String actual = ManagerManageCategoriesUI.getInstance().categoriesTest();
+        String expected = "category1"+"category2"+"category3";
+        Assert.assertEquals(expected,actual);
     }
 
 }

@@ -26,7 +26,14 @@ public class ManagerManageCategoriesUI extends UI {
             System.out.println(category.getName());
         }
     }
-
+    public String categoriesTest()
+    {
+        String categories = "";
+        for (Category category : Category.getAllCategories()) {
+            categories += category.getName();
+        }
+        return categories;
+    }
     @Override
     public void help()
     {

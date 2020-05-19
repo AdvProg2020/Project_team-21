@@ -29,8 +29,6 @@ public class MainMenuUI extends UI {
         }
         System.out.println("       Most Popular Products By Our Users     ");
         controller.showPopularProducts();
-        System.out.println("        Recent Sales For you        ");
-        controller.showSales();
     }
 
     @Override

@@ -40,7 +40,6 @@ public class SellerViewSalesUI extends UI {
             }
             i++;
         }
-        ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
     }
 
     @Override

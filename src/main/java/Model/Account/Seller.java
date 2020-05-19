@@ -33,6 +33,7 @@ public class Seller extends Account {
     }
 
     public static void addNewSeller (Seller seller){
+        Account.addAccount(seller);
         allSellers.add(seller);
     }
 

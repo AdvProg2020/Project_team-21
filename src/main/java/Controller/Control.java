@@ -84,12 +84,12 @@ public class Control {
         this.user = user;
     }
 
-    public void showPopularProducts() {
-
+    public void showPopularProducts()
+    {
     }
 
-    public void showSales() {
-
+    public void showSales()
+    {
     }
 
     public void login(String userName, String password) throws notFoundUserOrPass {
