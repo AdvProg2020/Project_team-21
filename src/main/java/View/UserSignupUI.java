@@ -30,6 +30,7 @@ public class UserSignupUI extends UI {
     {
 
         Company company = null;
+        boolean login = true;
         Scanner scanner = ConsoleView.getScanner();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
@@ -45,6 +46,7 @@ public class UserSignupUI extends UI {
         String phone = scanner.nextLine();
         if(type.equalsIgnoreCase("seller"))
         {
+            login = false;
             System.out.println("Enter your Company name");
             String companyName = scanner.nextLine();
             if(Company.getAllCompanies().containsKey(companyName))
@@ -59,7 +61,7 @@ public class UserSignupUI extends UI {
             }
         }
         try {
-            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,company,true);
+            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,company,login);
             System.out.println("Wellcome "+firstName+"!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
             ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();

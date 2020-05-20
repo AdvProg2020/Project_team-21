@@ -34,7 +34,6 @@ import View.OffsUI.OffsMainUI.ShowProductsWithOffAfterUI;
 import View.ProductPageUI.ProductDigestUI;
 import View.ProductPageUI.ProductMainUI;
 import View.ManagerProfileUIs.ManagerAddBalanceUI;
-import View.OffsUI.OffsUI;
 import View.ProductPageUI.*;
 import View.SellerProfileUIs.*;
 import View.SellerProfileUIs.ManageOffs.SellerAddOffUI;
@@ -709,5 +708,4 @@ public class ConsoleView{
         System.out.println("For commands on this page please enter Help.");
         processInput(scanner.nextLine());
     }
-
 }

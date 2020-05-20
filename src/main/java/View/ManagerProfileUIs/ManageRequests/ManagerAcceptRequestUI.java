@@ -30,7 +30,6 @@ public class ManagerAcceptRequestUI extends UI {
     {
         if(ControlManager.getInstance().checkRequestIdExistance(requestId))
         {
-            Request.getAllRequests().get(requestId).acceptReq(requestId);
             if(Request.getAllRequests().get(requestId).getRequestType().equals(RequestType.ADD))
             {
                 System.out.println("It has been successfully added!");
@@ -43,6 +42,7 @@ public class ManagerAcceptRequestUI extends UI {
             {
                 System.out.println("It has been successfully edited!");
             }
+            Request.getAllRequests().get(requestId).acceptReq(requestId);
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
         }
         else
