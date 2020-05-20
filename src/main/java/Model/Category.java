@@ -76,9 +76,9 @@ public class Category implements Comparable<Category>{
         this.name = name;
     }
 
-    public static ArrayList<Category> getAllCategories() {
-        return allCategories;
-    }
+//    public static ArrayList<Category> getAllCategories() {
+//        return allCategories;
+//    }
 
     @Override
     public int compareTo(Category o) {
