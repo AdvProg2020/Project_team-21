@@ -45,7 +45,8 @@ public class ManagerAddCategoryUI extends UI {
                 }
                 else
                 {
-                    System.out.println("This product doesn't exist!");
+                    if(!productId.equalsIgnoreCase("end"))
+                        System.out.println("This product doesn't exist!");
                 }
             }
             ControlManager.getInstance().addCategory(categoryName,products);

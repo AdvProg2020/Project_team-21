@@ -6,14 +6,14 @@ import java.util.Comparator;
 
 public abstract class RequestsSort implements Comparator {
     public static class requestSortById implements Comparator<Request>{
-        public int compare(Request one , Request two){
-            return one.getRequestId().compareTo(two.getRequestId());
+        public int compare(Request firstOne , Request secondOne){
+            return firstOne.getRequestId().compareTo(secondOne.getRequestId());
         }
     }
 
     public static class requestSortByType implements Comparator<Request>{
-        public int compare(Request one , Request two){
-            return one.getType().compareToIgnoreCase(two.getType());
+        public int compare(Request firstOne , Request secondOne){
+            return firstOne.getType().compareToIgnoreCase(secondOne.getType());
         }
     }
 }

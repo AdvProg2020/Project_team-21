@@ -28,6 +28,8 @@ public abstract class Account {
         this.credit = 0;
         allAccounts.put(username,this);
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
+        if(!(this instanceof Seller))
+            allAccounts.put(username,this);
     }
 
     public String getUsername() {
@@ -86,8 +88,11 @@ public abstract class Account {
         this.password = password;
     }
 
-    public void removeAccount (Account account){
+    public static void removeAccount (Account account){
         allAccounts.remove(account);
+    }
+    public static void addAccount (Account account){
+        allAccounts.put(account.getUsername(),account);
     }
 
     public abstract String getType();

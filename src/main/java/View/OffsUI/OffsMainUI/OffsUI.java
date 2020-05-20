@@ -1,25 +1,26 @@
-package View.ProductsUIs.ProductsMainUI;
+package View.OffsUI.OffsMainUI;
 
+import Controller.Control;
 import View.UI;
 
-import Model.Product;
 
-public class ProductsMainUI extends UI {
-    private static ProductsMainUI instance;
+public class OffsUI extends UI {
+    private static OffsUI instance;
 
-    private ProductsMainUI()
+    private OffsUI()
     {
 
     }
-    public static ProductsMainUI getInstance() {
+    public static OffsUI getInstance() {
         if(instance == null)
-            instance = new ProductsMainUI();
+            instance = new OffsUI();
         return instance;
     }
 
     @Override
     public void run() {
-        System.out.println(Product.getAllProducts());
+        System.out.println(Control.getInstance().showAllOffProducts());
+
     }
 
     @Override
@@ -29,10 +30,5 @@ public class ProductsMainUI extends UI {
         System.out.println("sorting");
         System.out.println("show products");
         System.out.println("show product [Product ID]");
-    }
-
-    @Override
-    public void sort() {
-
     }
 }

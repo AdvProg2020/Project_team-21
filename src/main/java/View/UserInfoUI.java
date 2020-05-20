@@ -163,6 +163,7 @@ public class UserInfoUI extends UI {
             System.out.println("To manage and see discount codes : view discount codes");
             System.out.println("To manage and see requests : manage requests");
             System.out.println("To manage and see categories : manage categories");
+            System.out.println("To add money to someone : add balance");
         }
         else if(user instanceof Seller)
         {

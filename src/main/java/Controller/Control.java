@@ -6,6 +6,8 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.DisAndOffStatus;
+import Model.Off;
 import Model.Filters.*;
 import Model.Sorts.ProductsSort;
 import Model.*;
@@ -87,8 +89,8 @@ public class Control {
         this.user = user;
     }
 
-    public void showPopularProducts() {
-
+    public void showPopularProducts()
+    {
     }
 
     public void showSales() {
@@ -205,6 +207,11 @@ public class Control {
         if (currentCategory == null) {
             availableFilters = availableFilters.concat("Category\n");
         }
+        else {
+            for (String specialFeature : currentCategory.getSpecialFeatures()){
+                availableFilters=availableFilters.concat(specialFeature+"\n");
+            }
+        }
 
         return availableFilters;
     }
@@ -212,7 +219,7 @@ public class Control {
     public String createFilter(String filterType, String filterInput) {
         Filter filter = null;
         if (filterType.equalsIgnoreCase("Brand")) {
-            filter = new BrandFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
+            filter = new CompanyNameFilter(filterInput, currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (filterType.equalsIgnoreCase("Price")) {
             String[] words = filterInput.split("[\\s-,_]");
             filter = new PriceFilter(Double.parseDouble(words[0]), Double.parseDouble(words[1]), currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
@@ -224,12 +231,46 @@ public class Control {
             filter = new InStockFilter(currentCategory == null ? Product.allProductsList : currentCategory.getProductsList());
         } else if (currentCategory == null && filterType.equalsIgnoreCase("Category")) {
             filter = new CategoryFilter(filterInput, Product.allProductsList);
+        }else if (currentCategory != null){
+            for (String specialFeature : currentCategory.getSpecialFeatures()){
+                if (filterType.equalsIgnoreCase(specialFeature))
+                    filter= new FeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
+            }
         }
         if (filter == null)
             return "Wrong Filter!";
         currentFilters.add(filter);
         return "Filter was created";
     }
+
+    public String createFilterForOffProducts(String filterType, String filterInput) {
+        Filter filter = null;
+        if (filterType.equalsIgnoreCase("Brand")) {
+            filter = new CompanyNameFilter(filterInput, currentCategory == null ? Product.allProductWithOff : currentCategory.getProductsList());
+        } else if (filterType.equalsIgnoreCase("Price")) {
+            String[] words = filterInput.split("[\\s-,_]");
+            filter = new PriceFilter(Double.parseDouble(words[0]), Double.parseDouble(words[1]), currentCategory == null ? Product.allProductWithOff : currentCategory.getProductsList());
+        } else if (filterType.equalsIgnoreCase("Name")) {
+            filter = new ProductNameFilter(filterInput, currentCategory == null ? Product.allProductWithOff : currentCategory.getProductsList());
+        } else if (filterType.equalsIgnoreCase("Seller")) {
+            filter = new SellerFilter(filterInput, currentCategory == null ? Product.allProductWithOff : currentCategory.getProductsList());
+        } else if (filterType.equalsIgnoreCase("Available")) {
+            filter = new InStockFilter(currentCategory == null ? Product.allProductWithOff : currentCategory.getProductsList());
+        } else if (currentCategory == null && filterType.equalsIgnoreCase("Category")) {
+            filter = new CategoryFilter(filterInput, Product.allProductWithOff);
+        }else if (currentCategory != null){
+            for (String specialFeature : currentCategory.getSpecialFeatures()){
+                if (filterType.equalsIgnoreCase(specialFeature))
+                    filter= new FeaturesFilter(specialFeature,filterInput,currentCategory.getProductsList());
+            }
+        }
+        if (filter == null)
+            return "Wrong Filter!";
+        currentFilters.add(filter);
+        return "Filter was created";
+    }
+
+
 
     public String showCurrentFilters() {
         return Filter.showCurrentFilters();
@@ -330,6 +371,47 @@ public class Control {
         if (filtered.equals(""))
             return showAllProducts();
         return filtered;
+    }
+
+    public String showFilteredAndSortedProductsWithOff() throws Exception {
+        String filtered = "";
+        ArrayList<Product> sorted = Filter.applyFilter(Product.allProductWithOff);
+        if (currentProductSort.equalsIgnoreCase("name A-Z"))
+            sorted.sort(new ProductsSort.productSortByNameAscending());
+        else if (currentProductSort.equalsIgnoreCase("name Z-A"))
+            sorted.sort(new ProductsSort.productSortByNameDescending());
+        else if (currentProductSort.equalsIgnoreCase("average Score"))
+            sorted.sort(new ProductsSort.productSortByRate());
+        else if (currentProductSort.equalsIgnoreCase("price ascending"))
+            sorted.sort(new ProductsSort.productSortByPriceAscending());
+        else if (currentProductSort.equalsIgnoreCase("price descending"))
+            sorted.sort(new ProductsSort.productSortByPriceDescendingly());
+        else if (!currentProductSort.equals(""))
+            return "wrong sort input.";
+        for (Product product : sorted) {
+            filtered = filtered.concat(product.showProductDigest());
+            filtered = filtered.concat("\n\n");
+        }
+        if (filtered.equals(""))
+            return showAllProducts();
+        return filtered;
+    }
+
+    public String showAllOffProducts(){
+        String offProducts="";
+        for (Off allOff : Off.allOffsList){
+            if (allOff.getDisAndOffStatus().equals(DisAndOffStatus.Expired))
+                allOff.removeOff();
+            else {
+                for (Product product : allOff.getProductsList()){
+                    offProducts=offProducts.concat(product.showProductDigest());
+                    offProducts = offProducts.concat("\n\n");
+                }
+            }
+        }
+        if (offProducts.equals(""))
+            return "No products with off to show";
+        return offProducts;
     }
     public void addToCart(Product product,String sellerUsername, String quantity) throws Exception
     {

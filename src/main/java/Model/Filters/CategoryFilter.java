@@ -13,6 +13,17 @@ public class CategoryFilter extends Filter {
         this.categoryName = categoryName;
     }
 
+    @Override
+    public String show() {
+        return name + " : " + categoryName;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) {
         for (Product product : products) {
             if (product.getCategory().getName().equals(categoryName))
@@ -20,18 +31,11 @@ public class CategoryFilter extends Filter {
         }
     }
 
+    @Override
     public void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) {
         for (Product product : products) {
             if (!product.getCategory().getName().equals(categoryName))
                 filteredProducts.remove(product);
         }
-    }
-
-    protected String show() {
-        return name + " : " + categoryName;
-    }
-
-    public String getName() {
-        return name;
     }
 }

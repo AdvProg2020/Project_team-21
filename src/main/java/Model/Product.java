@@ -10,6 +10,7 @@ public class Product {
 
     public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
+    public static ArrayList<Product> allProductWithOff=new ArrayList<>();
     private ArrayList<Customer> buyers = new ArrayList<>();
     private String productId;
     private ProductState productState;
@@ -24,6 +25,7 @@ public class Product {
     ArrayList<Score> scoresList;
     ArrayList<Review> reviewsList;
     private Off off;
+    private HashMap<String,String> specialFeatures = new HashMap<String, String>();
 
 
     // Initialization Block
@@ -43,6 +45,13 @@ public class Product {
         allProductsList.add(this);
         allProducts.put(productId,this);
         SaveData.saveData(this, getProductId(), SaveData.productFile);
+        addProductsWithOff();
+    }
+
+    public void setSpecialFeatures(ArrayList<String> specialFeatures){
+        for (int i = 0; i < specialFeatures.size(); i++) {
+            this.specialFeatures.put(category.getSpecialFeatures().get(i), specialFeatures.get(i));
+        }
     }
 
     public static ArrayList<Product> getAllProductsList() {
@@ -188,6 +197,32 @@ public class Product {
         throw new Exception("There is no product with this ID");
     }
 
+    public String showSpecialFeatures(){
+        StringBuilder features = new StringBuilder();
+        for (String key : specialFeatures.keySet()){
+            features.append("\n\t").append(key).append(": ").append(specialFeatures.get(key));
+        }
+        return features.toString();
+    }
+
+    public HashMap<String, String> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void addSpecialFeature(String specialFeature , String specialFeatureValue){
+        if (!specialFeatures.containsKey(specialFeature)){
+            specialFeatures.put(specialFeature,specialFeatureValue);
+        }
+    }
+
+    public void removeOff(Off off){
+        setOff(null);
+    }
+
+    public void removeSpecialFeature(String specialFeature ){
+        specialFeatures.remove(specialFeature);
+    }
+
     public String showProductDigest() {
         return
                 "name: " + name +
@@ -200,7 +235,19 @@ public class Product {
                         "\n\taverage score: " + calculateScore();
     }
 
+    public boolean hasOff(){
+        for (Product product : allProductsList){
+            if (product.getOff()!=null)
+                return true;
+        }
+        return false;
+    }
 
+    public void addProductsWithOff(){
+        for (Product product : allProductsList)
+            if (product.hasOff())
+                allProductWithOff.add(product);
+    }
 
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();

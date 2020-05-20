@@ -37,6 +37,7 @@ public class Seller extends Account implements Comparable<Seller>{
     }
 
     public static void addNewSeller (Seller seller){
+        Account.addAccount(seller);
         allSellers.add(seller);
     }
 

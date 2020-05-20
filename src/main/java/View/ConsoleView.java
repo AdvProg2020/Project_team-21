@@ -6,6 +6,7 @@ import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
 import Model.SaveData;
+import Model.Category;
 import Model.ShoppingCart;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerCartShowProductsUI;
 import View.CustomerProfileUIs.CustomerCartUIs.CustomerIncreaseDecreaseProductCartUI;
@@ -28,6 +29,13 @@ import View.ManagerProfileUIs.ManageUsers.ManagerCreateManagerUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerDeleteUserUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerManageUsersUI;
 import View.ManagerProfileUIs.ManageUsers.ManagerViewUI;
+import View.OffsUI.FilterinUIForOffs.*;
+import View.OffsUI.OffsMainUI.OffsUI;
+import View.OffsUI.OffsMainUI.ShowProductsWithOffAfterUI;
+import View.ProductPageUI.ProductDigestUI;
+import View.ProductPageUI.ProductMainUI;
+import View.ManagerProfileUIs.ManagerAddBalanceUI;
+import View.OffsUI.OffsUI;
 import View.ManagerProfileUIs.SortDiscountCodesType;
 import View.ProductPageUI.*;
 import View.SellerProfileUIs.*;
@@ -44,6 +52,7 @@ import View.ProductsUIs.ProductsMainUI.ProductsMainUI;
 import View.ProductsUIs.ProductsMainUI.ShowProductsAfterUI;
 import View.ProductsUIs.ProductsMainUI.ViewCategoriesUI;
 import View.ProductsUIs.SortingUI.*;
+import com.sun.tools.javac.Main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -127,7 +136,9 @@ public class ConsoleView{
                 System.out.println("Goodbye " + user.getFirstName());
                 Control.getInstance().setUser(null);
                 Control.getInstance().setSignOutCart(new ShoppingCart(null));
+                goToNextPage(MainMenuUI.getInstance());
             }
+            rightInput = true;
         }
         if(currentMenu.equals(UserLoginUI.getInstance()))
         {
@@ -151,6 +162,18 @@ public class ConsoleView{
             {
                 goToNextPage(ProductsMainUI.getInstance());
                 rightInput = true;
+            }
+            else if(input.trim().matches("(?i)categories"))
+            {
+                for (Category category : Category.getAllCategories()) {
+                    System.out.println(category.getName());
+                }
+                rightInput = true;
+            }
+            else if(input.trim().matches("(?i)offs"))
+            {
+               goToNextPage(OffsUI.getInstance());
+               rightInput = true;
             }
         }
         else if(currentMenu.equals(ProductMainUI.getInstance()))
@@ -236,6 +259,11 @@ public class ConsoleView{
                 else if(input.trim().matches("(?i)manage\\s+categories"))
                 {
                     goToNextPage(ManagerManageCategoriesUI.getInstance());
+                    rightInput = true;
+                }
+                else if(input.trim().matches("(?i)add\\s+balance"))
+                {
+                    goToNextPage(ManagerAddBalanceUI.getInstance());
                     rightInput = true;
                 }
             }
@@ -565,8 +593,8 @@ public class ConsoleView{
                 rightInput = true;
             }
         }
-        else if(currentMenu.equals(ProductsMainUI.getInstance())){
-
+        else if(currentMenu.equals(ProductsMainUI.getInstance()))
+        {
             if (input.trim().matches("(?i)view\\s+categories")){
                 goToNextPage(ViewCategoriesUI.getInstance());
                 rightInput=true;
@@ -581,7 +609,6 @@ public class ConsoleView{
                 goToNextPage(SortingUI.getInstance());
                 rightInput=true;
             }
-
             else if (input.trim().matches("(?i)show\\s+products")){
                 goToNextPage(ShowProductsAfterUI.getInstance());
                 rightInput=true;
@@ -631,6 +658,55 @@ public class ConsoleView{
             }
             else if(input.trim().matches("(?i)disable\\s+sort")){
                 goToNextPage(DisableSortUI.getInstance());
+                rightInput=true;
+            }
+        }
+        else if(currentMenu.equals(OffsUI.getInstance())){
+
+            if (input.trim().matches("(?i)view\\s+categories")){
+                goToNextPage(ViewCategoriesUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)filtering\\s+")){
+                goToNextPage(FilteringOffsUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)sorting\\s+")){
+                goToNextPage(SortingUI.getInstance());
+                rightInput=true;
+            }
+
+            else if (input.trim().matches("(?i)show\\s+products")){
+                goToNextPage(ShowProductsWithOffAfterUI.getInstance());
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)show\\s+product\\s+(\\S+)")){
+                goToNextPage(ProductMainUI.getInstance());
+                ProductMainUI.getInstance().setProductID(input.split("\\s+")[2]);
+                rightInput=true;
+            }
+        }
+        else if (currentMenu.equals(FilteringOffsUI.getInstance())){
+
+            if (input.trim().matches("(?i)show\\s+available\\s+filters")){
+                goToNextPage(AvailableFilterOffsUI.getInstance());
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)filter\\s+(\\S+)\\s+(\\S+)")){
+                goToNextPage(SelectedFilterForOffUI.getInstance());
+                SelectedFilterUI.getInstance().setFilterInput(input.split("\\s+")[1]);
+                SelectedFilterUI.getInstance().setFilterType(input.split("\\s+")[2]);
+                rightInput=true;
+            }
+            else if (input.trim().matches("(?i)current\\s+filters")){
+                goToNextPage(CurrentFiltersOffsUI.getInstance());
+                rightInput=true;
+            }
+            else if(input.trim().matches("(?i)disable\\s+filter\\s+(\\S+)")){
+                goToNextPage(DisableFilterOffsUI.getInstance());
+                DisableFilterUI.getInstance().setDisablingFilter(input.split("\\s+")[2]);
                 rightInput=true;
             }
         }

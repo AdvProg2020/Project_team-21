@@ -12,25 +12,29 @@ public class InStockFilter extends Filter {
         this.name = "Only Available Products";
     }
 
-    public void apply(ArrayList<Product> filterdProducts, ArrayList<Product> products) {
-        for (Product product : products) {
-            if (product.doesExist())
-                filterdProducts.add(product);
-        }
-    }
-
-    public void removeDiffs(ArrayList<Product> filterdProducts, ArrayList<Product> products) {
-        for (Product product : products) {
-            if (!product.doesExist())
-                filterdProducts.remove(product);
-        }
-    }
-
-    protected String show() {
+    @Override
+    public String show() {
         return name;
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void apply(ArrayList<Product> filteredProducts, ArrayList<Product> products) {
+        for (Product product : products) {
+            if (product.doesExist())
+                filteredProducts.add(product);
+        }
+    }
+
+    @Override
+    public void removeDiffs(ArrayList<Product> filteredProducts, ArrayList<Product> products) {
+        for (Product product : products) {
+            if (!product.doesExist())
+                filteredProducts.remove(product);
+        }
     }
 }
