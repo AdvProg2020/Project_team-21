@@ -207,7 +207,10 @@ public class Product {
     }
 
     public static void getObjectFromDatabase(){
-        allProducts.put(((Product)SaveData.reloadObject(SaveData.productFile)).getProductId() ,(Product) SaveData.reloadObject(SaveData.productFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productFile)));
+        for (Object object : objects) {
+            allProducts.put(((Product)object).getProductId() ,(Product) (object));
+        }
     }
 
 }

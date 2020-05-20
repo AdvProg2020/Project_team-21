@@ -129,7 +129,10 @@ public class DiscountCode {
     }
 
     public static void getObjectFromDatabase(){
-        allDiscountCodes.put(((DiscountCode)SaveData.reloadObject(SaveData.discountCodeFile)).getDiscountId() ,(DiscountCode) SaveData.reloadObject(SaveData.discountCodeFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.discountCodeFile)));
+        for (Object object : objects) {
+            allDiscountCodes.put(((DiscountCode)object).getDiscountId() ,(DiscountCode) (object));
+        }
     }
 
 

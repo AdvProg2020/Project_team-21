@@ -129,6 +129,9 @@ public class Customer extends Account implements Comparable<Customer>{
     }
 
     public static void getObjectFromDatabase(){
-        allCustomer.add((Customer) SaveData.reloadObject(SaveData.customerFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.customerFile)));
+        for (Object object : objects) {
+            allCustomer.add((Customer) (object));
+        }
     }
 }

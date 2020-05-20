@@ -155,8 +155,16 @@ public class Log implements Comparable<Log>{
 //    }
 
     public static void getObjectFromDatabase(){
-        allLogs.put(((Log) SaveData.reloadObject(SaveData.buyLogFile)).getLogId() ,(Log) SaveData.reloadObject(SaveData.buyLogFile));
-        allLogs.put(((Log) SaveData.reloadObject(SaveData.sellLogFile)).getLogId() ,(Log) SaveData.reloadObject(SaveData.sellLogFile));
+
+        ArrayList<Object> objects1 = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
+        for (Object object : objects1) {
+            allLogs.put(((Log)object).getLogId() ,(Log) (object));
+        }
+
+        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
+        for (Object object : objects2) {
+            allLogs.put(((Log)object).getLogId() ,(Log) (object));
+        }
     }
 
 }

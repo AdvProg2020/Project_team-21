@@ -63,25 +63,46 @@ public class SaveData {
         reloadObject(shoppingCartFile);
     }
 
-    public static Object reloadObject(String fileName){
+    public static ArrayList<Object> reloadObject(String fileName){
+
+        ArrayList<StringBuilder> jsonFiles = new ArrayList<>();
         try {
             FileReader reader = new FileReader(fileName);
-            int character;
-            StringBuilder jsonString = new StringBuilder();
+            while (reader.read()!=-1) {
+                int character;
+                StringBuilder name = new StringBuilder();
 
-            while ((character = reader.read())!=-1) {
-                jsonString.append(character);
+                while ((character = reader.read()) != '\n') {
+                    name.append(character);
+                }
+                jsonFiles.add(name);
+                reader.close();
             }
-            Object object = readData(jsonString.toString(), fileToClassMap.get(fileName));
-            reader.close();
-            return object;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        ArrayList<Object> objects = new ArrayList<>();
+        for (StringBuilder jsonFile : jsonFiles) {
+            try {
+                FileReader reader = new FileReader(String.valueOf(jsonFile));
+                int character;
+                StringBuilder jsonString = new StringBuilder();
+
+                while ((character = reader.read())!=-1) {
+                    jsonString.append(character);
+                }
+                Object object = readData(jsonString.toString(), fileToClassMap.get(fileName));
+                reader.close();
+                objects.add(object);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return objects;
     }
 
-    public static Object readData(String jsonString, Class className){
+    private static Object readData(String jsonString, Class className){
 
         return gson.fromJson(jsonString, className);
     }
@@ -91,7 +112,7 @@ public class SaveData {
         file.createNewFile();
     }
 
-    public static void saveData(Object object, String name, String typeClass) {
+    public static void createAllFiles(){
 
         try {
             createFile(accountFile);
@@ -170,6 +191,11 @@ public class SaveData {
         } catch (IOException e) {
 //            e.printStackTrace();
         }
+    }
+
+    public static void saveData(Object object, String name, String typeClass) {
+
+
 
 //        typeClass += ".txt";
         String json = gson.toJson(object);

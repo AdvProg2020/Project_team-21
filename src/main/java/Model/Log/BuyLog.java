@@ -43,6 +43,9 @@ public class BuyLog extends Log{
     }
 
     public static void getObjectFromDatabase(){
-        allBuyLogs.put(((BuyLog) SaveData.reloadObject(SaveData.buyLogFile)).getLogId() ,(BuyLog) SaveData.reloadObject(SaveData.buyLogFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
+        for (Object object : objects) {
+            allBuyLogs.put(((BuyLog)object).getLogId() ,(BuyLog) (object));
+        }
     }
 }

@@ -1,19 +1,18 @@
+import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
-import Model.Category;
-import Model.DiscountCode;
 import Model.Log.BuyLog;
 import Model.Log.Log;
 import Model.Log.SellLog;
-import Model.Off;
-import Model.Product;
 import View.ConsoleView;
 import View.MainMenuUI;
 
 public class Main {
     public static void main(String[] args) {
+        SaveData.createAllFiles();
+
         Account.getObjectFromDatabase();
         Customer.getObjectFromDatabase();
         Manager.getObjectFromDatabase();

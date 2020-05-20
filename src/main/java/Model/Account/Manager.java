@@ -40,6 +40,9 @@ public class Manager extends Account implements Comparable<Manager>{
     }
 
     public static void getObjectFromDatabase(){
-        allManagers.add((Manager) SaveData.reloadObject(SaveData.managerFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.managerFile)));
+        for (Object object : objects) {
+            allManagers.add((Manager) (object));
+        }
     }
 }

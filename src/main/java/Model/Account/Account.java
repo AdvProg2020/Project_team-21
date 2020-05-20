@@ -113,7 +113,10 @@ public abstract class Account {
     }
 
     public static void getObjectFromDatabase(){
-        allAccounts.put(((Account)SaveData.reloadObject(SaveData.accountFile)).getUsername() ,(Account)SaveData.reloadObject(SaveData.accountFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.accountFile)));
+        for (Object object : objects) {
+            allAccounts.put(((Account)object).getUsername() ,(Account)(object));
+        }
     }
 
 }

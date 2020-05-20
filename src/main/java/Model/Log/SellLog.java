@@ -34,6 +34,9 @@ public class SellLog extends Log{
     }
 
     public static void getObjectFromDatabase(){
-        allSellLogs.put(((SellLog) SaveData.reloadObject(SaveData.sellLogFile)).getLogId() ,(SellLog) SaveData.reloadObject(SaveData.sellLogFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
+        for (Object object : objects) {
+            allSellLogs.put(((SellLog)object).getLogId() ,(SellLog) (object));
+        }
     }
 }

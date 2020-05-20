@@ -103,6 +103,9 @@ public class Seller extends Account implements Comparable<Seller>{
     }
 
     public static void getObjectFromDatabase(){
-        allSellers.add((Seller) SaveData.reloadObject(SaveData.sellerFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerFile)));
+        for (Object object : objects) {
+            allSellers.add((Seller) (object));
+        }
     }
 }

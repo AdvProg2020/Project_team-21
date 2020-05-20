@@ -135,6 +135,9 @@ public class Off implements Comparable<Off>{
     }
 
     public static void getObjectFromDatabase(){
-        allOffs.put(((Off)SaveData.reloadObject(SaveData.offFile)).getOffId() ,(Off) SaveData.reloadObject(SaveData.offFile));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offFile)));
+        for (Object object : objects) {
+            allOffs.put(((Off)object).getOffId() ,(Off) (object));
+        }
     }
 }
