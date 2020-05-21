@@ -60,4 +60,9 @@ public class SellerEditOffUI extends UI {
         System.out.println("To edit any field type one of these phrases:\n  add product\n  remove product\n  amount\n  start\n  end");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

@@ -45,4 +45,9 @@ public class ManagerViewUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

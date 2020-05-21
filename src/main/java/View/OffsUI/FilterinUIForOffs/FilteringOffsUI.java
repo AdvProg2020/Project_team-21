@@ -27,4 +27,9 @@ public class FilteringOffsUI extends UI {
         System.out.println("current filters");
         System.out.println("disable filter [a selected filter]");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

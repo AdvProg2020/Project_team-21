@@ -36,6 +36,11 @@ public class SelectedFilterForOffUI extends UI {
         System.out.println("Enter desired value for your selected filter\n(If you chose price, you can " +"\n" +
                 "separate start and end of price range with space,comma or dash)");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }
 
 

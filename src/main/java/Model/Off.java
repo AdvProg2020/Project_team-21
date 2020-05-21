@@ -1,10 +1,12 @@
 package Model;
 
+import Controller.Sort;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Off {
+public class Off implements Comparable<Off>{
 
     private static HashMap<String, Off> allOffs = new HashMap<>();
     public static ArrayList<Off> allOffsList = new ArrayList<>();
@@ -28,6 +30,7 @@ public class Off {
         setStartTime(startTime);
         setEndTime(endTime);
         setOffAmount(offAmount);
+        SaveData.saveData(this, getOffId(), SaveData.offFile);
     }
 
     private void setOffId(String offId) {
@@ -106,6 +109,39 @@ public class Off {
 
     public void removeProduct(Product product){
         productsList.remove(product);
+    }
+
+    @Override
+    public int compareTo(Off o) {
+        return (int)(getOffAmount()-o.getOffAmount());
+    }
+
+    private static void setAllOffs(HashMap<String, Off> allOffs) {
+        Off.allOffs = allOffs;
+    }
+
+    public static void sortAllOffsByOffID(){
+        Off.setAllOffs((HashMap<String, Off>) Sort.sortOffHashMap(getAllOffs()));
+    }
+
+    public static void sortAllOffsByOffAmount(){
+        Off.setAllOffs(convertArrayListToHashMap(Sort.sortOffArrayListByAmount(new ArrayList<>(Off.getAllOffs().values()))));
+    }
+
+    private static HashMap<String, Off> convertArrayListToHashMap(ArrayList<Off> offs){
+        HashMap<String, Off> offHashMap = new HashMap<>();
+        for (Off off : offs) {
+            offHashMap.put(off.getOffId(), off);
+        }
+
+        return offHashMap;
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offFile)));
+        for (Object object : objects) {
+            allOffs.put(((Off)object).getOffId() ,(Off) (object));
+        }
     }
 
     public DisAndOffStatus getDisAndOffStatus (){

@@ -10,8 +10,11 @@ import Model.DisAndOffStatus;
 import Model.Off;
 import Model.Filters.*;
 import Model.Sorts.ProductsSort;
+import Model.*;
+import View.ConsoleView;
 
 import java.nio.charset.Charset;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Control {
@@ -478,10 +481,9 @@ public class Control {
     public Map<String, Account> sortByKey(Map map) {
         // TreeMap to store values of HashMap
         TreeMap<String, Account> sorted = new TreeMap<>();
-
-        // Copy all data from hashMap into TreeMap
-        sorted.putAll(map);
-
         return sorted;
     }
+
+
+
 }

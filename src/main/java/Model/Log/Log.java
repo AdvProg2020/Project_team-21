@@ -2,13 +2,15 @@ package Model.Log;
 
 import Model.DiscountCode;
 import Model.Product;
+import Model.SaveData;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Log {
+public class Log implements Comparable<Log>{
+
     private static HashMap<String, Log> allLogs = new HashMap<>();
     private String logId;
     private LocalDateTime date;
@@ -40,6 +42,7 @@ public class Log {
         this.receiverPostalCode = receiverPostalCode;
         logStatus = LogStatus.PROCESSING;
         addLog(this);
+//        SaveData.saveData(this, (getLogId()+getReceiverName()), SaveData.log);
     }
 
     public void addLog(Log log)
@@ -138,6 +141,11 @@ public class Log {
     public void setReceiverUserName(String receiverUserName) {
         this.receiverUserName = receiverUserName;
     }
+
+    @Override
+    public int compareTo(Log o) {
+        return getLogId().compareTo(o.getLogId());
+    }
 //    public boolean hasProductWithId (String Id){
 //
 //    }
@@ -145,4 +153,18 @@ public class Log {
 //    public Product getProductWithId (String Id){
 //
 //    }
+
+    public static void getObjectFromDatabase(){
+
+        ArrayList<Object> objects1 = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
+        for (Object object : objects1) {
+            allLogs.put(((Log)object).getLogId() ,(Log) (object));
+        }
+
+        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
+        for (Object object : objects2) {
+            allLogs.put(((Log)object).getLogId() ,(Log) (object));
+        }
+    }
+
 }

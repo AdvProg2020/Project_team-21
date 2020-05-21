@@ -41,4 +41,9 @@ public class ManagerEditCategoryNameUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

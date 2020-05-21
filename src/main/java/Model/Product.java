@@ -44,6 +44,7 @@ public class Product {
         addSeller(seller);
         allProductsList.add(this);
         allProducts.put(productId,this);
+        SaveData.saveData(this, getProductId(), SaveData.productFile);
         addProductsWithOff();
     }
 
@@ -251,4 +252,12 @@ public class Product {
     private void setBuyersAverageScore() {
         this.buyersAverageScore = calculateScore();
     }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productFile)));
+        for (Object object : objects) {
+            allProducts.put(((Product)object).getProductId() ,(Product) (object));
+        }
+    }
+
 }

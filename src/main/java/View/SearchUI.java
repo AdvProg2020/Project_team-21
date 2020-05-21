@@ -22,4 +22,9 @@ public class SearchUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

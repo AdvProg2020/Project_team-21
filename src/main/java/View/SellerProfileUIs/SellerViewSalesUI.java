@@ -48,4 +48,10 @@ public class SellerViewSalesUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+        Seller user = (Seller) Control.getInstance().getUser();
+        user.sortSellLogsByLogId();
+    }
+
 }

@@ -1,13 +1,16 @@
 package Model.Account;
 
+import Controller.Sort;
 import Model.Company;
 import Model.Off;
 import Model.Product;
 import Model.Log.SellLog;
+import Model.SaveData;
 
 import java.util.ArrayList;
 
-public class Seller extends Account {
+public class Seller extends Account implements Comparable<Seller>{
+
     private static ArrayList<Seller> allSellers = new ArrayList<>();
     private Company company;
     private ArrayList<Product> allProducts = new ArrayList<>();
@@ -18,6 +21,7 @@ public class Seller extends Account {
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company) {
         super(username, firstName, lastName, email, phoneNumber, password);
         this.company = company;
+        SaveData.saveData(this, getUsername(), SaveData.sellerFile);
     }
 
     public static void removeSeller (Seller seller){
@@ -88,5 +92,21 @@ public class Seller extends Account {
 
     public void setSellLogs(ArrayList<SellLog> sellLogs) {
         this.sellLogs = sellLogs;
+    }
+
+    @Override
+    public int compareTo(Seller o) {
+        return getUsername().compareTo(o.getUsername());
+    }
+
+    public void sortSellLogsByLogId(){
+        this.setSellLogs(Sort.sortSellLogArrayList(this.getSellLogs()));
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerFile)));
+        for (Object object : objects) {
+            allSellers.add((Seller) (object));
+        }
     }
 }

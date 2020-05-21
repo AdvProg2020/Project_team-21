@@ -1,15 +1,15 @@
 package View;
 
-public class SalesUI extends UI {
-    private static SalesUI instance;
+public class ProductInfoUI extends UI {
+    private static ProductInfoUI instance;
 
-    private SalesUI()
+    private ProductInfoUI()
     {
 
     }
-    public static SalesUI getInstance() {
+    public static ProductInfoUI getInstance() {
         if(instance == null)
-            instance = new SalesUI();
+            instance = new ProductInfoUI();
         return instance;
     }
 

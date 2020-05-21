@@ -42,4 +42,9 @@ public class ProductDigestUI extends UI
         System.out.println("To add this product to your shopping cart: add to cart");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

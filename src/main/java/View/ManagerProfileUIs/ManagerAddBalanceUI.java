@@ -60,4 +60,9 @@ public class ManagerAddBalanceUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

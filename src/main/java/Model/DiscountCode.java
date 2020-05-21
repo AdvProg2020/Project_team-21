@@ -1,8 +1,12 @@
 package Model;
 
+import Controller.Sort;
+
 import Model.Account.Customer;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class DiscountCode {
@@ -34,6 +38,7 @@ public class DiscountCode {
         setMaxDiscountAmount(maxDiscountAmount);
         setDiscountNumberForEachUser(discountNumberForEachUser);
         allDiscountCodes.put(discountId,this);
+        SaveData.saveData(this, getDiscountId(), SaveData.discountCodeFile);
     }
 
     public static HashMap<String, DiscountCode> getAllDiscountCodes() {
@@ -106,4 +111,29 @@ public class DiscountCode {
     public void setDiscountNumberForEachUser(int discountNumberForEachUser) {
         this.discountNumberForEachUser = discountNumberForEachUser;
     }
+
+    public static void sortAllDiscountCodesByDiscountID(){
+        DiscountCode.setAllDiscountCodes((HashMap<String, DiscountCode>) Sort.sortDiscountCodeHashMap(getAllDiscountCodes()));
+    }
+
+    public static void sortAllDiscountCodesByDiscountPercentage(){
+        DiscountCode.setAllDiscountCodes(convertArrayListToHashMap(Sort.sortDiscountCodesByDiscountPercentage(new ArrayList<>(DiscountCode.getAllDiscountCodes().values()))));
+    }
+
+    private static HashMap<String, DiscountCode> convertArrayListToHashMap(ArrayList<DiscountCode> discountCodes){
+        HashMap<String, DiscountCode> discountCodeHashMap = new HashMap<>();
+        for (DiscountCode discountCode : discountCodes) {
+            discountCodeHashMap.put(discountCode.getDiscountId(), discountCode);
+        }
+        return discountCodeHashMap;
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.discountCodeFile)));
+        for (Object object : objects) {
+            allDiscountCodes.put(((DiscountCode)object).getDiscountId() ,(DiscountCode) (object));
+        }
+    }
+
+
 }

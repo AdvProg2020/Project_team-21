@@ -50,4 +50,9 @@ public class CustomerRateProductUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

@@ -28,4 +28,9 @@ public class ProductAttributesUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

@@ -33,6 +33,11 @@ public class DisableFilterUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }
 
 

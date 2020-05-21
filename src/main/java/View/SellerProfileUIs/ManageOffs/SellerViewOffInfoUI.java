@@ -58,4 +58,9 @@ public class SellerViewOffInfoUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

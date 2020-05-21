@@ -54,4 +54,9 @@ public class ManagerRemoveCategoryUI extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

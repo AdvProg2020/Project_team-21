@@ -184,4 +184,9 @@ public class UserInfoUI extends UI {
             System.out.println("To view your discount codes : view discount codes");
         }
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

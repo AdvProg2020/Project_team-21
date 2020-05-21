@@ -36,4 +36,9 @@ public class MainMenuUI extends UI {
     {
         System.out.println("Login: login\nSignup: signup\nSee sales: offs\nSee all products: products\nSee all categories: categories");
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

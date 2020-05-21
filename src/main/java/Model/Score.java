@@ -2,7 +2,7 @@ package Model;
 
 import Model.Account.Account;
 
-public class Score {
+public class Score implements Comparable<Score>{
 
     private Account user;
     private Product product;
@@ -13,6 +13,7 @@ public class Score {
         setUser(user);
         setProduct(product);
         setScore(score);
+        SaveData.saveData(this, (getScore()+getUser().getFirstName()), SaveData.scoreFile);
     }
 
     public void setUser(Account user) {
@@ -37,5 +38,10 @@ public class Score {
 
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public int compareTo(Score o) {
+        return (getScore() - o.getScore());
     }
 }

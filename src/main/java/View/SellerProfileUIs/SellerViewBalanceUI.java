@@ -31,4 +31,9 @@ public class SellerViewBalanceUI extends UI {
 
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

@@ -51,4 +51,9 @@ public class ProductMainUI extends UI {
         System.out.println("To see scores and comments and submit a comment: comments");
     }
 
+    @Override
+    public void sort() {
+
+    }
+
 }

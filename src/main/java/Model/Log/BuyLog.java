@@ -2,6 +2,7 @@ package Model.Log;
 
 import Model.Account.Customer;
 import Model.Product;
+import Model.SaveData;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BuyLog extends Log{
                 customer.addBuyLogs(this);
             }
         }
+        SaveData.saveData(this, getLogId(), SaveData.buyLogFile);
     }
 
     public ArrayList<String> getSellersUsernames() {
@@ -38,5 +40,12 @@ public class BuyLog extends Log{
     public void removeSellLog(BuyLog buyLog)
     {
         allBuyLogs.remove(buyLog.getLogId(),buyLog);
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
+        for (Object object : objects) {
+            allBuyLogs.put(((BuyLog)object).getLogId() ,(BuyLog) (object));
+        }
     }
 }

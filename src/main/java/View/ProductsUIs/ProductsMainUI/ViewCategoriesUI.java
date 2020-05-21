@@ -28,4 +28,9 @@ public class ViewCategoriesUI  extends UI {
     public void help() {
 
     }
+
+    @Override
+    public void sort() {
+
+    }
 }

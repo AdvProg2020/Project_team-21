@@ -2,6 +2,9 @@ package Model.Account;
 
 import Model.DiscountCode;
 
+import Controller.Sort;
+import Model.SaveData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,6 +26,8 @@ public abstract class Account {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.credit = 0;
+        allAccounts.put(username,this);
+        SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
     }
@@ -103,4 +108,20 @@ public abstract class Account {
                 ", credit=" + credit +
                 '}';
     }
+
+    private static void setAllAccounts(HashMap<String, Account> allAccounts) {
+        Account.allAccounts = allAccounts;
+    }
+
+    public void sortAllAccounts(){
+//        Account.setAllAccounts((HashMap<String, Account>) Sort.sortAccountHashMap(getAllAccounts()));
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.accountFile)));
+        for (Object object : objects) {
+            allAccounts.put(((Account)object).getUsername() ,(Account)(object));
+        }
+    }
+
 }

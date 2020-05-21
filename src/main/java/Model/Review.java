@@ -2,7 +2,7 @@ package Model;
 
 import Model.Account.Account;
 
-public class Review {
+public class Review implements Comparable<Review> {
 
     private Account user;
     private Product product;
@@ -15,6 +15,7 @@ public class Review {
         setProduct(product);
         setReviewText(reviewText);
         setHasBought(hasBought);
+        SaveData.saveData(this, getReviewText(), SaveData.reviewFile);
     }
 
     private void setUser(Account user) {
@@ -47,5 +48,10 @@ public class Review {
 
     public boolean hasBought(){
         return hasBought;
+    }
+
+    @Override
+    public int compareTo(Review o) {
+        return getReviewText().compareTo(o.getReviewText());
     }
 }
