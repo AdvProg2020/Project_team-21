@@ -27,6 +27,15 @@ public class Main {
         Customer.getObjectFromDatabase();
         Manager.getObjectFromDatabase();
         Seller.getObjectFromDatabase();
+        for (Seller seller : Seller.getAllSeller()) {
+            Account.addAccount(seller);
+        }
+        for (Manager manager : Manager.getAllManagers()) {
+            Account.addAccount(manager);
+        }
+        for (Customer customer : Customer.getaAllCustomers()) {
+            Account.addAccount(customer);
+        }
 //        Account.getObjectFromDatabase();
 
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
