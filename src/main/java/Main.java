@@ -11,12 +11,11 @@ import View.MainMenuUI;
 
 public class Main {
     public static void main(String[] args) {
+        new SaveData();
         SaveData.createAllFiles();
 
-        Account.getObjectFromDatabase();
-        Customer.getObjectFromDatabase();
-        Manager.getObjectFromDatabase();
-        Seller.getObjectFromDatabase();
+
+
         BuyLog.getObjectFromDatabase();
         Log.getObjectFromDatabase();
         SellLog.getObjectFromDatabase();
@@ -24,6 +23,11 @@ public class Main {
         DiscountCode.getObjectFromDatabase();
         Off.getObjectFromDatabase();
         Product.getObjectFromDatabase();
+
+        Customer.getObjectFromDatabase();
+        Manager.getObjectFromDatabase();
+        Seller.getObjectFromDatabase();
+//        Account.getObjectFromDatabase();
 
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
         ConsoleView.getInstance().processInput("main menu");

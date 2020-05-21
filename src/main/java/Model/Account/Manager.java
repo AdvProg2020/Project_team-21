@@ -15,7 +15,7 @@ public class Manager extends Account implements Comparable<Manager>{
     public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         super(username, firstName, lastName, email, phoneNumber, password);
         addNewManager(this);
-        SaveData.saveData(this, getUsername(), SaveData.accountFile);
+        SaveData.saveData(this, getUsername(), SaveData.managerFile);
     }
 
     public String getType(){
