@@ -26,7 +26,8 @@ public abstract class Account {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.credit = 0;
-        allAccounts.put(username,this);
+        if(!(this instanceof Seller))
+            allAccounts.put(username,this);
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
         if(!(this instanceof Seller))
             allAccounts.put(username,this);

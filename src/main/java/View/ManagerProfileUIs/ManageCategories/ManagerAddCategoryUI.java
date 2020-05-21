@@ -53,7 +53,7 @@ public class ManagerAddCategoryUI extends UI {
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
         }catch (Exception e)
         {
-            ConsoleView.getInstance().errorInput("This category doesn't exist!",ConsoleView.getInstance().getLastMenu());
+            ConsoleView.getInstance().errorInput(e.getMessage(),ConsoleView.getInstance().getLastMenu());
         }
     }
 

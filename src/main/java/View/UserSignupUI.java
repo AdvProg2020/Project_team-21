@@ -62,7 +62,8 @@ public class UserSignupUI extends UI {
         }
         try {
             Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,company,login);
-            System.out.println("Wellcome "+firstName+"!");
+            if (login)
+                System.out.println("Wellcome "+firstName+"!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
             ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
         }catch (Exception e)

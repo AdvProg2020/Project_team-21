@@ -244,7 +244,7 @@ public class ControlManager {
     public boolean checkCategoryExistance(String name)
     {
         for (Category category : Category.getAllCategories()) {
-            if(category.getName().equalsIgnoreCase("name"))
+            if(category.getName().equalsIgnoreCase(name))
                 return true;
         }
         return false;
