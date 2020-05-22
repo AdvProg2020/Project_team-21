@@ -50,7 +50,8 @@ public class ManagerViewDiscountCodeUI extends UI {
 
     @Override
     public void help() {
-
+        System.out.println("To sort discountCodes according to their discount percentage: sort by percentage");
+        System.out.println("To sort discountCodes according to alphabet: sort by alphabet");
     }
 
     public void setSortDiscountCodesType(SortDiscountCodesType sortDiscountCodesType) {
