@@ -6,6 +6,7 @@ import Model.Account.Manager;
 import Model.Account.Seller;
 import Model.Log.BuyLog;
 import Model.Log.SellLog;
+import Model.Request.Request;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -30,6 +31,14 @@ public class SaveData {
     public static final String sellLogFile = "SellLog.txt";
     public static final String shoppingCartFile = "ShoppingCart.txt";
 
+    public static final String offRequestFile = "OffRequest.txt";
+    public static final String productRequestFile = "ProductRequest.txt";
+    public static final String sellerRequestFile = "SellerRequest.txt";
+    public static final String offReqFile = "OffReq.txt";
+    public static final String productReqFile = "ProductReq.txt";
+    public static final String sellerReqFile = "SellerReq.txt";
+
+
     private static HashMap<String, Class> fileToClassMap = new HashMap<>();
     private static Gson gson;
 
@@ -49,6 +58,13 @@ public class SaveData {
         fileToClassMap.put(shoppingCartFile, ShoppingCart.class);
         fileToClassMap.put(accountFile, Account.class);
 
+        fileToClassMap.put(offRequestFile, Off.class);
+        fileToClassMap.put(productRequestFile, Product.class);
+        fileToClassMap.put(sellerRequestFile, Seller.class);
+        fileToClassMap.put(offReqFile, Request.class);
+        fileToClassMap.put(productReqFile, Request.class);
+        fileToClassMap.put(sellerReqFile, Request.class);
+
         gson = new Gson();
     }
 
@@ -66,6 +82,13 @@ public class SaveData {
         reloadObject(sellerFile);
         reloadObject(sellLogFile);
         reloadObject(shoppingCartFile);
+
+        reloadObject(offRequestFile);
+        reloadObject(productRequestFile);
+        reloadObject(sellerRequestFile);
+        reloadObject(offReqFile);
+        reloadObject(productReqFile);
+        reloadObject(sellerReqFile);
     }
 
     public static ArrayList<Object> reloadObject(String fileName){
@@ -224,6 +247,42 @@ public class SaveData {
 
         try {
             createFile(shoppingCartFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(offRequestFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(productRequestFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(sellerRequestFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(offReqFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(productReqFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(sellerReqFile);
         } catch (IOException e) {
 //            e.printStackTrace();
         }

@@ -4,6 +4,9 @@ import Model.Account.Seller;
 import Model.Category;
 import Model.Company;
 import Model.Product;
+import Model.SaveData;
+
+import java.util.ArrayList;
 
 public class ProductRequest extends Request {
     private Seller provider;
@@ -18,6 +21,9 @@ public class ProductRequest extends Request {
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);
          this.provider = provider;
+
+        SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
+        SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
     }
 
     public void setEditField(String editField) {
@@ -72,5 +78,17 @@ public class ProductRequest extends Request {
     @Override
     public String getType() {
         return "Product Request";
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productRequestFile)));
+        for (Object object : objects) {
+            getRequestedProducts().put(((Product)object).getProductId() ,(Product) (object));
+        }
+
+        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.productReqFile)));
+        for (Object object : objects2) {
+            getAllRequests().put(((ProductRequest)object).getRequestId() ,(ProductRequest) (object));
+        }
     }
 }

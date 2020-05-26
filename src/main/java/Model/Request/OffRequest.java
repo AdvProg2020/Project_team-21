@@ -3,6 +3,7 @@ package Model.Request;
 import Model.Account.Seller;
 import Model.Off;
 import Model.Product;
+import Model.SaveData;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class OffRequest extends Request {
         requestedOffs.put(requestId,off);
         Request.addRequest(requestId,this);
         this.provider = provider;
+
+        SaveData.saveData(this, getRequestId(), SaveData.offReqFile);
+        SaveData.saveData(off, (getRequestId()+off.getOffId()), SaveData.offRequestFile);
     }
 
     public void setEditField(String editField) {
@@ -100,5 +104,17 @@ public class OffRequest extends Request {
     @Override
     public String getType() {
         return "Off Request";
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offRequestFile)));
+        for (Object object : objects) {
+            getRequestedOffs().put(((Off)object).getOffId() ,(Off) (object));
+        }
+
+        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.offReqFile)));
+        for (Object object : objects2) {
+            getAllRequests().put(((OffRequest)object).getRequestId() ,(OffRequest) (object));
+        }
     }
 }

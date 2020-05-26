@@ -58,4 +58,20 @@ public abstract class Request {
     public static HashMap<String, Seller> getRequestedSellers() {
         return requestedSellers;
     }
+
+    public static void setRequestedOffs(HashMap<String, Off> requestedOffs) {
+        Request.requestedOffs = requestedOffs;
+    }
+
+    public static void setAllRequests(HashMap<String, Request> allRequests) {
+        Request.allRequests = allRequests;
+    }
+
+    public static void setRequestedProducts(HashMap<String, Product> requestedProducts) {
+        Request.requestedProducts = requestedProducts;
+    }
+
+    public static void setRequestedSellers(HashMap<String, Seller> requestedSellers) {
+        Request.requestedSellers = requestedSellers;
+    }
 }

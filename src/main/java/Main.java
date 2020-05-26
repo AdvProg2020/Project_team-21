@@ -6,6 +6,9 @@ import Model.Account.Seller;
 import Model.Log.BuyLog;
 import Model.Log.Log;
 import Model.Log.SellLog;
+import Model.Request.OffRequest;
+import Model.Request.ProductRequest;
+import Model.Request.SellerRequest;
 import View.ConsoleView;
 import View.MainMenuUI;
 
@@ -27,6 +30,10 @@ public class Main {
         Customer.getObjectFromDatabase();
         Manager.getObjectFromDatabase();
         Seller.getObjectFromDatabase();
+
+        OffRequest.getObjectFromDatabase();
+        ProductRequest.getObjectFromDatabase();
+        SellerRequest.getObjectFromDatabase();
 //        Account.getObjectFromDatabase();
 
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
