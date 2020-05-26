@@ -529,7 +529,7 @@ public class ConsoleView{
                 SellerViewOffsUI.getInstance().sort();
                 rightInput = true;
             }
-            else if(input.trim().matches("(?i)sort\\s+by\\s+discountI\\s+alphabet"))
+            else if(input.trim().matches("(?i)sort\\s+by\\s+alphabet"))
             {
                 ManagerViewDiscountCodeUI.getInstance().setSortDiscountCodesType(SortDiscountCodesType.DISCOUNT_ID);
                 SellerViewOffsUI.getInstance().sort();

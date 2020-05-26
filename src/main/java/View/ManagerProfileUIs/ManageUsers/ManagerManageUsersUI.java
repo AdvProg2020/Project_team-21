@@ -38,6 +38,6 @@ public class ManagerManageUsersUI extends UI {
         System.out.println("to show information of a user : view [username]");
         System.out.println("to delete a user : delete user [username]");
         System.out.println("To add a new manager : create manager profile");
-        System.out.println("to sort by alphabet : sort by alphabet");
+        System.out.println("To sort managers by alphabet : sort by alphabet");
     }
 }
