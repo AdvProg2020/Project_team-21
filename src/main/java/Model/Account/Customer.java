@@ -132,6 +132,8 @@ public class Customer extends Account implements Comparable<Customer>{
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.customerFile)));
         for (Object object : objects) {
             allCustomer.add((Customer) (object));
+
+            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
         }
     }
 }

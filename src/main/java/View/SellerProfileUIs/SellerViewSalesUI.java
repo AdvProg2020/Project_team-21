@@ -45,7 +45,7 @@ public class SellerViewSalesUI extends UI {
     @Override
     public void help()
     {
-
+        System.out.println("To sort sales history: sort sales history");
     }
 
     @Override

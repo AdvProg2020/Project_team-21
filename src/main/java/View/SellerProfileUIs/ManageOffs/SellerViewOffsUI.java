@@ -37,6 +37,8 @@ public class SellerViewOffsUI extends UI {
         System.out.println("To view an Off's infos : view [offID]");
         System.out.println("To send an edit request on an off : edit [offID]");
         System.out.println("To send an add request for an off : add off");
+        System.out.println("To sort offs according to off id: sort offs by offId");
+        System.out.println("To sort offs according to off amount: sort offs by off amount");
     }
 
     public void setSortOffType(SortOffType sortOffType) {

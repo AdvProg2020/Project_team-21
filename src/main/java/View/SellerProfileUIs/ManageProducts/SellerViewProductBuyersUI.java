@@ -57,7 +57,7 @@ public class SellerViewProductBuyersUI extends UI {
 
     @Override
     public void help() {
-
+        System.out.println("To sort buyers by id: sort buyers");
     }
 
     @Override
