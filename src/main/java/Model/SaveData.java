@@ -30,7 +30,6 @@ public class SaveData {
     public static final String sellerFile = "Seller.txt";
     public static final String sellLogFile = "SellLog.txt";
     public static final String shoppingCartFile = "ShoppingCart.txt";
-
     public static final String offRequestFile = "OffRequest.txt";
     public static final String productRequestFile = "ProductRequest.txt";
     public static final String sellerRequestFile = "SellerRequest.txt";

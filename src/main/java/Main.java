@@ -13,12 +13,10 @@ import View.ConsoleView;
 import View.MainMenuUI;
 
 public class Main {
-    public static void main(String[] args) {
+    static void readFilesFromDatabase()
+    {
         new SaveData();
         SaveData.createAllFiles();
-
-
-
         BuyLog.getObjectFromDatabase();
         Log.getObjectFromDatabase();
         SellLog.getObjectFromDatabase();
@@ -43,8 +41,10 @@ public class Main {
         for (Customer customer : Customer.getaAllCustomers()) {
             Account.addAccount(customer);
         }
-//        Account.getObjectFromDatabase();
+    }
 
+    public static void main(String[] args) {
+        readFilesFromDatabase();
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
         ConsoleView.getInstance().processInput("main menu");
     }

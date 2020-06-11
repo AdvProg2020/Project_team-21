@@ -30,6 +30,10 @@ public class ManagerManageUsersUI extends UI {
         for (String s : Account.getAllAccounts().keySet())
         {
             System.out.println(s + "     " + Account.getAllAccounts().get(s).getType());
+            if(s.equals(Control.getInstance().getUser().getUsername()))
+            {
+                System.out.print("  *");
+            }
         }
     }
 

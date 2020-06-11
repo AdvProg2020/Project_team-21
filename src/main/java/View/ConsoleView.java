@@ -564,7 +564,7 @@ public class ConsoleView{
             if(input.trim().matches("(?i)remove\\s+(.+)"))
             {
                 ManagerRemoveProductUI.getInstance().setID(input.split("\\s+")[1]);
-                goToNextPage(ManagerManageProductsUI.getInstance());
+                goToNextPage(ManagerRemoveProductUI.getInstance());
                 rightInput = true;
             }
         }
