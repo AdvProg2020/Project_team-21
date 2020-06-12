@@ -8,10 +8,14 @@ import Model.Log.BuyLog;
 import Model.Log.SellLog;
 import Model.Request.Request;
 import com.google.gson.Gson;
+import javafx.application.Application;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -96,6 +100,7 @@ public class SaveData {
         try {
 //            FileReader reader = new FileReader(fileName);
 //            while (reader.read()!=-1) {
+
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
                 String character;
                 StringBuilder name = new StringBuilder();

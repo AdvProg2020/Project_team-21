@@ -1,3 +1,4 @@
+import GUIControllers.GUICenter;
 import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
@@ -11,8 +12,14 @@ import Model.Request.ProductRequest;
 import Model.Request.SellerRequest;
 import View.ConsoleView;
 import View.MainMenuUI;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 
-public class Main {
+import java.io.IOException;
+
+public class Main extends Application {
     static void readFilesFromDatabase()
     {
         new SaveData();
@@ -24,11 +31,9 @@ public class Main {
         DiscountCode.getObjectFromDatabase();
         Off.getObjectFromDatabase();
         Product.getObjectFromDatabase();
-
         Customer.getObjectFromDatabase();
         Manager.getObjectFromDatabase();
         Seller.getObjectFromDatabase();
-
         OffRequest.getObjectFromDatabase();
         ProductRequest.getObjectFromDatabase();
         SellerRequest.getObjectFromDatabase();
@@ -43,9 +48,18 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
         readFilesFromDatabase();
+        launch(args);
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
         ConsoleView.getInstance().processInput("main menu");
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        stage.setTitle("Market");
+        stage.setScene(GUICenter.getInstance().getSigninScene());
+        stage.show();
     }
 }
