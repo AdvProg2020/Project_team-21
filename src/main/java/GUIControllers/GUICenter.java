@@ -16,14 +16,4 @@ public class GUICenter {
         }
         return instance;
     }
-    Scene signinScene;
-
-    public Scene getSigninScene() throws IOException {
-        if(signinScene == null)
-        {
-            Parent template = FXMLLoader.load(getClass().getResource("/test.fxml"));
-            signinScene = new Scene(template, 800, 800);
-        }
-        return signinScene;
-    }
 }

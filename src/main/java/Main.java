@@ -49,6 +49,7 @@ public class Main extends Application {
     }
 
 
+
     public static void main(String[] args) {
         readFilesFromDatabase();
         launch(args);
@@ -58,10 +59,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setTitle("Market");
-        Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
-        Scene scene = new Scene(mainPage);
-        stage.setScene(scene);
+        stage.setTitle("Idiots Market");
+        Scene scene = null;
+        if(Manager.getAllManagers().isEmpty())
+        {
+            Parent managerMaker = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
+            scene = new Scene(managerMaker, 1000, 720);
+            stage.setScene(scene);
+        }
+        else
+        {
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
+            scene = new Scene(mainPage, 1000, 720);
+            stage.setScene(scene);
+        }
         stage.show();
     }
 }
