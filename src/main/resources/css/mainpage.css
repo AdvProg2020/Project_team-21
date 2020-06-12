@@ -1,0 +1,91 @@
+
+@font-face {
+    font-family: "Rustico";
+    src: url("/fonts/Rustico/rustico_regular.ttf");
+}
+
+.navBarTitle {
+    -fx-padding: 0 0 0 15;
+    -fx-font-size: 18;
+    -fx-font-family: Rustico;
+    -fx-text-fill: #001f3f;
+    -fx-pref-height: 160px;
+}
+
+.navBarContainer {
+    -fx-background-color: #80a7ea;
+}
+
+.navBarSignUpBtn {
+    -fx-text-fill: #6838ff;
+    -fx-background-color: #80a7ea;
+    -fx-font-size: 15;
+}
+.navBarSignUpBtn :hover{
+    font-size:17px !important;
+    -fx-text-fill: #001f3f;
+    -fx-font-size: 15;
+}
+
+.navBarSignInBtn {
+    -fx-text-fill: #6838ff;
+    -fx-background-color: #80a7ea;
+    -fx-font-size: 15;
+}
+.navBarSignInBtn :hover{
+    font-size:17px !important;
+    -fx-text-fill: #001f3f;
+    -fx-font-size: 15;
+}
+
+.navBarButtons {
+    -fx-text-fill: #001f3f;
+    -fx-background-color: #80a7ea;
+    -fx-font-size: 15;
+}
+
+
+.navBarAccountBtn {
+
+    -fx-background-position: center;
+    -fx-background-image: url("/images/account_icon2.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-color: #80a7ea;
+}
+
+.navBarLeftContainer {
+    -fx-padding: 35 0 0 0;
+}
+
+.navBarRightContainer {
+    -fx-padding: 35 0 0 0;
+}
+
+.navBarAccountLabel {
+    -fx-padding: 30 0 0 10;
+    -fx-font-size: 15;
+}
+
+.mainPageProductCards {
+    -fx-padding: 20 20 0 20;
+    -fx-border-color: #bfaecd;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.mainPageProductCardsTitle {
+    -fx-padding: 30 0 100 0;
+    -fx-text-alignment: center;
+    /*-fx-start-margin: 20;*/
+    /*-fx-end-margin: 20;*/
+}
+
+.wholePageContainer {
+    -fx-background-color: #eff3f8;
+}
+
+.welcomeText {
+    -fx-font-size: 30;
+}
+

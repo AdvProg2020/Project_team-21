@@ -1,4 +1,3 @@
-import GUIControllers.GUICenter;
 import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
@@ -15,6 +14,7 @@ import View.MainMenuUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,7 +59,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Market");
-        stage.setScene(GUICenter.getInstance().getSigninScene());
+        Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
+        Scene scene = new Scene(mainPage);
+        stage.setScene(scene);
         stage.show();
     }
 }
