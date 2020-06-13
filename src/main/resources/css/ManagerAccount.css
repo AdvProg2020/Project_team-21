@@ -1,0 +1,6 @@
+.Button{
+    -fx-background-color:  #24282b;
+}
+.Button:hover{
+    -fx-background-color: #7d7878;
+}

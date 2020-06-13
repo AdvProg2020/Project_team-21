@@ -52,6 +52,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         readFilesFromDatabase();
+        for (String s : Account.getAllAccounts().keySet()) {
+            System.out.println(s);
+        }
         launch(args);
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
         ConsoleView.getInstance().processInput("main menu");
@@ -69,7 +72,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/mainPage.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/CreateDiscountCode.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }

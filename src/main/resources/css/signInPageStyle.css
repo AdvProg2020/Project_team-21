@@ -1,0 +1,17 @@
+.inputField {
+    -fx-background-color: #E3DCF4;
+    -fx-border-radius: 15px;
+}
+
+.submitButton {
+    -fx-background-color: #7563ff;
+    -fx-text-fill: #e4f5d3;
+}
+
+.wholePageContainer {
+    -fx-background-color: #eff3f8;
+}
+
+.inputContainer {
+    -fx-padding: 20 20 0 20;
+}
