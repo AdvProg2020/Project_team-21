@@ -1,5 +1,6 @@
-package GUIControllers;
+package GUIControllers.ManagerAccount;
 
+import GUIControllers.GraphicFather;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +11,7 @@ import java.net.URL;
 import java.util.EnumMap;
 import java.util.ResourceBundle;
 
-public class EditField extends GraphicFather implements Initializable {
+public class EditFieldManager extends GraphicFather implements Initializable {
     public TextField Username;
     public TextField Phone;
     public TextField Email;

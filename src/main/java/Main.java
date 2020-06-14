@@ -76,7 +76,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/SignInPage.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditFieldSeller.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }

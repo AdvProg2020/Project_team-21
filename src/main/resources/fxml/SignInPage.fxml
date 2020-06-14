@@ -104,7 +104,6 @@
         <Button
                 onAction="#goBack"
                 styleClass="backButton"
-                text="Back"
                 prefHeight="40"
                 prefWidth="60"
         >
