@@ -13,6 +13,7 @@ public class ProductRequest extends Request {
     private String editField;
     private String newValueEdit;
     private Seller seller;
+    private String providerUsername;
     public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product)
     {
         super(requestType);
@@ -21,9 +22,14 @@ public class ProductRequest extends Request {
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);
          this.provider = provider;
-
+         providerUsername = provider.getUsername();
+         setRequestId(requestId);
         SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
         SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
+    }
+
+    public String getProviderUsername() {
+        return providerUsername;
     }
 
     public void setEditField(String editField) {

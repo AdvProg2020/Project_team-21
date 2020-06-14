@@ -17,12 +17,12 @@
       <graphic>
          <ImageView fitHeight="82.0" fitWidth="72.0">
             <image>
-               <Image url="@../images/back.png" />
+               <Image url="@../../images/back.png" />
             </image>
          </ImageView>
       </graphic>
       <stylesheets>
-         <URL value="@../css/ManagerAccount.css" />
+         <URL value="@../../css/ManagerAccount.css" />
       </stylesheets>
     </Button>
     <Button layoutX="1036.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="127.0" prefWidth="132.0" styleClass="Button" textFill="#cfb936" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
@@ -32,12 +32,12 @@
       <graphic>
          <ImageView fitHeight="99.0" fitWidth="84.0" onMouseClicked="#done">
             <image>
-               <Image url="@../images/ok.png" />
+               <Image url="@../../images/ok.png" />
             </image>
          </ImageView>
       </graphic>
       <stylesheets>
-         <URL value="@../css/ManagerAccount.css" />
+         <URL value="@../../css/ManagerAccount.css" />
       </stylesheets>
     </Button>
     <Label layoutX="53.0" layoutY="195.0" prefHeight="39.0" prefWidth="581.0" text="Enter start date in [year month day hour minute]" textFill="#cfb936" AnchorPane.leftAnchor="50.0">

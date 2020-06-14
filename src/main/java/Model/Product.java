@@ -17,7 +17,7 @@ public class Product {
     private String name;
     private Company company;
     private double price;
-    private ArrayList<Seller> sellers;
+    private ArrayList<Seller> sellers = new ArrayList<Seller>();
     private boolean doesExist;
     private Category category;
     private String details;

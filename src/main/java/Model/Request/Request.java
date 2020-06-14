@@ -17,6 +17,7 @@ public abstract class Request {
     {
         this.requestType = requestType;
     }
+
     public static HashMap<String, Off> getRequestedOffs() {
         return requestedOffs;
     }

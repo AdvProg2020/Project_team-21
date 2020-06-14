@@ -8,6 +8,7 @@ import Model.SaveData;
 import java.util.ArrayList;
 
 public class SellerRequest extends Request {
+    private String providerUsername;
     public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType)
     {
         super(requestType);
@@ -15,8 +16,14 @@ public class SellerRequest extends Request {
         Request.addRequest(requestId,this);
         requestedSellers.put(requestId,seller);
 
+        setRequestId(requestId);
+        providerUsername = userName;
         SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
         SaveData.saveData(seller, (getRequestId()+seller.getUsername()), SaveData.sellerRequestFile);
+    }
+
+    public String getProviderUsername() {
+        return providerUsername;
     }
 
     @Override

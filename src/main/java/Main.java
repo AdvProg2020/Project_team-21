@@ -6,9 +6,7 @@ import Model.Account.Seller;
 import Model.Log.BuyLog;
 import Model.Log.Log;
 import Model.Log.SellLog;
-import Model.Request.OffRequest;
-import Model.Request.ProductRequest;
-import Model.Request.SellerRequest;
+import Model.Request.*;
 import View.ConsoleView;
 import View.MainMenuUI;
 import javafx.application.Application;
@@ -20,8 +18,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    static void readFilesFromDatabase()
-    {
+    static void putToAbstract(){
+        for (Seller seller : Seller.getAllSeller()) {
+            Account.addAccount(seller);
+        }
+        for (Manager manager : Manager.getAllManagers()) {
+            Account.addAccount(manager);
+        }
+        for (Customer customer : Customer.getaAllCustomers()) {
+            Account.addAccount(customer);
+        }
+    }
+    static void readFilesFromDatabase(){
         new SaveData();
         SaveData.createAllFiles();
         BuyLog.getObjectFromDatabase();
@@ -37,15 +45,7 @@ public class Main extends Application {
         OffRequest.getObjectFromDatabase();
         ProductRequest.getObjectFromDatabase();
         SellerRequest.getObjectFromDatabase();
-        for (Seller seller : Seller.getAllSeller()) {
-            Account.addAccount(seller);
-        }
-        for (Manager manager : Manager.getAllManagers()) {
-            Account.addAccount(manager);
-        }
-        for (Customer customer : Customer.getaAllCustomers()) {
-            Account.addAccount(customer);
-        }
+        putToAbstract();
     }
 
 
@@ -53,7 +53,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         readFilesFromDatabase();
         for (String s : Account.getAllAccounts().keySet()) {
-            System.out.println(s);
+            System.out.println(s + "  "+Account.getAllAccounts().get(s).getType());
         }
         launch(args);
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
@@ -72,7 +72,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/EditDiscountCode.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageRequests.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }

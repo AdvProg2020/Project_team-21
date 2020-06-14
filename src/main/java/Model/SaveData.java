@@ -6,7 +6,10 @@ import Model.Account.Manager;
 import Model.Account.Seller;
 import Model.Log.BuyLog;
 import Model.Log.SellLog;
+import Model.Request.OffRequest;
+import Model.Request.ProductRequest;
 import Model.Request.Request;
+import Model.Request.SellerRequest;
 import com.google.gson.Gson;
 import javafx.application.Application;
 
@@ -64,9 +67,9 @@ public class SaveData {
         fileToClassMap.put(offRequestFile, Off.class);
         fileToClassMap.put(productRequestFile, Product.class);
         fileToClassMap.put(sellerRequestFile, Seller.class);
-        fileToClassMap.put(offReqFile, Request.class);
-        fileToClassMap.put(productReqFile, Request.class);
-        fileToClassMap.put(sellerReqFile, Request.class);
+        fileToClassMap.put(offReqFile, OffRequest.class);
+        fileToClassMap.put(productReqFile, ProductRequest.class);
+        fileToClassMap.put(sellerReqFile, SellerRequest.class);
 
         gson = new Gson();
     }

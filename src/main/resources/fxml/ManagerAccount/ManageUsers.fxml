@@ -10,38 +10,38 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.ManagerAccount.ManageUsers">
-	<Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+	<Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />
          </font>
          <graphic>
             <ImageView fitHeight="90.0" fitWidth="92.0">
                <image>
-                  <Image url="@../images/back.png" />
+                  <Image url="@../../images/back.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-   <Button layoutX="550.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" textFill="#cfb936">
+   <Button layoutX="550.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
       <graphic>
          <ImageView fitHeight="67.0" fitWidth="69.0" onMouseClicked="#deleteUser">
             <image>
-               <Image url="@../images/ok.png" />
+               <Image url="@../../images/ok.png" />
             </image>
          </ImageView>
       </graphic>
    </Button>
-   <Button layoutX="546.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" textFill="#cfb936">
+   <Button layoutX="546.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
       <graphic>
          <ImageView fitHeight="67.0" fitWidth="69.0" onMouseClicked="#viewUser">
             <image>
-               <Image url="@../images/ok.png" />
+               <Image url="@../../images/ok.png" />
             </image>
          </ImageView>
       </graphic>
@@ -58,7 +58,7 @@
       </font>
    </Label>
    <TextField layoutX="275.0" layoutY="192.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Username" AnchorPane.leftAnchor="250.0" />
-   <Button layoutX="55.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="422.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Create a manager profile" textFill="#cfb936" AnchorPane.leftAnchor="55.0">
+   <Button layoutX="55.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="422.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Create a manager profile" textFill="#cfb936" AnchorPane.leftAnchor="55.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>

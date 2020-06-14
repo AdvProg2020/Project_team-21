@@ -19,27 +19,27 @@
       </AnchorPane>
       <AnchorPane layoutX="761.0" layoutY="49.0" prefHeight="736.0" prefWidth="394.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="49.0">
          <children>
-            <Button fx:id="MangeUsers1" layoutX="28.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="283.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Manage Users" textFill="#cfb936" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="51.0">
+            <Button fx:id="MangeUsers1" layoutX="28.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="283.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Users" textFill="#cfb936" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="51.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers11" layoutX="36.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Manage Request" textFill="#cfb936" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="500.0">
+            <Button fx:id="MangeUsers11" layoutX="36.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Request" textFill="#cfb936" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="500.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers1111" layoutX="20.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="344.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Manage All Products" textFill="#cfb936" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="202.0">
+            <Button fx:id="MangeUsers1111" layoutX="20.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="344.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage All Products" textFill="#cfb936" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="202.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers11111" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="398.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Manage Discount Codes" textFill="#cfb936" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="350.0">
+            <Button fx:id="MangeUsers11111" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="398.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Discount Codes" textFill="#cfb936" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="350.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers111" layoutX="40.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="333.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Manage Categories" textFill="#cfb936" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="650.0">
+            <Button fx:id="MangeUsers111" layoutX="40.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="333.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Categories" textFill="#cfb936" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="650.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
@@ -113,20 +113,20 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="MangeUsers112" layoutX="311.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936">
+      <Button fx:id="MangeUsers112" layoutX="311.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />
          </font>
       </Button>
       <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="121.0" layoutY="175.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="118.0" />
-      <Button  layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+      <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />
          </font>
          <graphic>
             <ImageView fitHeight="90.0" fitWidth="92.0">
                <image>
-                  <Image url="@../images/back.png" />
+                  <Image url="@../../images/back.png" />
                </image>
             </ImageView>
          </graphic>
