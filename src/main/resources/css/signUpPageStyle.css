@@ -1,3 +1,87 @@
+
+@font-face {
+    font-family: "Rustico";
+    src: url("/fonts/Rustico/rustico_regular.ttf");
+}
+
+.navBarTitle {
+    -fx-padding: 0 0 0 15;
+    -fx-font-size: 18;
+    -fx-font-family: Rustico;
+    -fx-text-fill: #001f3f;
+    -fx-pref-height: 60px;
+}
+
+.navBarContainer {
+    -fx-background-color: #80a7ea;
+}
+
+.navBarSignUpBtn {
+    -fx-text-fill: #6838ff;
+    -fx-background-color: #80a7ea;
+    -fx-font-size: 15;
+}
+
+.navBarSignUpBtn :hover{
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.navBarSignInBtn {
+    -fx-text-fill: #6838ff;
+    -fx-background-color: #80a7ea;
+    -fx-font-size: 15;
+}
+.navBarSignInBtn :hover{
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.navBarButtons {
+    -fx-text-fill: #001f3f;
+    -fx-background-color: #80a7ea;
+    -fx-font-size: 15;
+}
+
+.navBarButtons:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.navBarAccountBtn {
+
+    -fx-background-position: center;
+    -fx-background-image: url("/images/account_icon.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-color: #80a7ea;
+}
+
+.navBarAccountBtn:hover {
+
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.navBarLeftContainer {
+    -fx-padding: 15 0 0 0;
+}
+
+.navBarRightContainer {
+    -fx-padding: 20 0 0 0;
+}
+
+.navBarAccountLabel {
+    -fx-padding: 17 0 0 10;
+    -fx-font-size: 15;
+}
+
+.wholePageContainer {
+    -fx-background-color: #eff3f8;
+}
+
+/*////////*/
+
+
 .inputField {
     -fx-background-color: #E3DCF4;
     -fx-border-radius: 15px;
@@ -6,6 +90,12 @@
 .submitButton {
     -fx-background-color: #7563ff;
     -fx-text-fill: #e4f5d3;
+    -fx-label-padding: 2 2 2 2;
+}
+
+.submitButton:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
 }
 
 .wholePageContainer {
@@ -14,4 +104,47 @@
 
 .inputContainer {
     -fx-padding: 20 20 0 20;
+}
+
+.profilePhoto {
+
+}
+
+.setProfilePhotoBtn {
+    -fx-padding: 3 3 3 3;
+    -fx-background-color: #6fa5db;
+}
+
+.setProfilePhotoBtn:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.setProfilePhotoBox {
+    -fx-border-insets: 5px;
+    -fx-padding: 2 2 20 8;
+}
+
+.accountTypeBox {
+    -fx-border-insets: 5px;
+    -fx-padding: 15 2 2 2;
+}
+
+.submitBox {
+    -fx-border-insets: 5px;
+    -fx-padding: 15 2 2 2;
+}
+
+
+.backButton {
+    -fx-background-position: center;
+    -fx-background-image: url("/images/back.png");
+    -fx-background-size: 40px 28px;
+    -fx-background-color: #eff3f8;
+}
+
+.backButton:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+    -fx-background-color: #c3c7cc !important;
 }

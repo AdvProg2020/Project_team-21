@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="GUIControllers.SignInPage"
@@ -14,10 +16,107 @@
             stylesheets="@/css/signInPageStyle.css"
             styleClass="wholePageContainer">
 
+    <AnchorPane
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            styleClass="navBarContainer"
+            maxWidth="Infinity">
 
-    <StackPane
-            AnchorPane.topAnchor="100"
-            alignment="TOP_CENTER">
+        <StackPane AnchorPane.leftAnchor="30" >
+            <HBox AnchorPane.leftAnchor="20" styleClass="navBarLeftContainer" StackPane.alignment="CENTER_RIGHT" >
+                <ImageView fitHeight="54" fitWidth="54" layoutX="1463.0" layoutY="551.0">
+                    <image>
+                        <Image url="@/images/market_logo.png"/>
+                    </image>
+                </ImageView>
+
+                <Label
+                        text="Advanced Idiots Market"
+                        styleClass="navBarTitle">
+
+                </Label>
+            </HBox>
+        </StackPane>
+
+        <Separator orientation="HORIZONTAL" AnchorPane.topAnchor="45" AnchorPane.rightAnchor="200" AnchorPane.leftAnchor="340">
+
+        </Separator>
+        <GridPane
+                AnchorPane.leftAnchor="380"
+                AnchorPane.topAnchor="30"
+                alignment="TOP_CENTER">
+
+            <HBox alignment="TOP_CENTER">
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="Main Page">
+
+                </Button>
+
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="User Page">
+
+                </Button>
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="Products Page">
+
+                </Button>
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="Offs Page">
+
+                </Button>
+
+
+            </HBox>
+        </GridPane>
+
+        <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
+            <HBox>
+                <Button
+                        styleClass="navBarAccountBtn"
+                        prefHeight="50"
+                        prefWidth="50"
+
+                >
+
+                </Button>
+                <Label
+                        styleClass="navBarAccountLabel"
+                        text="Account"
+                >
+
+                </Label>
+            </HBox>
+
+        </VBox>
+
+    </AnchorPane>
+
+    <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
+
+        <Button
+                onAction="#goBack"
+                styleClass="backButton"
+                text="Back"
+                prefHeight="40"
+                prefWidth="60"
+        >
+
+        </Button>
+    </AnchorPane>
+
+    <GridPane
+            AnchorPane.topAnchor="130"
+            AnchorPane.rightAnchor="0"
+            AnchorPane.leftAnchor="0"
+            alignment="CENTER">
 
     <VBox>
         <VBox styleClass="inputContainer">
@@ -46,14 +145,17 @@
             </VBox>
 
 
-        <Button
-                text="Submit"
-                styleClass="submitButton"
-        >
+        <VBox alignment="BOTTOM_CENTER" styleClass="submitBox">
+            <Button
+                    text="Submit"
+                    styleClass="submitButton"
+            >
 
-        </Button>
+            </Button>
+        </VBox>
+
     </VBox>
 
-    </StackPane>
+    </GridPane>
 
 </AnchorPane>

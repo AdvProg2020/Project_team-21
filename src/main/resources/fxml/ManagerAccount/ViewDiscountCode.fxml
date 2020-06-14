@@ -8,24 +8,12 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.ManagerAccount.ViewDiscountCode">
-	<Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="99.0" prefWidth="118.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
-         <font>
-            <Font name="Hiragino Sans W2" size="30.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="90.0" fitWidth="92.0">
-               <image>
-                  <Image url="@../../images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    <Label layoutX="376.0" prefHeight="68.0" prefWidth="500.0" text="View Discount Code" textFill="#cfb936" AnchorPane.leftAnchor="376.0" AnchorPane.rightAnchor="323.0" AnchorPane.topAnchor="0.0">
       <font>
          <Font size="56.0" />
       </font>
    </Label>
-   <AnchorPane layoutX="-1.0" layoutY="67.0" prefHeight="785.0" prefWidth="1196.0">
+   <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="848.0" prefWidth="1196.0">
       <children>
          <Label fx:id="username" layoutX="712.0" layoutY="150.0" prefHeight="50.0" prefWidth="432.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="150.0">
             <font>
@@ -77,6 +65,18 @@
                <Font name="Hiragino Sans W3" size="34.0" />
             </font>
          </Label>
+      	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="99.0" prefWidth="118.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="90.0" fitWidth="92.0">
+                     <image>
+                        <Image url="@../../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
       </children>
    </AnchorPane>
 

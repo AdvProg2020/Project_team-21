@@ -49,6 +49,12 @@ public class Main extends Application {
         putToAbstract();
     }
 
+    private static Scene scene;
+
+    public static Scene getScene() {
+        return scene;
+    }
+
     public static void main(String[] args) {
         readFilesFromDatabase();
         for (String s : Account.getAllAccounts().keySet()) {
@@ -62,7 +68,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Idiots Market");
-        Scene scene = null;
         if(Manager.getAllManagers().isEmpty())
         {
             Parent managerMaker = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
@@ -71,7 +76,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditOFF.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/SignInPage.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }
