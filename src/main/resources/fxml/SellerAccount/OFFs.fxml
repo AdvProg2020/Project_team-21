@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SellerAccount.OFFs">
+    <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="68.0" prefWidth="107.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+        <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+        </font>
+      <graphic>
+         <ImageView fitHeight="74.0" fitWidth="76.0">
+            <image>
+               <Image url="@../../images/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+    </Button>
+    <Button layoutX="519.0" layoutY="207.0" mnemonicParsing="false" onMouseClicked="#viewOFF" prefHeight="88.0" prefWidth="122.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="519.0" AnchorPane.topAnchor="207.0">
+        <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+        </font>
+      <graphic>
+         <ImageView fitHeight="86.0" fitWidth="86.0">
+            <image>
+               <Image url="@../../images/ok.png" />
+            </image>
+         </ImageView>
+      </graphic>
+    </Button>
+    <Label layoutX="58.0" layoutY="149.0" prefHeight="39.0" prefWidth="168.0" text="View An OFF:" textFill="#cfb936" AnchorPane.leftAnchor="60.0">
+        <font>
+            <Font size="29.0" />
+        </font>
+    </Label>
+    <TextField fx:id="offToView" layoutX="255.0" layoutY="204.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="255.0" />
+    <Label layoutX="397.0" layoutY="26.0" prefHeight="66.0" prefWidth="112.0" text="OFFs" textFill="#cfb936" AnchorPane.topAnchor="10.0">
+        <font>
+            <Font size="35.0" />
+        </font>
+    </Label>
+    <TableView fx:id="listOFFs" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+    </TableView>
+   <Label layoutX="65.0" layoutY="307.0" prefHeight="39.0" prefWidth="322.0" text="Edit An OFF" textFill="#cfb936" AnchorPane.leftAnchor="65.0">
+      <font>
+         <Font size="29.0" />
+      </font>
+   </Label>
+   <TextField fx:id="offToEdit" layoutX="253.0" layoutY="357.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="253.0" />
+   <Button layoutX="199.0" layoutY="522.0" mnemonicParsing="false" onMouseClicked="#createOFF" prefHeight="88.0" prefWidth="409.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Create An OFF" textFill="#cfb936" AnchorPane.leftAnchor="199.0">
+      <font>
+         <Font name="Hiragino Sans W2" size="30.0" />
+      </font>
+   </Button>
+   <Button layoutX="519.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#editOFF" prefHeight="88.0" prefWidth="122.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="519.0" AnchorPane.topAnchor="367.0">
+      <font>
+         <Font name="Hiragino Sans W2" size="30.0" />
+      </font>
+      <graphic>
+         <ImageView fitHeight="86.0" fitWidth="86.0">
+            <image>
+               <Image url="@../../images/ok.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Button>
+   <Label fx:id="AlertLabel" layoutX="81.0" layoutY="748.0" prefHeight="66.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0">
+      <font>
+         <Font name="Hiragino Sans W5" size="35.0" />
+      </font>
+   </Label>
+
+</AnchorPane>
