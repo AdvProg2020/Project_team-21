@@ -40,7 +40,7 @@
          <Font size="29.0" />
       </font>
    </Label>
-   <Label layoutX="397.0" layoutY="26.0" prefHeight="66.0" prefWidth="296.0" text="Manage Categories" textFill="#cfb936" AnchorPane.topAnchor="10.0">
+   <Label layoutX="342.0" layoutY="18.0" prefHeight="66.0" prefWidth="296.0" text="Manage Categories" textFill="#cfb936" AnchorPane.topAnchor="18.0">
       <font>
          <Font size="35.0" />
       </font>
@@ -57,7 +57,7 @@
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
    </Button>
-   <Button layoutX="463.0" layoutY="257.0" mnemonicParsing="false" onMouseClicked="#editCategory" prefHeight="51.0" prefWidth="276.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit A Category" textFill="#cfb936" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="250.0">
+   <Button layoutX="463.0" layoutY="257.0" mnemonicParsing="false" onMouseClicked="#editCategory" prefHeight="51.0" prefWidth="274.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit A Category" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>

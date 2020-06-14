@@ -72,7 +72,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageRequests.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/EditCategory.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }
