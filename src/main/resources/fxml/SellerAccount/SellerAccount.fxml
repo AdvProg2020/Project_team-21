@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SellerAccount.SellerAccount">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </AnchorPane>
+      <AnchorPane layoutX="648.0" layoutY="184.0" prefHeight="295.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.bottomAnchor="388.0" AnchorPane.leftAnchor="648.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="184.0">
+         <children>
+            <Button fx:id="MangeUsers11" layoutX="91.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#goToProducts" prefHeight="51.0" prefWidth="153.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Products" textFill="#cfb936" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="39.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#goToSalesHistory" prefHeight="51.0" prefWidth="209.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Sales History" textFill="#cfb936" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+            </Button>
+            <Button fx:id="MangeUsers11111" layoutX="319.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#goToOFFs" prefHeight="51.0" prefWidth="125.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="OFFs" textFill="#cfb936" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+            </Button>
+            <Button fx:id="MangeUsers111" layoutX="321.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#goToCategories" prefHeight="51.0" prefWidth="171.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Categories" textFill="#cfb936" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="150.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="25.0" layoutY="187.0" prefHeight="516.0" prefWidth="592.0" style="-fx-border-color: White;">
+         <children>
+            <Line endX="259.4027099609375" endY="544.3114624023438" startX="259.4027099609375" startY="15.8714599609375" stroke="#9e9191" AnchorPane.leftAnchor="275.0" />
+            <Line endX="1.0000267028808594" endY="258.9602966308594" layoutX="10.0" layoutY="10.0" startX="552.5000610351562" startY="254.66737365722656" stroke="#9e9191" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="275.0" />
+            <Line endX="-19.999969482421875" endY="253.0098114013672" layoutX="20.0" layoutY="-104.0" startX="542.4276123046875" startY="253.00967407226562" stroke="#9e9191" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="137.5" />
+            <Label layoutX="5.0" layoutY="2.0" prefHeight="39.0" prefWidth="176.0" text="Username" textFill="#b31215" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="383.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="152.0" prefHeight="39.0" prefWidth="96.0" text="Name" textFill="#b31215" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="441.0" AnchorPane.topAnchor="142.5">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="6.0" layoutY="282.0" prefHeight="39.0" prefWidth="164.0" text="Address" textFill="#b31215" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="280.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="311.0" layoutY="2.0" prefHeight="39.0" prefWidth="219.0" text="Phone Number" textFill="#b31215" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="Username" layoutX="20.0" layoutY="47.0" prefHeight="81.0" prefWidth="247.0" text="---" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="307.0" AnchorPane.topAnchor="47.0">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="Name" layoutX="12.0" layoutY="183.0" prefHeight="85.0" prefWidth="260.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="Address" layoutX="36.0" layoutY="324.0" prefHeight="94.0" prefWidth="229.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="Phone" layoutX="287.0" layoutY="47.0" prefHeight="83.0" prefWidth="256.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="115.0" layoutY="136.0" prefHeight="17.0" prefWidth="88.0" text="Email" textFill="#b31215" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="-73.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="Email" layoutX="284.0" layoutY="175.0" prefHeight="98.0" prefWidth="300.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="175.0">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="165.0" layoutY="289.0" text="Password" textFill="#b31215" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="-123.0" AnchorPane.topAnchor="280.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="Password" layoutX="281.0" layoutY="313.0" prefHeight="87.0" prefWidth="295.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Line endX="-9.999969482421875" endY="257.5668029785156" layoutX="18.0" layoutY="142.0" startX="552.5000610351562" startY="254.66737365722656" stroke="#9e9191" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="410.0" />
+            <Label layoutX="6.0" layoutY="424.0" prefHeight="39.0" prefWidth="225.0" text="Company Name" textFill="#b31215" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="424.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="306.0" layoutY="412.0" prefHeight="39.0" prefWidth="262.0" text="Company Address" textFill="#b31215" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="425.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="companyName" layoutX="22.0" layoutY="467.0" prefHeight="94.0" prefWidth="229.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="companyAddress" layoutX="300.0" layoutY="465.0" prefHeight="94.0" prefWidth="229.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Optima Regular" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button layoutX="157.0" layoutY="766.0" mnemonicParsing="false" onMouseClicked="#editField" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936" AnchorPane.bottomAnchor="20.0">
+         <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+         </font>
+      </Button>
+      <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="297.0" layoutY="110.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="53.0" />
+      <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="92.0">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <AnchorPane layoutX="651.0" layoutY="513.0" prefHeight="241.0" prefWidth="484.0" style="-fx-border-color: WHITE;">
+         <children>
+            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="176.0" text="Balance:" textFill="#3ab214">
+               <font>
+                  <Font name="Futura Medium" size="33.0" />
+               </font>
+            </Label>
+            <Label fx:id="balance" layoutX="190.0" layoutY="136.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Futura Medium" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
