@@ -9,18 +9,6 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.ManagerAccount.EditDiscountCode">
-	<Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
-         <font>
-            <Font name="Hiragino Sans W2" size="30.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="90.0" fitWidth="92.0">
-               <image>
-                  <Image url="@../../images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    <Label layoutX="384.0" layoutY="14.0" prefHeight="68.0" prefWidth="485.0" text="EDIT Discount Code" textFill="#cfb936" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="14.0">
       <font>
          <Font size="56.0" />
@@ -59,7 +47,7 @@
                <Font name="Hiragino Sans W3" size="20.0" />
             </font>
          </Button>
-         <Button layoutX="105.0" mnemonicParsing="false" onMouseClicked="#enableMaxPercentage" prefHeight="54.0" prefWidth="150.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Max  Percentage" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="460.0">
+         <Button layoutX="105.0" mnemonicParsing="false" onMouseClicked="#enableMaxPercentage" prefHeight="54.0" prefWidth="150.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Max Amount" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="460.0">
             <font>
                <Font name="Hiragino Sans W3" size="15.0" />
             </font>
@@ -87,6 +75,18 @@
             </font>
          </Button>
          <TextField fx:id="removeUsers" layoutX="947.0" layoutY="670.0" prefHeight="27.0" prefWidth="240.0" promptText="Enter new value" AnchorPane.rightAnchor="10.0" />
+      	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="90.0" fitWidth="92.0">
+                     <image>
+                        <Image url="@../../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
       </children>
    </AnchorPane>
 

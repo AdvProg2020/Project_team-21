@@ -1,3 +1,4 @@
+import Controller.Control;
 import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
@@ -48,8 +49,6 @@ public class Main extends Application {
         putToAbstract();
     }
 
-
-
     public static void main(String[] args) {
         readFilesFromDatabase();
         for (String s : Account.getAllAccounts().keySet()) {
@@ -72,7 +71,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/OFFs.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditOFF.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }

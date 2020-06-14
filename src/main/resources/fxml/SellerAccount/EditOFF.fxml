@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SellerAccount.EditOFF">
+   <Label layoutX="470.0" layoutY="24.0" prefHeight="68.0" prefWidth="350.0" text="EDIT OFF" textFill="#cfb936" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="379.0" AnchorPane.topAnchor="24.0">
+      <font>
+         <Font size="56.0" />
+      </font>
+   </Label>
+   <AnchorPane layoutX="-1.0" layoutY="7.0" prefHeight="856.0" prefWidth="1196.0" AnchorPane.leftAnchor="-1.0">
+      <children>
+         <Label fx:id="AlertLabel" prefHeight="82.0" prefWidth="1055.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <font>
+               <Font size="52.0" />
+            </font>
+         </Label>
+         <TextField fx:id="startDate" prefHeight="27.0" prefWidth="550.0" promptText="Enter Name" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="170.0" />
+         <TextField fx:id="endDate" prefHeight="27.0" prefWidth="550.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="270.0" />
+         <TextField fx:id="percentage" prefHeight="27.0" prefWidth="550.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="400.0" />
+         <TextField fx:id="productsToRemove" layoutX="616.0" layoutY="500.0" prefHeight="31.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="500.0" />
+         <Button layoutX="1050.0" layoutY="-6.0" mnemonicParsing="false" onMouseClicked="#makeChange" prefHeight="131.0" prefWidth="136.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="-6.0">
+            <font>
+               <Font name="Hiragino Sans W2" size="30.0" />
+            </font>
+            <graphic>
+               <ImageView fitHeight="88.0" fitWidth="90.0">
+                  <image>
+                     <Image url="@../../images/ok.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <Label layoutX="242.0" layoutY="171.0" text="Start Date" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+            <font>
+               <Font name="Hiragino Sans W3" size="25.0" />
+            </font>
+         </Label>
+         <Label layoutX="107.0" layoutY="279.0" text="End Date" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+            <font>
+               <Font name="Hiragino Sans W3" size="25.0" />
+            </font>
+         </Label>
+         <Label layoutX="97.0" layoutY="372.0" text="Percentage" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="400.0">
+            <font>
+               <Font name="Hiragino Sans W3" size="25.0" />
+            </font>
+         </Label>
+         <Label layoutX="89.0" layoutY="515.0" text="ProductIDs To Remove(Seperate By ,)" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="515.0">
+            <font>
+               <Font name="Hiragino Sans W3" size="25.0" />
+            </font>
+         </Label>
+         <Label layoutX="108.0" layoutY="604.0" text="ProductIDs To Remove(Seperate By ,)" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+            <font>
+               <Font name="Hiragino Sans W3" size="25.0" />
+            </font>
+         </Label>
+         <TextField fx:id="productsToAdd" layoutX="619.0" layoutY="602.0" prefHeight="31.0" prefWidth="554.0" promptText="Enter new value" />
+      	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="90.0" fitWidth="92.0">
+                     <image>
+                        <Image url="@../../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+      </children>
+   </AnchorPane>
+
+</AnchorPane>
