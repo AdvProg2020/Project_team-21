@@ -26,12 +26,12 @@
          <URL value="@../../css/ManagerAccount.css" />
       </stylesheets>
     </Button>
-    <Button layoutX="518.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="88.0" prefWidth="122.0" styleClass="Button" textFill="#cfb936">
+    <Button layoutX="518.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="88.0" prefWidth="122.0" styleClass="Button" textFill="#cfb936">
         <font>
-            <Font name="Hiragino Sans W2" size="30.0" />
+            <Font name="Hiragino Sans W2" size="30.0"/>
         </font>
       <graphic>
-         <ImageView fitHeight="99.0" fitWidth="84.0" onMouseClicked="#removeProduct">
+         <ImageView fitHeight="99.0" fitWidth="84.0" >
             <image>
                <Image url="@../../images/ok.png" />
             </image>
@@ -46,7 +46,7 @@
             <Font size="29.0" />
         </font>
     </Label>
-    <TextField fx:id="productToRemove" layoutX="257.0" layoutY="265.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Username" AnchorPane.leftAnchor="257.0" />
+    <TextField fx:id="productToRemove" layoutX="257.0" layoutY="265.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="257.0" />
     <Label layoutX="397.0" layoutY="26.0" prefHeight="66.0" prefWidth="268.0" text="Manage Products" textFill="#cfb936" AnchorPane.topAnchor="10.0">
         <font>
             <Font size="35.0" />
