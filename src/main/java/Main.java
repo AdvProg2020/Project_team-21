@@ -72,7 +72,7 @@ public class Main extends Application {
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/CreateDiscountCode.fxml"));
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/EditDiscountCode.fxml"));
             scene = new Scene(mainPage, 1000, 720);
             stage.setScene(scene);
         }
