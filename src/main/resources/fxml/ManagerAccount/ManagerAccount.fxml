@@ -11,36 +11,36 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.ManagerAccount.ManagerAccount">
    <children>
-      <AnchorPane layoutX="761.0" layoutY="49.0" prefHeight="736.0" prefWidth="394.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="49.0">
+      <AnchorPane layoutX="761.0" layoutY="139.0" prefHeight="709.0" prefWidth="397.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="139.0">
          <children>
-            <Button fx:id="MangeUsers1" layoutX="28.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="283.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Users" textFill="#cfb936" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="51.0">
+            <Button layoutX="28.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#manageUsers" prefHeight="51.0" prefWidth="211.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Users" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="51.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers11" layoutX="36.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Request" textFill="#cfb936" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="500.0">
+            <Button layoutX="36.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#manageRequests" prefHeight="51.0" prefWidth="255.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Requests" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="350.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers1111" layoutX="20.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="344.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage All Products" textFill="#cfb936" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="202.0">
+            <Button layoutX="20.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="51.0" prefWidth="298.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage All Products" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="150.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers11111" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="398.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Discount Codes" textFill="#cfb936" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="350.0">
+            <Button layoutX="102.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#manageDiscountCodes" prefHeight="51.0" prefWidth="335.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Discount Codes" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="250.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="MangeUsers111" layoutX="40.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="333.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Categories" textFill="#cfb936" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="650.0">
+            <Button layoutX="40.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#manageCategories" prefHeight="51.0" prefWidth="280.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Categories" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="450.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="164.0" layoutY="237.0" prefHeight="455.0" prefWidth="564.0">
+      <AnchorPane layoutX="164.0" layoutY="218.0" prefHeight="489.0" prefWidth="590.0">
          <children>
             <Line endX="259.4044494628906" endY="408.41339111328125" startX="259.4043884277344" startY="-4.160430908203125" stroke="#9e9191" AnchorPane.leftAnchor="275.0" />
             <Line endX="-9.999969482421875" endY="257.5668029785156" layoutX="10.0" layoutY="10.0" startX="552.5000610351562" startY="254.66737365722656" stroke="#9e9191" AnchorPane.topAnchor="275.0" />
@@ -75,7 +75,7 @@
                   <Font name="Optima Regular" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="Address" layoutX="36.0" layoutY="324.0" prefHeight="94.0" prefWidth="229.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="20.0">
+            <Label fx:id="Address" layoutX="36.0" layoutY="324.0" prefHeight="69.0" prefWidth="229.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="Optima Regular" size="25.0" />
                </font>
@@ -105,13 +105,13 @@
                   <Font name="Optima Regular" size="25.0" />
                </font>
             </Label>
+            <Button mnemonicParsing="false" onMouseClicked="#editFields" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="130.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="30.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="MangeUsers112" layoutX="311.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#goToManageUsers" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936">
-         <font>
-            <Font name="Hiragino Sans W2" size="30.0" />
-         </font>
-      </Button>
       <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="121.0" layoutY="175.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="118.0" />
       <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>

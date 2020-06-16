@@ -3,7 +3,6 @@ package GUIControllers;
 import Controller.Control;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -75,7 +74,7 @@ public class SignUpPage extends GraphicFather {
         Page pageToGo = GUICenter.getInstance().getLanding();
         if(((String)type.getValue()).equalsIgnoreCase("seller")){
             login = false;
-            pageToGo = Page.COMPANYCREATE;
+            pageToGo = Page.CREATECOMPANY;
         }
         try{
             String imagePath = "profilePhotos/account_icon.png" ;

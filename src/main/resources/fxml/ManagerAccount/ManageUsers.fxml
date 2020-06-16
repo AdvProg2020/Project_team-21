@@ -22,7 +22,7 @@
             </ImageView>
          </graphic>
       </Button>
-   <Button layoutX="550.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
+   <Button layoutX="550.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#removeUser" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
@@ -34,7 +34,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button layoutX="546.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
+   <Button layoutX="546.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#viewUser" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
@@ -46,7 +46,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <TextField layoutX="266.0" layoutY="427.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Username" AnchorPane.leftAnchor="250.0" />
+   <TextField fx:id="userToView" layoutX="266.0" layoutY="427.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Username" AnchorPane.leftAnchor="250.0" />
    <Label layoutX="127.0" layoutY="378.0" prefHeight="39.0" prefWidth="225.0" text="View A User:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
       <font>
          <Font size="29.0" />
@@ -57,8 +57,8 @@
          <Font size="29.0" />
       </font>
    </Label>
-   <TextField layoutX="275.0" layoutY="192.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Username" AnchorPane.leftAnchor="250.0" />
-   <Button layoutX="55.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="51.0" prefWidth="422.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Create a manager profile" textFill="#cfb936" AnchorPane.leftAnchor="55.0">
+   <TextField fx:id="userToRemove" layoutX="275.0" layoutY="192.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Username" AnchorPane.leftAnchor="250.0" />
+   <Button layoutX="55.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#createManage" prefHeight="51.0" prefWidth="422.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Create a manager profile" textFill="#cfb936" AnchorPane.leftAnchor="55.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
@@ -70,5 +70,10 @@
    </Label>
    <TableView fx:id="listUsers" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
    </TableView>
+   <Label fx:id="AlertLabel" layoutX="91.0" layoutY="758.0" prefHeight="66.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215">
+      <font>
+         <Font name="Hiragino Sans W5" size="35.0" />
+      </font>
+   </Label>
 
 </AnchorPane>

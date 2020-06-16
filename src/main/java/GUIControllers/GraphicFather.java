@@ -5,15 +5,19 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -87,5 +91,46 @@ public class GraphicFather {
     public void signOut(Event event){
         Control.getInstance().logout();
         goToNextPage(GUICenter.getInstance().getLanding(),event);
+    }
+
+    public void showImageUser(Circle profilePhoto){
+        File file = new File(Control.getInstance().getUser().getImagePath());
+        Image image = new Image(file.toURI().toString());
+        ImagePattern img = new ImagePattern(image);
+        profilePhoto.setFill(img);
+    }
+    private boolean signedIn(){
+        boolean result = false;
+        if(Control.getInstance().getUser() != null)
+            result = true;
+        return result;
+    }
+
+    public void topBarShow(Button signinButton, Button signupButton, Circle profilePhoto,Label accountName){
+        profilePhoto.setFill(new ImagePattern(new Image("/images/account_icon.png")));
+        if(signedIn())
+        {
+            Account user = Control.getInstance().getUser();
+            signinButton.setText("");
+            signinButton.setDisable(true);
+            signupButton.setText("View Your Account");
+            accountName.setText(user.getFirstName());
+            showImageUser(profilePhoto);
+        }
+    }
+    public void gotoSignUpPage(ActionEvent actionEvent){
+        if(!signedIn())
+        {
+            goToNextPage(Page.SIGNUP,actionEvent);
+            GUICenter.getInstance().setLanding(Page.MAIN);
+        }
+        else{
+            goToAccount(actionEvent);
+        }
+    }
+
+    public void gotoSignInPage(ActionEvent actionEvent){
+        goToNextPage(Page.SIGNIN,actionEvent);
+        GUICenter.getInstance().setLanding(Page.MAIN);
     }
 }

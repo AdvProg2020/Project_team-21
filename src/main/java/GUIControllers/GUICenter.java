@@ -81,8 +81,26 @@ public class GUICenter {
         else if(page.equals(Page.CUSTOMER)){
             template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/CustomerAccount.fxml"));
         }
-        else if(page.equals(Page.COMPANYCREATE)){
+        else if(page.equals(Page.CREATECOMPANY)){
             template = FXMLLoader.load(getClass().getResource("/fxml/CreateCompany.fxml"));
+        }
+        else if(page.equals(Page.MANAGEUSERS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageUsers.fxml"));
+        }
+        else if(page.equals(Page.MANAGEREQUESTS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageRequests.fxml"));
+        }
+        else if(page.equals(Page.MANAGEPRODUCTS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageProducts.fxml"));
+        }
+        else if(page.equals(Page.MANAGEDISCOUNTCODES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageDiscountCodes.fxml"));
+        }
+        else if(page.equals(Page.MANAGECATEGORIES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageCategories.fxml"));
+        }
+        else if(page.equals(Page.EDITFIELDSMANAGER)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/EditFieldManager.fxml"));
         }
         result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         return result;

@@ -1,14 +1,15 @@
 package GUIControllers.ManagerAccount;
 
+import Controller.ControlManager;
+import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import GUIControllers.Page;
 import Model.Account.Account;
 import com.sun.glass.ui.Accessible;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +21,9 @@ public class ManageUsers extends GraphicFather implements Initializable {
     public TableView<Account> listUsers;
     public TableColumn<Account,String> userName = new TableColumn<>("Username");
     public TableColumn<Account,String> type = new TableColumn<>("Type");
+    public TextField userToView;
+    public TextField userToRemove;
+    public Label AlertLabel;
 
     public void deleteUser(MouseEvent mouseEvent) {
     }
@@ -41,6 +45,21 @@ public class ManageUsers extends GraphicFather implements Initializable {
         listUsers.getColumns().add(type);
     }
 
-    public void viewUser(MouseEvent mouseEvent) {
+    public void viewUser(MouseEvent mouseEvent){
+        if(Account.getAllAccounts().keySet().contains(userToView.getText())){
+            goToNextPage(Page.VIEWUSER,mouseEvent);
+            ControlManager.getInstance().setUserToView(userToView.getText());
+        }
+        else{
+            showError(AlertLabel,"This username doesn't Exist",Error.NEGATIVE);
+        }
+    }
+
+    public void removeUser(MouseEvent mouseEvent){
+
+    }
+
+    public void createManage(MouseEvent mouseEvent) {
+
     }
 }

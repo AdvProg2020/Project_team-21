@@ -70,7 +70,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Label fx:id="AlertLabel" layoutX="81.0" layoutY="748.0" prefHeight="66.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0">
+   <Label fx:id="AlertLabel" layoutX="81.0" layoutY="748.0" prefHeight="66.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0">
       <font>
          <Font name="Hiragino Sans W5" size="35.0" />
       </font>

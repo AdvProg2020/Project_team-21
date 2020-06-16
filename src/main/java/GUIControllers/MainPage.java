@@ -19,41 +19,10 @@ public class MainPage extends GraphicFather implements Initializable {
     public Button signupButton;
     public Label accountName;
     public Circle profilePhoto;
-    boolean signedIn = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        profilePhoto.setFill(new ImagePattern(new Image("/images/account_icon.png")));
-        if(Control.getInstance().getUser() != null)
-            signedIn = true;
-        if(signedIn)
-        {
-            Account user = Control.getInstance().getUser();
-            signinButton.setText("");
-            signinButton.setDisable(true);
-            signupButton.setText("View Your Account");
-            accountName.setText(user.getFirstName());
-            File file = new File(user.getImagePath());
-            Image image = new Image(file.toURI().toString());
-            ImagePattern img = new ImagePattern(image);
-            profilePhoto.setFill(img);
-        }
-    }
-
-    public void gotoSignUpPage(ActionEvent actionEvent){
-        if(!signedIn)
-        {
-            goToNextPage(Page.SIGNUP,actionEvent);
-            GUICenter.getInstance().setLanding(Page.MAIN);
-        }
-        else{
-            goToAccount(actionEvent);
-        }
-    }
-
-    public void gotoSignInPage(ActionEvent actionEvent){
-        goToNextPage(Page.SIGNIN,actionEvent);
-        GUICenter.getInstance().setLanding(Page.MAIN);
+        topBarShow(signinButton,signupButton,profilePhoto,accountName);
     }
 
     public void gotoProductsPage(ActionEvent actionEvent) throws IOException {

@@ -16,10 +16,10 @@ import java.util.HashMap;
 public class ControlManager {
 
     Manager user = (Manager)(Control.getInstance().getUser());
+    private String userToView;
     private static ControlManager instance;
     private ControlManager()
     {
-
     }
     public static ControlManager getInstance()
     {
@@ -30,6 +30,14 @@ public class ControlManager {
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber,String photo)
     {
         Manager manager = new Manager(username,firstName,lastName,email,phoneNumber,password,photo);
+    }
+
+    public void setUserToView(String userToView) {
+        this.userToView = userToView;
+    }
+
+    public String getUserToView() {
+        return userToView;
     }
 
     public void viewUsername(String username) throws Exception

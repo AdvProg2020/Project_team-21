@@ -17,6 +17,7 @@ public abstract class Account {
     private String phoneNumber;
     private String password;
     private double credit;
+    private String address;
     private String imagePath;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
@@ -31,6 +32,16 @@ public abstract class Account {
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        if(address == null)
+            address = "No Address";
+        this.address = address;
     }
 
     public void setImagePath(String imagePath) {
