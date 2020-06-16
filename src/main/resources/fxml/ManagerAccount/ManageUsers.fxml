@@ -27,7 +27,7 @@
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
       <graphic>
-         <ImageView fitHeight="67.0" fitWidth="69.0" onMouseClicked="#deleteUser">
+         <ImageView fitHeight="67.0" fitWidth="69.0">
             <image>
                <Image url="@../../images/ok.png" />
             </image>
@@ -39,7 +39,7 @@
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
       <graphic>
-         <ImageView fitHeight="67.0" fitWidth="69.0" onMouseClicked="#viewUser">
+         <ImageView fitHeight="67.0" fitWidth="69.0">
             <image>
                <Image url="@../../images/ok.png" />
             </image>

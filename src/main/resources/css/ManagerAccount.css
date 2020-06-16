@@ -4,3 +4,10 @@
 .Button:hover{
     -fx-background-color: #7d7878;
 }
+.SpecialButton{
+    -fx-background-color: none;
+}
+.SpecialButton:hover{
+    -fx-scale-y: 1.2 !important;
+    -fx-scale-x: 1.2 !important;
+}

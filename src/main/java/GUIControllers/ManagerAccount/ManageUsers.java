@@ -27,8 +27,6 @@ public class ManageUsers extends GraphicFather implements Initializable {
     public TextField userToRemove;
     public Label AlertLabel;
 
-    public void deleteUser(MouseEvent mouseEvent) {
-    }
     ObservableList<Account> getAccounts(){
         ObservableList<Account> result =  FXCollections.observableArrayList();
         for (String s : Account.getAllAccounts().keySet()) {
