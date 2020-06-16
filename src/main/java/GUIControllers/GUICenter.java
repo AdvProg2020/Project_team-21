@@ -102,6 +102,12 @@ public class GUICenter {
         else if(page.equals(Page.EDITFIELDSMANAGER)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/EditFieldManager.fxml"));
         }
+        else if(page.equals(Page.VIEWUSER)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ViewUsername.fxml"));
+        }
+        else if(page.equals(Page.CREATEMANAGER)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/CreateManager.fxml"));
+        }
         result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         return result;
     }

@@ -35,7 +35,6 @@ public class ManagerDeleteUserUI extends UI {
         {
             ConsoleView.getInstance().errorInput(e.getMessage(),ConsoleView.getInstance().getLastMenu());
         }
-
     }
 
     @Override

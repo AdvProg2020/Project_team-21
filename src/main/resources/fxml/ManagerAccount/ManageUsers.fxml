@@ -70,9 +70,9 @@
    </Label>
    <TableView fx:id="listUsers" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
    </TableView>
-   <Label fx:id="AlertLabel" layoutX="91.0" layoutY="758.0" prefHeight="66.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215">
+   <Label fx:id="AlertLabel" layoutX="91.0" layoutY="758.0" prefHeight="54.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="100.0">
       <font>
-         <Font name="Hiragino Sans W5" size="35.0" />
+         <Font name="Hiragino Sans W5" size="25.0" />
       </font>
    </Label>
 

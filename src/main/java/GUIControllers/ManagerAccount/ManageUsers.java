@@ -1,10 +1,12 @@
 package GUIControllers.ManagerAccount;
 
+import Controller.Control;
 import Controller.ControlManager;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Account.Account;
+import View.ConsoleView;
 import com.sun.glass.ui.Accessible;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,8 +49,8 @@ public class ManageUsers extends GraphicFather implements Initializable {
 
     public void viewUser(MouseEvent mouseEvent){
         if(Account.getAllAccounts().keySet().contains(userToView.getText())){
-            goToNextPage(Page.VIEWUSER,mouseEvent);
             ControlManager.getInstance().setUserToView(userToView.getText());
+            goToNextPage(Page.VIEWUSER,mouseEvent);
         }
         else{
             showError(AlertLabel,"This username doesn't Exist",Error.NEGATIVE);
@@ -56,10 +58,18 @@ public class ManageUsers extends GraphicFather implements Initializable {
     }
 
     public void removeUser(MouseEvent mouseEvent){
-
+        try
+        {
+            Control.getInstance().deleteUser(userToRemove.getText());
+            showError(AlertLabel,"User "+userToRemove.getText()+" has been deleted successfully!",Error.POSITIVE);
+        }
+        catch (Exception e)
+        {
+            showError(AlertLabel,e.getMessage(),Error.NEGATIVE);
+        }
     }
 
     public void createManage(MouseEvent mouseEvent) {
-
+        goToNextPage(Page.CREATEMANAGER,mouseEvent);
     }
 }
