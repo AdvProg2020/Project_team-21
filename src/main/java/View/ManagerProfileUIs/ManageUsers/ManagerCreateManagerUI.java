@@ -39,7 +39,7 @@ public class ManagerCreateManagerUI extends UI {
             String email = scanner.nextLine();
             System.out.println("Enter phone number: ");
             String phone = scanner.nextLine();
-            Control.getInstance().createAccount("manager",username,password,firstName,lastName,email,phone,checkPassword,null,false);
+            Control.getInstance().createAccount("manager",username,password,firstName,lastName,email,phone,checkPassword,null,false, "");
             System.out.println("The account has been created!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());
         }catch (Exception e) {

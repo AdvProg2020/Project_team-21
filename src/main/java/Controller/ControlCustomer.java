@@ -22,9 +22,10 @@ public class ControlCustomer {
             instance = new ControlCustomer();
         return instance;
     }
-    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber)
+    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber,String photo)
     {
-        new Customer(username,firstName,lastName,email,phoneNumber,password);
+       Customer customer = new Customer(username,firstName,lastName,email,phoneNumber,password);
+       customer.setImagePath(photo);
     }
     private boolean checkProductExistance(String productID)
     {

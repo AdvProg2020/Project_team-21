@@ -1,0 +1,5 @@
+package GUIControllers;
+
+public enum Page {
+    MAIN,SIGNIN,SIGNUP,MANAGER,SELLER,CUSTOMER,COMPANYCREATE
+}

@@ -1,160 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUIControllers.SignInPage"
-            prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@/css/signInPageStyle.css"
-            styleClass="wholePageContainer">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <AnchorPane
-            AnchorPane.leftAnchor="0"
-            AnchorPane.rightAnchor="0"
-            styleClass="navBarContainer"
-            maxWidth="Infinity">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signInPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SignInPage">
 
-        <StackPane AnchorPane.leftAnchor="30" >
-            <HBox AnchorPane.leftAnchor="20" styleClass="navBarLeftContainer" StackPane.alignment="CENTER_RIGHT" >
+    <AnchorPane maxWidth="Infinity" styleClass="navBarContainer" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <StackPane AnchorPane.leftAnchor="30">
+            <HBox styleClass="navBarLeftContainer" AnchorPane.leftAnchor="20" StackPane.alignment="CENTER_RIGHT">
                 <ImageView fitHeight="54" fitWidth="54" layoutX="1463.0" layoutY="551.0">
                     <image>
-                        <Image url="@/images/market_logo.png"/>
+                        <Image url="@/images/market_logo.png" />
                     </image>
                 </ImageView>
 
-                <Label
-                        text="Advanced Idiots Market"
-                        styleClass="navBarTitle">
+                <Label styleClass="navBarTitle" text="Advanced Idiots Market">
 
                 </Label>
             </HBox>
         </StackPane>
 
-        <Separator orientation="HORIZONTAL" AnchorPane.topAnchor="45" AnchorPane.rightAnchor="200" AnchorPane.leftAnchor="340">
+        <Separator orientation="HORIZONTAL" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="200" AnchorPane.topAnchor="45">
 
         </Separator>
-        <GridPane
-                AnchorPane.leftAnchor="380"
-                AnchorPane.topAnchor="30"
-                alignment="TOP_CENTER">
+        <GridPane alignment="TOP_CENTER" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="30">
 
-            <HBox alignment="TOP_CENTER">
-
-                <Button
-                        styleClass="navBarButtons"
-                        text="Main Page">
-
-                </Button>
-
-
-                <Button
-                        styleClass="navBarButtons"
-                        text="User Page">
-
-                </Button>
-
-                <Button
-                        styleClass="navBarButtons"
-                        text="Products Page">
-
-                </Button>
-
-                <Button
-                        styleClass="navBarButtons"
-                        text="Offs Page">
-
-                </Button>
-
-
-            </HBox>
+            <HBox alignment="TOP_CENTER" />
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
 
-        <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
-            <HBox>
-                <Button
-                        styleClass="navBarAccountBtn"
-                        prefHeight="50"
-                        prefWidth="50"
-
-                >
-
-                </Button>
-                <Label
-                        styleClass="navBarAccountLabel"
-                        text="Account"
-                >
-
-                </Label>
-            </HBox>
+        <VBox styleClass="navBarRightContainer" AnchorPane.rightAnchor="20">
+            <HBox />
 
         </VBox>
+      <Button layoutX="336.0" layoutY="39.0" onMouseClicked="#goToMain" styleClass="navBarButtons" text="Main Page" />
 
     </AnchorPane>
 
     <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
 
-        <Button
-                onAction="#goBack"
-                styleClass="backButton"
-                prefHeight="40"
-                prefWidth="60"
-        >
+        <Button onAction="#goBack" prefHeight="40" prefWidth="60" styleClass="backButton">
 
         </Button>
     </AnchorPane>
 
-    <GridPane
-            AnchorPane.topAnchor="130"
-            AnchorPane.rightAnchor="0"
-            AnchorPane.leftAnchor="0"
-            alignment="CENTER">
+    <GridPane alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="130">
 
     <VBox>
         <VBox styleClass="inputContainer">
-            <Label
-                    text="Username"
-            >
+            <Label text="Username">
             </Label>
 
-            <TextField
-                    styleClass="inputField"
-            >
+            <TextField fx:id="username" styleClass="inputField">
             </TextField>
         </VBox>
 
 
             <VBox styleClass="inputContainer">
-                <Label
-                        text="Password"
-                >
+                <Label text="Password">
                 </Label>
 
-                <TextField
-                        styleClass="inputField"
-                >
+                <TextField fx:id="password" styleClass="inputField">
                 </TextField>
             </VBox>
 
 
         <VBox alignment="BOTTOM_CENTER" styleClass="submitBox">
-            <Button
-                    text="Submit"
-                    styleClass="submitButton"
-            >
+            <Button onMouseClicked="#done" styleClass="submitButton" text="Submit">
 
             </Button>
         </VBox>
 
     </VBox>
+      <columnConstraints>
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
 
     </GridPane>
+   <Label fx:id="AlertLabel" layoutX="138.0" layoutY="338.0" prefHeight="17.0" prefWidth="214.0" text="---" textFill="#b91533">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
 
 </AnchorPane>

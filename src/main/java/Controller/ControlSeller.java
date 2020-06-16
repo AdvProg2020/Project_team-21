@@ -25,9 +25,9 @@ public class ControlSeller {
             instance = new ControlSeller();
         return instance;
     }
-    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company)
+    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company,String photo)
     {
-        new SellerRequest(Control.getInstance().randomString(10),username,firstName,lastName,email,phoneNumber,password,company, RequestType.ADD);
+        new SellerRequest(Control.getInstance().randomString(10),username,firstName,lastName,email,phoneNumber,password,company, RequestType.ADD,photo);
     }
     public boolean checkProductExists(String productID)
     {

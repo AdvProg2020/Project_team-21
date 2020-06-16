@@ -296,9 +296,6 @@ public class SaveData {
     }
 
     public static void saveData(Object object, String name, String typeClass) {
-
-
-
 //        typeClass += ".txt";
         String json = gson.toJson(object);
 

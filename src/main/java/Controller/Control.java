@@ -10,11 +10,8 @@ import Model.DisAndOffStatus;
 import Model.Off;
 import Model.Filters.*;
 import Model.Sorts.ProductsSort;
-import Model.*;
-import View.ConsoleView;
 
 import java.nio.charset.Charset;
-import java.math.BigDecimal;
 import java.util.*;
 
 public class Control {
@@ -112,7 +109,7 @@ public class Control {
         }
     }
 
-    public void createAccount(String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login) throws Exception {
+    public void createAccount(String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login, String photo) throws Exception {
         //5 errors
         if (!verifyPassword.equals(password)) {
             throw new Exception("Your password doesn't match");
@@ -129,13 +126,16 @@ public class Control {
         if (Account.getAllAccounts().containsKey(username)) {
             throw new Exception("This username already exists!");
         }
+        if(username.isEmpty()||type.isEmpty()||password.isEmpty()||firstName.isEmpty()||lastName.isEmpty()||email.isEmpty()||phoneNumber.isEmpty()||verifyPassword.isEmpty()){
+            throw new Exception("You should fill all of the fields");
+        }
 
         if (type.equalsIgnoreCase("manager")) {
-            ControlManager.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber);
+            ControlManager.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber,photo);
         } else if (type.equalsIgnoreCase("seller")) {
-            ControlSeller.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber, company);
+            ControlSeller.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber, company,photo);
         } else if (type.equalsIgnoreCase("customer")) {
-            ControlCustomer.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber);
+            ControlCustomer.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber,photo);
         }
         if (login)
             login(username, password);
@@ -195,7 +195,11 @@ public class Control {
 
     }
 
-    class notFoundUserOrPass extends Exception {
+    public void logout() {
+        setUser(null);
+    }
+
+    public class notFoundUserOrPass extends Exception {
         notFoundUserOrPass(String message) {
             super(message + "\ntry again");
         }

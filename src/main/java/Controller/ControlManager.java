@@ -27,9 +27,10 @@ public class ControlManager {
             instance = new ControlManager();
         return instance;
     }
-    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber)
+    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber,String photo)
     {
-        new Manager(username,firstName,lastName,email,phoneNumber,password);
+        Manager manager = new Manager(username,firstName,lastName,email,phoneNumber,password);
+        manager.setImagePath(photo);
     }
 
     public void viewUsername(String username) throws Exception

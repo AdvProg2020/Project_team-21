@@ -3,8 +3,6 @@ package GUIControllers;
 import Controller.Control;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -17,10 +15,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
-public class SignUpPage extends GraphicFather {
-
-
-    public ImageView profilePhoto;
+public class MakeManagerFirst extends GraphicFather {
     public TextField username;
     public TextField password;
     public TextField confirmPassword;
@@ -28,9 +23,21 @@ public class SignUpPage extends GraphicFather {
     public TextField lastName;
     public TextField email;
     public TextField phoneNumber;
-    public ComboBox<String> type;
     public Label alertLabel;
+    public ImageView profilePhoto;
     File imageFile = null;
+
+    private void putImage(File sourceFile,String username){
+        File copyToTemp = new File("src/main/resources/images/temp");
+        File finalCopy = new File("src/main/resources/images/profilePhotos/" + username +"."+ getFileExt(sourceFile));
+        try {
+            FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
+            File copied = new File(copyToTemp + "/" +sourceFile.getName());
+            copied.renameTo(finalCopy);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private String getFileExt(File file){
         String name = file.getName();
@@ -44,17 +51,22 @@ public class SignUpPage extends GraphicFather {
         }
         return ext;
     }
-    private void putImage(File sourceFile,String username){
-        File copyToTemp = new File("src/main/resources/images/temp");
-        File finalCopy = new File("src/main/resources/images/profilePhotos/" + username +"."+ getFileExt(sourceFile));
-        try {
-            FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
-            File copied = new File(copyToTemp + "/" +sourceFile.getName());
-            copied.renameTo(finalCopy);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    public void submit(MouseEvent mouseEvent) {
+        try{
+            String imagePath = "src/main/resources/images/account_icon.png" ;
+            if(imageFile !=null)
+                imagePath = "src/main/resources/images/profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
+            Control.getInstance().createAccount("Manager",username.getText(),password.getText(),firstName.getText(),lastName.getText(),
+                    email.getText(),phoneNumber.getText(),confirmPassword.getText(),null,true,imagePath);
+            if(imageFile != null)
+                putImage(imageFile, username.getText());
+            goToNextPage(Page.MAIN,mouseEvent);
+        }catch (Exception e){
+            showError(alertLabel, e.getMessage(), Error.NEGATIVE);
         }
     }
+
     public void uploadPhotoButton(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter =
@@ -65,29 +77,6 @@ public class SignUpPage extends GraphicFather {
             Image profileImg = new Image(sourceFile.toURI().toString());
             profilePhoto.setImage(profileImg);
             imageFile = sourceFile;
-          }
-    }
-
-    public void submit(MouseEvent mouseEvent) {
-        boolean login = true;
-        Page pageToGo = GUICenter.getInstance().getLanding();
-        if(((String)type.getValue()).equalsIgnoreCase("seller")){
-            login = false;
-            pageToGo = Page.COMPANYCREATE;
-        }
-        try{
-            String imagePath = "src/main/resources/images/account_icon.png" ;
-            if(imageFile !=null)
-                imagePath = "src/main/resources/images/profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
-            Control.getInstance().createAccount(type.getValue(),username.getText(),password.getText(),firstName.getText(),lastName.getText(),
-                    email.getText(),phoneNumber.getText(),confirmPassword.getText(),null,login,imagePath);
-            if(imageFile != null)
-                putImage(imageFile, username.getText());
-            goToNextPage(pageToGo,mouseEvent);
-        }catch (Exception e){
-            showError(alertLabel, e.getMessage(), Error.NEGATIVE);
         }
     }
-
-
 }

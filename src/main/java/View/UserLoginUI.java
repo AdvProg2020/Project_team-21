@@ -40,7 +40,7 @@ public class UserLoginUI extends UI {
         System.out.println("enter your password: ");
         try {
             Control.getInstance().login(userName,ConsoleView.getScanner().nextLine());
-            System.out.println("Wellcome " + Control.getInstance().getUser().getFirstName());
+            System.out.println("Welcome " + Control.getInstance().getUser().getFirstName());
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
             ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
         }catch (Exception e)

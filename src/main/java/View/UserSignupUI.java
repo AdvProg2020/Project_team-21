@@ -28,7 +28,6 @@ public class UserSignupUI extends UI {
     @Override
     public void run()
     {
-
         Company company = null;
         boolean login = true;
         Scanner scanner = ConsoleView.getScanner();
@@ -61,9 +60,9 @@ public class UserSignupUI extends UI {
             }
         }
         try {
-            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,company,login);
+            Control.getInstance().createAccount(type,userName,password,firstName,lastName,email,phone,checkPassword,company,login,"" );
             if (login)
-                System.out.println("Wellcome "+firstName+"!");
+                System.out.println("Welcome "+firstName+"!");
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLandingPageAfterSigninOrSignup());
             ConsoleView.getInstance().getLandingPageAfterSigninOrSignup().run();
         }catch (Exception e)

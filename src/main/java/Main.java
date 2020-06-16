@@ -1,4 +1,5 @@
 import Controller.Control;
+import GUIControllers.GUICenter;
 import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
@@ -58,7 +59,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         readFilesFromDatabase();
         for (String s : Account.getAllAccounts().keySet()) {
-            System.out.println(s + "  "+Account.getAllAccounts().get(s).getType());
+            System.out.println(s + "  "+Account.getAllAccounts().get(s).getType() + " " + Account.getAllAccounts().get(s).getImagePath());
         }
         launch(args);
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
@@ -71,14 +72,19 @@ public class Main extends Application {
         if(Manager.getAllManagers().isEmpty())
         {
             Parent managerMaker = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
-            scene = new Scene(managerMaker, 1000, 720);
+            scene = new Scene(managerMaker);
             stage.setScene(scene);
+            GUICenter.getInstance().addSeenPage(scene);
+            GUICenter.getInstance().setCurrentMenu(scene);
         }
         else
         {
-            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/CustomerAccount.fxml"));
-            scene = new Scene(mainPage, 1000, 720);
+            Parent mainPage = FXMLLoader.load(getClass().getResource("/fxml/MainPage.fxml"));
+            stage.setMaximized(true);
+            scene = new Scene(mainPage);
             stage.setScene(scene);
+            GUICenter.getInstance().addSeenPage(scene);
+            GUICenter.getInstance().setCurrentMenu(scene);
         }
         stage.show();
     }

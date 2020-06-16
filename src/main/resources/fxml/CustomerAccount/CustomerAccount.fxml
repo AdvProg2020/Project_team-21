@@ -118,7 +118,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button layoutX="174.0" layoutY="655.0" mnemonicParsing="false" onMouseClicked="#editField" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936" AnchorPane.bottomAnchor="161.0">
+      <Button layoutX="174.0" layoutY="655.0" mnemonicParsing="false" onMouseClicked="#editField" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="170.0">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />
          </font>
@@ -150,5 +150,10 @@
             </Label>
          </children>
       </AnchorPane>
+      <Button layoutX="182.0" layoutY="729.0" mnemonicParsing="false" onMouseClicked="#signOut" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Sign Out" textFill="#cfb936" AnchorPane.leftAnchor="170.0">
+         <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

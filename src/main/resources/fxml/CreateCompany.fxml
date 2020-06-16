@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -17,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signUpPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SignUpPage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signUpPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.CreateCompany">
 
     <AnchorPane maxWidth="Infinity" styleClass="navBarContainer" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
@@ -64,10 +61,7 @@
     </AnchorPane>
 
     <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="80">
-
-        <Button onAction="#goBack" prefHeight="40" prefWidth="60" styleClass="backButton">
-
-        </Button>
+      <Label fx:id="alertLabel" layoutX="378.0" layoutY="5.0" prefHeight="23.0" prefWidth="118.0" textFill="#b31215" />
     </AnchorPane>
 
     <GridPane alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="110">
@@ -76,101 +70,47 @@
 
        <HBox alignment="CENTER">
 
-           <ImageView fx:id="profilePhoto" fitHeight="80" fitWidth="80" layoutX="1463.0" layoutY="551.0" styleClass="profilePhoto">
-               <image>
-                   <Image url="@/images/account_icon.png" />
-               </image>
-           </ImageView>
-
-           <VBox alignment="BOTTOM_CENTER" styleClass="setProfilePhotoBox">
-               <Button onAction="#uploadPhotoButton" styleClass="setProfilePhotoBtn" text="Set Profile Image">
-               </Button>
-           </VBox>
+           <VBox alignment="BOTTOM_CENTER" styleClass="setProfilePhotoBox" />
        </HBox>
 
 
-        <VBox styleClass="inputContainer">
-            <Label text="Username">
-            </Label>
-
-            <TextField fx:id="username" styleClass="inputField">
-            </TextField>
-        </VBox>
+        <VBox styleClass="inputContainer" />
 
        <HBox>
            <VBox styleClass="inputContainer">
-               <Label text="Password">
+               <Label text="Enter Company Name">
                </Label>
 
-               <TextField fx:id="password" styleClass="inputField">
+               <TextField fx:id="companyName" styleClass="inputField">
                </TextField>
            </VBox>
 
-           <VBox styleClass="inputContainer">
-               <Label text="Re-Enter your Password">
-               </Label>
-
-               <TextField fx:id="confirmPassword" styleClass="inputField">
-               </TextField>
-           </VBox>
+           <VBox styleClass="inputContainer" />
        </HBox>
 
         <HBox>
             <VBox styleClass="inputContainer">
-                <Label text="First Name">
+                <Label text="Enter Company Address">
                 </Label>
 
-                <TextField fx:id="firstName" styleClass="inputField">
+                <TextField fx:id="companyAddress" styleClass="inputField">
                 </TextField>
             </VBox>
 
-            <VBox styleClass="inputContainer">
-                <Label text="Last Name">
-                </Label>
-
-                <TextField fx:id="lastName" styleClass="inputField">
-                </TextField>
-            </VBox>
+            <VBox styleClass="inputContainer" />
         </HBox>
 
-        <VBox styleClass="inputContainer">
-            <Label text="Email">
-            </Label>
+        <VBox styleClass="inputContainer" />
 
-            <TextField fx:id="email" styleClass="inputField">
-            </TextField>
-        </VBox>
+        <VBox styleClass="inputContainer" />
 
-        <VBox styleClass="inputContainer">
-            <Label text="Phone Number">
-            </Label>
-
-            <TextField fx:id="phoneNumber" styleClass="inputField">
-            </TextField>
-        </VBox>
-
-        <VBox alignment="CENTER" styleClass="accountTypeBox">
-            <ComboBox fx:id="type" promptText="Account Type">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Manager" />
-                        <String fx:value="Seller" />
-                        <String fx:value="Customer" />
-                    </FXCollections>
-                </items>
-            </ComboBox>
-        </VBox>
+        <VBox alignment="CENTER" styleClass="accountTypeBox" />
 
         <VBox alignment="BOTTOM_CENTER" styleClass="submitBox">
             <Button onMouseClicked="#submit" styleClass="submitButton" text="Submit">
 
             </Button>
         </VBox>
-         <HBox prefHeight="49.0" prefWidth="321.0">
-            <children>
-               <Label fx:id="alertLabel" prefHeight="50.0" prefWidth="327.0" textFill="#bc2020" />
-            </children>
-         </HBox>
 
     </VBox>
       <columnConstraints>

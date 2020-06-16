@@ -17,7 +17,7 @@ public abstract class Account {
     private String phoneNumber;
     private String password;
     private double credit;
-    private String imagePath = "/images/profile.png";;
+    private String imagePath;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
         this.username = username;
@@ -30,8 +30,6 @@ public abstract class Account {
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
-        if(!(this instanceof Seller))
-            allAccounts.put(username,this);
     }
 
     public void setImagePath(String imagePath) {
@@ -39,6 +37,8 @@ public abstract class Account {
     }
 
     public String getImagePath() {
+        if(imagePath == null)
+            imagePath = "/images/profile.png";
         return imagePath;
     }
 

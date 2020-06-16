@@ -1,5 +1,6 @@
 package Model.Request;
 
+import GUIControllers.GUICenter;
 import Model.Account.Seller;
 import Model.Company;
 import Model.Product;
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 
 public class SellerRequest extends Request {
     private String providerUsername;
-    public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType)
+    public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType,String photo)
     {
         super(requestType);
         Seller seller = new Seller(userName,firstName,lastName,email,phoneNumber,password,company);
+        GUICenter.getInstance().setSellerToAddCompany(seller);
+        seller.setImagePath(photo);
         Request.addRequest(requestId,this);
         requestedSellers.put(requestId,seller);
 

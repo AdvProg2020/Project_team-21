@@ -49,7 +49,6 @@
 }
 
 .navBarAccountBtn {
-
     -fx-background-position: center;
     -fx-background-image: url("/images/account_icon.png");
     -fx-background-size: 50px 50px;
