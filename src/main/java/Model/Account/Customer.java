@@ -21,8 +21,8 @@ public class Customer extends Account implements Comparable<Customer>{
     public ArrayList <BuyLog> buyLogs = new ArrayList<>();
     public HashMap<String , Off> offs = new HashMap<>();
 
-    public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password) {
-        super(username, firstName, lastName, email, phoneNumber, password);
+    public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
+        super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewCustomer(this);
         SaveData.saveData(this, getUsername(), SaveData.customerFile);
         setShoppingCart(new ShoppingCart(this));

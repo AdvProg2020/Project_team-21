@@ -44,9 +44,10 @@ public class SignUpPage extends GraphicFather {
         }
         return ext;
     }
+
     private void putImage(File sourceFile,String username){
-        File copyToTemp = new File("src/main/resources/images/temp");
-        File finalCopy = new File("src/main/resources/images/profilePhotos/" + username +"."+ getFileExt(sourceFile));
+        File copyToTemp = new File("temp");
+        File finalCopy = new File("profilePhotos/" + username +"."+ getFileExt(sourceFile));
         try {
             FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
             File copied = new File(copyToTemp + "/" +sourceFile.getName());
@@ -55,6 +56,7 @@ public class SignUpPage extends GraphicFather {
             e.printStackTrace();
         }
     }
+
     public void uploadPhotoButton(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter =
@@ -76,13 +78,14 @@ public class SignUpPage extends GraphicFather {
             pageToGo = Page.COMPANYCREATE;
         }
         try{
-            String imagePath = "src/main/resources/images/account_icon.png" ;
+            String imagePath = "profilePhotos/account_icon.png" ;
             if(imageFile !=null)
-                imagePath = "src/main/resources/images/profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
+                imagePath = "profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
             Control.getInstance().createAccount(type.getValue(),username.getText(),password.getText(),firstName.getText(),lastName.getText(),
                     email.getText(),phoneNumber.getText(),confirmPassword.getText(),null,login,imagePath);
-            if(imageFile != null)
+            if(imageFile != null){
                 putImage(imageFile, username.getText());
+            }
             goToNextPage(pageToGo,mouseEvent);
         }catch (Exception e){
             showError(alertLabel, e.getMessage(), Error.NEGATIVE);

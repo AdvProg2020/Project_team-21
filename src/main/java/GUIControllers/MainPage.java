@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +33,9 @@ public class MainPage extends GraphicFather implements Initializable {
             signinButton.setDisable(true);
             signupButton.setText("View Your Account");
             accountName.setText(user.getFirstName());
-            ImagePattern img = new ImagePattern(new Image(user.getImagePath()));
+            File file = new File(user.getImagePath());
+            Image image = new Image(file.toURI().toString());
+            ImagePattern img = new ImagePattern(image);
             profilePhoto.setFill(img);
         }
     }

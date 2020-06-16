@@ -24,8 +24,7 @@ public class ControlCustomer {
     }
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber,String photo)
     {
-       Customer customer = new Customer(username,firstName,lastName,email,phoneNumber,password);
-       customer.setImagePath(photo);
+       Customer customer = new Customer(username,firstName,lastName,email,phoneNumber,password,photo);
     }
     private boolean checkProductExistance(String productID)
     {

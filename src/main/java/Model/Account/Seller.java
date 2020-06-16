@@ -18,8 +18,8 @@ public class Seller extends Account implements Comparable<Seller>{
     private ArrayList<SellLog> sellLogs = new ArrayList<>();
 
 
-    public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company) {
-        super(username, firstName, lastName, email, phoneNumber, password);
+    public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company,String photo) {
+        super(username, firstName, lastName, email, phoneNumber, password,photo);
         this.company = company;
         SaveData.saveData(this, getUsername(), SaveData.sellerFile);
     }
