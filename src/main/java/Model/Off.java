@@ -2,6 +2,7 @@ package Model;
 
 import Controller.Sort;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +45,13 @@ public class Off implements Comparable<Off>{
     public static void removeOff(Off off)
     {
         allOffs.remove(off.getOffId());
+
+        File file = new File(off.getOffId()+".txt");
+        if(file.delete()){
+//            System.out.println("yes");
+        } else {
+//            System.out.println("hah");
+        }
     }
 
     public ArrayList<Product> getProductsList() {

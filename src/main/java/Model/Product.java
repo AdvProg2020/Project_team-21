@@ -3,6 +3,7 @@ package Model;
 import Model.Account.Customer;
 import Model.Account.Seller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -73,6 +74,13 @@ public class Product {
         for (Seller seller : product.getSellers())
         {
             seller.getAllProducts().remove(product);
+        }
+
+        File file = new File(product.getProductId()+".txt");
+        if(file.delete()){
+//            System.out.println("yes");
+        } else {
+//            System.out.println("hah");
         }
     }
 

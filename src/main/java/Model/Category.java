@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Category implements Comparable<Category>{
@@ -70,6 +71,13 @@ public class Category implements Comparable<Category>{
             product.setCategory(null);
         }
         allCategories.remove(category);
+
+        File file = new File(category.getName()+".txt");
+        if(file.delete()){
+//            System.out.println("yes");
+        } else {
+//            System.out.println("hah");
+        }
     }
 
     public void setName(String name){

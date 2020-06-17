@@ -5,6 +5,7 @@ import Model.Product;
 import Model.Request.RequestType;
 import Model.SaveData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,6 +25,13 @@ public class Manager extends Account implements Comparable<Manager>{
 
     public static void removeManager (Manager manager){
         allManagers.remove(manager);
+
+        File file = new File(manager.getUsername()+".txt");
+        if(file.delete()){
+//            System.out.println("yes");
+        } else {
+//            System.out.println("hah");
+        }
     }
 
     public static ArrayList<Manager> getAllManagers() {

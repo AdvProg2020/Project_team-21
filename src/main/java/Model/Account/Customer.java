@@ -8,6 +8,7 @@ import Model.Off;
 import Model.SaveData;
 import Model.ShoppingCart;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +31,13 @@ public class Customer extends Account implements Comparable<Customer>{
 
     public static void removeCustomer (Customer customer){
         allCustomer.remove(customer);
+
+        File file = new File(customer.getUsername()+".txt");
+        if(file.delete()){
+//            System.out.println("yes");
+        } else {
+//            System.out.println("hah");
+        }
     }
 
     public static ArrayList<Customer> getaAllCustomers() {

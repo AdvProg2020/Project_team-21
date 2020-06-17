@@ -7,6 +7,7 @@ import Model.Product;
 import Model.Log.SellLog;
 import Model.SaveData;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Seller extends Account implements Comparable<Seller>{
@@ -26,6 +27,12 @@ public class Seller extends Account implements Comparable<Seller>{
 
     public static void removeSeller (Seller seller){
         allSellers.remove(seller);
+        File file = new File(seller.getUsername()+".txt");
+        if(file.delete()){
+//            System.out.println("yes");
+        } else {
+//            System.out.println("hah");
+        }
     }
     public void removeOff(Off off)
     {
