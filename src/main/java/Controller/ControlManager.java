@@ -17,6 +17,7 @@ public class ControlManager {
 
     Manager user = (Manager)(Control.getInstance().getUser());
     private String userToView;
+    private String discountCodeToView;
     private static ControlManager instance;
     private ControlManager()
     {
@@ -38,6 +39,14 @@ public class ControlManager {
 
     public String getUserToView() {
         return userToView;
+    }
+
+    public void setDiscountCodeToView(String discountCodeToView) {
+        this.discountCodeToView = discountCodeToView;
+    }
+
+    public String getDiscountCodeToView() {
+        return discountCodeToView;
     }
 
     public void viewUsername(String username) throws Exception

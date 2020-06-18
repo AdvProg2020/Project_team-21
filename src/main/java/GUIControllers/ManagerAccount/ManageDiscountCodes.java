@@ -1,6 +1,9 @@
 package GUIControllers.ManagerAccount;
 
+import Controller.ControlManager;
+import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import GUIControllers.Page;
 import Model.DiscountCode;
 import Model.Product;
 import javafx.collections.FXCollections;
@@ -9,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +24,11 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
     public TableView<DiscountCode> listDiscountCodes;
 
     public TableColumn<DiscountCode,String> id = new TableColumn<>("DiscountID");
+    public Label alertLabel;
+    public TextField codeToEdit;
+    public TextField codeToRemove;
+    public TextField codeToView;
+
     ObservableList<DiscountCode> getDiscountCode(){
         ObservableList<DiscountCode> result =  FXCollections.observableArrayList();
         for (String s : DiscountCode.getAllDiscountCodes().keySet()) {
@@ -37,6 +46,12 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
     }
 
     public void viewDiscountCode(MouseEvent mouseEvent) {
+        if(!DiscountCode.getAllDiscountCodes().containsKey(codeToView.getText()))
+            showError(alertLabel,"This code doesn't exist!", Error.NEGATIVE);
+        else{
+            ControlManager.getInstance().setDiscountCodeToView(codeToView.getText());
+            goToNextPage(Page.VIEWDISCOUNTCODE,mouseEvent);
+        }
     }
 
     public void RemoveDiscountCode(MouseEvent mouseEvent) {

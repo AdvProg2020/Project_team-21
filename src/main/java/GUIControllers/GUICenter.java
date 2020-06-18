@@ -108,6 +108,12 @@ public class GUICenter {
         else if(page.equals(Page.CREATEMANAGER)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/CreateManager.fxml"));
         }
+        else if(page.equals(Page.EDITDISCOUNTCODE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/EditDiscountCode.fxml"));
+        }
+        else if(page.equals(Page.VIEWDISCOUNTCODE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ViewDiscountCode.fxml"));
+        }
         result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         return result;
     }
