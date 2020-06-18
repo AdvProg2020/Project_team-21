@@ -1,11 +1,15 @@
 package GUIControllers.ManagerAccount;
 
+import Controller.Control;
+import Controller.ControlManager;
+import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import Model.Account.Account;
 import Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,6 +25,7 @@ public class ManageProducts extends GraphicFather implements Initializable {
 
     public TableColumn<Product,String> name = new TableColumn<>("Name");
     public TableColumn<Product,String> id = new TableColumn<>("ProductId");
+    public Label alertLabel;
 
     ObservableList<Product> getProducts(){
         ObservableList<Product> result =  FXCollections.observableArrayList();
@@ -41,6 +46,13 @@ public class ManageProducts extends GraphicFather implements Initializable {
     }
 
     public void removeProduct(MouseEvent mouseEvent) {
+        try {
+            ControlManager.getInstance().removeProduct(productToRemove.getText());
+            showError(alertLabel,"Product " + productToRemove.getText() + " has been successfully deleted!",Error.POSITIVE);
+        } catch (Exception e) {
+            showError(alertLabel,e.getMessage(), Error.NEGATIVE);
+        }
+
     }
 
 }

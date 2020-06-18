@@ -26,7 +26,7 @@ public class Manager extends Account implements Comparable<Manager>{
     public static void removeManager (Manager manager){
         allManagers.remove(manager);
 
-        File file = new File(manager.getUsername()+".txt");
+        File file = new File(manager.getUsername()+".json");
         if(file.delete()){
 //            System.out.println("yes");
         } else {

@@ -28,10 +28,10 @@
     </Button>
     <Button layoutX="518.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="88.0" prefWidth="122.0" styleClass="Button" textFill="#cfb936">
         <font>
-            <Font name="Hiragino Sans W2" size="30.0"/>
+            <Font name="Hiragino Sans W2" size="30.0" />
         </font>
       <graphic>
-         <ImageView fitHeight="99.0" fitWidth="84.0" >
+         <ImageView fitHeight="99.0" fitWidth="84.0">
             <image>
                <Image url="@../../images/ok.png" />
             </image>
@@ -54,5 +54,10 @@
     </Label>
     <TableView fx:id="listProducts" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
     </TableView>
+   <Label fx:id="alertLabel" layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="828.0" textFill="#cfb936" AnchorPane.bottomAnchor="200.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
 
 </AnchorPane>

@@ -21,7 +21,10 @@
     <GridPane alignment="CENTER" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="110">
 
     <VBox GridPane.columnIndex="1">
-         <HBox prefHeight="100.0" prefWidth="200.0" />
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Label fx:id="alertLabel" prefHeight="50.0" prefWidth="327.0" textFill="#bc2020" />
+            </children></HBox>
 
        <HBox alignment="CENTER">
 
@@ -105,11 +108,7 @@
 
             </Button>
         </VBox>
-         <HBox prefHeight="49.0" prefWidth="321.0">
-            <children>
-               <Label fx:id="alertLabel" prefHeight="50.0" prefWidth="327.0" textFill="#bc2020" />
-            </children>
-         </HBox>
+         <HBox prefHeight="49.0" prefWidth="321.0" />
 
     </VBox>
       <columnConstraints>

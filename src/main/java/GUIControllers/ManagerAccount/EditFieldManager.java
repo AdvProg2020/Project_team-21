@@ -1,6 +1,9 @@
 package GUIControllers.ManagerAccount;
 
+import Controller.Control;
+import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import Model.Account.Account;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,52 +11,55 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.ResourceBundle;
 
-public class EditFieldManager extends GraphicFather implements Initializable {
-    public TextField Username;
+public class EditFieldManager extends GraphicFather{
     public TextField Phone;
     public TextField Email;
     public TextField Address;
     public TextField Password;
-    public TextField Name;
-    public Label AlertLabel;
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Username.setDisable(true);
-        Phone.setDisable(true);
-        Email.setDisable(true);
-        Address.setDisable(true);
-        Password.setDisable(true);
-        Name.setDisable(true);
-    }
+    public Label alertLabel;
+    public TextField firstName;
+    public TextField lastName;
+    private ArrayList<String> editedFields = new ArrayList<>();
 
-    public void enableName(MouseEvent mouseEvent) {
-        Name.setDisable(false);
+    public void submit(MouseEvent mouseEvent) {
+        Account user = Control.getInstance().getUser();
+        if(!firstName.getText().isEmpty()){
+            editedFields.add("First Name");
+            user.setFirstName(firstName.getText());
+        }
+        if(!lastName.getText().isEmpty()){
+            editedFields.add("Last Name");
+            user.setLastName(lastName.getText());
+        }
+        if(!Phone.getText().isEmpty()){
+            editedFields.add("Phone Number");
+            user.setPhoneNumber(Phone.getText());
+        }
+        if(!Email.getText().isEmpty()){
+            editedFields.add("Email");
+            user.setEmail(Email.getText());
+        }
+        if(!Address.getText().isEmpty()){
+            editedFields.add("Address");
+            user.setAddress(Address.getText());
+        }
+        if(!Password.getText().isEmpty()){
+            editedFields.add("Password");
+            user.setPassword(Password.getText());
+        }
+        if(editedFields.isEmpty()){
+            showError(alertLabel,"No field has been updated!", Error.NEGATIVE);
+        }
+        else{
+            String fields = "";
+            for (String editedField : editedFields) {
+                fields += editedField + " ";
+            }
+            showError(alertLabel,"Fields: " + fields + "has been updated for you!",Error.POSITIVE);
+        }
     }
-
-    public void enablePassword(MouseEvent mouseEvent) {
-        Password.setDisable(false);
-    }
-
-    public void enableEmail(MouseEvent mouseEvent) {
-        Email.setDisable(false);
-    }
-
-    public void enablePhone(MouseEvent mouseEvent) {
-        Email.setDisable(false);
-    }
-
-    public void enableAddress(MouseEvent mouseEvent) {
-        Address.setDisable(false);
-    }
-
-    public void enableUsername(MouseEvent mouseEvent) {
-        Username.setDisable(false);
-    }
-
-    public void makeChange(MouseEvent mouseEvent) {
-    }
-
 }

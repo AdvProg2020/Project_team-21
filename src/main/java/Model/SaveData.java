@@ -311,7 +311,7 @@ public class SaveData {
             writer2.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 
