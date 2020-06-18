@@ -1,5 +1,6 @@
 import Controller.Control;
 import GUIControllers.GUICenter;
+import GUIControllers.Page;
 import Model.*;
 import Model.Account.Account;
 import Model.Account.Customer;
@@ -74,8 +75,9 @@ public class Main extends Application {
             Parent managerMaker = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
             scene = new Scene(managerMaker);
             stage.setScene(scene);
-            GUICenter.getInstance().addSeenPage(scene);
-            GUICenter.getInstance().setCurrentMenu(scene);
+            GUICenter.getInstance().addSeenPage(Page.MAKEMANAGERFIRST);
+            GUICenter.getInstance().setCurrentMenu(Page.MAKEMANAGERFIRST);
+            GUICenter.getInstance().setCurrentScene(scene);
         }
         else
         {
@@ -83,8 +85,9 @@ public class Main extends Application {
             stage.setMaximized(true);
             scene = new Scene(mainPage);
             stage.setScene(scene);
-            GUICenter.getInstance().addSeenPage(scene);
-            GUICenter.getInstance().setCurrentMenu(scene);
+            GUICenter.getInstance().addSeenPage(Page.MAIN);
+            GUICenter.getInstance().setCurrentMenu(Page.MAIN);
+            GUICenter.getInstance().setCurrentScene(scene);
         }
         stage.show();
     }

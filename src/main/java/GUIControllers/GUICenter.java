@@ -11,10 +11,14 @@ import java.util.HashMap;
 
 public class GUICenter {
    private static GUICenter instance;
-    private ArrayList<Scene> seenPages;
-    private Scene currentMenu;
+//    private ArrayList<Scene> seenPages;
+//    private Scene currentMenu;
+
+    private ArrayList<Page> seenPages;
+    private Page currentMenu;
+    private Scene currentScene;
+
     private Page landing;
-    private HashMap<Page,Scene> allPages = new HashMap<>();
     private Seller sellerToAddCompany;
     private GUICenter()
     {
@@ -44,19 +48,42 @@ public class GUICenter {
         return landing;
     }
 
-    public ArrayList<Scene> getSeenPages() {
+    public void setCurrentScene(Scene currentScene) {
+        this.currentScene = currentScene;
+    }
+
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
+    //    public ArrayList<Scene> getSeenPages() {
+//        return seenPages;
+//    }
+//    public void addSeenPage(Scene scene){
+//        seenPages.add(scene);
+//    }
+//    public void removeFromScenePage(int index){seenPages.remove(index);}
+//
+//    public Scene getCurrentMenu() {
+//        return currentMenu;
+//    }
+//
+//    public void setCurrentMenu(Scene currentMenu) {
+//        this.currentMenu = currentMenu;
+//    }
+    public ArrayList<Page> getSeenPages() {
         return seenPages;
     }
-    public void addSeenPage(Scene scene){
-        seenPages.add(scene);
+    public void addSeenPage(Page page){
+        seenPages.add(page);
     }
     public void removeFromScenePage(int index){seenPages.remove(index);}
 
-    public Scene getCurrentMenu() {
+    public Page getCurrentMenu() {
         return currentMenu;
     }
 
-    public void setCurrentMenu(Scene currentMenu) {
+    public void setCurrentMenu(Page currentMenu) {
         this.currentMenu = currentMenu;
     }
 
@@ -65,6 +92,9 @@ public class GUICenter {
         Parent template = null;
         if(page.equals(Page.MAIN)){
             template = FXMLLoader.load(getClass().getResource("/fxml/MainPage.fxml"));
+        }
+        else if(page.equals(Page.MAKEMANAGERFIRST)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
         }
         else if(page.equals(Page.SIGNIN)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SignInPage.fxml"));
@@ -114,7 +144,8 @@ public class GUICenter {
         else if(page.equals(Page.VIEWDISCOUNTCODE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ViewDiscountCode.fxml"));
         }
-        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
+//        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
+        result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;
     }
 }
