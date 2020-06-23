@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="GUIControllers.ProductPage"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@/css/productPageStyle.css"
+            alignment="CENTER">
+
+    <VBox styleClass="mainPageProductCards" prefWidth="700" prefHeight="500">
+        <HBox prefWidth="700" prefHeight="56" styleClass="topBar" alignment="CENTER_LEFT">
+            <HBox style="-fx-padding: 10 0 0 20">
+                <Button styleClass="backBtn" onAction="#goBack">
+                </Button>
+            </HBox>
+        </HBox>
+
+        <VBox styleClass="mainPageProductCards2">
+
+            <HBox>
+                <VBox>
+                    <ImageView fitHeight="200" fitWidth="200" layoutX="1463.0" layoutY="551.0" fx:id="productPic">
+                        <image>
+                            <Image url="@/images/product4.png"/>
+                        </image>
+                    </ImageView>
+
+                    <HBox style="-fx-padding: 14 15 0 20">
+                        <Label
+                                text="Score: 4.3"
+                                fx:id="averageScore"
+                                style="-fx-label-padding: 10 15 0 10"
+                        >
+
+                        </Label>
+
+                        <Button
+                                text="+Add to Cart"
+                                prefHeight="50"
+                                prefWidth="75"
+                                styleClass="basketBuyButton"
+                        >
+
+                        </Button>
+                    </HBox>
+                </VBox>
+
+               <HBox>
+                   <VBox styleClass="productDescriptionBox">
+                       <Label
+                               styleClass="mainPageProductCardsTitle"
+                               text="Juice"
+                               fx:id="productLabel"
+                       >
+
+                       </Label>
+
+                       <Label
+                               styleClass="mainPageProductCardsDetail"
+                               text="The best you have ever seen!"
+                               fx:id="productDescription"
+                       >
+
+                       </Label>
+                   </VBox>
+
+                   <HBox styleClass="priceContainer" >
+                       <Label
+                               text="10$"
+                               fx:id="productPrice"
+                       >
+
+                       </Label>
+
+                   </HBox>
+               </HBox>
+            </HBox>
+
+        </VBox>
+
+       <VBox style="-fx-padding: 20 15 18 15">
+           <ScrollPane prefHeight="150" prefWidth="250" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
+
+<!--               <VBox>-->
+
+<!--                   <Label-->
+<!--                           styleClass="commentLabels"-->
+<!--                           prefWidth="Infinity"-->
+<!--                           prefHeight="10"-->
+<!--                           text="comment1"-->
+<!--                   >-->
+
+<!--                   </Label>-->
+
+<!--                   <Label-->
+<!--                           styleClass="commentLabels"-->
+<!--                           prefWidth="Infinity"-->
+<!--                           prefHeight="10"-->
+<!--                           text="comment2"-->
+<!--                   >-->
+
+<!--                   </Label>-->
+
+<!--                   <Label-->
+<!--                           styleClass="commentLabels"-->
+<!--                           prefWidth="Infinity"-->
+<!--                           prefHeight="10"-->
+<!--                           text="comment3"-->
+<!--                   >-->
+
+<!--                   </Label>-->
+
+<!--                   <Label-->
+<!--                           styleClass="commentLabels"-->
+<!--                           prefWidth="Infinity"-->
+<!--                           prefHeight="10"-->
+<!--                           text="comment4"-->
+<!--                   >-->
+
+<!--                   </Label>-->
+
+<!--               </VBox>-->
+
+
+
+
+                   <GridPane  fx:id="commentsGridPane"
+                              alignment="CENTER">
+
+                   </GridPane>
+
+           </ScrollPane>
+
+           <VBox styleClass="addCommentBox">
+               <TextField
+                        fx:id="addComment"
+                       promptText="Comment..."
+                       prefWidth="150"
+                       prefHeight="40"
+               >
+
+               </TextField>
+           </VBox>
+       </VBox>
+
+    </VBox>
+
+</GridPane>

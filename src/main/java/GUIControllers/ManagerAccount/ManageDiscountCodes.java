@@ -55,11 +55,24 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
     }
 
     public void RemoveDiscountCode(MouseEvent mouseEvent) {
+        try {
+            ControlManager.getInstance().removeDiscountCode(codeToRemove.getText());
+            showError(alertLabel,"Code " + codeToRemove.getText()+" has been successfully deleted!",Error.POSITIVE);
+        } catch (Exception e) {
+            showError(alertLabel,e.getMessage(),Error.NEGATIVE);
+        }
     }
 
     public void createDiscountCode(MouseEvent mouseEvent) {
+        goToNextPage(Page.CREATEDISCOUNTCODE,mouseEvent);
     }
 
     public void EditDiscountCode(MouseEvent mouseEvent) {
+        if(DiscountCode.getAllDiscountCodes().containsKey(codeToEdit.getText())){
+            ControlManager.getInstance().setDiscountCodeToEdit(codeToEdit.getText());
+            goToNextPage(Page.EDITDISCOUNTCODE,mouseEvent);
+        }else{
+            showError(alertLabel,"This code doesn't exist!",Error.NEGATIVE);
+        }
     }
 }

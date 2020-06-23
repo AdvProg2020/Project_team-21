@@ -1,0 +1,85 @@
+.mainPageProductCards {
+    -fx-padding: 0 0 0 0;
+    -fx-border-color: #bfaecd;
+    -fx-background-color: #ebebff;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, #D0D0D0, 10, 0, 0, 0);
+    -fx-text-alignment: CENTER;
+    -fx-border-insets: 6px;
+}
+
+.topBar {
+    -fx-background-color: #7676cb;
+}
+
+.mainPageProductCards2 {
+    -fx-padding: 25 25 0 25;
+    -fx-text-alignment: CENTER;
+    -fx-border-insets: 6px;
+}
+
+.backBtn {
+     -fx-background-position: center;
+     -fx-background-image: url("/images/back.png");
+     -fx-background-size: 44px 25px;
+     -fx-background-color: #7676cb;
+ }
+
+.backBtn:hover {
+    -fx-scale-y: 1.13 !important;
+    -fx-scale-x: 1.13 !important;
+}
+
+.productDescriptionBox {
+    -fx-padding: 20 0 0 40;
+}
+
+.mainPageProductCardsTitle {
+    -fx-padding: 20 0 20 15;
+    -fx-text-fill: #001f3f;
+    -fx-font-weight: bold;
+    -fx-font-size: 23px;
+    -fx-text-alignment: center;
+}
+
+.priceContainer {
+    -fx-padding: 40 0 0 200;
+    -fx-font-size: 18px;
+}
+
+.basketBuyButton {
+    -fx-background-position: center;
+    /*-fx-background-image: url("/images/shopping_basket.jpg");*/
+    /*-fx-background-size: 45px 45px;*/
+    -fx-background-color: #ebebff;
+    -fx-border-style: solid;
+
+    -fx-background-color: #75baff;
+
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 4 0 0 0;
+}
+
+.basketBuyButton:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+    -fx-font-weight: bold;
+}
+
+.commentLabels {
+    -fx-padding: 3 14 1 14;
+    -fx-border-color: #bfaecd;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, #D0D0D0, 10, 0, 0, 0);
+    -fx-text-alignment: CENTER;
+    -fx-border-insets: 6px;
+}
+
+.addCommentBox {
+    -fx-padding: 5 0 0 0;
+}

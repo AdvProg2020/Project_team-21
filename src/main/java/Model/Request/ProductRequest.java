@@ -17,8 +17,9 @@ public class ProductRequest extends Request {
     public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product)
     {
         super(requestType);
+        String imagePath="";
         if(requestType.equals(RequestType.ADD))
-             product = new Product(productId,name,company,price,category,seller);
+             product = new Product(productId,name,company,price,category,seller,imagePath);
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);
          this.provider = provider;

@@ -4,6 +4,7 @@ import Controller.Sort;
 
 import Model.Account.Customer;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,6 +67,12 @@ public class DiscountCode {
     {
         discountOwners.remove(customer.getUsername(),customer);
         customer.removeDiscountCode(this);
+    }
+    public static void removeDiscountCode (String code){
+        allDiscountCodes.remove(code);
+
+        File file = new File(code+".txt");
+        file.delete();
     }
 
     public HashMap<String, Customer> getDiscountOwners() {

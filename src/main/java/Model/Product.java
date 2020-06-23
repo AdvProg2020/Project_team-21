@@ -27,6 +27,7 @@ public class Product {
     ArrayList<Review> reviewsList;
     private Off off;
     private HashMap<String,String> specialFeatures = new HashMap<String, String>();
+    private String imagePath;
 
 
     // Initialization Block
@@ -35,7 +36,7 @@ public class Product {
         reviewsList = new ArrayList<>();
     }
 
-    public Product(String productId, String name, Company company, double price, Category category,Seller seller){
+    public Product(String productId, String name, Company company, double price, Category category,Seller seller,String imagePath){
         setProductId(productId);
         setName(name);
         setProductState(productState);
@@ -47,6 +48,15 @@ public class Product {
         allProducts.put(productId,this);
         SaveData.saveData(this, getProductId(), SaveData.productFile);
         addProductsWithOff();
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public void setSpecialFeatures(ArrayList<String> specialFeatures){

@@ -33,11 +33,7 @@ public class Customer extends Account implements Comparable<Customer>{
         allCustomer.remove(customer);
 
         File file = new File(customer.getUsername()+".txt");
-        if(file.delete()){
-//            System.out.println("yes");
-        } else {
-//            System.out.println("hah");
-        }
+        file.delete();
     }
 
     public static ArrayList<Customer> getaAllCustomers() {

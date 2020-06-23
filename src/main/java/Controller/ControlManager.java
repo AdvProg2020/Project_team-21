@@ -18,6 +18,7 @@ public class ControlManager {
     Manager user = (Manager)(Control.getInstance().getUser());
     private String userToView;
     private String discountCodeToView;
+    private String discountCodeToEdit;
     private static ControlManager instance;
     private ControlManager()
     {
@@ -31,6 +32,14 @@ public class ControlManager {
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber,String photo)
     {
         Manager manager = new Manager(username,firstName,lastName,email,phoneNumber,password,photo);
+    }
+
+    public void setDiscountCodeToEdit(String discountCodeToEdit) {
+        this.discountCodeToEdit = discountCodeToEdit;
+    }
+
+    public String getDiscountCodeToEdit() {
+        return discountCodeToEdit;
     }
 
     public void setUserToView(String userToView) {
@@ -60,7 +69,7 @@ public class ControlManager {
     {
         if(!Product.getAllProducts().containsKey(id))
             throw new Exception("This product doesn't exist!");
-        Product.getAllProducts().remove(id);
+        Product.removeProduct(Product.getAllProducts().get(id));
     }
     private int makeInt(String s)
     {
@@ -114,7 +123,7 @@ public class ControlManager {
     public void editDiscountCode(String field,String newValue, String id) throws Exception
     {
         DiscountCode discountCode = DiscountCode.getAllDiscountCodes().get(id);
-        if(field.equals("Start date"))
+        if(field.equalsIgnoreCase("Start date"))
         {
             if(!newValue.matches("\\d{4}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}"))
             {
@@ -126,7 +135,7 @@ public class ControlManager {
                 discountCode.setStartTime(LocalDateTime.of(makeInt(startDateParsed[0]),makeInt(startDateParsed[1]),makeInt(startDateParsed[2]),makeInt(startDateParsed[3]),makeInt(startDateParsed[4])));
             }
         }
-        else if(field.equals("End date"))
+        else if(field.equalsIgnoreCase("End date"))
         {
             if(!newValue.matches("\\d{4}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}\\s+\\d{1,2}"))
             {
@@ -138,7 +147,7 @@ public class ControlManager {
                 discountCode.setEndTime(LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4])));
             }
         }
-        else if(field.equals("Percentage"))
+        else if(field.equalsIgnoreCase("Percentage"))
         {
             if(!newValue.matches("\\d+.?(\\d+)?"))
             {
@@ -149,7 +158,7 @@ public class ControlManager {
                 discountCode.setDiscountPercentage(makeDouble(newValue));
             }
         }
-        else if(field.equals("Max amount"))
+        else if(field.equalsIgnoreCase("Max amount"))
         {
             if(!newValue.matches("\\d+.?(\\d+)?"))
             {
@@ -160,7 +169,7 @@ public class ControlManager {
                 discountCode.setMaxDiscountAmount(makeDouble(newValue));
             }
         }
-        else if(field.equals("Max times"))
+        else if(field.equalsIgnoreCase("Max times"))
         {
             if(!newValue.matches("\\d+"))
             {
@@ -220,7 +229,7 @@ public class ControlManager {
                 Customer customer = discountCode.getDiscountOwners().get(s);
                 customer.removeDiscountCode(discountCode);
             }
-            DiscountCode.getAllDiscountCodes().remove(id);
+            DiscountCode.removeDiscountCode(id);
         }
     }
     public void addCategory(String name, ArrayList<Product> products) throws Exception
