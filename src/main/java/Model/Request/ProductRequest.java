@@ -6,6 +6,7 @@ import Model.Company;
 import Model.Product;
 import Model.SaveData;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ProductRequest extends Request {
@@ -48,6 +49,10 @@ public class ProductRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
+        File file = new File(requestId +(requestedProducts.get(requestId).getProductId())+".txt");
+        file.delete();
+        File file1 = new File(requestId+".txt");
+        file1.delete();
         requestedProducts.remove(requestId);
         Request.getAllRequests().remove(requestId);
     }

@@ -26,7 +26,8 @@ public class ManagerEditCategoryNameUI extends UI {
         String newName = ConsoleView.getScanner().nextLine();
         try
         {
-            ControlManager.getInstance().changeCategoryName(newName);
+            String chert = "";
+            ControlManager.getInstance().changeCategoryName(newName,chert);
             ManagerEditCategoryUI.getInstance().setCategoryName(newName);
             System.out.println("Your category's name has been successfully changed to " + newName);
             ConsoleView.getInstance().goToNextPage(ConsoleView.getInstance().getLastMenu());

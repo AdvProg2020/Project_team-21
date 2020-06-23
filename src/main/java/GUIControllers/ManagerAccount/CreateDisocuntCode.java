@@ -32,7 +32,7 @@ public class CreateDisocuntCode extends GraphicFather{
         HashMap<String,Customer> codeOwners = new HashMap<>();
         String[] userInputUsers = usersToAdd.getText().split(",");
         for (String owner : userInputUsers){
-            owner.trim();
+            owner = owner.trim();
             if(!Account.getAllAccounts().containsKey(owner)){
                 usersNotExist.add(owner);
                 continue;

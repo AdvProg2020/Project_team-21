@@ -20,6 +20,7 @@ public class ControlManager {
     private String discountCodeToView;
     private String discountCodeToEdit;
     private String requestToView;
+    private String categoryToEdit;
     private static ControlManager instance;
     private ControlManager()
     {
@@ -49,6 +50,14 @@ public class ControlManager {
 
     public String getRequestToView() {
         return requestToView;
+    }
+
+    public void setCategoryToEdit(String categoryToEdit) {
+        this.categoryToEdit = categoryToEdit;
+    }
+
+    public String getCategoryToEdit() {
+        return categoryToEdit;
     }
 
     public void setUserToView(String userToView) {
@@ -249,14 +258,14 @@ public class ControlManager {
         }
         new Category(name, products);
     }
-    public void changeCategoryName(String newName) throws Exception
+    public void changeCategoryName(String newName,String name) throws Exception
     {
         if(ControlManager.getInstance().checkCategoryExistance(newName))
         {
             throw new Exception("This category already exists!");
         }
         for (Category category : Category.getAllCategories()) {
-            if(category.getName().equalsIgnoreCase(ManagerEditCategoryUI.getInstance().getCategoryName()))
+            if(category.getName().equalsIgnoreCase(name))
             {
                 category.setName(newName);
             }

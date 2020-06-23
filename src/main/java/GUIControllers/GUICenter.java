@@ -150,6 +150,12 @@ public class GUICenter {
         else if(page.equals(Page.VIEWREQUEST)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ViewRequest.fxml"));
         }
+        else if(page.equals(Page.CREATECATEGORY)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/CreateCategory.fxml"));
+        }
+        else if(page.equals(Page.EDITCATEGORY)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/EditCategory.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

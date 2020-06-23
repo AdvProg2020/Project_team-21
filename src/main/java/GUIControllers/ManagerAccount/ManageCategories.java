@@ -1,8 +1,12 @@
 package GUIControllers.ManagerAccount;
 
+import Controller.ControlManager;
+import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import GUIControllers.Page;
 import Model.Category;
 import Model.Request.Request;
+import View.ConsoleView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -19,8 +23,9 @@ import java.util.ResourceBundle;
 public class ManageCategories extends GraphicFather implements Initializable {
     public TextField categoryToRemove;
     public TableView<Category> listCategories;
-    public Label AlertLabel;
     public TableColumn<Category,String> name = new TableColumn<>("Name");
+    public Label alertLabel;
+    public TextField categoryToEdit;
 
     ObservableList<Category> getCategories(){
         ObservableList<Category> result =  FXCollections.observableArrayList();
@@ -39,11 +44,31 @@ public class ManageCategories extends GraphicFather implements Initializable {
     }
 
     public void removeCategory(MouseEvent mouseEvent) {
+        String categoryName = categoryToRemove.getText();
+        if(!ControlManager.getInstance().checkCategoryExistance(categoryName))
+        {
+            showError(alertLabel,"This category doesn't exist!", Error.NEGATIVE);
+        }
+        else
+        {
+            for (Category category : Category.getAllCategories()) {
+                if(category.getName().equalsIgnoreCase(categoryName))
+                    Category.removeCategory(category);
+            }
+        }
     }
 
     public void addCategory(MouseEvent mouseEvent) {
+        goToNextPage(Page.CREATECATEGORY,mouseEvent);
     }
 
     public void editCategory(MouseEvent mouseEvent) {
+        if(ControlManager.getInstance().checkCategoryExistance(categoryToEdit.getText())){
+            ControlManager.getInstance().setCategoryToEdit(categoryToEdit.getText());
+            goToNextPage(Page.EDITCATEGORY,mouseEvent);
+        }else{
+            showError(alertLabel,"This category doesn't exist!",Error.NEGATIVE);
+        }
+
     }
 }

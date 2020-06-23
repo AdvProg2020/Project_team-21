@@ -5,6 +5,7 @@ import Model.Off;
 import Model.Product;
 import Model.SaveData;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -53,6 +54,10 @@ public class OffRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
+        File file = new File(requestId +(requestedOffs.get(requestId).getOffId())+".txt");
+        file.delete();
+        File file1 = new File(requestId+".txt");
+        file1.delete();
         requestedOffs.remove(requestId);
         Request.getAllRequests().remove(requestId);
     }

@@ -34,7 +34,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button layoutX="483.0" layoutY="394.0" mnemonicParsing="false" onMouseClicked="#viewReq" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.bottomAnchor="384.0">
+   <Button layoutX="483.0" layoutY="394.0" mnemonicParsing="false" onMouseClicked="#viewReq" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
@@ -46,8 +46,8 @@
          </ImageView>
       </graphic>
    </Button>
-   <TextField fx:id="requestToView" layoutX="254.0" layoutY="547.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="250.0" />
-   <Label layoutX="50.0" layoutY="482.0" prefHeight="39.0" prefWidth="203.0" text="View A Request:" textFill="#cfb936" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="50.0">
+   <TextField fx:id="requestToView" layoutX="253.0" layoutY="499.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="253.0" />
+   <Label layoutX="46.0" layoutY="449.0" prefHeight="39.0" prefWidth="203.0" text="View A Request:" textFill="#cfb936" AnchorPane.leftAnchor="46.0">
       <font>
          <Font size="29.0" />
       </font>
@@ -70,8 +70,8 @@
          <Font size="29.0" />
       </font>
    </Label>
-   <TextField fx:id="requestToDecline" layoutX="271.0" layoutY="375.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.bottomAnchor="470.0" AnchorPane.leftAnchor="250.0" />
-   <Button layoutX="475.0" layoutY="537.0" mnemonicParsing="false" onMouseClicked="#declineReq" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.bottomAnchor="241.0">
+   <TextField fx:id="requestToDecline" layoutX="271.0" layoutY="375.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="250.0" />
+   <Button layoutX="475.0" layoutY="537.0" mnemonicParsing="false" onMouseClicked="#declineReq" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
@@ -83,7 +83,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Label fx:id="alertLabel" layoutX="113.0" layoutY="735.0" prefHeight="48.0" prefWidth="603.0" text="----" textFill="#d01212" AnchorPane.bottomAnchor="200.0">
+   <Label fx:id="alertLabel" layoutX="113.0" layoutY="735.0" prefHeight="48.0" prefWidth="603.0" text="----" textFill="#d01212" AnchorPane.bottomAnchor="20.0">
       <font>
          <Font name="Hiragino Sans W4" size="21.0" />
       </font>

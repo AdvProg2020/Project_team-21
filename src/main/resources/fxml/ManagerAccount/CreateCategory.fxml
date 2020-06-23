@@ -51,16 +51,16 @@
             <Font size="35.0" />
         </font>
     </Label>
-   <Label fx:id="AlertLabel" layoutX="313.0" layoutY="496.0" prefHeight="66.0" prefWidth="907.0" text="---" textFill="#bc1d25" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="198.0">
-      <font>
-         <Font size="30.0" />
-      </font>
-   </Label>
-   <Label layoutX="29.0" layoutY="265.0" prefHeight="39.0" prefWidth="572.0" text="Enter ProductIDs to add (Seperate By ,)" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="400.0">
+   <Label fx:id="alertLabel" layoutX="313.0" layoutY="496.0" prefHeight="66.0" prefWidth="907.0" text="---" textFill="#bc1d25" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="198.0">
       <font>
          <Font size="25.0" />
       </font>
    </Label>
-   <TextField fx:id="productsToAdd" layoutX="853.0" layoutY="259.0" prefHeight="39.0" prefWidth="677.0" promptText="Enter IDs" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="400.0" />
+   <Label layoutX="29.0" layoutY="265.0" prefHeight="39.0" prefWidth="572.0" text="Enter ProductIDs to add (Seperate By ,)" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="300.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <TextField fx:id="productsToAdd" layoutX="853.0" layoutY="259.0" prefHeight="39.0" prefWidth="677.0" promptText="Enter IDs" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="300.0" />
 
 </AnchorPane>
