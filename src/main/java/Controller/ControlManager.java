@@ -19,6 +19,7 @@ public class ControlManager {
     private String userToView;
     private String discountCodeToView;
     private String discountCodeToEdit;
+    private String requestToView;
     private static ControlManager instance;
     private ControlManager()
     {
@@ -40,6 +41,14 @@ public class ControlManager {
 
     public String getDiscountCodeToEdit() {
         return discountCodeToEdit;
+    }
+
+    public void setRequestToView(String requestToView) {
+        this.requestToView = requestToView;
+    }
+
+    public String getRequestToView() {
+        return requestToView;
     }
 
     public void setUserToView(String userToView) {

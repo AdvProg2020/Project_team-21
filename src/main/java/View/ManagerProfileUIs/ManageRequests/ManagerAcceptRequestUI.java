@@ -49,8 +49,6 @@ public class ManagerAcceptRequestUI extends UI {
         {
             ConsoleView.getInstance().errorInput("This request ID doesn't exist!" , ConsoleView.getInstance().getLastMenu());
         }
-
-
     }
     @Override
     public void help() {

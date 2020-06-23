@@ -147,6 +147,9 @@ public class GUICenter {
         else if(page.equals(Page.CREATEDISCOUNTCODE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/CreateDiscountCode.fxml"));
         }
+        else if(page.equals(Page.VIEWREQUEST)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ViewRequest.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;
