@@ -171,6 +171,15 @@ public class GUICenter {
         else if(page.equals(Page.EDITFIELDSELLER)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditFieldSeller.fxml"));
         }
+        else if(page.equals(Page.VIEWOFF)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/ViewOFF.fxml"));
+        }
+        else if(page.equals(Page.EDITOFF)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditOFF.fxml"));
+        }
+        else if(page.equals(Page.CREATEOFF)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateOFF.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

@@ -9,62 +9,58 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SellerAccount.ViewOFF">
-   <Label layoutX="488.0" layoutY="20.0" prefHeight="68.0" prefWidth="500.0" text="View OFF" textFill="#cfb936" AnchorPane.leftAnchor="488.0" AnchorPane.rightAnchor="211.0" AnchorPane.topAnchor="20.0">
+   <Label layoutX="504.0" layoutY="24.0" prefHeight="68.0" prefWidth="182.0" text="View OFF" textFill="#cfb936" AnchorPane.leftAnchor="504.0" AnchorPane.rightAnchor="513.0" AnchorPane.topAnchor="24.0">
       <font>
-         <Font size="56.0" />
+         <Font size="40.0" />
       </font>
    </Label>
-   <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="848.0" prefWidth="1196.0">
-      <children>
-         <Label fx:id="percentage" layoutX="712.0" layoutY="150.0" prefHeight="50.0" prefWidth="432.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="120.0">
-            <font>
-               <Font name="Hiragino Sans W5" size="31.0" />
-            </font>
-         </Label>
-         <Label fx:id="endTime" layoutX="726.0" layoutY="395.0" prefHeight="50.0" prefWidth="432.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="726.0" AnchorPane.topAnchor="320.0">
-            <font>
-               <Font name="Hiragino Sans W5" size="31.0" />
-            </font>
-         </Label>
-         <Label fx:id="startTime" layoutX="714.0" layoutY="271.0" prefHeight="50.0" prefWidth="432.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="220.0">
-            <font>
-               <Font name="Hiragino Sans W5" size="31.0" />
-            </font>
-         </Label>
-         <Label layoutX="200.0" layoutY="86.0" text="Percentage" textFill="#b31215" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="120.0">
-            <font>
-               <Font name="Hiragino Sans W3" size="34.0" />
-            </font>
-         </Label>
-         <Label layoutX="194.0" layoutY="170.0" text="Start Time" textFill="#b31215" AnchorPane.leftAnchor="194.0" AnchorPane.topAnchor="220.0">
-            <font>
-               <Font name="Hiragino Sans W3" size="34.0" />
-            </font>
-         </Label>
-         <Label layoutX="202.0" layoutY="364.0" text="End Time" textFill="#b31215" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="320.0">
-            <font>
-               <Font name="Hiragino Sans W3" size="34.0" />
-            </font>
-         </Label>
-         <TableView fx:id="listProducts" editable="true" layoutX="663.0" layoutY="475.0" prefHeight="390.0" prefWidth="426.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="100.0" />
-         <Label layoutX="205.0" layoutY="523.0" prefHeight="42.0" prefWidth="166.0" text="Products" textFill="#b31215" AnchorPane.leftAnchor="205.0">
-            <font>
-               <Font name="Hiragino Sans W3" size="34.0" />
-            </font>
-         </Label>
-      	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="99.0" prefWidth="118.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
-               <font>
-                  <Font name="Hiragino Sans W2" size="30.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="90.0" fitWidth="92.0">
-                     <image>
-                        <Image url="@../../images/back.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-      </children>
-   </AnchorPane>
+   <Label fx:id="percentage" prefHeight="26.0" prefWidth="432.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
+      <font>
+         <Font name="Hiragino Sans W5" size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="endTime" prefHeight="29.0" prefWidth="429.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="290.0">
+      <font>
+         <Font name="Hiragino Sans W5" size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="startTime" prefHeight="26.0" prefWidth="432.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="220.0">
+      <font>
+         <Font name="Hiragino Sans W5" size="20.0" />
+      </font>
+   </Label>
+   <Label text="Percentage" textFill="#b31215" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <font>
+         <Font name="Hiragino Sans W3" size="25.0" />
+      </font>
+   </Label>
+   <Label text="Start Time" textFill="#b31215" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="220.0">
+      <font>
+         <Font name="Hiragino Sans W3" size="25.0" />
+      </font>
+   </Label>
+   <Label text="End Time" textFill="#b31215" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="290.0">
+      <font>
+         <Font name="Hiragino Sans W3" size="25.0" />
+      </font>
+   </Label>
+   <TableView fx:id="listProducts" editable="true" prefHeight="390.0" prefWidth="426.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="100.0" />
+   <Label layoutX="233.0" layoutY="649.0" prefHeight="42.0" prefWidth="166.0" text="Products" textFill="#b31215" AnchorPane.leftAnchor="233.0">
+      <font>
+         <Font name="Hiragino Sans W3" size="25.0" />
+      </font>
+   </Label>
+	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="99.0" prefWidth="118.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="92.0">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
 
 </AnchorPane>

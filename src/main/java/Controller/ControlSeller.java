@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.zip.CheckedOutputStream;
 
 public class ControlSeller {
+    private String offToView;
+    private String offToEdit;
     private static ControlSeller instance;
     private ControlSeller()
     {
@@ -25,7 +27,24 @@ public class ControlSeller {
             instance = new ControlSeller();
         return instance;
     }
-    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company,String photo)
+
+    public String getOffToView() {
+        return offToView;
+    }
+
+    public void setOffToView(String offToView) {
+        this.offToView = offToView;
+    }
+
+    public String getOffToEdit() {
+        return offToEdit;
+    }
+
+    public void setOffToEdit(String offToEdit) {
+        this.offToEdit = offToEdit;
+    }
+
+    public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company, String photo)
     {
         new SellerRequest(Control.getInstance().randomString(10),username,firstName,lastName,email,phoneNumber,password,company, RequestType.ADD,photo);
     }

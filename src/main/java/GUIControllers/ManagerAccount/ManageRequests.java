@@ -52,7 +52,6 @@ public class ManageRequests extends GraphicFather implements Initializable {
         listRequests.getColumns().add(type);
         listRequests.getColumns().add(id);
         listRequests.getColumns().add(provider);
-
     }
 
     public void acceptReq(MouseEvent mouseEvent) {

@@ -22,7 +22,6 @@ public class EditDiscountCode extends GraphicFather{
     public TextField removeUsers;
     public Label alertLabel;
     public Label okLabel;
-    private ArrayList<String> editedFields = new ArrayList<>();
     private ArrayList<String> oks = new ArrayList<>();
     private ArrayList<String> errors = new ArrayList<>();
 
