@@ -29,7 +29,7 @@ public class Category implements Comparable<Category>{
     }
     public static void rewriteFiles(){
         for (Category category : allCategories) {
-            File file = new File(category.getName()+".txt");
+            File file = new File(category.getName()+".json");
             file.delete();
             SaveData.saveData(category, category.getName(), SaveData.categoryFile);
         }
@@ -81,7 +81,7 @@ public class Category implements Comparable<Category>{
         }
         allCategories.remove(category);
 
-        File file = new File(category.getName()+".txt");
+        File file = new File(category.getName()+".json");
         if(file.delete()){
 //            System.out.println("yes");
         } else {

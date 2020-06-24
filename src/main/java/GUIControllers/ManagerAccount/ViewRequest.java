@@ -49,7 +49,7 @@ public class ViewRequest extends GraphicFather implements Initializable {
                 field2Info.setText(seller.getFirstName() + " " + seller.getLastName());
                 field3Info.setText(seller.getEmail());
                 field4Info.setText(seller.getPhoneNumber());
-                field5Info.setText(seller.getCompany().toString());
+                field5Info.setText(seller.getCompany().getName());
                 field6Info.setText(seller.getPassword());
             }
             else if(request instanceof OffRequest)

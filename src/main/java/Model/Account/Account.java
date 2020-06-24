@@ -155,5 +155,4 @@ public abstract class Account {
             allAccounts.put(((Account)object).getUsername() ,(Account)(object));
         }
     }
-
 }

@@ -93,7 +93,8 @@ public class ManageRequests extends GraphicFather implements Initializable {
     }
 
     public void viewReq(MouseEvent mouseEvent) {
-        if(ControlManager.getInstance().checkRequestIdExistance(requestToView.getText())){
+        String requestId = requestToView.getText();
+        if(ControlManager.getInstance().checkRequestIdExistance(requestId)){
             ControlManager.getInstance().setRequestToView(requestToView.getText());
             goToNextPage(Page.VIEWREQUEST,mouseEvent);
         }

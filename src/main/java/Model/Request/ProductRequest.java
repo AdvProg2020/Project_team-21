@@ -29,7 +29,7 @@ public class ProductRequest extends Request {
     public static void rewriteFiles(){
         for (String s : requestedProducts.keySet()) {
             Product product = requestedProducts.get(s);
-            File file = new File(s + product.getProductId()+".txt");
+            File file = new File(s + product.getProductId()+".json");
             file.delete();
             SaveData.saveData(product, s+product.getProductId(), SaveData.productRequestFile);
         }
@@ -54,9 +54,9 @@ public class ProductRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File(requestId +(requestedProducts.get(requestId).getProductId())+".txt");
+        File file = new File(requestId +(requestedProducts.get(requestId).getProductId())+".json");
         file.delete();
-        File file1 = new File(requestId+".txt");
+        File file1 = new File(requestId+".json");
         file1.delete();
         requestedProducts.remove(requestId);
         Request.getAllRequests().remove(requestId);

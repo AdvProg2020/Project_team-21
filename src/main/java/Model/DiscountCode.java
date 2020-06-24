@@ -43,7 +43,7 @@ public class DiscountCode {
     }
     public static void rewriteFiles(){
         for (String s : allDiscountCodes.keySet()) {
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             SaveData.saveData(allDiscountCodes.get(s), s, SaveData.discountCodeFile);
         }
@@ -79,7 +79,7 @@ public class DiscountCode {
     public static void removeDiscountCode (String code){
         allDiscountCodes.remove(code);
 
-        File file = new File(code+".txt");
+        File file = new File(code+".json");
         file.delete();
     }
 

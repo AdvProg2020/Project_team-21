@@ -20,7 +20,7 @@ public class Manager extends Account implements Comparable<Manager>{
     }
     public static void rewriteFiles(){
         for (Manager manager : Manager.getAllManagers()) {
-            File file = new File(manager.getUsername()+".txt");
+            File file = new File(manager.getUsername()+".json");
             file.delete();
             SaveData.saveData(manager, manager.getUsername(), SaveData.managerFile);
         }

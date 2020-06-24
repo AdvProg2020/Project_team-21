@@ -28,7 +28,7 @@ public class SellLog extends Log{
     public static void rewriteFiles(){
         for (String s : SellLog.getAllSellLogs().keySet()) {
             SellLog log = SellLog.getAllSellLogs().get(s);
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             SaveData.saveData(log, s, SaveData.sellLogFile);
         }

@@ -23,7 +23,7 @@ public class Company {
     }
     public static void rewriteFiles(){
         for (String s : allCompanies.keySet()) {
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             SaveData.saveData(allCompanies.get(s), s, SaveData.companyFile);
         }

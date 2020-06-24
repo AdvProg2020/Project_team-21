@@ -24,7 +24,7 @@ public class Review implements Comparable<Review> {
 
     public static void rewriteFiles(){
         for (Review review : allReviews) {
-            File file = new File(review.getReviewText()+".txt");
+            File file = new File(review.getReviewText()+".json");
             file.delete();
             SaveData.saveData(review, review.getReviewText(), SaveData.reviewFile);
         }

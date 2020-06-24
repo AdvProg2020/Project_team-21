@@ -33,7 +33,7 @@ public class BuyLog extends Log{
     public static void rewriteFiles(){
         for (String s : BuyLog.getAllBuyLogs().keySet()) {
             BuyLog log = BuyLog.getAllBuyLogs().get(s);
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             SaveData.saveData(log, s, SaveData.buyLogFile);
         }

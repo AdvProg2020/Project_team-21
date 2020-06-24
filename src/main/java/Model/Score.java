@@ -22,7 +22,7 @@ public class Score implements Comparable<Score>{
     }
     public static void rewriteFiles(){
         for (Score score : allScores) {
-            File file = new File(score.getScore() + score.getUser().getFirstName()+".txt");
+            File file = new File(score.getScore() + score.getUser().getFirstName()+".json");
             file.delete();
             SaveData.saveData(score, score.getScore() + score.getUser().getFirstName(), SaveData.scoreFile);
         }

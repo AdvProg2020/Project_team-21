@@ -51,7 +51,7 @@ public class Product {
     }
     public static void rewriteFiles(){
         for (String s : allProducts.keySet()) {
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             SaveData.saveData(allProducts.get(s), s, SaveData.productFile);
         }
@@ -93,7 +93,7 @@ public class Product {
             seller.getAllProducts().remove(product);
         }
 
-        File file = new File(product.getProductId()+".txt");
+        File file = new File(product.getProductId()+".json");
         if(file.delete()){
 //            System.out.println("yes");
         } else {

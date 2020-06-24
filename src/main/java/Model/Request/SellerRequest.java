@@ -27,7 +27,7 @@ public class SellerRequest extends Request {
     public static void rewriteFiles(){
         for (String s : requestedSellers.keySet()) {
             Seller seller = requestedSellers.get(s);
-            File file = new File(s + seller.getUsername()+".txt");
+            File file = new File(s + seller.getUsername()+".json");
             file.delete();
             SaveData.saveData(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
         }
@@ -40,9 +40,9 @@ public class SellerRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File(requestId+(requestedSellers.get(requestId).getUsername())+".txt");
+        File file = new File(requestId+(requestedSellers.get(requestId).getUsername())+".json");
         file.delete();
-        File file1 = new File(requestId+".txt");
+        File file1 = new File(requestId+".json");
         file1.delete();
         requestedSellers.remove(requestId);
         getAllRequests().remove(requestId);

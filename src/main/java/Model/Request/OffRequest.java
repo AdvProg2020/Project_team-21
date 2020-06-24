@@ -34,7 +34,7 @@ public class OffRequest extends Request {
     public static void rewriteFiles(){
         for (String s : getAllRequests().keySet()) {
             Request req = getAllRequests().get(s);
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             if(req.getType().equalsIgnoreCase("Off Request"))
                 SaveData.saveData(req, s, SaveData.offReqFile);
@@ -74,9 +74,9 @@ public class OffRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File(requestId +(requestedOffs.get(requestId).getOffId())+".txt");
+        File file = new File(requestId +(requestedOffs.get(requestId).getOffId())+".json");
         file.delete();
-        File file1 = new File(requestId+".txt");
+        File file1 = new File(requestId+".json");
         file1.delete();
         requestedOffs.remove(requestId);
         Request.getAllRequests().remove(requestId);

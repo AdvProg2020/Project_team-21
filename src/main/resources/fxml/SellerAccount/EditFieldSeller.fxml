@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -14,29 +15,16 @@
          <Font size="56.0" />
       </font>
    </Label>
-   <Label fx:id="AlertLabel" prefHeight="82.0" prefWidth="1000.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="50.0">
+   <Label fx:id="alertLabel" prefHeight="82.0" prefWidth="1000.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="50.0">
       <font>
-         <Font size="52.0" />
+         <Font size="25.0" />
       </font>
    </Label>
-   <TextField fx:id="Username" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="170.0" />
-   <TextField fx:id="Phone" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="270.0" />
-   <TextField fx:id="Email" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="370.0" />
-   <TextField fx:id="Address" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="570.0" />
-   <TextField fx:id="Password" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="470.0" />
-   <TextField fx:id="Name" layoutX="399.0" layoutY="675.0" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="365.0" AnchorPane.topAnchor="675.0" />
-   <Button mnemonicParsing="false" onMouseClicked="#makeChange" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
-      <font>
-         <Font name="Hiragino Sans W2" size="30.0" />
-      </font>
-      <graphic>
-         <ImageView fitHeight="102.0" fitWidth="104.0">
-            <image>
-               <Image url="@../../images/check.png" />
-            </image>
-         </ImageView>
-      </graphic>
-   </Button>
+   <TextField fx:id="Phone" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="170.0" />
+   <TextField fx:id="Email" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="220.0" />
+   <TextField fx:id="Address" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="320.0" />
+   <TextField fx:id="Password" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="270.0" />
+   <TextField fx:id="firstName" layoutX="399.0" layoutY="675.0" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="370.0" />
 	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />
@@ -50,35 +38,30 @@
          </graphic>
       </Button>
    <TextField fx:id="companyName" layoutX="926.0" layoutY="253.0" prefHeight="27.0" prefWidth="176.0" promptText="Enter new value" AnchorPane.rightAnchor="90.0" />
-   <TextField fx:id="companyAddress" layoutX="939.0" layoutY="504.0" prefHeight="27.0" prefWidth="176.0" promptText="Enter new value" AnchorPane.rightAnchor="84.0" />
-   <Label layoutX="131.0" layoutY="172.0" text="Username" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+   <TextField fx:id="companyAddress" layoutX="942.0" layoutY="342.0" prefHeight="27.0" prefWidth="176.0" promptText="Enter new value" AnchorPane.rightAnchor="90.0" />
+   <Label layoutX="138.0" layoutY="269.0" text="Phone Number" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="170.0">
       <font>
-         <Font name="Hiragino Sans W3" size="30.0" />
+         <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label layoutX="138.0" layoutY="269.0" text="Phone Number" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+   <Label layoutX="105.0" layoutY="366.0" text="Email" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="220.0">
       <font>
-         <Font name="Hiragino Sans W3" size="30.0" />
+         <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label layoutX="105.0" layoutY="366.0" text="Email" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+   <Label layoutX="104.0" layoutY="466.0" text="Password" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="270.0">
       <font>
-         <Font name="Hiragino Sans W3" size="30.0" />
+         <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label layoutX="104.0" layoutY="466.0" text="Password" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+   <Label layoutX="108.0" layoutY="572.0" text="Address" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="320.0">
       <font>
-         <Font name="Hiragino Sans W3" size="30.0" />
+         <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label layoutX="108.0" layoutY="572.0" text="Address" textFill="#b31215" AnchorPane.leftAnchor="100.0">
+   <Label layoutX="91.0" layoutY="676.0" text="First Name" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="370.0">
       <font>
-         <Font name="Hiragino Sans W3" size="30.0" />
-      </font>
-   </Label>
-   <Label layoutX="91.0" layoutY="676.0" text="Name" textFill="#b31215" AnchorPane.leftAnchor="100.0">
-      <font>
-         <Font name="Hiragino Sans W3" size="30.0" />
+         <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
    <Label layoutX="943.0" layoutY="205.0" text="Company Name" textFill="#b31215" AnchorPane.rightAnchor="70.0">
@@ -86,10 +69,31 @@
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label layoutX="922.0" layoutY="453.0" text="Company Address" textFill="#b31215" AnchorPane.rightAnchor="60.0">
+   <Label layoutX="914.0" layoutY="308.0" text="Company Address" textFill="#b31215" AnchorPane.rightAnchor="50.0">
       <font>
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
+   <Button layoutX="1046.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#makeChange" prefHeight="119.0" prefWidth="119.0" styleClass="Button" textFill="#cfb936" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <font>
+         <Font name="Hiragino Sans W2" size="30.0" />
+      </font>
+      <graphic>
+         <ImageView fitHeight="88.0" fitWidth="91.0">
+            <image>
+               <Image url="@../../images/ok.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <stylesheets>
+         <URL value="@../../css/ManagerAccount.css" />
+      </stylesheets>
+   </Button>
+   <Label layoutX="110.0" layoutY="380.0" text="Last Name" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="420.0">
+      <font>
+         <Font name="Hiragino Sans W3" size="25.0" />
+      </font>
+   </Label>
+   <TextField fx:id="lastName" layoutX="404.0" layoutY="380.0" prefHeight="27.0" prefWidth="435.0" promptText="Enter new value" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="420.0" />
 
 </AnchorPane>

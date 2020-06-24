@@ -35,7 +35,7 @@ public class Off implements Comparable<Off>{
 
     public static void rewriteFiles(){
         for (String s : allOffs.keySet()) {
-            File file = new File(s+".txt");
+            File file = new File(s+".json");
             file.delete();
             SaveData.saveData(allOffs.get(s), s, SaveData.offFile);
         }
@@ -54,7 +54,7 @@ public class Off implements Comparable<Off>{
     {
         allOffs.remove(off.getOffId());
 
-        File file = new File(off.getOffId()+".txt");
+        File file = new File(off.getOffId()+".json");
         if(file.delete()){
 //            System.out.println("yes");
         } else {

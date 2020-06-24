@@ -25,7 +25,7 @@ public class Seller extends Account implements Comparable<Seller>{
     }
     public static void rewriteFiles(){
         for (Seller seller : Seller.getAllSeller()) {
-            File file = new File(seller.getUsername()+".txt");
+            File file = new File(seller.getUsername()+".json");
             file.delete();
             SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
         }
@@ -33,7 +33,7 @@ public class Seller extends Account implements Comparable<Seller>{
 
     public static void removeSeller (Seller seller){
         allSellers.remove(seller);
-        File file = new File(seller.getUsername()+".txt");
+        File file = new File(seller.getUsername()+".json");
         if(file.delete()){
 //            System.out.println("yes");
         } else {
