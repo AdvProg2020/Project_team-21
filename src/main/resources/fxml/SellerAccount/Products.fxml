@@ -41,7 +41,7 @@
          <URL value="@../../css/ManagerAccount.css" />
       </stylesheets>
     </Button>
-    <Label layoutX="53.0" layoutY="195.0" prefHeight="39.0" prefWidth="242.0" text="View A Product:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+    <Label layoutX="53.0" layoutY="195.0" prefHeight="39.0" prefWidth="206.0" text="View A Product:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
         <font>
             <Font size="29.0" />
         </font>
@@ -54,12 +54,12 @@
     </Label>
     <TableView fx:id="listProducts" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
     </TableView>
-   <Label fx:id="AlertLabel" layoutX="107.0" layoutY="755.0" prefHeight="57.0" prefWidth="660.0" text="----" textFill="#b31215">
+   <Label fx:id="alertLabel" layoutX="107.0" layoutY="755.0" prefHeight="57.0" prefWidth="660.0" text="----" textFill="#b31215" AnchorPane.bottomAnchor="15.0">
       <font>
-         <Font size="30.0" />
+         <Font size="25.0" />
       </font>
    </Label>
-   <Label layoutX="55.0" layoutY="293.0" prefHeight="39.0" prefWidth="294.0" text="View Buyers A Product:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+   <Label layoutX="55.0" layoutY="293.0" prefHeight="39.0" prefWidth="325.0" text="View Buyers Of A Product:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
       <font>
          <Font size="29.0" />
       </font>
@@ -101,12 +101,12 @@
          </ImageView>
       </graphic>
    </Button>
-   <Label layoutX="65.0" layoutY="486.0" prefHeight="39.0" prefWidth="247.0" text="Remove A Product:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+   <Label layoutX="65.0" layoutY="486.0" prefHeight="39.0" prefWidth="312.0" text="Remove A Product:*Req*" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
       <font>
          <Font size="29.0" />
       </font>
    </Label>
-   <TextField fx:id="productToRemove" layoutX="446.0" layoutY="491.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="446.0" />
+   <TextField fx:id="productToRemove" layoutX="446.0" layoutY="491.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="450.0" />
    <Button layoutX="733.0" layoutY="470.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="119.0" prefWidth="79.0" styleClass="Button" textFill="#cfb936" AnchorPane.leftAnchor="715.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
@@ -122,13 +122,34 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button layoutX="325.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="102.0" prefWidth="263.0" styleClass="Button" text="Add A Product" textFill="#cfb936">
+   <Button layoutX="325.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="62.0" prefWidth="309.0" styleClass="Button" text="Create A Product" textFill="#cfb936" AnchorPane.bottomAnchor="50.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
       <stylesheets>
          <URL value="@../../css/ManagerAccount.css" />
       </stylesheets>
+   </Button>
+   <Label layoutX="53.0" layoutY="580.0" prefHeight="39.0" prefWidth="331.0" text="Add A Product to list:*Req*" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+      <font>
+         <Font size="29.0" />
+      </font>
+   </Label>
+   <TextField fx:id="productToAdd" layoutX="438.0" layoutY="574.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter ID" AnchorPane.leftAnchor="450.0" />
+   <Button layoutX="722.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#addProductToList" prefHeight="119.0" prefWidth="79.0" styleClass="Button" textFill="#cfb936" AnchorPane.leftAnchor="715.0">
+      <font>
+         <Font name="Hiragino Sans W2" size="30.0" />
+      </font>
+      <stylesheets>
+         <URL value="@../../css/ManagerAccount.css" />
+      </stylesheets>
+      <graphic>
+         <ImageView fitHeight="99.0" fitWidth="84.0">
+            <image>
+               <Image url="@../../images/ok.png" />
+            </image>
+         </ImageView>
+      </graphic>
    </Button>
 
 </AnchorPane>

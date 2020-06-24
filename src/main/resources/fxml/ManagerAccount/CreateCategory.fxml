@@ -25,7 +25,7 @@
          <URL value="@../../css/ManagerAccount.css" />
       </stylesheets>
     </Button>
-    <Button layoutX="1036.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="127.0" prefWidth="132.0" styleClass="Button" textFill="#cfb936" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+    <Button layoutX="1036.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#done" prefHeight="127.0" prefWidth="132.0" styleClass="Button" textFill="#cfb936" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
         <font>
             <Font name="Hiragino Sans W2" size="30.0" />
         </font>

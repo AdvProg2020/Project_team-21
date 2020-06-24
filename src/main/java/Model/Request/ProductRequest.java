@@ -12,10 +12,9 @@ public class ProductRequest extends Request {
     private String newValueEdit;
     private Seller seller;
     private String providerUsername;
-    public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product)
+    public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product,String imagePath)
     {
         super(requestType);
-        String imagePath="";
         if(requestType.equals(RequestType.ADD))
              product = new Product(productId,name,company,price,category,seller,imagePath);
          requestedProducts.put(requestId,product);
@@ -26,6 +25,7 @@ public class ProductRequest extends Request {
         SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
         SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
     }
+
     public static void rewriteFiles(){
         for (String s : requestedProducts.keySet()) {
             Product product = requestedProducts.get(s);

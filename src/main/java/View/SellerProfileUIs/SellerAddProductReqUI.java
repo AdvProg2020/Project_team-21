@@ -39,9 +39,10 @@ public class SellerAddProductReqUI extends UI {
             String companyName = scanner.nextLine();
             System.out.println("Enter company's location: ");
             String companyLocation = scanner.nextLine();
+            String productID = Control.getInstance().randomString(10);
             try
             {
-                String reqID = ControlSeller.getInstance().sendAddProductReq(name,companyName,categoryName,price,companyLocation);
+                String reqID = ControlSeller.getInstance().sendAddProductReq(name,companyName,categoryName,price,companyLocation,productID,"");
                 System.out.println("Your request with id " + reqID + " has been sent!");
             }
             catch (Exception e)

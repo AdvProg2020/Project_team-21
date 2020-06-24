@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" stylesheets="@../../css/signUpPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SellerAccount.CreateProduct">
+    <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="68.0" prefWidth="107.0" styleClass="Button" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+        <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+        </font>
+      <graphic>
+         <ImageView fitHeight="82.0" fitWidth="72.0">
+            <image>
+               <Image url="@../../images/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <stylesheets>
+         <URL value="@../../css/ManagerAccount.css" />
+      </stylesheets>
+    </Button>
+    <Button layoutX="1036.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#done" prefHeight="127.0" prefWidth="132.0" styleClass="Button" textFill="#cfb936" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+        <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+        </font>
+      <graphic>
+         <ImageView fitHeight="99.0" fitWidth="84.0" onMouseClicked="#done">
+            <image>
+               <Image url="@../../images/ok.png" />
+            </image>
+         </ImageView>
+      </graphic>
+      <stylesheets>
+         <URL value="@../../css/ManagerAccount.css" />
+      </stylesheets>
+    </Button>
+    <Label layoutX="88.0" layoutY="229.0" prefHeight="18.0" prefWidth="128.0" text="Enter Name" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="200.0">
+        <font>
+            <Font size="25.0" />
+        </font>
+    </Label>
+    <TextField fx:id="name" layoutX="317.0" layoutY="213.0" prefHeight="26.0" prefWidth="235.0" promptText="Name" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="200.0" />
+    <Label layoutX="499.0" layoutY="2.0" prefHeight="66.0" prefWidth="227.0" text="Create Prodcut" textFill="#cfb936" AnchorPane.leftAnchor="499.0" AnchorPane.topAnchor="2.0">
+        <font>
+            <Font size="35.0" />
+        </font>
+    </Label>
+   <Label fx:id="alertLabel" layoutX="226.0" layoutY="753.0" prefHeight="66.0" prefWidth="848.0" text="---" textFill="#bc1d25" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="245.0">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Button layoutX="832.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#uploadPhotoButton" prefHeight="51.0" prefWidth="191.0" styleClass="SpecialButton" text="Set Photo" textFill="#5eae71" AnchorPane.rightAnchor="100.0">
+      <font>
+         <Font name="Hiragino Sans W2" size="30.0" />
+      </font>
+      <stylesheets>
+         <URL value="@../../css/ManagerAccount.css" />
+      </stylesheets>
+   </Button>
+   <Circle fx:id="photo" fill="DODGERBLUE" layoutX="827.0" layoutY="169.0" radius="69.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" AnchorPane.rightAnchor="300.0" />
+   <Label layoutX="87.0" layoutY="255.0" prefHeight="30.0" prefWidth="164.0" text="Enter Category" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="250.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <TextField fx:id="category" layoutX="324.0" layoutY="259.0" prefHeight="26.0" prefWidth="235.0" promptText="Category" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="250.0" />
+   <Label layoutX="87.0" layoutY="340.0" prefHeight="30.0" prefWidth="256.0" text="Enter Company's Name" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="300.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <TextField fx:id="companyName" layoutX="349.0" layoutY="319.0" prefHeight="26.0" prefWidth="235.0" promptText="Company Name" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="300.0" />
+   <Label layoutX="87.0" layoutY="350.0" prefHeight="30.0" prefWidth="278.0" text="Enter Company's Location" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <TextField fx:id="companyLocation" layoutX="360.0" layoutY="310.0" prefHeight="26.0" prefWidth="235.0" promptText="Company Location" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="350.0" />
+   <Label layoutX="527.0" layoutY="71.0" prefHeight="18.0" prefWidth="172.0" text="*A Request will be sent to all managers*" textFill="#cfb936">
+      <font>
+         <Font size="10.0" />
+      </font>
+   </Label>
+   <Label layoutX="59.0" layoutY="391.0" prefHeight="30.0" prefWidth="118.0" text="Enter Price" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="400.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Label>
+   <TextField fx:id="price" layoutX="365.0" layoutY="388.0" prefHeight="26.0" prefWidth="235.0" promptText="Price" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="400.0" />
+
+</AnchorPane>

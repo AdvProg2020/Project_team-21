@@ -16,6 +16,9 @@ import java.util.zip.CheckedOutputStream;
 public class ControlSeller {
     private String offToView;
     private String offToEdit;
+    private String productToView;
+    private String productViewBuyers;
+    private String productToEdit;
     private static ControlSeller instance;
     private ControlSeller()
     {
@@ -42,6 +45,30 @@ public class ControlSeller {
 
     public void setOffToEdit(String offToEdit) {
         this.offToEdit = offToEdit;
+    }
+
+    public void setProductToView(String productToView) {
+        this.productToView = productToView;
+    }
+
+    public void setProductToEdit(String productToEdit) {
+        this.productToEdit = productToEdit;
+    }
+
+    public String getProductToEdit() {
+        return productToEdit;
+    }
+
+    public String getProductToView() {
+        return productToView;
+    }
+
+    public String getProductViewBuyers() {
+        return productViewBuyers;
+    }
+
+    public void setProductViewBuyers(String productViewBuyers) {
+        this.productViewBuyers = productViewBuyers;
     }
 
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company, String photo)
@@ -85,18 +112,18 @@ public class ControlSeller {
             }
         }
         Product product = Product.getAllProducts().get(productID);
-        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,null,RequestType.EDIT,null,product);
+        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,null,RequestType.EDIT,null,product,"");
         req.setEditField(field);
         req.setNewValueEdit(value);
         return requestID;
     }
-    public String sendAddProductReq(String name, String companyName, String categoryName, String price,String companyLocation) throws Exception
+    public String sendAddProductReq(String name, String companyName, String categoryName, String price,String companyLocation,String productID,String imagePath) throws Exception
     {
         Seller seller = (Seller) Control.getInstance().getUser();
         Category category = null;
         Company company = null;
         double priceNum = 0;
-        String productID = Control.getInstance().randomString(10);
+
         String requestID = Control.getInstance().randomString(10);
         for (Category category1 : Category.getAllCategories()) {
             if(category1.getName().equalsIgnoreCase(categoryName))
@@ -122,7 +149,7 @@ public class ControlSeller {
         {
             priceNum = Double.parseDouble(price);
         }
-        new ProductRequest(requestID,productID,name,company,priceNum,category,seller,RequestType.ADD,seller,null);
+        new ProductRequest(requestID,productID,name,company,priceNum,category,seller,RequestType.ADD,seller,null,imagePath);
         return requestID;
     }
     public String sendAddSellerProductReq(String productID) throws Exception
@@ -134,7 +161,7 @@ public class ControlSeller {
         String requestID = Control.getInstance().randomString(10);
         Seller seller = (Seller) Control.getInstance().getUser();
         Product product = Product.getAllProducts().get(productID);
-        new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.ADD_SELLER,seller,product);
+        new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.ADD_SELLER,seller,product,"");
         return requestID;
     }
     public String sendRemoveProductReq(String productID) throws Exception
@@ -145,7 +172,7 @@ public class ControlSeller {
             Seller seller = (Seller) Control.getInstance().getUser();
             Product product = Product.getAllProducts().get(productID);
             String requestID = Control.getInstance().randomString(10);
-            new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.DELETE,seller,product);
+            new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.DELETE,seller,product,"");
         return requestID;
     }
     public boolean checkOffExistance (String offID)

@@ -1,9 +1,11 @@
 package GUIControllers.SellerAccount;
 
+import Controller.Control;
 import Controller.ControlManager;
 import Controller.ControlSeller;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import Model.Account.Seller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -23,6 +25,7 @@ public class EditOFF extends GraphicFather{
     public Label okLabel;
     private ArrayList<String> oks = new ArrayList<>();
     private ArrayList<String> errors = new ArrayList<>();
+    private Seller seller = (Seller) Control.getInstance().getUser();
 
     public void makeChange(MouseEvent mouseEvent) {
         String offID = ControlSeller.getInstance().getOffToEdit();
@@ -65,9 +68,15 @@ public class EditOFF extends GraphicFather{
         }
         if(!productToRemove.getText().isEmpty()){
             try {
-                String reqID = ControlSeller.getInstance().sendEditOffRequest(offID,"remove product","",productToRemove.getText());
-                reqIDs.add(reqID);
-                oks.add("Remove Product");
+                if (ControlSeller.getInstance().checkProductExists(productToRemove.getText())&&ControlSeller.getInstance().checkSellerGotProduct(productToRemove.getText(), seller))
+                {
+                    String reqID = ControlSeller.getInstance().sendEditOffRequest(offID,"remove product","",productToRemove.getText());
+                    reqIDs.add(reqID);
+                    oks.add("Remove Product");
+                }
+                else{
+                    errors.add("Remove Product: You don't have this product");
+                }
             } catch (Exception e) {
                 errors.add("Remove Product: "+ e.getMessage());
             }

@@ -6,19 +6,17 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SellerAccount.EditProduct">
-   <Label layoutX="470.0" layoutY="24.0" prefHeight="68.0" prefWidth="350.0" text="EDIT Product" textFill="#cfb936" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="379.0" AnchorPane.topAnchor="24.0">
+   <Label layoutX="495.0" layoutY="24.0" prefHeight="68.0" prefWidth="247.0" text="EDIT Product" textFill="#cfb936" AnchorPane.leftAnchor="495.0" AnchorPane.rightAnchor="457.0" AnchorPane.topAnchor="24.0">
       <font>
-         <Font size="56.0" />
+         <Font size="40.0" />
       </font>
    </Label>
-   <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="204.0" layoutY="201.0" radius="69.0" stroke="BLACK" strokeType="INSIDE" />
-   <Label fx:id="AlertLabel" prefHeight="82.0" prefWidth="1055.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0">
+   <Label fx:id="alertLabel" prefHeight="58.0" prefWidth="1055.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="50.0">
       <font>
-         <Font size="52.0" />
+         <Font size="30.0" />
       </font>
    </Label>
    <TextField fx:id="name" layoutX="458.0" layoutY="417.0" prefHeight="31.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="417.0" />
@@ -57,10 +55,15 @@
          <Font name="Hiragino Sans W3" size="30.0" />
       </font>
    </Label>
-   <Button layoutX="283.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#setPhoto" prefHeight="58.0" prefWidth="267.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="setNewPhoto" textFill="#cfb936">
+   <Label layoutX="521.0" layoutY="80.0" prefHeight="30.0" prefWidth="177.0" text="*This will send a request to managers*" textFill="#cfb936">
       <font>
-         <Font name="Hiragino Sans W2" size="30.0" />
+         <Font size="10.0" />
       </font>
-   </Button>
+   </Label>
+   <Label fx:id="okLabel" layoutX="96.0" layoutY="684.0" prefHeight="49.0" prefWidth="1048.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="83.0">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Label>
 
 </AnchorPane>

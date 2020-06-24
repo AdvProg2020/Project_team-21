@@ -180,6 +180,18 @@ public class GUICenter {
         else if(page.equals(Page.CREATEOFF)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateOFF.fxml"));
         }
+        else if(page.equals(Page.VIEWPRODUCT)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/ViewProduct.fxml"));
+        }
+        else if(page.equals(Page.VIEWBUYERSPRODUCT)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/ViewBuyersProduct.fxml"));
+        }
+        else if(page.equals(Page.EDITPRODUCT)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditProduct.fxml"));
+        }
+        else if(page.equals(Page.CREATEPRODUCT)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateProduct.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;
