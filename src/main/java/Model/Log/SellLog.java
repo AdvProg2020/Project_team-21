@@ -4,6 +4,7 @@ import Model.Account.Seller;
 import Model.Product;
 import Model.SaveData;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,14 @@ public class SellLog extends Log{
         }
         SaveData.saveData(this, getLogId(), SaveData.sellLogFile);
     }
+    public static void rewriteFiles(){
+        for (String s : SellLog.getAllSellLogs().keySet()) {
+            SellLog log = SellLog.getAllSellLogs().get(s);
+            File file = new File(s+".txt");
+            file.delete();
+            SaveData.saveData(log, s, SaveData.sellLogFile);
+        }
+    }
     public void addSellLog(SellLog sellLog)
     {
         allSellLogs.put(sellLog.getLogId(),sellLog);
@@ -38,5 +47,9 @@ public class SellLog extends Log{
         for (Object object : objects) {
             allSellLogs.put(((SellLog)object).getLogId() ,(SellLog) (object));
         }
+    }
+
+    public static HashMap<String, SellLog> getAllSellLogs() {
+        return allSellLogs;
     }
 }

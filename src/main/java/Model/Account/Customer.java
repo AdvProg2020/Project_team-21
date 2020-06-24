@@ -29,6 +29,14 @@ public class Customer extends Account implements Comparable<Customer>{
         setShoppingCart(new ShoppingCart(this));
     }
 
+    public static void rewriteFiles(){
+        for (Customer customer : Customer.getAllCustomer()) {
+            File file = new File(customer.getUsername()+".txt");
+            file.delete();
+            SaveData.saveData(customer, customer.getUsername(), SaveData.customerFile);
+        }
+    }
+
     public static void removeCustomer (Customer customer){
         allCustomer.remove(customer);
 

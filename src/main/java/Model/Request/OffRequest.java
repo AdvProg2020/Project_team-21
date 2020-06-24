@@ -31,6 +31,26 @@ public class OffRequest extends Request {
         SaveData.saveData(off, (getRequestId()+off.getOffId()), SaveData.offRequestFile);
     }
 
+    public static void rewriteFiles(){
+        for (String s : getAllRequests().keySet()) {
+            Request req = getAllRequests().get(s);
+            File file = new File(s+".txt");
+            file.delete();
+            if(req.getType().equalsIgnoreCase("Off Request"))
+                SaveData.saveData(req, s, SaveData.offReqFile);
+            else if(req.getType().equalsIgnoreCase("Product Request"))
+                SaveData.saveData(req, s, SaveData.productReqFile);
+            else if(req.getType().equalsIgnoreCase("Seller Request"))
+                SaveData.saveData(req, s, SaveData.sellerReqFile);
+        }
+        for (String s : requestedOffs.keySet()) {
+            Off off = requestedOffs.get(s);
+            File file = new File(s + off.getOffId()+".txt");
+            file.delete();
+            SaveData.saveData(off, s+off.getOffId(), SaveData.offRequestFile);
+        }
+    }
+
     public String getProviderUsername() {
         return providerUsername;
     }

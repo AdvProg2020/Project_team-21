@@ -24,6 +24,14 @@ public class SellerRequest extends Request {
         SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
         SaveData.saveData(seller, (getRequestId()+seller.getUsername()), SaveData.sellerRequestFile);
     }
+    public static void rewriteFiles(){
+        for (String s : requestedSellers.keySet()) {
+            Seller seller = requestedSellers.get(s);
+            File file = new File(s + seller.getUsername()+".txt");
+            file.delete();
+            SaveData.saveData(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
+        }
+    }
 
     public String getProviderUsername() {
         return providerUsername;

@@ -4,20 +4,32 @@ import Model.Account.Account;
 import Model.Account.Seller;
 import Model.Log.SellLog;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ShoppingCart {
 
     private HashMap<Product, Integer> productsQuantity = new HashMap<>();
     private HashMap<Product, Seller> productSeller = new HashMap<>();
+    private static ArrayList<ShoppingCart> allShoppingCarts = new ArrayList<>();
 
     private Account customer;
     private double price;
 
     public ShoppingCart(Account customer){
         setCustomer(customer);
+        allShoppingCarts.add(this);
+//        SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
     }
 
+//    public static void rewriteFiles(){
+//        for (ShoppingCart cart : allShoppingCarts) {
+//            File file = new File(cart.getCustomer().getUsername()+"ShoppingCart"+".txt");
+//            file.delete();
+//            SaveData.saveData(cart, cart.getCustomer().getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
+//        }
+//    }
 
     public void setCustomer(Account customer){
         this.customer = customer;
@@ -74,5 +86,10 @@ public class ShoppingCart {
         productsQuantity.clear();
         productSeller.clear();
     }
-
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
+//        for (Object object : objects) {
+//            allShoppingCarts.add((ShoppingCart)(object));
+//        }
+//    }
 }

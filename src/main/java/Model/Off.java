@@ -31,7 +31,14 @@ public class Off implements Comparable<Off>{
         setStartTime(startTime);
         setEndTime(endTime);
         setOffAmount(offAmount);
-        SaveData.saveData(this, getOffId(), SaveData.offFile);
+    }
+
+    public static void rewriteFiles(){
+        for (String s : allOffs.keySet()) {
+            File file = new File(s+".txt");
+            file.delete();
+            SaveData.saveData(allOffs.get(s), s, SaveData.offFile);
+        }
     }
 
     private void setOffId(String offId) {
@@ -41,6 +48,7 @@ public class Off implements Comparable<Off>{
     public static void addOff(Off off)
     {
         allOffs.put(off.getOffId(),off);
+        SaveData.saveData(off, off.getOffId(), SaveData.offFile);
     }
     public static void removeOff(Off off)
     {
@@ -164,7 +172,6 @@ public class Off implements Comparable<Off>{
 
     public void removeOff(){
         allOffsList.remove(this);
-
     }
 
 

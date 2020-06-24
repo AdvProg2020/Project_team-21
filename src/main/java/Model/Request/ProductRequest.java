@@ -1,10 +1,7 @@
 package Model.Request;
 
+import Model.*;
 import Model.Account.Seller;
-import Model.Category;
-import Model.Company;
-import Model.Product;
-import Model.SaveData;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,6 +25,14 @@ public class ProductRequest extends Request {
          setRequestId(requestId);
         SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
         SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
+    }
+    public static void rewriteFiles(){
+        for (String s : requestedProducts.keySet()) {
+            Product product = requestedProducts.get(s);
+            File file = new File(s + product.getProductId()+".txt");
+            file.delete();
+            SaveData.saveData(product, s+product.getProductId(), SaveData.productRequestFile);
+        }
     }
 
     public String getProviderUsername() {

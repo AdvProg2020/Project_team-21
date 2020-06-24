@@ -1,7 +1,9 @@
 package Model;
 
+import Model.Account.Account;
 import Model.Account.Seller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +19,14 @@ public class Company {
         this.name = name;
         this.location = location;
         allCompanies.put(name,this);
+        SaveData.saveData(this, getName(), SaveData.companyFile);
+    }
+    public static void rewriteFiles(){
+        for (String s : allCompanies.keySet()) {
+            File file = new File(s+".txt");
+            file.delete();
+            SaveData.saveData(allCompanies.get(s), s, SaveData.companyFile);
+        }
     }
 
     public static HashMap<String, Company> getAllCompanies() {
@@ -46,5 +56,12 @@ public class Company {
     public void addSeller(Seller seller)
     {
         allSellers.add(seller);
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.companyFile)));
+        for (Object object : objects) {
+            allCompanies.put(((Company)object).getName() ,(Company)(object));
+        }
     }
 }

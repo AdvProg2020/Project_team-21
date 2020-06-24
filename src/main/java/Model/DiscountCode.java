@@ -41,6 +41,14 @@ public class DiscountCode {
         allDiscountCodes.put(discountId,this);
         SaveData.saveData(this, getDiscountId(), SaveData.discountCodeFile);
     }
+    public static void rewriteFiles(){
+        for (String s : allDiscountCodes.keySet()) {
+            File file = new File(s+".txt");
+            file.delete();
+            SaveData.saveData(allDiscountCodes.get(s), s, SaveData.discountCodeFile);
+        }
+    }
+
 
     public static HashMap<String, DiscountCode> getAllDiscountCodes() {
         return allDiscountCodes;

@@ -22,7 +22,13 @@ public class Seller extends Account implements Comparable<Seller>{
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         this.company = company;
-        SaveData.saveData(this, getUsername(), SaveData.sellerFile);
+    }
+    public static void rewriteFiles(){
+        for (Seller seller : Seller.getAllSeller()) {
+            File file = new File(seller.getUsername()+".txt");
+            file.delete();
+            SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
+        }
     }
 
     public static void removeSeller (Seller seller){
@@ -46,6 +52,7 @@ public class Seller extends Account implements Comparable<Seller>{
     public static void addNewSeller (Seller seller){
         Account.addAccount(seller);
         allSellers.add(seller);
+        SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
     }
 
     public Company getCompany() {

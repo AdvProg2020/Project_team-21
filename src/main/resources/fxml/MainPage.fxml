@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane styleClass="wholePageContainer" stylesheets="@/css/mainPageStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="GUIControllers.MainPage">
+<AnchorPane styleClass="wholePageContainer" stylesheets="@/css/mainPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.MainPage">
 
     <AnchorPane maxWidth="Infinity" styleClass="navBarContainer" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
@@ -89,6 +89,22 @@
 
         </Label>
 
+
     </StackPane>
+
+    <StackPane alignment="CENTER" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="50">
+
+        <Button fx:id="quitButton" layoutX="322.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#end" style="-fx-background-color: none;" stylesheets="@../css/ManagerAccount.css" styleClass="SpecialButton">
+            <graphic>
+                <ImageView fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/quit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+    </StackPane>
+
 
 </AnchorPane>

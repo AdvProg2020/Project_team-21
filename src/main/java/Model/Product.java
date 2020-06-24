@@ -46,9 +46,15 @@ public class Product {
         addSeller(seller);
         allProductsList.add(this);
         allProducts.put(productId,this);
-        SaveData.saveData(this, getProductId(), SaveData.productFile);
         addProductsWithOff();
         this.imagePath = imagePath;
+    }
+    public static void rewriteFiles(){
+        for (String s : allProducts.keySet()) {
+            File file = new File(s+".txt");
+            file.delete();
+            SaveData.saveData(allProducts.get(s), s, SaveData.productFile);
+        }
     }
 
     public String getImagePath() {
@@ -76,6 +82,7 @@ public class Product {
     public static void addProduct(Product product)
     {
         allProducts.put(product.getProductId(),product);
+        SaveData.saveData(product, product.getProductId(), SaveData.productFile);
     }
 
     public static void removeProduct(Product product)

@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Account.Seller;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -24,6 +26,13 @@ public class Category implements Comparable<Category>{
         setName(name);
         allCategories.add(this);
         SaveData.saveData(this, getName(), SaveData.categoryFile);
+    }
+    public static void rewriteFiles(){
+        for (Category category : allCategories) {
+            File file = new File(category.getName()+".txt");
+            file.delete();
+            SaveData.saveData(category, category.getName(), SaveData.categoryFile);
+        }
     }
 
     public String getName() {

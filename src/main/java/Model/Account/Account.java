@@ -5,6 +5,7 @@ import Model.DiscountCode;
 import Controller.Sort;
 import Model.SaveData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,6 +33,15 @@ public abstract class Account {
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
+    }
+
+    public static void rewriteFiles(){
+        for (String s : Account.getAllAccounts().keySet()) {
+            Account account = Account.getAllAccounts().get(s);
+            File file = new File(s+account.getPassword()+".txt");
+            file.delete();
+            SaveData.saveData(account, (s+account.getPassword()), SaveData.accountFile);
+        }
     }
 
     public String getAddress() {

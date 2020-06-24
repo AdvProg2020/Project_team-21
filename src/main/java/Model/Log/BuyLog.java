@@ -1,9 +1,11 @@
 package Model.Log;
 
+import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Product;
 import Model.SaveData;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +30,14 @@ public class BuyLog extends Log{
         }
         SaveData.saveData(this, getLogId(), SaveData.buyLogFile);
     }
+    public static void rewriteFiles(){
+        for (String s : BuyLog.getAllBuyLogs().keySet()) {
+            BuyLog log = BuyLog.getAllBuyLogs().get(s);
+            File file = new File(s+".txt");
+            file.delete();
+            SaveData.saveData(log, s, SaveData.buyLogFile);
+        }
+    }
 
     public ArrayList<String> getSellersUsernames() {
         return sellersUsernames;
@@ -47,5 +57,9 @@ public class BuyLog extends Log{
         for (Object object : objects) {
             allBuyLogs.put(((BuyLog)object).getLogId() ,(BuyLog) (object));
         }
+    }
+
+    public static HashMap<String, BuyLog> getAllBuyLogs() {
+        return allBuyLogs;
     }
 }
