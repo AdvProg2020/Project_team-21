@@ -1,6 +1,9 @@
 package GUIControllers.CustomerAccount;
 
+import Controller.Control;
 import GUIControllers.GraphicFather;
+import GUIControllers.Page;
+import Model.Account.Customer;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -21,7 +24,15 @@ public class CustomerAccount extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Customer customer = (Customer) Control.getInstance().getUser();
+        showImageUser(photoCircle);
+        Username.setText(customer.getUsername());
+        Name.setText(customer.getFirstName()+" "+ customer.getLastName());
+        Address.setText(customer.getAddress());
+        Phone.setText(customer.getPhoneNumber());
+        Email.setText(customer.getEmail());
+        Password.setText(customer.getPassword());
+        balance.setText(Double.toString(customer.getBalance()));
     }
 
     public void goToCart(MouseEvent mouseEvent) {
@@ -31,8 +42,10 @@ public class CustomerAccount extends GraphicFather implements Initializable {
     }
 
     public void goToDiscountCodes(MouseEvent mouseEvent) {
+        goToNextPage(Page.CUSTOMERDISCOUNTCODES,mouseEvent);
     }
 
     public void editField(MouseEvent mouseEvent) {
+        goToNextPage(Page.EDITFIELDSMANAGER,mouseEvent);
     }
 }

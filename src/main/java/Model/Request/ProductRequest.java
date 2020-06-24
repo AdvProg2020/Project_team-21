@@ -22,8 +22,8 @@ public class ProductRequest extends Request {
          this.provider = provider;
          providerUsername = provider.getUsername();
          setRequestId(requestId);
-        SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
         SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
+        SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
     }
 
     public static void rewriteFiles(){

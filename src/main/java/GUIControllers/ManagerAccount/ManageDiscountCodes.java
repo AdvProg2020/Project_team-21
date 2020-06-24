@@ -20,7 +20,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManageDiscountCodes extends GraphicFather implements Initializable {
-    public Label AlertLabel;
     public TableView<DiscountCode> listDiscountCodes;
 
     public TableColumn<DiscountCode,String> id = new TableColumn<>("DiscountID");

@@ -192,6 +192,9 @@ public class GUICenter {
         else if(page.equals(Page.CREATEPRODUCT)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateProduct.fxml"));
         }
+        else if(page.equals(Page.CUSTOMERDISCOUNTCODES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/DiscountCodes.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

@@ -37,6 +37,7 @@ public class SellerAccount extends GraphicFather implements Initializable {
         companyAddress.setText(seller.getCompany().getLocation());
         companyName.setText(seller.getCompany().getName());
         balance.setText(Double.toString(seller.getCredit()));
+        showImageUser(photoCircle);
     }
 
     public void goToProducts(MouseEvent mouseEvent) {
