@@ -4,7 +4,10 @@ import Controller.ControlManager;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
+import Model.Account.Account;
 import Model.Account.Seller;
+import Model.Category;
+import Model.Company;
 import Model.Off;
 import Model.Product;
 import Model.Request.*;
@@ -53,6 +56,17 @@ public class ManageRequests extends GraphicFather implements Initializable {
         listRequests.getColumns().add(id);
         listRequests.getColumns().add(provider);
     }
+    private void rewriteFiles(){
+        Seller.rewriteFiles();
+        Account.rewriteFiles();
+        Product.rewriteFiles();
+        Off.rewriteFiles();
+        ProductRequest.rewriteFiles();
+        OffRequest.rewriteFiles();
+        Seller.rewriteFiles();
+        Category.rewriteFiles();
+        Company.rewriteFiles();
+    }
 
     public void acceptReq(MouseEvent mouseEvent) {
         String requestId = requestToAccept.getText();
@@ -70,7 +84,14 @@ public class ManageRequests extends GraphicFather implements Initializable {
             {
                 showError(alertLabel,"It has been successfully edited!", Error.POSITIVE);
             }
+            else if(Request.getAllRequests().get(requestId).getRequestType().equals(RequestType.ADD_SELLER))
+            {
+                showError(alertLabel,"It has been successfully added!", Error.POSITIVE);
+            }
             Request.getAllRequests().get(requestId).acceptReq(requestId);
+
+            rewriteFiles();
+
         }
         else
         {
@@ -84,6 +105,8 @@ public class ManageRequests extends GraphicFather implements Initializable {
         {
             Request.getAllRequests().get(requestId).declineReq(requestId);
             showError(alertLabel,"It has been declined successfully!",Error.POSITIVE);
+
+            rewriteFiles();
         }
         else
         {

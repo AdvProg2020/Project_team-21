@@ -4,6 +4,7 @@ import Controller.ControlManager;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
+import Model.Account.Customer;
 import Model.DiscountCode;
 import Model.Product;
 import javafx.beans.value.ChangeListener;
@@ -57,6 +58,7 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
         try {
             ControlManager.getInstance().removeDiscountCode(codeToRemove.getText());
             showError(alertLabel,"Code " + codeToRemove.getText()+" has been successfully deleted!",Error.POSITIVE);
+            Customer.rewriteFiles();
         } catch (Exception e) {
             showError(alertLabel,e.getMessage(),Error.NEGATIVE);
         }

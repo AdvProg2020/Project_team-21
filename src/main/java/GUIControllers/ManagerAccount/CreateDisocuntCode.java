@@ -6,6 +6,7 @@ import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import Model.Account.Account;
 import Model.Account.Customer;
+import Model.Product;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -49,6 +50,9 @@ public class CreateDisocuntCode extends GraphicFather{
             ,percentage.getText(),maxPercentage.getText(),maxAmount.getText(),codeOwners);
             showError(alertLabel,"New Discount Code with id " + discountCode + " has been successfully been made.\nUsers not detected: " + usersNotExist+"\nUsers not customer " + usersNotCustomer
                     , Error.POSITIVE);
+
+            Customer.rewriteFiles();
+            Product.rewriteFiles();
         } catch (Exception e) {
             showError(alertLabel,e.getMessage(),Error.NEGATIVE);
         }

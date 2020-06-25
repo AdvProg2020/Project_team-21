@@ -12,6 +12,7 @@ public class Category implements Comparable<Category>{
     private String name;
     private ArrayList<String> productsList;
     private ArrayList<String> subCategories;
+    private static Category allProducts = new Category("All Products",new ArrayList<>());
 
     private ArrayList<String> specialFeatures = new ArrayList<String>();
 
@@ -29,7 +30,8 @@ public class Category implements Comparable<Category>{
             }
         }
         setName(name);
-        allCategories.add(this);
+        if(!name.equals("All Products"))
+            allCategories.add(this);
         SaveData.saveData(this, getName()+"category", SaveData.categoryFile);
     }
     public static void rewriteFiles(){
@@ -69,7 +71,7 @@ public class Category implements Comparable<Category>{
     }
 
     public void removeProductFromCategory(Product product){
-        product.setCategory(null);
+        product.setCategory(allProducts);
         productsList.remove(product.getProductId());
     }
 
@@ -96,7 +98,7 @@ public class Category implements Comparable<Category>{
     public static void removeCategory(Category category){
         for (Product product : category.getProductsList())
         {
-            product.setCategory(null);
+            product.setCategory(allProducts);
         }
         allCategories.remove(category);
 

@@ -112,7 +112,7 @@
                     styleClass="backButton"
             >
                 <graphic>
-                    <ImageView fitHeight="30" fitWidth="30">
+                    <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#goBack">
                         <image>
                             <Image url="@../images/back.png" />
                         </image>

@@ -154,12 +154,16 @@ public class ControlSeller {
     }
     public String sendAddSellerProductReq(String productID) throws Exception
     {
+        Seller seller = (Seller) Control.getInstance().getUser();
         if(!Product.getAllProducts().containsKey(productID))
         {
-            new Exception("This product doesn't exist!");
+            throw new Exception("This product doesn't exist!");
+        }
+        if(seller.getAllProducts().contains(Product.getAllProducts().get(productID)))
+        {
+            throw new Exception("You Already have this product!");
         }
         String requestID = Control.getInstance().randomString(10);
-        Seller seller = (Seller) Control.getInstance().getUser();
         Product product = Product.getAllProducts().get(productID);
         new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.ADD_SELLER,seller,product,"");
         return requestID;
@@ -241,6 +245,9 @@ public class ControlSeller {
         }
         if(!Control.getInstance().doubleCheck(amount))
         {
+            if(Double.parseDouble(amount) > 100){
+                throw new Exception("Your percentage is above 100%");
+            }
             throw new Exception("Your amount format is wrong!");
         }
         String[] startParse = start.split("\\s+");

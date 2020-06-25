@@ -4,8 +4,11 @@ import Controller.Control;
 import Controller.ControlSeller;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.Off;
 import Model.Product;
+import Model.Request.OffRequest;
 import View.ConsoleView;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -37,6 +40,12 @@ public class CreateOFF extends GraphicFather {
         try{
             String reqID = ControlSeller.getInstance().sendAddOfRequest(products,percentage.getText(),startDate.getText(),endDate.getText());
             showError(alertLabel,"Your request with ID " + reqID + " has been sent without these products cause they don't exist: "+productsNotExist, Error.POSITIVE);
+
+            Off.rewriteFiles();
+            OffRequest.rewriteFiles();
+            Product.rewriteFiles();
+            Seller.rewriteFiles();
+            Manager.rewriteFiles();
         }
         catch (Exception e){
             showError(alertLabel,e.getMessage(),Error.NEGATIVE);

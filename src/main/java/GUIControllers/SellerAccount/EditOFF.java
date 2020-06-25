@@ -5,7 +5,11 @@ import Controller.ControlManager;
 import Controller.ControlSeller;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import Model.Account.Manager;
 import Model.Account.Seller;
+import Model.Off;
+import Model.Product;
+import Model.Request.OffRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -94,5 +98,11 @@ public class EditOFF extends GraphicFather{
         for (String reqID : reqIDs) {
             okLabel.setText(okLabel.getText() + "\n" + reqID);
         }
+
+        Off.rewriteFiles();
+        OffRequest.rewriteFiles();
+        Manager.rewriteFiles();
+        Seller.rewriteFiles();
+        Product.rewriteFiles();
     }
 }

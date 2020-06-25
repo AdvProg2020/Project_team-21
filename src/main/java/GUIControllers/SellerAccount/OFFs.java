@@ -8,6 +8,7 @@ import GUIControllers.Page;
 import Model.Account.Seller;
 import Model.Off;
 import Model.Product;
+import Model.Request.OffRequest;
 import Model.Request.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,8 @@ public class OFFs extends GraphicFather implements Initializable {
         if(ControlSeller.getInstance().checkOffExistance(offToView.getText()) && ControlSeller.getInstance().checkSellerGotOff(offToView.getText(),seller)) {
             ControlSeller.getInstance().setOffToEdit(offToEdit.getText());
             goToNextPage(Page.EDITOFF,mouseEvent);
+            OffRequest.rewriteFiles();
+            Off.rewriteFiles();
         }
         else {
             showError(alertLabel,"This OFF does not exist!", Error.NEGATIVE);

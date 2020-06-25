@@ -32,6 +32,7 @@ public class CreateCategory extends GraphicFather {
         try {
             ControlManager.getInstance().addCategory(name.getText(),products);
             showError(alertLabel,"Category successfully been made without these products cause they don't exist!:" + productsNotExist,Error.POSITIVE);
+            Product.rewriteFiles();
         } catch (Exception e) {
             showError(alertLabel,e.getMessage(), Error.NEGATIVE);
         }

@@ -5,7 +5,12 @@ import Controller.ControlManager;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import Model.Account.Account;
+import Model.Account.Customer;
+import Model.Account.Seller;
+import Model.Category;
+import Model.Company;
 import Model.Product;
+import Model.ShoppingCart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -49,6 +54,12 @@ public class ManageProducts extends GraphicFather implements Initializable {
         try {
             ControlManager.getInstance().removeProduct(productToRemove.getText());
             showError(alertLabel,"Product " + productToRemove.getText() + " has been successfully deleted!",Error.POSITIVE);
+
+            Category.rewriteFiles();
+            Company.rewriteFiles();
+            Seller.rewriteFiles();
+            Customer.rewriteFiles();
+
         } catch (Exception e) {
             showError(alertLabel,e.getMessage(), Error.NEGATIVE);
         }

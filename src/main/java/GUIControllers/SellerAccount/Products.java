@@ -2,11 +2,12 @@ package GUIControllers.SellerAccount;
 
 import Controller.Control;
 import Controller.ControlSeller;
+import GUIControllers.*;
 import GUIControllers.Error;
-import GUIControllers.GraphicFather;
-import GUIControllers.Page;
+import Model.Account.Manager;
 import Model.Account.Seller;
 import Model.Product;
+import Model.Request.ProductRequest;
 import View.ConsoleView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,6 +60,9 @@ public class Products extends GraphicFather implements Initializable {
         {
             String reqID = ControlSeller.getInstance().sendRemoveProductReq(productToRemove.getText());
             showError(alertLabel,"Your request with ID " + reqID + " has been sent!",Error.POSITIVE);
+            Product.rewriteFiles();
+            ProductRequest.rewriteFiles();
+            Manager.rewriteFiles();
         }
         catch (Exception e)
         {
@@ -87,13 +91,14 @@ public class Products extends GraphicFather implements Initializable {
     }
 
     public void viewProduct(MouseEvent mouseEvent) {
-//        if(ControlSeller.getInstance().checkProductExists(productToView.getText())&&ControlSeller.getInstance().checkSellerGotProduct(productToView.getText(), seller)){
-//            ControlSeller.getInstance().setProductToView(productToView.getText());
-//            goToNextPage(Page.VIEWPRODUCT,mouseEvent);
-//        }
-//        else{
-//            showError(alertLabel,"You don't have this product!", Error.NEGATIVE);
-//        }
+        if(ControlSeller.getInstance().checkProductExists(productToView.getText())&&ControlSeller.getInstance().checkSellerGotProduct(productToView.getText(), seller)){
+            ControlSeller.getInstance().setProductToView(productToView.getText());
+            ProductPage.setProduct(Product.getAllProducts().get(productToView.getText()));
+            goToNextPage(Page.PRODUCTPAGE,mouseEvent);
+        }
+        else{
+            showError(alertLabel,"You don't have this product!", Error.NEGATIVE);
+        }
     }
 
     public void addProductToList(MouseEvent mouseEvent) {
@@ -101,6 +106,8 @@ public class Products extends GraphicFather implements Initializable {
         {
             String reqID = ControlSeller.getInstance().sendAddSellerProductReq(productToAdd.getText());
             showError(alertLabel,"Your request with id " + reqID + " has been sent!",Error.POSITIVE);
+            ProductRequest.rewriteFiles();
+            Product.rewriteFiles();
         }
         catch (Exception e)
         {

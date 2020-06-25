@@ -81,9 +81,6 @@ public class ProductRequest extends Request {
         if(this.getRequestType().equals(RequestType.ADD))
         {
             Product.addProduct(product);
-            for (Seller productSeller : product.getSellers()) {
-                productSeller.addProduct(product);
-            }
         }
         else if(this.getRequestType().equals(RequestType.DELETE))
             Product.removeProduct(product);
@@ -102,7 +99,7 @@ public class ProductRequest extends Request {
         {
             Seller seller = null;
             for (Seller seller1 : Seller.getAllSeller()) {
-                if(seller1.getUsername().equals(this.seller))
+                if(seller1.getUsername().equals(this.provider))
                     seller = seller1;
             }
             product.addSeller(seller);

@@ -64,10 +64,10 @@ public class ManageUsers extends GraphicFather implements Initializable {
         {
             Control.getInstance().deleteUser(userToRemove.getText());
             showError(AlertLabel,"User "+userToRemove.getText()+" has been deleted successfully!",Error.POSITIVE);
-//            Account.rewriteFiles();
-//            Customer.rewriteFiles();
-//            Manager.rewriteFiles();
-//            Seller.rewriteFiles();
+            Account.rewriteFiles();
+            Customer.rewriteFiles();
+            Manager.rewriteFiles();
+            Seller.rewriteFiles();
         }
         catch (Exception e)
         {

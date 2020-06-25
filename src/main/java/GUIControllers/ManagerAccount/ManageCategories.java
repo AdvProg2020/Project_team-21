@@ -50,6 +50,9 @@ public class ManageCategories extends GraphicFather implements Initializable {
         {
             showError(alertLabel,"This category doesn't exist!", Error.NEGATIVE);
         }
+        else if(categoryName.equals("All Products")){
+            showError(alertLabel,"You can't remove this category",Error.NEGATIVE);
+        }
         else
         {
             for (Category category : Category.getAllCategories()) {
@@ -66,7 +69,10 @@ public class ManageCategories extends GraphicFather implements Initializable {
     }
 
     public void editCategory(MouseEvent mouseEvent) {
-        if(ControlManager.getInstance().checkCategoryExistance(categoryToEdit.getText())){
+        if(categoryToEdit.getText().equals("All Products")){
+            showError(alertLabel,"You can't edit this category",Error.NEGATIVE);
+        }
+        else if(ControlManager.getInstance().checkCategoryExistance(categoryToEdit.getText())){
             ControlManager.getInstance().setCategoryToEdit(categoryToEdit.getText());
             goToNextPage(Page.EDITCATEGORY,mouseEvent);
         }else{

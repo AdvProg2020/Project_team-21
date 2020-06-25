@@ -3,6 +3,11 @@ package GUIControllers.SellerAccount;
 import Controller.ControlSeller;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import Model.Account.Manager;
+import Model.Account.Seller;
+import Model.Product;
+import Model.Request.OffRequest;
+import Model.Request.ProductRequest;
 import View.ConsoleView;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -63,7 +68,10 @@ public class EditProduct extends GraphicFather {
         for (String reqID : reqIDs) {
             okLabel.setText(okLabel.getText() + "\n" + reqID);
         }
-
+        Product.rewriteFiles();
+        ProductRequest.rewriteFiles();
+        Manager.rewriteFiles();
+        Seller.rewriteFiles();
     }
 
 }

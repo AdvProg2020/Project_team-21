@@ -51,6 +51,10 @@ public class Company {
     {
         allProducts.add(product.getProductId());
     }
+    public void removeProduct(Product product)
+    {
+        allProducts.remove(product.getProductId());
+    }
 
     public ArrayList<String> getAllProducts() {
         return allProducts;

@@ -93,15 +93,25 @@ public class Product {
     {
         allProducts.put(product.getProductId(),product);
         allProductsList.add(product);
+        product.getCategory().addProductToCategory(product);
+        product.getCompany().addProduct(product);
+
+        for (Seller seller : product.getSellers()) {
+            seller.addProduct(product);
+        }
+
         SaveData.saveData(product, product.getProductId(), SaveData.productFile);
     }
 
     public static void removeProduct(Product product)
     {
         allProducts.remove(product.getProductId());
-        for (Seller seller : product.getSellers())
-        {
+        for (Seller seller : product.getSellers()){
             seller.getAllProducts().remove(product);
+        }
+
+        for (Seller seller : product.getSellers()) {
+            seller.removeProduct(product);
         }
 
         File file = new File(product.getProductId()+".json");

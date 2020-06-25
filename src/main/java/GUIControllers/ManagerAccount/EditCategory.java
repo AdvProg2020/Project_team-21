@@ -70,5 +70,8 @@ public class EditCategory extends GraphicFather {
         }
         showError(alertLabel,"Fields " + error + "had problems", Error.NEGATIVE);
         showError(okLabel,"Fields " + ok + "had been successfully changed",Error.POSITIVE);
+
+        Category.rewriteFiles();
+        Product.rewriteFiles();
     }
 }

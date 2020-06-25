@@ -5,6 +5,7 @@ import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import Model.Account.Account;
 import Model.Account.Seller;
+import Model.Company;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -67,6 +68,9 @@ public class EditFieldSeller extends GraphicFather {
                 fields += editedField + " ";
             }
             showError(alertLabel,"Fields: " + fields + "has been updated for you!",Error.POSITIVE);
+            Seller.rewriteFiles();
+            Account.rewriteFiles();
+            Company.rewriteFiles();
         }
     }
 }

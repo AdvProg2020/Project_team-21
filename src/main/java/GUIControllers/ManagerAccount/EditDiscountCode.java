@@ -3,6 +3,9 @@ package GUIControllers.ManagerAccount;
 import Controller.ControlManager;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import Model.Account.Customer;
+import Model.DiscountCode;
+import Model.Product;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -95,5 +98,9 @@ public class EditDiscountCode extends GraphicFather{
         }
         showError(alertLabel,"Fields " + error + "had problems", Error.NEGATIVE);
         showError(okLabel,"Fields " + ok + "had been successfully changed",Error.POSITIVE);
+
+        Customer.rewriteFiles();
+        DiscountCode.rewriteFiles();
+        Product.rewriteFiles();
     }
 }
