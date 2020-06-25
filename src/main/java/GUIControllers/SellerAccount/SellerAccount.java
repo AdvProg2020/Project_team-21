@@ -5,7 +5,10 @@ import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Account.Seller;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
@@ -24,16 +27,20 @@ public class SellerAccount extends GraphicFather implements Initializable {
     public Label Name;
     public Label Username;
     public Label balance;
+    public Button viewPassButton;
+    public ImageView viewPassImage;
+    private boolean showPass;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showPass = false;
         Seller seller = (Seller) Control.getInstance().getUser();
         Username.setText(seller.getUsername());
         Name.setText(seller.getFirstName() + " " + seller.getLastName());
         Address.setText(seller.getAddress());
         Phone.setText(seller.getPhoneNumber());
         Email.setText(seller.getEmail());
-        Password.setText(seller.getPassword());
+        Password.setText("*****");
         companyAddress.setText(seller.getCompany().getLocation());
         companyName.setText(seller.getCompany().getName());
         balance.setText(Double.toString(seller.getCredit()));
@@ -58,5 +65,18 @@ public class SellerAccount extends GraphicFather implements Initializable {
 
     public void editField(MouseEvent mouseEvent) {
         goToNextPage(Page.EDITFIELDSELLER,mouseEvent);
+    }
+
+    public void viewPass(MouseEvent mouseEvent) {
+        Seller seller = (Seller) Control.getInstance().getUser();
+        if(!showPass){
+            Password.setText(seller.getPassword());
+            viewPassImage.setImage(new Image(getClass().getResource("/Images/unview.png").toString()));
+        }else{
+            Password.setText("*****");
+            viewPassImage.setImage(new Image(getClass().getResource("/Images/view.png").toString()));
+        }
+        showPass = !showPass;
+
     }
 }

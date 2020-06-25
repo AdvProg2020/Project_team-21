@@ -4,8 +4,11 @@ import Controller.Control;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Account.Customer;
+import Model.Account.Seller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
@@ -21,9 +24,12 @@ public class CustomerAccount extends GraphicFather implements Initializable {
     public Label Password;
     public Circle photoCircle;
     public Label balance;
+    public ImageView viewPassImage;
+    private boolean showPass;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showPass = false;
         Customer customer = (Customer) Control.getInstance().getUser();
         showImageUser(photoCircle);
         Username.setText(customer.getUsername());
@@ -31,7 +37,7 @@ public class CustomerAccount extends GraphicFather implements Initializable {
         Address.setText(customer.getAddress());
         Phone.setText(customer.getPhoneNumber());
         Email.setText(customer.getEmail());
-        Password.setText(customer.getPassword());
+        Password.setText("*****");
         balance.setText(Double.toString(customer.getBalance()));
     }
 
@@ -48,5 +54,17 @@ public class CustomerAccount extends GraphicFather implements Initializable {
 
     public void editField(MouseEvent mouseEvent) {
         goToNextPage(Page.EDITFIELDSMANAGER,mouseEvent);
+    }
+
+    public void viewPass(MouseEvent mouseEvent) {
+        Customer seller = (Customer) Control.getInstance().getUser();
+        if(!showPass){
+            Password.setText(seller.getPassword());
+            viewPassImage.setImage(new Image(getClass().getResource("/Images/unview.png").toString()));
+        }else{
+            Password.setText("*****");
+            viewPassImage.setImage(new Image(getClass().getResource("/Images/view.png").toString()));
+        }
+        showPass = !showPass;
     }
 }
