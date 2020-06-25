@@ -6,6 +6,9 @@ import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Account.Account;
+import Model.Account.Customer;
+import Model.Account.Manager;
+import Model.Account.Seller;
 import Model.DiscountCode;
 import View.ConsoleView;
 import com.sun.glass.ui.Accessible;
@@ -61,6 +64,10 @@ public class ManageUsers extends GraphicFather implements Initializable {
         {
             Control.getInstance().deleteUser(userToRemove.getText());
             showError(AlertLabel,"User "+userToRemove.getText()+" has been deleted successfully!",Error.POSITIVE);
+//            Account.rewriteFiles();
+//            Customer.rewriteFiles();
+//            Manager.rewriteFiles();
+//            Seller.rewriteFiles();
         }
         catch (Exception e)
         {

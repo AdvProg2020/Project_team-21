@@ -13,12 +13,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.GREEN;
@@ -64,6 +67,7 @@ public class GraphicFather {
 //    }
 
     public void goBack(Event event) throws IOException {
+        click();
         ArrayList<Page> seenPages = GUICenter.getInstance().getSeenPages();
         if(seenPages.size()>1)
         {
@@ -87,6 +91,7 @@ public class GraphicFather {
 
     public void goToNextPage(Page page, Event event)
     {
+        click();
         Scene menu = null;
         try {
             menu = GUICenter.getInstance().getSceneFromPage(page);
@@ -171,5 +176,12 @@ public class GraphicFather {
     public void gotoSignInPage(ActionEvent actionEvent){
         goToNextPage(Page.SIGNIN,actionEvent);
         GUICenter.getInstance().setLanding(Page.MAIN);
+    }
+    public void click(){
+        MediaPlayer mediaPlayer;
+        Media h = new Media(getClass().getResource("/Musics/click.mp3").toString());
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.play();
+        mediaPlayer.setVolume(GUICenter.getInstance().getClickVolume());
     }
 }

@@ -41,27 +41,31 @@ public class MainPage extends GraphicFather implements Initializable {
 
     public void gotoProductsPage(ActionEvent actionEvent) throws IOException {
     }
+//
+//    public void end(MouseEvent mouseEvent) {
+//        Account.rewriteFiles();
+//        Customer.rewriteFiles();
+//        Manager.rewriteFiles();
+//        Seller.rewriteFiles();
+//        BuyLog.rewriteFiles();
+//        SellLog.rewriteFiles();
+//        OffRequest.rewriteFiles();
+//        ProductRequest.rewriteFiles();
+//        SellerRequest.rewriteFiles();
+//        Category.rewriteFiles();
+//        Company.rewriteFiles();
+//        DiscountCode.rewriteFiles();
+//        Off.rewriteFiles();
+//        Product.rewriteFiles();
+//        Review.rewriteFiles();
+//        Score.rewriteFiles();
+////        ShoppingCart.rewriteFiles();
+//        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+//        stage.close();
+////        Platform.exit();
+//    }
 
-    public void end(MouseEvent mouseEvent) {
-        Account.rewriteFiles();
-        Customer.rewriteFiles();
-        Manager.rewriteFiles();
-        Seller.rewriteFiles();
-        BuyLog.rewriteFiles();
-        SellLog.rewriteFiles();
-        OffRequest.rewriteFiles();
-        ProductRequest.rewriteFiles();
-        SellerRequest.rewriteFiles();
-        Category.rewriteFiles();
-        Company.rewriteFiles();
-        DiscountCode.rewriteFiles();
-        Off.rewriteFiles();
-        Product.rewriteFiles();
-        Review.rewriteFiles();
-        Score.rewriteFiles();
-//        ShoppingCart.rewriteFiles();
-        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        stage.close();
-//        Platform.exit();
+    public void goToSettings(MouseEvent mouseEvent) {
+        goToNextPage(Page.SETTINGS,mouseEvent);
     }
 }

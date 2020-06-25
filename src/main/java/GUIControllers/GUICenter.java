@@ -4,6 +4,7 @@ import Model.Account.Seller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +18,9 @@ public class GUICenter {
     private ArrayList<Page> seenPages;
     private Page currentMenu;
     private Scene currentScene;
+    private double clickVolume = 0.5;
+    private double musicVolume = 0.7;
+    private MediaPlayer mediaPlayer;
 
     private Page landing;
     private Seller sellerToAddCompany;
@@ -30,6 +34,14 @@ public class GUICenter {
             instance = new GUICenter();
         }
         return instance;
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 
     public Seller getSellerToAddCompany() {
@@ -54,6 +66,22 @@ public class GUICenter {
 
     public Scene getCurrentScene() {
         return currentScene;
+    }
+
+    public double getMusicVolume() {
+        return musicVolume;
+    }
+
+    public double getClickVolume() {
+        return clickVolume;
+    }
+
+    public void setMusicVolume(double musicVolume) {
+        this.musicVolume = musicVolume;
+    }
+
+    public void setClickVolume(double clickVolume) {
+        this.clickVolume = clickVolume;
     }
 
     //    public ArrayList<Scene> getSeenPages() {
@@ -95,6 +123,9 @@ public class GUICenter {
         }
         else if(page.equals(Page.MAKEMANAGERFIRST)){
             template = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
+        }
+        else if(page.equals(Page.SETTINGS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
         }
         else if(page.equals(Page.SIGNIN)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SignInPage.fxml"));

@@ -92,19 +92,32 @@
 
     </StackPane>
 
-    <StackPane alignment="CENTER" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="50">
+<!--    <StackPane alignment="CENTER" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">-->
 
-        <Button fx:id="quitButton" layoutX="322.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#end" style="-fx-background-color: none;" stylesheets="@../css/ManagerAccount.css" styleClass="SpecialButton">
+<!--        <Button fx:id="quitButton" layoutX="322.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#end" style="-fx-background-color: none;" styleClass="SpecialButton" stylesheets="@../css/ManagerAccount.css">-->
+<!--            <graphic>-->
+<!--                <ImageView fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true">-->
+<!--                    <image>-->
+<!--                        <Image url="@../images/quit.png" />-->
+<!--                    </image>-->
+<!--                </ImageView>-->
+<!--            </graphic>-->
+<!--        </Button>-->
+
+<!--    </StackPane>-->
+   <StackPane alignment="CENTER" layoutX="20.0" layoutY="247.0">
+      <children>
+         <Button fx:id="quitButton1" layoutX="322.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#goToSettings" style="-fx-background-color: none;" styleClass="SpecialButton" stylesheets="@../css/ManagerAccount.css">
             <graphic>
-                <ImageView fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/quit.png" />
-                    </image>
-                </ImageView>
+               <ImageView fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/settings.png" />
+                  </image>
+               </ImageView>
             </graphic>
-        </Button>
-
-    </StackPane>
+         </Button>
+      </children>
+   </StackPane>
 
 
 </AnchorPane>

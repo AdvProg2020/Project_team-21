@@ -16,9 +16,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class Main extends Application {
     static void putToAbstract(){
@@ -50,6 +54,19 @@ public class Main extends Application {
         SellerRequest.getObjectFromDatabase();
         putToAbstract();
     }
+    MediaPlayer mediaPlayer;
+    public void music() {
+        Media h = new Media(getClass().getResource("/Musics/back.mp3").toString());
+        mediaPlayer = new MediaPlayer(h);
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+        });
+        mediaPlayer.setVolume(GUICenter.getInstance().getMusicVolume());
+        GUICenter.getInstance().setMediaPlayer(mediaPlayer);
+    }
 
     private static Scene scene;
 
@@ -70,6 +87,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Idiots Market");
+        music();
         if(Manager.getAllManagers().isEmpty())
         {
             Parent managerMaker = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
