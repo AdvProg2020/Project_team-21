@@ -2,11 +2,8 @@ package Model.Account;
 
 import Controller.Control;
 import Controller.Sort;
-import Model.DiscountCode;
+import Model.*;
 import Model.Log.BuyLog;
-import Model.Off;
-import Model.SaveData;
-import Model.ShoppingCart;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,6 +38,12 @@ public class Customer extends Account implements Comparable<Customer>{
         for (Customer customer : Customer.getAllCustomer()) {
             SaveData.saveDataRunning(customer, customer.getUsername(), SaveData.customerFile);
         }
+    }
+
+    public boolean hasBought(Product product){
+        if(product.getBuyers().contains(this))
+            return true;
+        return false;
     }
 
     public static void removeCustomer (Customer customer){

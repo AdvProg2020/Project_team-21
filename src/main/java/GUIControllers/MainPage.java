@@ -33,14 +33,13 @@ public class MainPage extends GraphicFather implements Initializable {
     public Label accountName;
     public Circle profilePhoto;
     public Button quitButton;
+    public Button userPage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        topBarShow(signinButton,signupButton,profilePhoto,accountName);
+        topBarShow(signinButton,signupButton,profilePhoto,accountName,userPage);
     }
 
-    public void gotoProductsPage(ActionEvent actionEvent) throws IOException {
-    }
 //
 //    public void end(MouseEvent mouseEvent) {
 //        Account.rewriteFiles();
@@ -68,4 +67,5 @@ public class MainPage extends GraphicFather implements Initializable {
     public void goToSettings(MouseEvent mouseEvent) {
         goToNextPage(Page.SETTINGS,mouseEvent);
     }
+
 }

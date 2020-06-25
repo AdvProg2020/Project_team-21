@@ -52,6 +52,7 @@ public class Main extends Application {
         OffRequest.getObjectFromDatabase();
         ProductRequest.getObjectFromDatabase();
         SellerRequest.getObjectFromDatabase();
+        Company.getObjectFromDatabase();
         putToAbstract();
     }
     MediaPlayer mediaPlayer;

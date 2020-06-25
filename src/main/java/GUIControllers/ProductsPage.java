@@ -23,6 +23,7 @@ package GUIControllers;//package Products;
 //    }
 //}
 
+import Controller.Control;
 import GUIControllers.GraphicFather;
 import Model.Product;
 import javafx.event.ActionEvent;
@@ -39,7 +40,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,9 +52,13 @@ public class ProductsPage extends GraphicFather implements Initializable {
 
 
     public GridPane productsGridPane;
+    public Circle profilePhoto;
+    public Label profileName;
+    public Button userPage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        topBarShowRest(profilePhoto,profileName,userPage);
         int i = 0;
         int j = 0;
         for (Product product : Product.getAllProducts().values()) {
@@ -69,7 +76,8 @@ public class ProductsPage extends GraphicFather implements Initializable {
 
         private ProductsCard(Product product){
 
-            Image cardImage = new Image(getClass().getResourceAsStream(product.getImagePath()));
+            File file = new File(product.getImagePath());
+            Image cardImage = new Image(file.toURI().toString());
             ImageView cardImageView = new ImageView(cardImage);
 
             cardImageView.setFitHeight(140);
@@ -83,7 +91,7 @@ public class ProductsPage extends GraphicFather implements Initializable {
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
 
             Label cardDescription = new Label();
-            cardDescription.setText((product.getName() + "\n" + "Company: " + product.getCompany() + "\n" + "Category: " + product.getCategory() + "\n" + "Price: " + product.getPrice()));
+            cardDescription.setText((product.getName() + "\n" + "Company: " + product.getCompany().getName() + "\n" + "Category: " + product.getCategory().getName() + "\n" + "Price: " + product.getPrice()));
             this.getChildren().add(cardDescription);
             cardDescription.getStyleClass().add("mainPageProductCardsDetail");
             cardDescription.setWrapText(true);
@@ -122,9 +130,7 @@ public class ProductsPage extends GraphicFather implements Initializable {
 
         public void viewProductButton(ActionEvent actionEvent, Product product) throws IOException {
             ProductPage.setProduct(product);
-//            sample.ScreenController screenController = new sample.ScreenController(Main.getScene());
-//            screenController.addScreen("ProductPage", FXMLLoader.load(getClass().getResource( "/Product/ProductPage.fxml" )));
-//            screenController.activate("ProductPage");
+            new GraphicFather().goToNextPage(Page.PRODUCTPAGE,actionEvent);
         }
     }
 

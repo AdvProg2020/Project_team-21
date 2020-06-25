@@ -124,6 +124,12 @@ public class GUICenter {
         else if(page.equals(Page.MAKEMANAGERFIRST)){
             template = FXMLLoader.load(getClass().getResource("/fxml/MakeManagerFirst.fxml"));
         }
+        else if(page.equals(Page.PRODUCTSPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ProductsPage.fxml"));
+        }
+        else if(page.equals(Page.PRODUCTPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ProductPage.fxml"));
+        }
         else if(page.equals(Page.SETTINGS)){
             template = FXMLLoader.load(getClass().getResource("/fxml/Settings.fxml"));
         }
@@ -225,6 +231,18 @@ public class GUICenter {
         }
         else if(page.equals(Page.CUSTOMERDISCOUNTCODES)){
             template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/DiscountCodes.fxml"));
+        }
+        else if(page.equals(Page.SHOPPINGCART)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ShoppingCartPage.fxml"));
+        }
+        else if(page.equals(Page.PAYMENTPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/PaymentPage.fxml"));
+        }
+        else if(page.equals(Page.OFFSPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/OffsPage.fxml"));
+        }
+        else if(page.equals(Page.OFFSPRIMEPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/OffsPage_Prime.fxml"));
         }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());

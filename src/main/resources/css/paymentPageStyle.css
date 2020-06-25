@@ -1,0 +1,36 @@
+.inputField {
+    -fx-background-color: #9ac8f4;
+    -fx-border-radius: 15px;
+}
+
+.paymentBox {
+    -fx-background-color: #c2e0f4;
+    -fx-padding: 20 20 20 20;
+}
+
+.topBar{
+    -fx-background-color: #6ca7f4;
+}
+
+.backBtn {
+    -fx-background-position: center;
+    -fx-background-image: url("/images/back.png");
+    -fx-background-size: 44px 25px;
+    -fx-background-color: #6ca7f4;
+}
+
+.backBtn:hover {
+    -fx-scale-y: 1.13 !important;
+    -fx-scale-x: 1.13 !important;
+}
+
+.payBtn {
+    -fx-border-style: solid;
+    -fx-padding: 4 8 4 8;
+    -fx-background-color: #c8d6f4;
+}
+
+.payBtn:hover {
+    -fx-scale-y: 1.13 !important;
+    -fx-scale-x: 1.13 !important;
+}

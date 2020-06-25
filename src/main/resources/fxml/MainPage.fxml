@@ -44,7 +44,7 @@
             </Button>
 
 
-            <Button styleClass="navBarButtons" text="User Page">
+            <Button styleClass="navBarButtons" text="User Page" onMouseClicked="#goToAccountButton" fx:id="userPage">
 
             </Button>
 
@@ -52,7 +52,7 @@
 
             </Button>
 
-            <Button styleClass="navBarButtons" text="Offs Page">
+            <Button styleClass="navBarButtons" text="Offs Page" onMouseClicked="#goToOffsPage">
 
             </Button>
 
@@ -68,7 +68,7 @@
 
         <VBox styleClass="navBarRightContainer" AnchorPane.rightAnchor="20">
             <HBox>
-                <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccount" radius="30" stroke="BLACK" strokeType="INSIDE" />
+                <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccountCircle" radius="30" stroke="BLACK" strokeType="INSIDE" />
 
                 <Label fx:id="accountName" styleClass="navBarAccountLabel">
                 </Label>

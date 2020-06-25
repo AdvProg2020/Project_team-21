@@ -45,8 +45,10 @@
 }
 
 .priceContainer {
-    -fx-padding: 40 0 0 200;
-    -fx-font-size: 18px;
+    -fx-padding: 40 0 0 75;
+    -fx-font-size: 16px;
+    -fx-min-width: 95px;
+    -fx-min-height: 50px;
 }
 
 .basketBuyButton {
@@ -82,4 +84,37 @@
 
 .addCommentBox {
     -fx-padding: 5 0 0 0;
+}
+
+.basketRemoveButton {
+    -fx-background-position: center;
+    /*-fx-background-image: url("/images/shopping_basket.jpg");*/
+    /*-fx-background-size: 45px 45px;*/
+    -fx-background-color: #ebebff;
+    -fx-border-style: solid;
+
+    -fx-background-color: #ec745e;
+
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 5 5 5 5;
+}
+
+.basketRemoveButton:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+    -fx-font-weight: bold;
+}
+
+.scoreBtn {
+    -fx-background-position: center;
+    -fx-background-image: url("/images/check_mark.png");
+    -fx-background-size: 25px 25px;
+    -fx-background-color: #ebebff;
+}
+
+.scoreBtn:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+    -fx-font-weight: bold;
 }

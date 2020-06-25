@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="GUIControllers.PaymentPage"
+          prefHeight="400.0" prefWidth="600.0"
+          stylesheets="@/css/paymentPageStyle.css"
+          alignment="CENTER">
+
+    <VBox>
+        <HBox>
+            <HBox prefWidth="200" prefHeight="80" styleClass="topBar" alignment="CENTER_LEFT">
+                <HBox style="-fx-padding: 10 0 0 20">
+                    <Button
+                            onAction="#goBack"
+                            styleClass="backBtn"
+                    >
+
+                    </Button>
+                </HBox>
+            </HBox>
+
+            <HBox AnchorPane.leftAnchor="20" alignment="CENTER_LEFT" prefHeight="80" prefWidth="500" style="-fx-padding: 0 0 0 50; -fx-background-color: #6ca7f4;">
+                <ImageView fitHeight="80" fitWidth="80" layoutX="1463.0" layoutY="551.0">
+                    <image>
+                        <Image url="@/images/market_logo.png"/>
+                    </image>
+                </ImageView>
+
+                <Label
+                        text="Advanced Idiots Market"
+                        style="-fx-padding: 0 0 0 15; -fx-font-size: 15px;">
+
+                </Label>
+            </HBox>
+        </HBox>
+
+        <VBox
+                prefWidth="700"
+                prefHeight="420"
+                styleClass="paymentBox"
+        >
+
+
+                <VBox style="-fx-text-alignment: center;" prefWidth="700" alignment="CENTER">
+                    <Label
+                            style="-fx-text-alignment: center; -fx-font-size: 16px;"
+                            text="Total Amount: 124$"
+                            fx:id="totalAmountLabel"
+                    >
+
+                    </Label>
+
+                </VBox>
+
+
+                <VBox style="-fx-padding: 38 150 0 150;">
+                    <Label
+                            text="Address"
+                    >
+
+                    </Label>
+
+                    <TextField
+                            prefHeight="50"
+                            styleClass="inputField"
+                    >
+
+                    </TextField>
+                </VBox>
+
+                <VBox style="-fx-padding: 24 150 0 150;">
+                    <Label
+                            text="Phone Number"
+                    >
+
+                    </Label>
+
+                    <TextField
+                            styleClass="inputField"
+                    >
+
+                    </TextField>
+
+                </VBox>
+
+                <HBox style="-fx-padding: 30 180 0 180;">
+                    <Label
+                            text="Discount Code:"
+                    >
+
+                    </Label>
+
+                    <TextField
+                            styleClass="inputField"
+                    >
+
+                    </TextField>
+
+                </HBox>
+
+               <HBox style="-fx-padding: 20 180 0 180;" alignment="CENTER">
+                   <Button
+                           styleClass="payBtn"
+                           text="Pay"
+                   >
+
+                   </Button>
+               </HBox>
+            </VBox>
+
+    </VBox>
+
+</GridPane>

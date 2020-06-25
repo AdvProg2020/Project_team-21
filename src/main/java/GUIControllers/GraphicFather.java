@@ -5,7 +5,6 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Manager;
 import Model.Account.Seller;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.GREEN;
@@ -115,7 +113,7 @@ public class GraphicFather {
             alertLabel.setTextFill(GREEN);
         alertLabel.setText(error);
     }
-    public void goToAccount(Event event){
+    public void goToAccountCircle(Event event){
         if(Control.getInstance().getUser() != null){
             Account user = Control.getInstance().getUser();
             if(user instanceof Customer){
@@ -128,6 +126,24 @@ public class GraphicFather {
                 goToNextPage(Page.SELLER,event);
             }
         }
+        else
+            gotoSignInPage(event);
+    }
+    public void goToAccountButton(Event event){
+        if(Control.getInstance().getUser() != null){
+            Account user = Control.getInstance().getUser();
+            if(user instanceof Customer){
+                goToNextPage(Page.CUSTOMER,event);
+            }
+            else if(user instanceof Manager){
+                goToNextPage(Page.MANAGER,event);
+            }
+            else if(user instanceof Seller){
+                goToNextPage(Page.SELLER,event);
+            }
+        }
+        else
+            gotoSignUpPage(event);
     }
     public void goToMain(MouseEvent mouseEvent) {
         goToNextPage(Page.MAIN,mouseEvent);
@@ -150,8 +166,9 @@ public class GraphicFather {
         return result;
     }
 
-    public void topBarShow(Button signinButton, Button signupButton, Circle profilePhoto,Label accountName){
+    public void topBarShow(Button signinButton, Button signupButton, Circle profilePhoto,Label accountName,Button userPage){
         profilePhoto.setFill(new ImagePattern(new Image("/images/account_icon.png")));
+        userPage.setText("Sign UP");
         if(signedIn())
         {
             Account user = Control.getInstance().getUser();
@@ -160,20 +177,34 @@ public class GraphicFather {
             signupButton.setText("View Your Account");
             accountName.setText(user.getFirstName());
             showImageUser(profilePhoto);
+            userPage.setText("User Page");
         }
     }
-    public void gotoSignUpPage(ActionEvent actionEvent){
+    public void topBarShowRest(Circle profilePhoto,Label accountName,Button userPage){
+
+        profilePhoto.setFill(new ImagePattern(new Image("/images/account_icon.png")));
+        userPage.setText("Sign UP");
+        if(signedIn())
+        {
+            Account user = Control.getInstance().getUser();
+            accountName.setText(user.getFirstName());
+            showImageUser(profilePhoto);
+            userPage.setText("User Page");
+        }
+    }
+
+    public void gotoSignUpPage(Event actionEvent){
         if(!signedIn())
         {
             goToNextPage(Page.SIGNUP,actionEvent);
             GUICenter.getInstance().setLanding(Page.MAIN);
         }
         else{
-            goToAccount(actionEvent);
+            goToAccountCircle(actionEvent);
         }
     }
 
-    public void gotoSignInPage(ActionEvent actionEvent){
+    public void gotoSignInPage(Event actionEvent){
         goToNextPage(Page.SIGNIN,actionEvent);
         GUICenter.getInstance().setLanding(Page.MAIN);
     }
@@ -183,5 +214,11 @@ public class GraphicFather {
         mediaPlayer = new MediaPlayer(h);
         mediaPlayer.play();
         mediaPlayer.setVolume(GUICenter.getInstance().getClickVolume());
+    }
+    public void gotoProductsPage(Event actionEvent) throws IOException {
+        goToNextPage(Page.PRODUCTSPAGE,actionEvent);
+    }
+    public void goToOffsPage(MouseEvent mouseEvent) {
+        goToNextPage(Page.OFFSPAGE,mouseEvent);
     }
 }

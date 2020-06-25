@@ -8,15 +8,16 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.collections.FXCollections?>
 <GridPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUIControllers.ProductPage"
-            prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@/css/productPageStyle.css"
-            alignment="CENTER">
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="GUIControllers.ProductPage"
+          prefHeight="400.0" prefWidth="600.0"
+          stylesheets="@/css/productPageStyle.css"
+          alignment="CENTER">
 
     <VBox styleClass="mainPageProductCards" prefWidth="700" prefHeight="500">
-        <HBox prefWidth="700" prefHeight="56" styleClass="topBar" alignment="CENTER_LEFT">
+        <HBox prefWidth="700" prefHeight="73" styleClass="topBar" alignment="CENTER_LEFT">
             <HBox style="-fx-padding: 10 0 0 20">
                 <Button styleClass="backBtn" onAction="#goBack">
                 </Button>
@@ -37,19 +38,33 @@
                         <Label
                                 text="Score: 4.3"
                                 fx:id="averageScore"
-                                style="-fx-label-padding: 10 15 0 10"
+                                style="-fx-label-padding: 10 15 0 0"
                         >
 
                         </Label>
 
                         <Button
                                 text="+Add to Cart"
-                                prefHeight="50"
-                                prefWidth="75"
+                                prefHeight="42"
+                                prefWidth="90"
                                 styleClass="basketBuyButton"
+                                onAction="#addButton"
+                                fx:id="increaseButton"
                         >
 
                         </Button>
+
+                        <HBox style="-fx-padding: 4 4 4 4;">
+                            <Button
+                                    text="-"
+                                    styleClass="basketRemoveButton"
+                                    onAction="#removeButton"
+                                    fx:id="decreaseButton"
+                            >
+
+                            </Button>
+                        </HBox>
+
                     </HBox>
                 </VBox>
 
@@ -72,15 +87,82 @@
                        </Label>
                    </VBox>
 
-                   <HBox styleClass="priceContainer" >
-                       <Label
-                               text="10$"
-                               fx:id="productPrice"
-                       >
+                   <VBox>
+                       <VBox styleClass="priceContainer" >
+                           <Label
+                                   minWidth="95"
+                                   text="10$"
+                                   fx:id="productPrice"
+                           >
 
-                       </Label>
+                           </Label>
 
-                   </HBox>
+
+
+                       </VBox>
+
+                       <VBox style="-fx-padding: 10 0 0 60;">
+                           <ComboBox promptText="Sellers" fx:id="sellersDropDown" style="-fx-padding: 0 15 0 5;">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+
+                                   </FXCollections>
+                               </items>
+                           </ComboBox>
+
+                           <HBox style="-fx-padding: 20 0 0 0;">
+                               <VBox>
+                                   <RadioButton fx:id="radioButton1">
+
+                                   </RadioButton>
+                                   <Label text="1">
+
+                                   </Label>
+                               </VBox>
+                               <VBox>
+                                   <RadioButton fx:id="radioButton2">
+
+                                   </RadioButton>
+                                   <Label text="2">
+
+                                   </Label>
+                               </VBox>
+                               <VBox>
+                                   <RadioButton fx:id="radioButton3">
+
+                                   </RadioButton>
+                                   <Label text="3">
+
+                                   </Label>
+                               </VBox>
+                               <VBox>
+                                   <RadioButton fx:id="radioButton4">
+
+                                   </RadioButton>
+                                   <Label text="4">
+
+                                   </Label>
+                               </VBox>
+                               <VBox>
+                                   <RadioButton fx:id="radioButton5">
+
+                                   </RadioButton>
+                                   <Label text="5">
+
+                                   </Label>
+                               </VBox>
+
+                               <Button
+                                       prefHeight="25"
+                                       prefWidth="25"
+                                       onAction="#scoreButton"
+                                       styleClass="scoreBtn"
+                               >
+
+                               </Button>
+                           </HBox>
+                       </VBox>
+                   </VBox>
                </HBox>
             </HBox>
 
@@ -143,11 +225,27 @@
                <TextField
                         fx:id="addComment"
                        promptText="Comment..."
-                       prefWidth="150"
+                       prefWidth="130"
                        prefHeight="40"
                >
 
                </TextField>
+
+
+           </VBox>
+           <VBox minWidth="100"
+                 minHeight="20">
+               <GridPane minWidth="100" minHeight="20" alignment="CENTER_RIGHT" style="-fx-padding: 12 15 0 0;">
+                   <Button
+                           minWidth="50"
+                           minHeight="25"
+                           text="Add Comment"
+                           onAction="#addCommentButton"
+                           fx:id="commentButton"
+                   >
+
+                   </Button>
+               </GridPane>
            </VBox>
        </VBox>
 
