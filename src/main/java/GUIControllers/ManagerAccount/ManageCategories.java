@@ -5,6 +5,7 @@ import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Category;
+import Model.Product;
 import Model.Request.Request;
 import View.ConsoleView;
 import javafx.collections.FXCollections;
@@ -52,8 +53,10 @@ public class ManageCategories extends GraphicFather implements Initializable {
         else
         {
             for (Category category : Category.getAllCategories()) {
-                if(category.getName().equalsIgnoreCase(categoryName))
+                if(category.getName().equalsIgnoreCase(categoryName)) {
                     Category.removeCategory(category);
+                    showError(alertLabel,"Category "+categoryToRemove.getText() + " has been deleted successfully!",Error.POSITIVE);
+                }
             }
         }
     }
@@ -70,5 +73,11 @@ public class ManageCategories extends GraphicFather implements Initializable {
             showError(alertLabel,"This category doesn't exist!",Error.NEGATIVE);
         }
 
+    }
+
+    public void selection(MouseEvent mouseEvent) {
+        Category selectedItem = listCategories.getSelectionModel().getSelectedItem();
+        categoryToEdit.setText(selectedItem.getName());
+        categoryToRemove.setText(selectedItem.getName());
     }
 }

@@ -21,7 +21,9 @@ public class OffRequest extends Request {
         Off off;
         if(requestType.equals(RequestType.ADD))
             off = new Off(offId,productList,startTime,endTime,percentage);
-        off = Off.getAllOffs().get(offId);
+        else
+            off = Off.getAllOffs().get(offId);
+        off.setRequestID(requestId);
         requestedOffs.put(requestId,off);
         Request.addRequest(requestId,this);
         this.provider = provider;
@@ -140,7 +142,7 @@ public class OffRequest extends Request {
     public static void getObjectFromDatabase(){
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offRequestFile)));
         for (Object object : objects) {
-            getRequestedOffs().put(((Off)object).getOffId() ,(Off) (object));
+            getRequestedOffs().put(((Off)object).getRequestID() ,(Off) (object));
         }
 
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.offReqFile)));

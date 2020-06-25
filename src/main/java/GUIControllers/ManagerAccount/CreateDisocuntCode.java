@@ -47,7 +47,7 @@ public class CreateDisocuntCode extends GraphicFather{
         try {
             ControlManager.getInstance().createDiscountCode(discountCode,startDate.getText(),endDate.getText()
             ,percentage.getText(),maxPercentage.getText(),maxAmount.getText(),codeOwners);
-            showError(alertLabel,"New Discount Code with id " + discountCode + " has been successfully been made.\nUsers not detexted: " + usersNotExist+"\nUsers not customer " + usersNotCustomer
+            showError(alertLabel,"New Discount Code with id " + discountCode + " has been successfully been made.\nUsers not detected: " + usersNotExist+"\nUsers not customer " + usersNotCustomer
                     , Error.POSITIVE);
         } catch (Exception e) {
             showError(alertLabel,e.getMessage(),Error.NEGATIVE);

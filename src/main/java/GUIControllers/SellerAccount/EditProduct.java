@@ -26,11 +26,13 @@ public class EditProduct extends GraphicFather {
             try
             {
                 String reqID = ControlSeller.getInstance().sendProductEditReq(productID,"name",name.getText());
+                System.out.println("edit name sent");
                 reqIDs.add(reqID);
                 oks.add("Name");
             }
             catch (Exception e)
             {
+                System.out.println("name rid");
                errors.add("Name: " + e.getMessage());
             }
         }
@@ -38,11 +40,13 @@ public class EditProduct extends GraphicFather {
             try
             {
                 String reqID = ControlSeller.getInstance().sendProductEditReq(productID,"price",price.getText());
+                System.out.println("edit price sent");
                 reqIDs.add(reqID);
                 oks.add("Price");
             }
             catch (Exception e)
             {
+                System.out.println("price ride");
                 errors.add("Price: " + e.getMessage());
             }
         }

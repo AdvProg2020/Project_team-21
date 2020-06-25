@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.CustomerAccount.CustomerAccount">
    <children>
-      <AnchorPane layoutX="646.0" layoutY="29.0" prefHeight="467.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.bottomAnchor="371.0" AnchorPane.leftAnchor="646.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="29.0">
+      <AnchorPane layoutX="653.0" layoutY="94.0" prefHeight="406.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.topAnchor="10.0">
          <children>
             <Button layoutX="63.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#goToCart" prefHeight="81.0" prefWidth="281.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Shopping Cart" textFill="#cfb936" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="19.0">
                <font>
@@ -118,9 +118,9 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button layoutX="174.0" layoutY="655.0" mnemonicParsing="false" onMouseClicked="#editField" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="170.0">
+      <Button layoutX="174.0" layoutY="655.0" mnemonicParsing="false" onMouseClicked="#editField" prefHeight="51.0" prefWidth="160.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Edit Fields" textFill="#cfb936" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0">
          <font>
-            <Font name="Hiragino Sans W2" size="30.0" />
+            <Font name="Hiragino Sans W2" size="25.0" />
          </font>
       </Button>
       <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="297.0" layoutY="110.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="53.0" />
@@ -136,7 +136,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane layoutX="655.0" layoutY="516.0" prefHeight="188.0" prefWidth="484.0" style="-fx-border-color: WHITE;">
+      <AnchorPane layoutX="655.0" layoutY="516.0" prefHeight="183.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.bottomAnchor="10.0">
          <children>
             <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="176.0" text="Balance:" textFill="#3ab214">
                <font>
@@ -150,10 +150,15 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button layoutX="182.0" layoutY="729.0" mnemonicParsing="false" onMouseClicked="#signOut" prefHeight="51.0" prefWidth="289.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Sign Out" textFill="#cfb936" AnchorPane.leftAnchor="170.0">
+      <Button layoutX="288.0" layoutY="729.0" mnemonicParsing="false" onMouseClicked="#signOut" prefHeight="51.0" prefWidth="146.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Sign Out" textFill="#cfb936" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="250.0">
          <font>
-            <Font name="Hiragino Sans W2" size="30.0" />
+            <Font name="Hiragino Sans W2" size="25.0" />
          </font>
       </Button>
+      <Label layoutX="504.0" layoutY="13.0" prefHeight="39.0" prefWidth="111.0" text="Customer" textFill="#b31215" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="Futura Medium" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -14,27 +14,27 @@
          <Font size="30.0" />
       </font>
    </Label>
-   <Label fx:id="percentage" layoutY="122.0" prefHeight="28.0" prefWidth="317.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="150.0">
+   <Label fx:id="percentage" layoutY="122.0" prefHeight="28.0" prefWidth="317.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="150.0">
       <font>
          <Font name="Hiragino Sans W5" size="20.0" />
       </font>
    </Label>
-   <Label fx:id="startTime" layoutY="244.0" prefHeight="28.0" prefWidth="408.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="244.0">
+   <Label fx:id="startTime" layoutY="244.0" prefHeight="28.0" prefWidth="471.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="244.0">
       <font>
          <Font name="Hiragino Sans W5" size="20.0" />
       </font>
    </Label>
-   <Label fx:id="endTime" layoutY="356.0" prefHeight="17.0" prefWidth="464.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="356.0">
+   <Label fx:id="endTime" layoutY="356.0" prefHeight="17.0" prefWidth="464.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="356.0">
       <font>
          <Font name="Hiragino Sans W5" size="20.0" />
       </font>
    </Label>
-   <Label fx:id="MaxAmount" layoutY="472.0" prefHeight="28.0" prefWidth="482.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="450.0">
+   <Label fx:id="MaxAmount" layoutY="472.0" prefHeight="28.0" prefWidth="482.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="450.0">
       <font>
          <Font name="Hiragino Sans W5" size="20.0" />
       </font>
    </Label>
-   <Label fx:id="maxForEach" layoutY="555.0" prefHeight="17.0" prefWidth="459.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="555.0">
+   <Label fx:id="maxForEach" layoutY="555.0" prefHeight="17.0" prefWidth="459.0" text="Mohammad" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="555.0">
       <font>
          <Font name="Hiragino Sans W5" size="20.0" />
       </font>

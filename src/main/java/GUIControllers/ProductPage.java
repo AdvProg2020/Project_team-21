@@ -58,12 +58,10 @@ public class ProductPage extends GraphicFather implements Initializable {
     }
 
     /*
-    imagepath product
     add comment button
     add to cart button
     not visible comment for seller and manager
      */
-
 
 }
 

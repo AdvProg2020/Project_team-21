@@ -15,14 +15,15 @@ public class SellerRequest extends Request {
     {
         super(requestType);
         Seller seller = new Seller(userName,firstName,lastName,email,phoneNumber,password,company,photo);
+        seller.setRequestID(requestId);
         GUICenter.getInstance().setSellerToAddCompany(seller);
         Request.addRequest(requestId,this);
         requestedSellers.put(requestId,seller);
 
         setRequestId(requestId);
         providerUsername = userName;
-        SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
         SaveData.saveData(seller, (getRequestId()+seller.getUsername()), SaveData.sellerRequestFile);
+        SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
     }
     public static void rewriteFiles(){
         for (String s : requestedSellers.keySet()) {
@@ -63,7 +64,7 @@ public class SellerRequest extends Request {
     public static void getObjectFromDatabase(){
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerRequestFile)));
         for (Object object : objects) {
-            getRequestedSellers().put(((Seller)object).getUsername() ,(Seller) (object));
+            requestedSellers.put(((Seller)object).getRequestID() ,(Seller) (object));
         }
 
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.sellerReqFile)));

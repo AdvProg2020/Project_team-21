@@ -17,6 +17,7 @@ public class ProductRequest extends Request {
         super(requestType);
         if(requestType.equals(RequestType.ADD))
              product = new Product(productId,name,company,price,category,seller,imagePath);
+        product.setRequestID(requestId);
          requestedProducts.put(requestId,product);
          Request.addRequest(requestId,this);
          this.provider = provider;
@@ -69,6 +70,9 @@ public class ProductRequest extends Request {
         if(this.getRequestType().equals(RequestType.ADD))
         {
             Product.addProduct(product);
+            for (Seller productSeller : product.getSellers()) {
+                productSeller.addProduct(product);
+            }
         }
         else if(this.getRequestType().equals(RequestType.DELETE))
             Product.removeProduct(product);
@@ -100,7 +104,7 @@ public class ProductRequest extends Request {
     public static void getObjectFromDatabase(){
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productRequestFile)));
         for (Object object : objects) {
-            getRequestedProducts().put(((Product)object).getProductId() ,(Product) (object));
+            getRequestedProducts().put(((Product)object).getRequestID() ,(Product) (object));
         }
 
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.productReqFile)));

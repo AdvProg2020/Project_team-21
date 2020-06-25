@@ -28,6 +28,7 @@ public class Product {
     private Off off;
     private HashMap<String,String> specialFeatures = new HashMap<String, String>();
     private String imagePath;
+    private String requestID;
 
 
     // Initialization Block
@@ -44,8 +45,6 @@ public class Product {
         setPrice(price);
         setCategory(category);
         addSeller(seller);
-        allProductsList.add(this);
-        allProducts.put(productId,this);
         addProductsWithOff();
         this.imagePath = imagePath;
     }
@@ -55,6 +54,14 @@ public class Product {
             file.delete();
             SaveData.saveData(allProducts.get(s), s, SaveData.productFile);
         }
+    }
+
+    public void setRequestID(String requestID) {
+        this.requestID = requestID;
+    }
+
+    public String getRequestID() {
+        return requestID;
     }
 
     public String getImagePath() {
@@ -82,6 +89,7 @@ public class Product {
     public static void addProduct(Product product)
     {
         allProducts.put(product.getProductId(),product);
+        allProductsList.add(product);
         SaveData.saveData(product, product.getProductId(), SaveData.productFile);
     }
 
@@ -282,6 +290,7 @@ public class Product {
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productFile)));
         for (Object object : objects) {
             allProducts.put(((Product)object).getProductId() ,(Product) (object));
+            allProductsList.add((Product)(object));
         }
     }
 

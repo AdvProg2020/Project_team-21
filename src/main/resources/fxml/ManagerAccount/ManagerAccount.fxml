@@ -130,5 +130,10 @@
             <Font name="Hiragino Sans W2" size="25.0" />
          </font>
       </Button>
+      <Label layoutX="572.0" layoutY="37.0" prefHeight="39.0" prefWidth="114.0" text="Manager" textFill="#b31215" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="Futura Medium" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

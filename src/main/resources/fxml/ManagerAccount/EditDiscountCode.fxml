@@ -14,7 +14,7 @@
          <Font size="40.0" />
       </font>
    </Label>
-   <Label fx:id="alertLabel" layoutX="302.0" layoutY="517.0" prefHeight="50.0" prefWidth="681.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="252.0" AnchorPane.rightAnchor="216.0">
+   <Label fx:id="alertLabel" layoutX="302.0" layoutY="517.0" prefHeight="35.0" prefWidth="681.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="216.0">
       <font>
          <Font size="25.0" />
       </font>
@@ -85,7 +85,7 @@
          <Font name="Hiragino Sans W3" size="15.0" />
       </font>
    </Label>
-   <Label fx:id="okLabel" layoutX="302.0" layoutY="592.0" prefHeight="50.0" prefWidth="681.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="160.0">
+   <Label fx:id="okLabel" layoutX="302.0" layoutY="592.0" prefHeight="50.0" prefWidth="681.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="90.0">
       <font>
          <Font size="25.0" />
       </font>

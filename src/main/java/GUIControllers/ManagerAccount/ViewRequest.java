@@ -57,7 +57,7 @@ public class ViewRequest extends GraphicFather implements Initializable {
                 info.setText("An Off with these infos is waiting for you!");
                 Off off = Request.getRequestedOffs().get(requestId);
                 field1.setText("Request Type");
-                field1Info.setText(request.getType());
+                field1Info.setText(request.getType() + " " + request.getRequestType());
                 field2.setText("OFF ID");
                 field2Info.setText(off.getOffId());
                 field3.setText("Start Time");
@@ -73,8 +73,8 @@ public class ViewRequest extends GraphicFather implements Initializable {
             {
                 info.setText("A Product with these infos is waiting for you!");
                 Product product = Request.getRequestedProducts().get(requestId);
-                field1.setText("Request Type");
-                field1Info.setText(request.getType());
+                field1.setText("Request Type" );
+                field1Info.setText(request.getType() + " " + request.getRequestType());
                 field2.setText("Name");
                 field2Info.setText(product.getName());
                 field3.setText("ID");

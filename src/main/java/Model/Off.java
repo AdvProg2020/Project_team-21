@@ -19,6 +19,7 @@ public class Off implements Comparable<Off>{
     private LocalDateTime endTime;
     private double offAmount;
     private DisAndOffStatus disAndOffStatus;
+    private String requestID;
 
     // Initialization Block
     {
@@ -39,6 +40,14 @@ public class Off implements Comparable<Off>{
             file.delete();
             SaveData.saveData(allOffs.get(s), s, SaveData.offFile);
         }
+    }
+
+    public String getRequestID() {
+        return requestID;
+    }
+
+    public void setRequestID(String requestID) {
+        this.requestID = requestID;
     }
 
     private void setOffId(String offId) {

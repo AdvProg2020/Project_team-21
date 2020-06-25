@@ -7,6 +7,7 @@ import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Account.Seller;
 import Model.Off;
+import Model.Product;
 import Model.Request.Request;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,6 +66,12 @@ public class OFFs extends GraphicFather implements Initializable {
     }
 
     public void createOFF(MouseEvent mouseEvent) {
-        goToNextPage(Page.CREATEDISCOUNTCODE,mouseEvent);
+        goToNextPage(Page.CREATEOFF,mouseEvent);
+    }
+
+    public void selection(MouseEvent mouseEvent) {
+        Off selectedItem = listOFFs.getSelectionModel().getSelectedItem();
+        offToView.setText(selectedItem.getOffId());
+        offToEdit.setText(selectedItem.getOffId());
     }
 }

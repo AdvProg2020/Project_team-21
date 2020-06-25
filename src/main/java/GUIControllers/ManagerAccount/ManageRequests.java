@@ -103,4 +103,10 @@ public class ManageRequests extends GraphicFather implements Initializable {
     }
 
 
+    public void selection(MouseEvent mouseEvent) {
+        Request selectedItem = listRequests.getSelectionModel().getSelectedItem();
+        requestToView.setText(selectedItem.getRequestId());
+        requestToAccept.setText(selectedItem.getRequestId());
+        requestToDecline.setText(selectedItem.getRequestId());
+    }
 }

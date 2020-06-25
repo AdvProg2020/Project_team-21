@@ -6,6 +6,7 @@ import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.Account.Account;
+import Model.DiscountCode;
 import View.ConsoleView;
 import com.sun.glass.ui.Accessible;
 import javafx.collections.FXCollections;
@@ -69,5 +70,11 @@ public class ManageUsers extends GraphicFather implements Initializable {
 
     public void createManage(MouseEvent mouseEvent) {
         goToNextPage(Page.CREATEMANAGER,mouseEvent);
+    }
+
+    public void selection(MouseEvent mouseEvent) {
+        Account selectedItem = listUsers.getSelectionModel().getSelectedItem();
+        userToRemove.setText(selectedItem.getUsername());
+        userToView.setText(selectedItem.getUsername());
     }
 }

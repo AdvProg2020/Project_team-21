@@ -55,4 +55,8 @@ public class ManageProducts extends GraphicFather implements Initializable {
 
     }
 
+    public void selection(MouseEvent mouseEvent) {
+        Product selectedItem = listProducts.getSelectionModel().getSelectedItem();
+        productToRemove.setText(selectedItem.getProductId());
+    }
 }

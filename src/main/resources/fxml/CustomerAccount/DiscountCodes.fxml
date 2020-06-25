@@ -21,7 +21,7 @@
             </ImageView>
          </graphic>
       </Button>
-   <Label layoutX="510.0" layoutY="23.0" prefHeight="66.0" prefWidth="220.0" text="Discount Codes" textFill="#cfb936" AnchorPane.topAnchor="23.0">
+   <Label layoutX="483.0" layoutY="23.0" prefHeight="66.0" prefWidth="245.0" text="Discount Codes" textFill="#cfb936" AnchorPane.topAnchor="23.0">
       <font>
          <Font size="35.0" />
       </font>

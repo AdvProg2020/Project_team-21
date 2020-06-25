@@ -45,25 +45,25 @@
             <Font size="25.0" />
         </font>
     </Label>
-    <TextField fx:id="startDate" layoutX="135.0" layoutY="280.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Start Date" AnchorPane.leftAnchor="140.0" />
+    <TextField fx:id="startDate" layoutX="144.0" layoutY="250.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Start Date" AnchorPane.leftAnchor="144.0" />
     <Label layoutX="497.0" layoutY="23.0" prefHeight="66.0" prefWidth="180.0" text="Create OFF" textFill="#cfb936" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="20.0">
         <font>
             <Font size="35.0" />
         </font>
     </Label>
-   <Label layoutX="52.0" layoutY="350.0" prefHeight="39.0" prefWidth="581.0" text="Enter end date in [year month day hour minute]" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+   <Label layoutX="50.0" layoutY="335.0" prefHeight="39.0" prefWidth="581.0" text="Enter end date in [year month day hour minute]" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
       <font>
          <Font size="25.0" />
       </font>
    </Label>
-   <TextField fx:id="endDate" layoutX="147.0" layoutY="426.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter End Date" AnchorPane.leftAnchor="147.0" />
-   <Label layoutX="46.0" layoutY="516.0" prefHeight="39.0" prefWidth="346.0" text="Enter Percentage Discount" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+   <TextField fx:id="endDate" layoutX="153.0" layoutY="400.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter End Date" AnchorPane.leftAnchor="153.0" />
+   <Label layoutX="55.0" layoutY="482.0" prefHeight="39.0" prefWidth="346.0" text="Enter Percentage Discount" textFill="#cfb936" AnchorPane.leftAnchor="55.0">
       <font>
          <Font size="25.0" />
       </font>
    </Label>
-   <TextField fx:id="percentage" layoutX="152.0" layoutY="604.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Percentage" AnchorPane.leftAnchor="140.0" />
-   <Label fx:id="alertLabel" layoutX="226.0" layoutY="753.0" prefHeight="66.0" prefWidth="848.0" text="---" textFill="#bc1d25" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="245.0">
+   <TextField fx:id="percentage" layoutX="143.0" layoutY="544.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Percentage" AnchorPane.leftAnchor="143.0" />
+   <Label fx:id="alertLabel" layoutX="226.0" layoutY="753.0" prefHeight="66.0" prefWidth="848.0" text="---" textFill="#bc1d25" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="245.0">
       <font>
          <Font size="20.0" />
       </font>

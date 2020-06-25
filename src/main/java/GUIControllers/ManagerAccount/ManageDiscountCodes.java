@@ -6,16 +6,16 @@ import GUIControllers.GraphicFather;
 import GUIControllers.Page;
 import Model.DiscountCode;
 import Model.Product;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import javax.swing.event.ChangeEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -73,5 +73,12 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
         }else{
             showError(alertLabel,"This code doesn't exist!",Error.NEGATIVE);
         }
+    }
+
+    public void selection(MouseEvent mouseEvent) {
+        DiscountCode selectedItem = listDiscountCodes.getSelectionModel().getSelectedItem();
+        codeToRemove.setText(selectedItem.getDiscountId());
+        codeToEdit.setText(selectedItem.getDiscountId());
+        codeToView.setText(selectedItem.getDiscountId());
     }
 }

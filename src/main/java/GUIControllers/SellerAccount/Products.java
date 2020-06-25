@@ -107,4 +107,13 @@ public class Products extends GraphicFather implements Initializable {
             showError(alertLabel,e.getMessage(),Error.NEGATIVE);
         }
     }
+
+    public void selection(MouseEvent mouseEvent) {
+        Product selectedItem = listProducts.getSelectionModel().getSelectedItem();
+        productToRemove.setText(selectedItem.getProductId());
+        productToEdit.setText(selectedItem.getProductId());
+        productToBuyers.setText(selectedItem.getProductId());
+        productToView.setText(selectedItem.getProductId());
+        productToAdd.setText(selectedItem.getProductId());
+    }
 }

@@ -114,6 +114,9 @@ public class ControlManager {
         }
         if(!percentage.matches("\\d+.?(\\d+)?"))
         {
+            if(Double.parseDouble(percentage) > 100){
+                throw new Exception("Your percentage is above 100%");
+            }
             throw new Exception("Your percentage should be a double!");
         }
         if(!maxDiscount.matches("\\d+.?(\\d+)?"))

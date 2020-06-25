@@ -52,7 +52,7 @@
             <Font size="35.0" />
         </font>
     </Label>
-    <TableView fx:id="listProducts" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+    <TableView onMouseClicked="#selection" fx:id="listProducts" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
     </TableView>
    <Label fx:id="alertLabel" layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="828.0" textFill="#cfb936" AnchorPane.bottomAnchor="200.0">
       <font>

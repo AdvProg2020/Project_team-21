@@ -14,7 +14,7 @@
          <Font size="40.0" />
       </font>
    </Label>
-   <Label fx:id="alertLabel" layoutX="288.0" layoutY="484.0" prefHeight="55.0" prefWidth="618.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="293.0">
+   <Label fx:id="alertLabel" layoutX="288.0" layoutY="484.0" prefHeight="21.0" prefWidth="656.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="293.0">
       <font>
          <Font size="25.0" />
       </font>
@@ -61,7 +61,7 @@
             </ImageView>
          </graphic>
       </Button>
-   <Label fx:id="okLabel" layoutX="290.0" layoutY="536.0" prefHeight="82.0" prefWidth="618.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="250.0">
+   <Label fx:id="okLabel" layoutX="290.0" layoutY="536.0" prefHeight="37.0" prefWidth="618.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="250.0">
       <font>
          <Font size="25.0" />
       </font>

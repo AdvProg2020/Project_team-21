@@ -17,6 +17,7 @@ public class Seller extends Account implements Comparable<Seller>{
     private ArrayList<Product> allProducts = new ArrayList<>();
     private ArrayList<Off> allOffs = new ArrayList<>();
     private ArrayList<SellLog> sellLogs = new ArrayList<>();
+    private String requestID;
 
 
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company,String photo) {
@@ -29,6 +30,14 @@ public class Seller extends Account implements Comparable<Seller>{
             file.delete();
             SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
         }
+    }
+
+    public String getRequestID() {
+        return requestID;
+    }
+
+    public void setRequestID(String requestID) {
+        this.requestID = requestID;
     }
 
     public static void removeSeller (Seller seller){

@@ -69,7 +69,7 @@
       </font>
    </Label>
    <TextField fx:id="maxPercentage" layoutX="891.0" layoutY="363.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Max Amount" AnchorPane.rightAnchor="90.0" />
-   <Label fx:id="alertLabel" layoutX="243.0" layoutY="668.0" prefHeight="94.0" prefWidth="587.0" text="---" textAlignment="CENTER" textFill="#bc1d25" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="369.0">
+   <Label fx:id="alertLabel" layoutX="243.0" layoutY="668.0" prefHeight="94.0" prefWidth="587.0" text="---" textAlignment="CENTER" textFill="#bc1d25" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="369.0">
       <font>
          <Font size="20.0" />
       </font>

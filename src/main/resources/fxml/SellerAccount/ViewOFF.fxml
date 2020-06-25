@@ -45,7 +45,7 @@
       </font>
    </Label>
    <TableView fx:id="listProducts" editable="true" prefHeight="390.0" prefWidth="426.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="100.0" />
-   <Label layoutX="233.0" layoutY="649.0" prefHeight="42.0" prefWidth="166.0" text="Products" textFill="#b31215" AnchorPane.leftAnchor="233.0">
+   <Label layoutX="233.0" layoutY="649.0" prefHeight="42.0" prefWidth="166.0" text="Products" textFill="#b31215" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="233.0">
       <font>
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>

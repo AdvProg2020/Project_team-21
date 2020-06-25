@@ -129,7 +129,7 @@ public class GraphicFather {
     }
     public void signOut(Event event){
         Control.getInstance().logout();
-        goToNextPage(GUICenter.getInstance().getLanding(),event);
+        goToNextPage(Page.MAIN,event);
     }
 
     public void showImageUser(Circle profilePhoto){

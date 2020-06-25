@@ -4,9 +4,11 @@ import Model.Account.Seller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Category implements Comparable<Category>{
     private static ArrayList<Category> allCategories = new ArrayList<>();
+    private static HashMap<String,Category> initialAllCategories = new HashMap<>();
     private String name;
     private ArrayList<Product> productsList;
     private ArrayList<Category> subCategories;
@@ -25,11 +27,11 @@ public class Category implements Comparable<Category>{
         }
         setName(name);
         allCategories.add(this);
-        SaveData.saveData(this, getName(), SaveData.categoryFile);
+        SaveData.saveData(this, getName()+"category", SaveData.categoryFile);
     }
     public static void rewriteFiles(){
         for (Category category : allCategories) {
-            File file = new File(category.getName()+".json");
+            File file = new File(category.getName()+"category"+".json");
             file.delete();
             SaveData.saveData(category, category.getName(), SaveData.categoryFile);
         }
@@ -74,6 +76,16 @@ public class Category implements Comparable<Category>{
         subCategories.remove(category);
     }
 
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.categoryFile)));
+        for (Object object : objects) {
+            initialAllCategories.put(((Category)object).getName(),(Category)object);
+        }
+        for (String s : initialAllCategories.keySet()) {
+            allCategories.add(initialAllCategories.get(s));
+        }
+    }
+
     public static void removeCategory(Category category){
         for (Product product : category.getProductsList())
         {
@@ -81,7 +93,7 @@ public class Category implements Comparable<Category>{
         }
         allCategories.remove(category);
 
-        File file = new File(category.getName()+".json");
+        File file = new File(category.getName() + "category" +".json");
         if(file.delete()){
 //            System.out.println("yes");
         } else {
@@ -104,13 +116,6 @@ public class Category implements Comparable<Category>{
 
     public ArrayList<Category> getSubCategories() {
         return subCategories;
-    }
-
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.categoryFile)));
-        for (Object object : objects) {
-            allCategories.add((Category) (object));
-        }
     }
 
     public String showSpecialFeatures(){

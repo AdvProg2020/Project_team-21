@@ -45,7 +45,7 @@
             <Font size="35.0" />
         </font>
     </Label>
-    <TableView fx:id="listDiscountCodes" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+    <TableView onMouseClicked="#selection" fx:id="listDiscountCodes" editable="true" layoutX="785.0" layoutY="3.0" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
     </TableView>
    <Label layoutX="65.0" layoutY="311.0" prefHeight="39.0" prefWidth="223.0" text="Remove A Discount Code:" textFill="#cfb936" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="250.0">
       <font>
@@ -53,7 +53,7 @@
       </font>
    </Label>
    <TextField fx:id="codeToRemove" layoutX="248.0" layoutY="384.0" prefHeight="39.0" prefWidth="235.0" promptText="Enter Discount Code" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="300.0" />
-   <Button layoutX="599.0" layoutY="396.0" mnemonicParsing="false" onMouseClicked="#EditDiscountCode" prefHeight="88.0" prefWidth="122.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="599.0" AnchorPane.topAnchor="400.0">
+   <Button layoutX="603.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#EditDiscountCode" prefHeight="88.0" prefWidth="122.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="425.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
       </font>
@@ -88,9 +88,9 @@
          </ImageView>
       </graphic>
    </Button>
-   <Label fx:id="alertLabel" layoutX="64.0" layoutY="614.0" prefHeight="66.0" prefWidth="693.0" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="64.0">
+   <Label fx:id="alertLabel" layoutX="64.0" layoutY="614.0" prefHeight="66.0" prefWidth="693.0" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="64.0">
       <font>
-         <Font name="Hiragino Sans W5" size="35.0" />
+         <Font name="Hiragino Sans W5" size="20.0" />
       </font>
    </Label>
 
