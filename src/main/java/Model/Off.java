@@ -11,9 +11,8 @@ public class Off implements Comparable<Off>{
 
     private static HashMap<String, Off> allOffs = new HashMap<>();
     public static ArrayList<Off> allOffsList = new ArrayList<>();
-
     private String offId;
-    private ArrayList<Product> productsList;
+    private ArrayList<String> productsList;
     private OffState offState;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -28,7 +27,8 @@ public class Off implements Comparable<Off>{
 
     public Off(String offId, ArrayList<Product> productsList, LocalDateTime startTime, LocalDateTime endTime, double offAmount){
         setOffId(offId);
-        setProductsList(productsList);
+        if(productsList != null)
+            setProductsList(productsList);
         setStartTime(startTime);
         setEndTime(endTime);
         setOffAmount(offAmount);
@@ -36,9 +36,7 @@ public class Off implements Comparable<Off>{
 
     public static void rewriteFiles(){
         for (String s : allOffs.keySet()) {
-            File file = new File(s+".json");
-            file.delete();
-            SaveData.saveData(allOffs.get(s), s, SaveData.offFile);
+            SaveData.saveDataRunning(allOffs.get(s), s, SaveData.offFile);
         }
     }
 
@@ -72,7 +70,11 @@ public class Off implements Comparable<Off>{
     }
 
     public ArrayList<Product> getProductsList() {
-        return productsList;
+        ArrayList<Product> res = new ArrayList<>();
+        for (String s : productsList) {
+            res.add(Product.getAllProducts().get(s));
+        }
+        return res;
     }
 
     public void setStartTime(LocalDateTime startTime) {
@@ -84,7 +86,9 @@ public class Off implements Comparable<Off>{
     }
 
     public void setProductsList(ArrayList<Product> productsList) {
-        this.productsList.addAll(productsList);
+        for (Product product : productsList) {
+            this.productsList.add(product.getProductId());
+        }
     }
 
     public void setOffAmount(double offAmount) {
@@ -116,7 +120,7 @@ public class Off implements Comparable<Off>{
     }
 
     public boolean doesProductExistWithId(String id){
-        for (Product product : productsList) {
+        for (Product product : getProductsList()) {
             if(product.getProductId().equals(id)){
                 return true;
             }
@@ -129,11 +133,11 @@ public class Off implements Comparable<Off>{
     }
 
     public void addProduct(Product product){
-        productsList.add(product);
+        productsList.add(product.getProductId());
     }
 
     public void removeProduct(Product product){
-        productsList.remove(product);
+        productsList.remove(product.getProductId());
     }
 
     @Override
@@ -187,7 +191,7 @@ public class Off implements Comparable<Off>{
 
 
     public void removeOffFromProducts(){
-        for (Product product : productsList){
+        for (Product product : getProductsList()){
             product.removeOff(this);
         }
     }

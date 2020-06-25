@@ -7,32 +7,38 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ProductRequest extends Request {
-    private Seller provider;
+    private String provider;
     private String editField;
     private String newValueEdit;
-    private Seller seller;
+    private String seller;
     private String providerUsername;
     public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product,String imagePath)
     {
         super(requestType);
         if(requestType.equals(RequestType.ADD))
-             product = new Product(productId,name,company,price,category,seller,imagePath);
+            product = new Product(productId,name,company,price,category,provider,imagePath);
         product.setRequestID(requestId);
-         requestedProducts.put(requestId,product);
-         Request.addRequest(requestId,this);
-         this.provider = provider;
-         providerUsername = provider.getUsername();
-         setRequestId(requestId);
+        requestedProducts.put(requestId,product);
+        Request.addRequest(requestId,this);
+        this.provider = provider.getUsername();
+        providerUsername = provider.getUsername();
+        setRequestId(requestId);
         SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
         SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
     }
 
+    //    public static void rewriteFiles(){
+//        for (String s : requestedProducts.keySet()) {
+//            Product product = requestedProducts.get(s);
+//            File file = new File(s + product.getProductId()+".json");
+//            file.delete();
+//            SaveData.saveData(product, s+product.getProductId(), SaveData.productRequestFile);
+//        }
+//    }
     public static void rewriteFiles(){
         for (String s : requestedProducts.keySet()) {
             Product product = requestedProducts.get(s);
-            File file = new File(s + product.getProductId()+".json");
-            file.delete();
-            SaveData.saveData(product, s+product.getProductId(), SaveData.productRequestFile);
+            SaveData.saveDataRunning(product, s+product.getProductId(), SaveData.productRequestFile);
         }
     }
 
@@ -49,7 +55,12 @@ public class ProductRequest extends Request {
     }
 
     public Seller getProvider() {
-        return provider;
+        Seller res = null;
+        for (Seller seller : Seller.getAllSeller()) {
+            if(seller.getUsername().equals(provider))
+                res = seller;
+        }
+        return res;
     }
 
     @Override
@@ -89,10 +100,14 @@ public class ProductRequest extends Request {
         }
         else if(this.getRequestType().equals(RequestType.ADD_SELLER))
         {
+            Seller seller = null;
+            for (Seller seller1 : Seller.getAllSeller()) {
+                if(seller1.getUsername().equals(this.seller))
+                    seller = seller1;
+            }
             product.addSeller(seller);
             seller.addProduct(product);
         }
-
         declineReq(requestId);
     }
 

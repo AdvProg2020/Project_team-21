@@ -135,7 +135,7 @@ public class ConsoleView{
             else{
                 System.out.println("Goodbye " + user.getFirstName());
                 Control.getInstance().setUser(null);
-                Control.getInstance().setSignOutCart(new ShoppingCart(null));
+                Control.getInstance().setSignOutCart(new ShoppingCart(null,"0000"));
                 goToNextPage(MainMenuUI.getInstance());
             }
             rightInput = true;

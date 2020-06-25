@@ -12,8 +12,9 @@ public class Company {
     private static HashMap<String,Company> allCompanies = new HashMap<>();
     private String name;
     private String location;
-    private ArrayList<Seller> allSellers = new ArrayList<>();
-    private ArrayList<Product> allProducts = new ArrayList<>();
+    private ArrayList<String> allSellers = new ArrayList<>();
+    private ArrayList<String> allProducts = new ArrayList<>();
+
 
     public Company(String name, String location) {
         this.name = name;
@@ -23,9 +24,7 @@ public class Company {
     }
     public static void rewriteFiles(){
         for (String s : allCompanies.keySet()) {
-            File file = new File(s+".json");
-            file.delete();
-            SaveData.saveData(allCompanies.get(s), s, SaveData.companyFile);
+            SaveData.saveDataRunning(allCompanies.get(s), s, SaveData.companyFile);
         }
     }
 
@@ -50,12 +49,20 @@ public class Company {
     }
     public void addProduct(Product product)
     {
-        allProducts.add(product);
+        allProducts.add(product.getProductId());
+    }
+
+    public ArrayList<String> getAllProducts() {
+        return allProducts;
+    }
+
+    public ArrayList<String> getAllSellers() {
+        return allSellers;
     }
 
     public void addSeller(Seller seller)
     {
-        allSellers.add(seller);
+        allSellers.add(seller.getUsername());
     }
 
     public static void getObjectFromDatabase(){

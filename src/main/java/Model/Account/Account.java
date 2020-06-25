@@ -35,12 +35,19 @@ public abstract class Account {
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
     }
 
+//    public static void rewriteFiles(){
+//        for (String s : Account.getAllAccounts().keySet()) {
+//            Account account = Account.getAllAccounts().get(s);
+//            File file = new File(s+account.getPassword()+".txt");
+//            file.delete();
+//            SaveData.saveData(account, (s+account.getPassword()), SaveData.accountFile);
+//        }
+//    }
+
     public static void rewriteFiles(){
         for (String s : Account.getAllAccounts().keySet()) {
             Account account = Account.getAllAccounts().get(s);
-            File file = new File(s+account.getPassword()+".txt");
-            file.delete();
-            SaveData.saveData(account, (s+account.getPassword()), SaveData.accountFile);
+            SaveData.saveDataRunning(account, (s+account.getPassword()), SaveData.accountFile);
         }
     }
 

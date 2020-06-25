@@ -64,9 +64,9 @@ public class EditFieldManager extends GraphicFather{
             }
             showError(alertLabel,"Fields: " + fields + "has been updated for you!",Error.POSITIVE);
         }
-//        Account.rewriteFiles();
-//        Customer.rewriteFiles();
-//        Seller.rewriteFiles();
-//        Manager.rewriteFiles();
+        Account.rewriteFiles();
+        Customer.rewriteFiles();
+        Seller.rewriteFiles();
+        Manager.rewriteFiles();
     }
 }

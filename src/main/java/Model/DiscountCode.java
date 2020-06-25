@@ -2,6 +2,7 @@ package Model;
 
 import Controller.Sort;
 
+import Model.Account.Account;
 import Model.Account.Customer;
 
 import java.io.File;
@@ -19,17 +20,13 @@ public class DiscountCode {
     private double discountPercentage;
     private double maxDiscountAmount;
     private int discountNumberForEachUser;
-    private HashMap<String, Customer> discountOwners;
-    // Initialization Block
-    {
-        discountOwners = new HashMap<>();
-    }
+    private ArrayList<String> discountOwners = new ArrayList<>();
 
     public DiscountCode(String discountId, LocalDateTime startTime, LocalDateTime endTime, double discountPercentage, double maxDiscountAmount, int discountNumberForEachUser,HashMap <String,Customer> codeOwners)
     {
         for (String s : codeOwners.keySet())
         {
-            discountOwners.put(s,codeOwners.get(s));
+            discountOwners.add(s);
             codeOwners.get(s).addDiscountCode(this);
         }
         setDiscountId(discountId);
@@ -43,9 +40,7 @@ public class DiscountCode {
     }
     public static void rewriteFiles(){
         for (String s : allDiscountCodes.keySet()) {
-            File file = new File(s+".json");
-            file.delete();
-            SaveData.saveData(allDiscountCodes.get(s), s, SaveData.discountCodeFile);
+            SaveData.saveDataRunning(allDiscountCodes.get(s), s, SaveData.discountCodeFile);
         }
     }
 
@@ -68,12 +63,12 @@ public class DiscountCode {
 
     public void addDiscountOwner(Customer customer)
     {
-        discountOwners.put(customer.getUsername(),customer);
+        discountOwners.add(customer.getUsername());
         customer.addDiscountCode(this);
     }
     public void removeDiscountOwner(Customer customer)
     {
-        discountOwners.remove(customer.getUsername(),customer);
+        discountOwners.remove(customer.getUsername());
         customer.removeDiscountCode(this);
     }
     public static void removeDiscountCode (String code){
@@ -84,7 +79,11 @@ public class DiscountCode {
     }
 
     public HashMap<String, Customer> getDiscountOwners() {
-        return discountOwners;
+        HashMap<String,Customer> res = new HashMap<>();
+        for (String owner : discountOwners) {
+            res.put(owner,(Customer)Account.getAllAccounts().get(owner));
+        }
+        return res;
     }
 
     public LocalDateTime getStartTime() {

@@ -18,19 +18,25 @@ public class SellLog extends Log{
         super(logId, date, totalDiscountAmount, totalAmount, allProducts, sellerUserName, receiverUserName,receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
         addSellLog(this);
         for (Seller seller : Seller.getAllSeller()) {
-            if(seller.getUsername().equalsIgnoreCase(sellerUserName))
+            if(seller.getUsername().equals(sellerUserName))
             {
                 seller.addSellLog(this);
             }
         }
         SaveData.saveData(this, getLogId(), SaveData.sellLogFile);
     }
+    //    public static void rewriteFiles(){
+//        for (String s : SellLog.getAllSellLogs().keySet()) {
+//            SellLog log = SellLog.getAllSellLogs().get(s);
+//            File file = new File(s+".json");
+//            file.delete();
+//            SaveData.saveData(log, s, SaveData.sellLogFile);
+//        }
+//    }
     public static void rewriteFiles(){
         for (String s : SellLog.getAllSellLogs().keySet()) {
             SellLog log = SellLog.getAllSellLogs().get(s);
-            File file = new File(s+".json");
-            file.delete();
-            SaveData.saveData(log, s, SaveData.sellLogFile);
+            SaveData.saveDataRunning(log, s, SaveData.sellLogFile);
         }
     }
     public void addSellLog(SellLog sellLog)

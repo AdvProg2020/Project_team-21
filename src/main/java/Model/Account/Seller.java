@@ -13,22 +13,30 @@ import java.util.ArrayList;
 public class Seller extends Account implements Comparable<Seller>{
 
     private static ArrayList<Seller> allSellers = new ArrayList<>();
-    private Company company;
-    private ArrayList<Product> allProducts = new ArrayList<>();
-    private ArrayList<Off> allOffs = new ArrayList<>();
-    private ArrayList<SellLog> sellLogs = new ArrayList<>();
+
+    private String company;
+    private ArrayList<String> allProducts = new ArrayList<>();
+    private ArrayList<String> allOffs = new ArrayList<>();
+    private ArrayList<String> sellLogs = new ArrayList<>();
+
     private String requestID;
 
 
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
-        this.company = company;
+        if(company != null)
+            this.company = company.getName();
     }
+    //    public static void rewriteFiles(){
+//        for (Seller seller : Seller.getAllSeller()) {
+//            File file = new File(seller.getUsername()+".json");
+//            file.delete();
+//            SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
+//        }
+//    }
     public static void rewriteFiles(){
         for (Seller seller : Seller.getAllSeller()) {
-            File file = new File(seller.getUsername()+".json");
-            file.delete();
-            SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
+            SaveData.saveDataRunning(seller, seller.getUsername(), SaveData.sellerFile);
         }
     }
 
@@ -51,7 +59,7 @@ public class Seller extends Account implements Comparable<Seller>{
     }
     public void removeOff(Off off)
     {
-        allOffs.remove(off);
+        allOffs.remove(off.getOffId());
     }
 
     public static ArrayList<Seller> getAllSeller() {
@@ -65,39 +73,52 @@ public class Seller extends Account implements Comparable<Seller>{
     }
 
     public Company getCompany() {
-        return company;
+        return Company.getAllCompanies().get(company);
     }
 
     public ArrayList<Product> getAllProducts() {
-        return allProducts;
+        ArrayList<Product> res = new ArrayList<>();
+        for (String product : allProducts) {
+            res.add(Product.getAllProducts().get(product));
+        }
+        return res;
     }
 
     public ArrayList<Off> getAllOffs() {
-        return allOffs;
+        ArrayList<Off> res = new ArrayList<>();
+        for (String off : allOffs) {
+            res.add(Off.getAllOffs().get(off));
+        }
+        return res;
     }
 
     public ArrayList<SellLog> getSellLogs() {
-        return sellLogs;
+        ArrayList<SellLog> res = new ArrayList<>();
+        for (String sellLog : sellLogs) {
+            res.add(SellLog.getAllSellLogs().get(sellLog));
+        }
+        return res;
     }
 
     public void addProduct (Product product){
-        allProducts.add(product);
+        allProducts.add(product.getProductId());
     }
 
     public void removeProduct(Product product){
-        allProducts.remove(product);
+        allProducts.remove(product.getProductId());
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompany(Company company)
+    {
+        this.company = company.getName();
     }
 
     public void addSellLog(SellLog sellLog)
     {
-        sellLogs.add(sellLog);
+        sellLogs.add(sellLog.getLogId());
     }
     public void addOffs (Off off){
-        allOffs.add(off);
+        allOffs.add(off.getOffId());
     }
 
     public static Seller getSellerWithUsername(String username)throws Exception{
@@ -114,7 +135,9 @@ public class Seller extends Account implements Comparable<Seller>{
     }
 
     public void setSellLogs(ArrayList<SellLog> sellLogs) {
-        this.sellLogs = sellLogs;
+        for (SellLog sellLog : sellLogs) {
+            this.sellLogs.add(sellLog.getLogId());
+        }
     }
 
     @Override

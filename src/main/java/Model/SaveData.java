@@ -321,5 +321,19 @@ public class SaveData {
            // e.printStackTrace();
         }
     }
+    public static void saveDataRunning(Object object, String name, String typeClass) {
+//        typeClass += ".txt";
+        String json = gson.toJson(object);
+
+        try {
+            name += ".json";
+            FileWriter writer = new FileWriter(name, false);
+            writer.write(json);
+            writer.close();
+
+        } catch (IOException e) {
+            // e.printStackTrace();
+        }
+    }
 
 }

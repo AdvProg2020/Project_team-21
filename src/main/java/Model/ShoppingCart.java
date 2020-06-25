@@ -2,24 +2,24 @@ package Model;
 
 import Model.Account.Account;
 import Model.Account.Seller;
-import Model.Log.SellLog;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ShoppingCart {
 
-    private HashMap<Product, Integer> productsQuantity = new HashMap<>();
-    private HashMap<Product, Seller> productSeller = new HashMap<>();
     private static ArrayList<ShoppingCart> allShoppingCarts = new ArrayList<>();
-
-    private Account customer;
+    private HashMap<String, Integer> productsQuantity = new HashMap<>();
+    private HashMap<String,String> productSeller = new HashMap<>();
+    private String customer;
+    private String cartID;
     private double price;
 
-    public ShoppingCart(Account customer){
-        setCustomer(customer);
+    public ShoppingCart(Account customer, String id){
+        if(customer != null)
+            setCustomer(customer);
         allShoppingCarts.add(this);
+        cartID = id;
 //        SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
     }
 
@@ -32,7 +32,7 @@ public class ShoppingCart {
 //    }
 
     public void setCustomer(Account customer){
-        this.customer = customer;
+        this.customer = customer.getUsername();
     }
 
     public double getPrice() {
@@ -40,45 +40,61 @@ public class ShoppingCart {
     }
 
     public HashMap<Product, Integer> getProductsQuantity() {
-        return productsQuantity;
+        HashMap<Product,Integer> res = new HashMap<>();
+        for (String s : productsQuantity.keySet()) {
+            res.put(Product.getAllProducts().get(s),productsQuantity.get(s));
+        }
+        return res;
     }
 
     public HashMap<Product, Seller> getProductSeller() {
-        return productSeller;
+        HashMap<Product,Seller> res = new HashMap<>();
+        for (String s : productSeller.keySet()) {
+            res.put(Product.getAllProducts().get(s),(Seller)Account.getAllAccounts().get(productSeller.get(s)));
+        }
+        return res;
     }
 
     public Account getCustomer(){
-        return customer;
+        return Account.getAllAccounts().get(customer);
     }
 
     public void addProduct(Product product, int num, Seller seller)
     {
-        productsQuantity.put(product, num);
+        productsQuantity.put(product.getProductId(), num);
         price += product.getPrice()*num;
-        productSeller.put(product,seller);
+        productSeller.put(product.getProductId(),seller.getUsername());
+    }
+
+    public void setCartID(String cartID) {
+        this.cartID = cartID;
+    }
+
+    public String getCartID() {
+        return cartID;
     }
 
     public void increaseQuantity(Product product)
     {
-        productsQuantity.put(product, productsQuantity.get(product)+1);
+        productsQuantity.put(product.getProductId(), productsQuantity.get(product.getProductId())+1);
         price += product.getPrice();
     }
     public void decreaseQuantity(Product product)
     {
-        if(productsQuantity.get(product)<=1)
+        if(productsQuantity.get(product.getProductId())<=1)
         {
             removeProduct(product);
         }
         else
         {
-            productsQuantity.put(product, productsQuantity.get(product)-1);
+            productsQuantity.put(product.getProductId(), productsQuantity.get(product.getProductId())-1);
             price -= product.getPrice();
         }
     }
     public void removeProduct(Product product){
-        productsQuantity.remove(product);
+        productsQuantity.remove(product.getProductId());
         price -= product.getPrice();
-        productSeller.remove(product);
+        productSeller.remove(product.getProductId());
     }
     public void clearShoppingCart()
     {
@@ -86,7 +102,11 @@ public class ShoppingCart {
         productsQuantity.clear();
         productSeller.clear();
     }
-//    public static void getObjectFromDatabase(){
+
+    public static ArrayList<ShoppingCart> getAllShoppingCarts() {
+        return allShoppingCarts;
+    }
+    //    public static void getObjectFromDatabase(){
 //        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
 //        for (Object object : objects) {
 //            allShoppingCarts.add((ShoppingCart)(object));

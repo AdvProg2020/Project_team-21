@@ -22,7 +22,7 @@ public class Control {
     public static String currentUserSort = "";
     public static String currentRequestSort = "";
     Account user = null;
-    ShoppingCart signOutCart = new ShoppingCart(null);
+    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
 
     private Control() {

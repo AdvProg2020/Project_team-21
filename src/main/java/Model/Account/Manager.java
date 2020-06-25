@@ -18,14 +18,18 @@ public class Manager extends Account implements Comparable<Manager>{
         addNewManager(this);
         SaveData.saveData(this, getUsername(), SaveData.managerFile);
     }
+    //    public static void rewriteFiles(){
+//        for (Manager manager : Manager.getAllManagers()) {
+//            File file = new File(manager.getUsername()+".json");
+//            file.delete();
+//            SaveData.saveData(manager, manager.getUsername(), SaveData.managerFile);
+//        }
+//    }
     public static void rewriteFiles(){
         for (Manager manager : Manager.getAllManagers()) {
-            File file = new File(manager.getUsername()+".json");
-            file.delete();
-            SaveData.saveData(manager, manager.getUsername(), SaveData.managerFile);
+            SaveData.saveDataRunning(manager, manager.getUsername(), SaveData.managerFile);
         }
     }
-
     public String getType(){
         return "Manager";
     }

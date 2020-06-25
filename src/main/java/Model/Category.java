@@ -10,8 +10,9 @@ public class Category implements Comparable<Category>{
     private static ArrayList<Category> allCategories = new ArrayList<>();
     private static HashMap<String,Category> initialAllCategories = new HashMap<>();
     private String name;
-    private ArrayList<Product> productsList;
-    private ArrayList<Category> subCategories;
+    private ArrayList<String> productsList;
+    private ArrayList<String> subCategories;
+
     private ArrayList<String> specialFeatures = new ArrayList<String>();
 
     // Initialization Block
@@ -22,8 +23,10 @@ public class Category implements Comparable<Category>{
 
     public Category(String name, ArrayList<Product> products)
     {
-        for (Product product : products) {
-            addProductToCategory(product);
+        if(products != null){
+            for (Product product : products) {
+                addProductToCategory(product);
+            }
         }
         setName(name);
         allCategories.add(this);
@@ -31,9 +34,7 @@ public class Category implements Comparable<Category>{
     }
     public static void rewriteFiles(){
         for (Category category : allCategories) {
-            File file = new File(category.getName()+"category"+".json");
-            file.delete();
-            SaveData.saveData(category, category.getName(), SaveData.categoryFile);
+            SaveData.saveDataRunning(category, category.getName()+"category", SaveData.categoryFile);
         }
     }
 
@@ -55,25 +56,31 @@ public class Category implements Comparable<Category>{
     }
 
     public void addProductToCategory(Product product){
-        productsList.add(product);
+        productsList.add(product.getProductId());
         product.setCategory(this);
     }
 
     public ArrayList<Product> getProductsList() {
-        return productsList;
+        ArrayList<Product> res = new ArrayList<>();
+        for (String s : productsList) {
+            res.add(Product.getAllProducts().get(s));
+        }
+        return res;
     }
 
     public void removeProductFromCategory(Product product){
         product.setCategory(null);
-        productsList.remove(product);
+        productsList.remove(product.getProductId());
     }
 
     public void addSubCategory(Category category){
-        subCategories.add(category);
+        subCategories.add(category.getName());
+        allCategories.add(category);
     }
 
     public void removeSubCategory(Category category){
-        subCategories.remove(category);
+        subCategories.remove(category.getName());
+        allCategories.remove(category);
     }
 
     public static void getObjectFromDatabase(){
@@ -115,7 +122,16 @@ public class Category implements Comparable<Category>{
     }
 
     public ArrayList<Category> getSubCategories() {
-        return subCategories;
+        ArrayList<Category> res = new ArrayList<>();
+        for (String subCategory : subCategories) {
+            for (Category category : Category.getAllCategories()) {
+                if(subCategory.equals(category.getName())){
+                    res.add(category);
+                    break;
+                }
+            }
+        }
+        return res;
     }
 
     public String showSpecialFeatures(){
@@ -139,7 +155,7 @@ public class Category implements Comparable<Category>{
     }
 
     public void addSpecialFeatureToProducts(String specialFeature){
-        for (Product product : productsList){
+        for (Product product : getProductsList()){
             product.addSpecialFeature(specialFeature,null);
         }
     }
@@ -150,7 +166,7 @@ public class Category implements Comparable<Category>{
     }
 
     public void removeSpecialFeatureFromProducts(String specialFeature){
-        for (Product product : productsList){
+        for (Product product : getProductsList()){
             product.removeSpecialFeature(specialFeature);
         }
     }

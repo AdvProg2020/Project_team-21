@@ -1,9 +1,9 @@
 package Model.Account;
 
+import Controller.Control;
 import Controller.Sort;
 import Model.DiscountCode;
 import Model.Log.BuyLog;
-import Model.Log.Log;
 import Model.Off;
 import Model.SaveData;
 import Model.ShoppingCart;
@@ -15,25 +15,31 @@ import java.util.HashMap;
 public class Customer extends Account implements Comparable<Customer>{
 
     private static ArrayList<Customer> allCustomer = new ArrayList<>();
-    private ShoppingCart shoppingCart;
-    private HashMap<String, DiscountCode> discountCodes = new HashMap<>();
-    private HashMap<DiscountCode,Integer> discountCodesUsed = new HashMap<>();
+    private String shoppingCart;
+    private ArrayList<String> discountCodes = new ArrayList<>();
+    private HashMap<String,Integer> discountCodesUsed = new HashMap<>();
+    private ArrayList<String> buyLogs = new ArrayList<>();
+    public ArrayList<String> offs = new ArrayList<>();
     public double balance;
-    public ArrayList <BuyLog> buyLogs = new ArrayList<>();
-    public HashMap<String , Off> offs = new HashMap<>();
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewCustomer(this);
         SaveData.saveData(this, getUsername(), SaveData.customerFile);
-        setShoppingCart(new ShoppingCart(this));
+        ShoppingCart cart = new ShoppingCart(this, Control.getInstance().randomString(5));
+        setShoppingCart(cart);
     }
 
+    //    public static void rewriteFiles(){
+//        for (Customer customer : Customer.getAllCustomer()) {
+//            File file = new File(customer.getUsername()+".json");
+//            file.delete();
+//            SaveData.saveData(customer, customer.getUsername(), SaveData.customerFile);
+//        }
+//    }
     public static void rewriteFiles(){
         for (Customer customer : Customer.getAllCustomer()) {
-            File file = new File(customer.getUsername()+".json");
-            file.delete();
-            SaveData.saveData(customer, customer.getUsername(), SaveData.customerFile);
+            SaveData.saveDataRunning(customer, customer.getUsername(), SaveData.customerFile);
         }
     }
 
@@ -53,46 +59,64 @@ public class Customer extends Account implements Comparable<Customer>{
     }
 
     public ShoppingCart getShoppingCart() {
+        ShoppingCart shoppingCart = null;
+        for (ShoppingCart cart : ShoppingCart.getAllShoppingCarts()) {
+            if(cart.getCartID().equals(this.shoppingCart))
+                shoppingCart = cart;
+        }
         return shoppingCart;
     }
 
     public ArrayList<BuyLog> getBuyLogs() {
-        return buyLogs;
+        ArrayList<BuyLog> res = new ArrayList<>();
+        for (String log : buyLogs) {
+            BuyLog.getAllBuyLogs().get(log);
+        }
+        return res;
     }
 
     public void addDiscountCode(DiscountCode discountCode)
     {
-        discountCodes.put(discountCode.getDiscountId(),discountCode);
-        discountCodesUsed.put(discountCode,0);
+        discountCodes.add(discountCode.getDiscountId());
+        discountCodesUsed.put(discountCode.getDiscountId(),0);
     }
     public void addDiscountUse(DiscountCode discountCode)
     {
-        discountCodesUsed.put(discountCode,discountCodesUsed.get(discountCode)+1);
-        if(discountCodesUsed.get(discountCode) >= discountCode.getDiscountNumberForEachUser())
+        discountCodesUsed.put(discountCode.getDiscountId(),discountCodesUsed.get(discountCode.getDiscountId())+1);
+        if(discountCodesUsed.get(discountCode.getDiscountId()) >= discountCode.getDiscountNumberForEachUser())
         {
             removeDiscountCode(discountCode);
         }
     }
 
     public HashMap<String, DiscountCode> getDiscountCodes() {
-        return discountCodes;
+        HashMap<String, DiscountCode> res = new HashMap<>();
+        for (String code : discountCodes) {
+            res.put(code,DiscountCode.getAllDiscountCodes().get(code));
+        }
+        return res;
     }
 
     public void removeDiscountCode(DiscountCode discountCode) {
         discountCodes.remove(discountCode.getDiscountId());
-        discountCodesUsed.remove(discountCode);
+        discountCodesUsed.remove(discountCode.getDiscountId());
     }
 
     public HashMap<String, Off> getOffs() {
-        return offs;
+        HashMap<String,Off> res = new HashMap<>();
+        for (String off : offs) {
+            res.put(off,Off.getAllOffs().get(off));
+        }
+        return res;
     }
 
     public void addBuyLogs (BuyLog buyLog){
-        buyLogs.add(buyLog);
+
+        buyLogs.add(buyLog.getLogId());
     }
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
+        this.shoppingCart = shoppingCart.getCartID();
     }
 
 //    public void addOffs (Off off){
@@ -137,7 +161,9 @@ public class Customer extends Account implements Comparable<Customer>{
     }
 
     private void setBuyLogs(ArrayList<BuyLog> buyLogs) {
-        this.buyLogs = buyLogs;
+        for (BuyLog log : buyLogs) {
+            this.buyLogs.add(log.getLogId());
+        }
     }
 
     public static void getObjectFromDatabase(){

@@ -16,12 +16,10 @@ public class Log implements Comparable<Log>{
     private LocalDateTime date;
     private double totalDiscountAmount;
     private double price;
-    private ArrayList<Product> allProducts= new ArrayList<>();
+    private ArrayList<String> allProducts = new ArrayList<>();
+    private String usedDiscountCode;
     private String sellerUserName;
     private String receiverUserName;
-    private LogStatus logStatus;
-    private DiscountCode usedDiscountCode;
-
     private String receiverName;
     private String receiverAddress;
     private String receiverPhoneNo;
@@ -33,16 +31,17 @@ public class Log implements Comparable<Log>{
         this.date = date;
         this.totalDiscountAmount = totalDiscountAmount;
         this.price = totalAmount;
-        this.allProducts = allProducts;
+        for (Product product : allProducts) {
+            this.allProducts.add(product.getProductId());
+        }
         this.sellerUserName = sellerUserName;
         this.receiverUserName = receiverUserName;
         this.receiverName = receiverName;
         this.receiverAddress = receiverAddress;
         this.receiverPhoneNo = receiverPhoneNo;
         this.receiverPostalCode = receiverPostalCode;
-        logStatus = LogStatus.PROCESSING;
         addLog(this);
-//        SaveData.saveData(this, (getLogId()+getReceiverName()), SaveData.log);
+//        SaveData.saveData(this, (getLogId()+getReceiverName()), SaveData.lo);
     }
 
     public void addLog(Log log)
@@ -52,9 +51,6 @@ public class Log implements Comparable<Log>{
     public void removeLog(Log log)
     {
         allLogs.remove(log.getLogId(),log);
-    }
-    public void setLogStatus(LogStatus logStatus) {
-        this.logStatus = logStatus;
     }
 
     public String getLogId() {
@@ -79,7 +75,11 @@ public class Log implements Comparable<Log>{
 
 
     public ArrayList<Product> getAllProducts() {
-        return allProducts;
+        ArrayList<Product> res = new ArrayList<>();
+        for (String product : allProducts) {
+            res.add(Product.getAllProducts().get(product));
+        }
+        return res;
     }
 
     public String getSellerName() {
@@ -98,16 +98,9 @@ public class Log implements Comparable<Log>{
         return sellerUserName;
     }
 
-    public LogStatus getLogStatus() {
-        return logStatus;
-    }
 
     public void setLogId(String logId) {
         this.logId = logId;
-    }
-
-    public void setAllProducts(ArrayList<Product> allProducts) {
-        this.allProducts = allProducts;
     }
 
     public void setSellerUserName(String sellerUserName) {
@@ -115,11 +108,13 @@ public class Log implements Comparable<Log>{
     }
 
     public void setUsedDiscountCode(DiscountCode usedDiscountCode) {
-        this.usedDiscountCode = usedDiscountCode;
+
+        this.usedDiscountCode = usedDiscountCode.getDiscountId();
     }
 
     public DiscountCode getUsedDiscountCode() {
-        return usedDiscountCode;
+
+        return DiscountCode.getAllDiscountCodes().get(usedDiscountCode);
     }
 
     public String getReceiverName() {

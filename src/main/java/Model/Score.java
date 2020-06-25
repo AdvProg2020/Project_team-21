@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Control;
 import Model.Account.Account;
 
 import java.io.File;
@@ -7,33 +8,48 @@ import java.util.ArrayList;
 
 public class Score implements Comparable<Score>{
 
-    private Account user;
-    private Product product;
+    private String user;
+    private String product;
+
     private int score;
     private static ArrayList<Score> allScores = new ArrayList<>();
+    private String scoreID;
 
     public Score(Account user, Product product, int score)
     {
-        setUser(user);
-        setProduct(product);
+        if(user != null)
+            setUser(user);
+        if(product != null)
+            setProduct(product);
         setScore(score);
         allScores.add(this);
+        setScoreID(Control.getInstance().randomString(5));
         SaveData.saveData(this, (getScore()+getUser().getFirstName()), SaveData.scoreFile);
     }
     public static void rewriteFiles(){
         for (Score score : allScores) {
-            File file = new File(score.getScore() + score.getUser().getFirstName()+".json");
-            file.delete();
-            SaveData.saveData(score, score.getScore() + score.getUser().getFirstName(), SaveData.scoreFile);
+            SaveData.saveDataRunning(score, score.getScore() + score.getUser().getFirstName(), SaveData.scoreFile);
         }
     }
 
+    public void setScoreID(String scoreID) {
+        this.scoreID = scoreID;
+    }
+
+    public String getScoreID() {
+        return scoreID;
+    }
+
+    public static ArrayList<Score> getAllScores() {
+        return allScores;
+    }
+
     public void setUser(Account user) {
-        this.user = user;
+        this.user = user.getUsername();
     }
 
     public void setProduct(Product product) {
-        this.product = product;
+        this.product = product.getProductId();
     }
 
     public void setScore(int score) {
@@ -41,11 +57,12 @@ public class Score implements Comparable<Score>{
     }
 
     public Account getUser() {
-        return user;
+
+        return Account.getAllAccounts().get(user);
     }
 
     public Product getProduct() {
-        return product;
+        return Product.getAllProducts().get(product);
     }
 
     public int getScore() {

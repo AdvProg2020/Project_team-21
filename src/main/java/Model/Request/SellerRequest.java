@@ -25,12 +25,18 @@ public class SellerRequest extends Request {
         SaveData.saveData(seller, (getRequestId()+seller.getUsername()), SaveData.sellerRequestFile);
         SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
     }
+    //    public static void rewriteFiles(){
+//        for (String s : requestedSellers.keySet()) {
+//            Seller seller = requestedSellers.get(s);
+//            File file = new File(s + seller.getUsername()+".json");
+//            file.delete();
+//            SaveData.saveData(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
+//        }
+//    }
     public static void rewriteFiles(){
         for (String s : requestedSellers.keySet()) {
             Seller seller = requestedSellers.get(s);
-            File file = new File(s + seller.getUsername()+".json");
-            file.delete();
-            SaveData.saveData(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
+            SaveData.saveDataRunning(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
         }
     }
 

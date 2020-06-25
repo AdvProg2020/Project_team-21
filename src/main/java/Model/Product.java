@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Seller;
 
@@ -12,20 +13,21 @@ public class Product {
     public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
     public static ArrayList<Product> allProductWithOff=new ArrayList<>();
-    private ArrayList<Customer> buyers = new ArrayList<>();
+    private ArrayList<String> buyers = new ArrayList<>();
+    private String company;
+    private ArrayList<String> sellers = new ArrayList<>();
+    private String category;
+    ArrayList<String> scoresList;
+    ArrayList<String> reviewsList;
+    private String off;
+
     private String productId;
     private ProductState productState;
     private String name;
-    private Company company;
     private double price;
-    private ArrayList<Seller> sellers = new ArrayList<Seller>();
     private boolean doesExist;
-    private Category category;
     private String details;
     private double buyersAverageScore;
-    ArrayList<Score> scoresList;
-    ArrayList<Review> reviewsList;
-    private Off off;
     private HashMap<String,String> specialFeatures = new HashMap<String, String>();
     private String imagePath;
     private String requestID;
@@ -41,18 +43,19 @@ public class Product {
         setProductId(productId);
         setName(name);
         setProductState(productState);
-        setCompany(company);
+        if(company != null)
+            setCompany(company);
         setPrice(price);
-        setCategory(category);
-        addSeller(seller);
+        if(category != null)
+            setCategory(category);
+        if(seller != null)
+            addSeller(seller);
         addProductsWithOff();
         this.imagePath = imagePath;
     }
     public static void rewriteFiles(){
         for (String s : allProducts.keySet()) {
-            File file = new File(s+".json");
-            file.delete();
-            SaveData.saveData(allProducts.get(s), s, SaveData.productFile);
+            SaveData.saveDataRunning(allProducts.get(s), s, SaveData.productFile);
         }
     }
 
@@ -74,7 +77,7 @@ public class Product {
 
     public void setSpecialFeatures(ArrayList<String> specialFeatures){
         for (int i = 0; i < specialFeatures.size(); i++) {
-            this.specialFeatures.put(category.getSpecialFeatures().get(i), specialFeatures.get(i));
+            this.specialFeatures.put(getCategory().getSpecialFeatures().get(i), specialFeatures.get(i));
         }
     }
 
@@ -110,11 +113,11 @@ public class Product {
     }
 
     public void setOff(Off off) {
-        this.off = off;
+        this.off = off.getOffId();
     }
 
     public Off getOff() {
-        return off;
+        return Off.getAllOffs().get(off);
     }
 
     public String getName() {
@@ -122,15 +125,27 @@ public class Product {
     }
 
     public Company getCompany() {
-        return company;
+
+        return Company.getAllCompanies().get(company);
     }
 
     public ArrayList<Seller> getSellers() {
-        return sellers;
+        ArrayList<Seller> res = new ArrayList<>();
+        for (String seller : sellers) {
+            res.add((Seller)Account.getAllAccounts().get(seller));
+        }
+        return res;
     }
 
     public Category getCategory() {
-        return category;
+        Category res = null;
+        for (Category allCategory : Category.getAllCategories()) {
+            if(allCategory.getName().equals(category)){
+                res = allCategory;
+                break;
+            }
+        }
+        return res;
     }
 
     public double getPrice() {
@@ -142,7 +157,16 @@ public class Product {
     }
 
     public ArrayList<Review> getReviewsList() {
-        return reviewsList;
+        ArrayList<Review> res = new ArrayList<>();
+        for (String s : reviewsList) {
+            for (Review review : Review.getAllReviews()) {
+                if(review.getReviewID().equals(s)){
+                    res.add(review);
+                    break;
+                }
+            }
+        }
+        return res;
     }
 
 
@@ -159,7 +183,7 @@ public class Product {
     }
 
     public void setCompany(Company company) {
-        this.company = company;
+        this.company = company.getName();
     }
 
     public void setPrice(double price) {
@@ -171,7 +195,7 @@ public class Product {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        this.category = category.getName();
     }
 
     public void setDetails(String details) {
@@ -179,15 +203,15 @@ public class Product {
     }
 
     public void addSeller(Seller seller){
-        sellers.add(seller);
+        sellers.add(seller.getUsername());
     }
 
     public void addScore(Score score){
-        scoresList.add(score);
+        scoresList.add(score.getScoreID());
     }
 
     public void addReview(Review review){
-        reviewsList.add(review);
+        reviewsList.add(review.getReviewID());
     }
 
     public static HashMap<String, Product> getAllProducts() {
@@ -196,11 +220,15 @@ public class Product {
 
     public void addBuyer(Customer customer)
     {
-        buyers.add(customer);
+        buyers.add(customer.getUsername());
     }
 
     public ArrayList<Customer> getBuyers() {
-        return buyers;
+        ArrayList<Customer> res = new ArrayList<>();
+        for (String buyer : buyers) {
+            res.add((Customer) Account.getAllAccounts().get(buyer));
+        }
+        return res;
     }
 
     public Double getProductFinalPriceConsideringOff() {
@@ -208,16 +236,16 @@ public class Product {
 //            off.removeOff();
 //        }
 //        if (off != null && off.getOffStatus().equals(OffStatus.APPROVED_OFF)) {
-            return price * ((double) 1 - (off.getOffAmount() / (double) 100));
+            return price * ((double) 1 - (getOff().getOffAmount() / (double) 100));
 //        } else return price;
     }
 
     private double calculateScore() {
         double totalScore = 0;
-        for (Score score : scoresList) {
+        for (Score score : getScoresList()) {
             totalScore += score.getScore();
         }
-        totalScore /= scoresList.size();
+        totalScore /= getScoresList().size();
 
         return totalScore;
     }
@@ -236,6 +264,19 @@ public class Product {
             features.append("\n\t").append(key).append(": ").append(specialFeatures.get(key));
         }
         return features.toString();
+    }
+
+    public ArrayList<Score> getScoresList() {
+        ArrayList<Score> res = new ArrayList<>();
+        for (String s : scoresList) {
+            for (Score score : Score.getAllScores()) {
+                if(score.getScoreID().equals(s)){
+                    res.add(score);
+                    break;
+                }
+            }
+        }
+        return res;
     }
 
     public HashMap<String, String> getSpecialFeatures() {
@@ -262,8 +303,8 @@ public class Product {
                         "\n\tid: " + productId +
                         "\n\tdeta: " + details  +
                         "\n\tprice: " + price +
-                        "\n\toff amount: " + off.getOffAmount()+
-                        "\n\tcategory: " + category.getName() +
+                        "\n\toff amount: " + getOff().getOffAmount()+
+                        "\n\tcategory: " + category +
                         "\n\tseller(s): " + sellers.toString() +
                         "\n\taverage score: " + calculateScore();
     }
