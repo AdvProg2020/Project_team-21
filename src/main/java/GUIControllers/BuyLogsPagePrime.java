@@ -1,9 +1,10 @@
 package GUIControllers;
 
-import Model.Off;
+import Model.Log.BuyLog;
 import Model.Product;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,29 +20,28 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class OffsPagePrime extends GraphicFather implements Initializable {
-    public GridPane offsGridPane;
-    private static ArrayList<Product> products = new ArrayList<>();
-    private static Off off;
-    public Label startTimeLabel;
-    public Label offAmountLabel;
-    public Label endTimeLabel;
+public class BuyLogsPagePrime extends GraphicFather implements Initializable {
 
-    public Button userPage;
-    public Circle profilePhoto;
-    public Label profileName;
+    private static ArrayList<Product> products = new ArrayList<>();
+    private static BuyLog buyLog;
+    public Label logIdLabel;
+    public Label totalAmountLabel;
+    public Label totalDiscountAmountLabel;
+    public Label dateLabel;
+    public GridPane logsGridPane;
+    public Label phoneNumberLabel;
+    public Label buyerName;
 
     public static void setProducts(ArrayList<Product> products) {
-        OffsPagePrime.products = products;
+        BuyLogsPagePrime.products = products;
     }
 
-    public static void setOff(Off off) {
-        OffsPagePrime.off = off;
+    public static void setBuyLog(BuyLog buyLog) {
+        BuyLogsPagePrime.buyLog = buyLog;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        topBarShowRest(profilePhoto,profileName,userPage);
         int i=0;
         int j=0;
         for (Product product : products) {
@@ -51,13 +50,16 @@ public class OffsPagePrime extends GraphicFather implements Initializable {
                 j++;
             }
             ProductsCard card = new ProductsCard(product);
-            offsGridPane.add(card, i, j);
+            logsGridPane.add(card, i, j);
             i++;
         }
 
-        startTimeLabel.setText("Start Time: " + off.getStartTime());
-        endTimeLabel.setText("End Time: " + off.getEndTime());
-        offAmountLabel.setText((int)off.getOffAmount() + "% Off");
+        logIdLabel.setText("Log Id: " + buyLog.getLogId());
+        totalAmountLabel.setText("Total Amount: " + buyLog.getPrice() + "$");
+        totalDiscountAmountLabel.setText("Discount Amount: " + buyLog.getTotalDiscountAmount() + "$");
+        dateLabel.setText(String.valueOf(buyLog.getDate()));
+        buyerName.setText("Buyer Name: " + buyLog.getReceiverName());
+        phoneNumberLabel.setText("Buyer's Phone Num: " + buyLog.getReceiverPhoneNo());
     }
 
     private static class ProductsCard extends HBox {
@@ -77,21 +79,13 @@ public class OffsPagePrime extends GraphicFather implements Initializable {
             this.getChildren().add(imageVBox);
 
             VBox vBox = new VBox();
-
-            HBox hBox = new HBox();
             Label cardTitle = new Label();
             cardTitle.setText(product.getName());
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
-            hBox.getChildren().add(cardTitle);
-            Label scoreLabel = new Label();
-            scoreLabel.setText("Score: " + product.getBuyersAverageScore());
-            scoreLabel.getStyleClass().add("scoreLabel");
-            hBox.getChildren().add(scoreLabel);
-
-            vBox.getChildren().add(hBox);
+            vBox.getChildren().add(cardTitle);
 
             Label cardTitle2 = new Label();
-            cardTitle2.setText(String.valueOf(product.getPrice()) + "$");
+            cardTitle2.setText(String.valueOf(product.getPrice()));
             cardTitle2.getStyleClass().add("mainPageProductCardsTitle");
             vBox.getChildren().add(cardTitle2);
             this.getChildren().add(vBox);
@@ -123,4 +117,5 @@ public class OffsPagePrime extends GraphicFather implements Initializable {
             new GraphicFather().goToNextPage(Page.PRODUCTPAGE,actionEvent);
         }
     }
+
 }

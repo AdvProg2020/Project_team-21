@@ -108,13 +108,13 @@
 
 .scoreBtn {
     -fx-background-position: center;
-    -fx-background-image: url("/images/check_mark.png");
+    -fx-background-image: url("/images/ok.png");
     -fx-background-size: 25px 25px;
     -fx-background-color: #ebebff;
 }
 
 .scoreBtn:hover {
-    -fx-scale-y: 1.05 !important;
-    -fx-scale-x: 1.05 !important;
+    -fx-scale-y: 1.10 !important;
+    -fx-scale-x: 1.10 !important;
     -fx-font-weight: bold;
 }

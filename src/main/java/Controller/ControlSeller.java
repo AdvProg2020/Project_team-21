@@ -112,7 +112,7 @@ public class ControlSeller {
             }
         }
         Product product = Product.getAllProducts().get(productID);
-        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,null,RequestType.EDIT,null,product,"");
+        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,(Seller)Control.getInstance().getUser(),RequestType.EDIT,null,product,"");
         req.setEditField(field);
         req.setNewValueEdit(value);
         return requestID;
@@ -245,10 +245,10 @@ public class ControlSeller {
         }
         if(!Control.getInstance().doubleCheck(amount))
         {
-            if(Double.parseDouble(amount) > 100){
-                throw new Exception("Your percentage is above 100%");
-            }
             throw new Exception("Your amount format is wrong!");
+        }
+        if(Double.parseDouble(amount) > 100){
+            throw new Exception("Your percentage is above 100%");
         }
         String[] startParse = start.split("\\s+");
         String[] endParse = end.split("\\s+");

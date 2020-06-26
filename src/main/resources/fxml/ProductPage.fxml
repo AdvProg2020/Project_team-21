@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.text.Font?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="GUIControllers.ProductPage"
@@ -34,12 +35,15 @@
                         </image>
                     </ImageView>
 
-                    <HBox style="-fx-padding: 14 15 0 20">
+                    <HBox style="-fx-padding: 14 15 0 12">
                         <Label
                                 text="Score: 4.3"
                                 fx:id="averageScore"
-                                style="-fx-label-padding: 10 15 0 0"
+                                style="-fx-label-padding: 10 3 0 0"
                         >
+                            <font>
+                                <Font name="Hiragino Sans W3" size="10" />
+                            </font>
 
                         </Label>
 
@@ -157,6 +161,7 @@
                                        prefWidth="25"
                                        onAction="#scoreButton"
                                        styleClass="scoreBtn"
+                                       fx:id="submitScore"
                                >
 
                                </Button>
@@ -246,6 +251,11 @@
 
                    </Button>
                </GridPane>
+           </VBox>
+           <VBox minWidth="200"
+                 minHeight="20">
+               <Label fx:id="alertLabel"/>
+
            </VBox>
        </VBox>
 

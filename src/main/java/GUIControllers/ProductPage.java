@@ -40,6 +40,9 @@ public class ProductPage extends GraphicFather implements Initializable {
     public Button increaseButton;
     public Button decreaseButton;
     public Button commentButton;
+    public Label alertLabel;
+    public Button submitScore;
+    private ToggleGroup toggleGroup = new ToggleGroup();
 
 
     @Override
@@ -53,7 +56,25 @@ public class ProductPage extends GraphicFather implements Initializable {
             radioButton3.setDisable(true);
             radioButton4.setDisable(true);
             radioButton5.setDisable(true);
+            submitScore.setDisable(true);
+        }else{
+            Customer customer = (Customer) Control.getInstance().getUser();
+            for (Score score : product.getScoresList()) {
+                if(score.getUser().equals(customer)){
+                    radioButton1.setDisable(true);
+                    radioButton2.setDisable(true);
+                    radioButton3.setDisable(true);
+                    radioButton4.setDisable(true);
+                    radioButton5.setDisable(true);
+                    submitScore.setDisable(true);
+                }
+            }
         }
+        radioButton1.setToggleGroup(toggleGroup);
+        radioButton2.setToggleGroup(toggleGroup);
+        radioButton3.setToggleGroup(toggleGroup);
+        radioButton4.setToggleGroup(toggleGroup);
+        radioButton5.setToggleGroup(toggleGroup);
 
         File file = new File(product.getImagePath());
         Image productImage = new Image(file.toURI().toString());
@@ -70,14 +91,15 @@ public class ProductPage extends GraphicFather implements Initializable {
         String offDetails;
         if(product.getOff()==null){
             offDetails = "NO OFF IS AVAILABLE!";
+            productPrice.setText("Price: " + product.getPrice() + "$");
         } else {
-            offDetails = "Off: " + product.getOff().getOffId() + " With Amount of: " + product.getOff().getOffAmount() + " With State of: " + product.getOff().getOffState();
+            offDetails = "Off: " + product.getOff().getOffId() + " With Amount of: " + product.getOff().getOffAmount();
+            productPrice.setText("Price: " + product.getPrice() * (100 - product.getOff().getOffAmount())/100 + "$");
         }
         productDescription.setText((product.getName() + "\n" + "Product Id: " + product.getProductId() + "\n" + "Company: " + product.getCompany().getName()
                 + " -At Location: " + product.getCompany().getLocation() + "\n" + "Category: " + categoryName + "\n" + "Price: " + product.getPrice() + "$" +"\n"
                 + offDetails));
         productDescription.setWrapText(true);
-        productPrice.setText("Price: " + product.getPrice() + "$");
         averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
 
         VBox vBox = new VBox();
@@ -102,12 +124,6 @@ public class ProductPage extends GraphicFather implements Initializable {
     }
 
     public void scoreButton(ActionEvent actionEvent) {
-        ToggleGroup toggleGroup = new ToggleGroup();
-        radioButton1.setToggleGroup(toggleGroup);
-        radioButton2.setToggleGroup(toggleGroup);
-        radioButton3.setToggleGroup(toggleGroup);
-        radioButton4.setToggleGroup(toggleGroup);
-        radioButton5.setToggleGroup(toggleGroup);
         RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
         String radioButtonId = selectedRadioButton.getId();
         int score=0;
@@ -123,6 +139,8 @@ public class ProductPage extends GraphicFather implements Initializable {
             score = 5;
         }
         product.addScore(new Score(Control.getInstance().getUser(),product,score));
+        Product.rewriteFiles();
+        showError(alertLabel,"Your score has been submitted." , Error.POSITIVE);
     }
 
     private Seller getSeller() throws Exception {
@@ -134,6 +152,10 @@ public class ProductPage extends GraphicFather implements Initializable {
         ShoppingCart cart = user.getShoppingCart();
         if(cart.getProductsQuantity().containsKey(product)){
             cart.decreaseQuantity(product);
+            showError(alertLabel,"Now you have " + cart.getProductsQuantity().get(product) + " of this product",Error.POSITIVE);
+        }
+        else{
+            showError(alertLabel,"You don't have this product.",Error.NEGATIVE);
         }
     }
 
@@ -143,17 +165,21 @@ public class ProductPage extends GraphicFather implements Initializable {
         if(!cart.getProductsQuantity().containsKey(product)){
             try {
                 cart.addProduct(product,1,getSeller());
+                showError(alertLabel,"Product has added to your cart",Error.POSITIVE);
             } catch (Exception e) {
-//                e.printStackTrace();
+                showError(alertLabel,e.getMessage(),Error.NEGATIVE);
             }
         }
         else{
             cart.increaseQuantity(product);
+            showError(alertLabel,"Now you have " + cart.getProductsQuantity().get(product) + " of this product.", Error.POSITIVE);
         }
     }
 
     public void addCommentButton(ActionEvent actionEvent) {
         Customer user = (Customer)Control.getInstance().getUser();
         product.addReview(new Review(user,product,addComment.getText(),user.hasBought(product)));
+        showError(alertLabel,"Your comment has been added.",Error.POSITIVE);
+        Product.rewriteFiles();
     }
 }

@@ -44,7 +44,7 @@
             </Button>
 
 
-            <Button styleClass="navBarButtons" text="User Page" onMouseClicked="#goToAccountButton" fx:id="userPage">
+            <Button fx:id="userPage" onMouseClicked="#goToAccountButton" styleClass="navBarButtons" text="User Page">
 
             </Button>
 
@@ -52,7 +52,7 @@
 
             </Button>
 
-            <Button styleClass="navBarButtons" text="Offs Page" onMouseClicked="#goToOffsPage">
+            <Button onMouseClicked="#goToOffsPage" styleClass="navBarButtons" text="Offs Page">
 
             </Button>
 
@@ -79,45 +79,39 @@
 
             </HBox>
         </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="quitButton1" mnemonicParsing="false" onMouseClicked="#goToSettings" prefHeight="23.0" prefWidth="29.0" style="-fx-background-color: none;" styleClass="SpecialButton" stylesheets="@../css/ManagerAccount.css">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
 
     </AnchorPane>
 
-    <StackPane alignment="CENTER" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="350">
+    <StackPane alignment="CENTER" AnchorPane.topAnchor="200"
+               AnchorPane.leftAnchor="0"
+               AnchorPane.rightAnchor="0"
+               styleClass="backgroundImage">
 
 
-        <Label styleClass="welcomeText" text="WelCome to Advanced Idiots Market!" textAlignment="CENTER" textFill="deepskyblue">
+        <Label
+                styleClass="welcomeText"
+                text="WellCome to Advanced Idiots Market!"
+                textAlignment="CENTER"
+                style="-fx-label-padding: 0 0 305 0;"
+        >
 
         </Label>
 
 
     </StackPane>
-
-<!--    <StackPane alignment="CENTER" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">-->
-
-<!--        <Button fx:id="quitButton" layoutX="322.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#end" style="-fx-background-color: none;" styleClass="SpecialButton" stylesheets="@../css/ManagerAccount.css">-->
-<!--            <graphic>-->
-<!--                <ImageView fitHeight="70" fitWidth="70" pickOnBounds="true" preserveRatio="true">-->
-<!--                    <image>-->
-<!--                        <Image url="@../images/quit.png" />-->
-<!--                    </image>-->
-<!--                </ImageView>-->
-<!--            </graphic>-->
-<!--        </Button>-->
-
-<!--    </StackPane>-->
-   <StackPane alignment="CENTER" layoutX="20.0" layoutY="247.0">
-      <children>
-         <Button fx:id="quitButton1" layoutX="322.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#goToSettings" style="-fx-background-color: none;" styleClass="SpecialButton" stylesheets="@../css/ManagerAccount.css">
-            <graphic>
-               <ImageView fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/settings.png" />
-                  </image>
-               </ImageView>
-            </graphic>
-         </Button>
-      </children>
-   </StackPane>
 
 
 </AnchorPane>

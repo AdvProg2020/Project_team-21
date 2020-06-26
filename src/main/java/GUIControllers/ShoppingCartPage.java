@@ -20,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 
 import java.io.File;
@@ -28,15 +27,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class ShoppingCartPage extends GraphicFather implements Initializable {
 
     public GridPane cartGridPane;
     public Label totalAmountLabel;
     private static double totalAmountToPay;
-    public Button userPage;
-    public Circle profilePhoto;
-    public Label profileName;
 
     public static double getTotalAmountToPay() {
         return totalAmountToPay;
@@ -48,9 +43,9 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        topBarShowRest(profilePhoto,profileName,userPage);
-        Customer user = (Customer) Control.getInstance().getUser();
-        ShoppingCart shoppingCart = user.getShoppingCart();
+        Customer customer = (Customer) Control.getInstance().getUser();
+        ShoppingCart shoppingCart = customer.getShoppingCart();
+
         int serial = 1;
         double totalAmount = 0;
         for (Product product : shoppingCart.getProductsQuantity().keySet()) {
@@ -88,7 +83,11 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
             EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent e)
                 {
-                    viewProductButton(e, product);
+                    try {
+                        viewProductButton(e, product);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             };
 
@@ -208,23 +207,24 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
             this.getChildren().add(binBtn);
         }
 
-        private void viewProductButton(ActionEvent actionEvent, Product product) {
+        private void viewProductButton(ActionEvent actionEvent, Product product) throws IOException {
             ProductPage.setProduct(product);
             new GraphicFather().goToNextPage(Page.PRODUCTPAGE,actionEvent);
         }
 
         private void addProduct() throws IOException {
-            shoppingCart.getProductsQuantity().replace(product, shoppingCart.getProductsQuantity().get(product)+1);
+            shoppingCart.increaseQuantity(product);
             update();
+
         }
 
         private void removeProduct() throws IOException {
-            shoppingCart.getProductsQuantity().replace(product, shoppingCart.getProductsQuantity().get(product)-1);
+            shoppingCart.decreaseQuantity(product);
             update();
         }
 
         private void throwProductToBin() throws IOException {
-            shoppingCart.getProductsQuantity().remove(product);
+            shoppingCart.removeProduct(product);
             update();
         }
 

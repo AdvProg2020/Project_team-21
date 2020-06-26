@@ -55,11 +55,13 @@ public class Off implements Comparable<Off>{
     public static void addOff(Off off)
     {
         allOffs.put(off.getOffId(),off);
+        allOffsList.add(off);
         SaveData.saveData(off, off.getOffId(), SaveData.offFile);
     }
     public static void removeOff(Off off)
     {
         allOffs.remove(off.getOffId());
+        allOffsList.remove(off);
 
         File file = new File(off.getOffId()+".json");
         if(file.delete()){
@@ -170,6 +172,7 @@ public class Off implements Comparable<Off>{
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offFile)));
         for (Object object : objects) {
             allOffs.put(((Off)object).getOffId() ,(Off) (object));
+            allOffsList.add((Off) (object));
         }
     }
 
@@ -185,6 +188,7 @@ public class Off implements Comparable<Off>{
 
     public void removeOff(){
         allOffsList.remove(this);
+        allOffs.remove(this.getOffId());
     }
 
 

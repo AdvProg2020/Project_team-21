@@ -110,6 +110,7 @@
     -fx-background-image: url("/images/back.png");
     -fx-background-size: 40px 28px;
     -fx-background-color: #eff3f8;
+    -fx-background-repeat: no-repeat;
 }
 
 .backButton:hover {

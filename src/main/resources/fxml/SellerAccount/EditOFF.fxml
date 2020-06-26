@@ -20,9 +20,9 @@
       </font>
    </Label>
    <TextField fx:id="startDate" prefHeight="15.0" prefWidth="550.0" promptText="Enter Name" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0" />
-   <TextField fx:id="endDate" prefHeight="27.0" prefWidth="550.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="250.0" />
-   <TextField fx:id="percentage" prefHeight="27.0" prefWidth="550.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="350.0" />
-   <TextField fx:id="productToRemove" prefHeight="15.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="450.0" />
+   <TextField fx:id="endDate" prefHeight="27.0" prefWidth="550.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="220.0" />
+   <TextField fx:id="percentage" prefHeight="27.0" prefWidth="550.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="290.0" />
+   <TextField fx:id="productToRemove" prefHeight="15.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="360.0" />
    <Button mnemonicParsing="false" onMouseClicked="#makeChange" prefHeight="131.0" prefWidth="136.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="-6.0">
       <font>
          <Font name="Hiragino Sans W2" size="30.0" />
@@ -40,27 +40,27 @@
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label text="End Date" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0">
+   <Label text="End Date" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="220.0">
       <font>
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label text="Percentage" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="350.0">
+   <Label text="Percentage" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="290.0">
       <font>
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label text="ProductID To Remove" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="450.0">
+   <Label text="ProductID To Remove" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="360.0">
       <font>
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <Label text="ProductID To Add" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="550.0">
+   <Label text="ProductID To Add" textFill="#b31215" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="430.0">
       <font>
          <Font name="Hiragino Sans W3" size="25.0" />
       </font>
    </Label>
-   <TextField fx:id="productToAdd" prefHeight="0.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="550.0" />
+   <TextField fx:id="productToAdd" prefHeight="0.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="430.0" />
 	<Button mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />

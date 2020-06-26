@@ -229,7 +229,7 @@
         </AnchorPane>
     </ScrollPane>
 
-    <GridPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="660" alignment="CENTER">
+    <GridPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="35" alignment="CENTER">
         <HBox>
             <Label
                     style="-fx-label-padding: 5 10 0 0; -fx-font-size: 16px;"

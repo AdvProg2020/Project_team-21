@@ -46,6 +46,7 @@ public class CustomerAccount extends GraphicFather implements Initializable {
     }
 
     public void goToOrders(MouseEvent mouseEvent) {
+        goToNextPage(Page.BUYLOGSPAGE,mouseEvent);
     }
 
     public void goToDiscountCodes(MouseEvent mouseEvent) {

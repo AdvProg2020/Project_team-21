@@ -80,4 +80,19 @@
 
 .welcomeText {
     -fx-font-size: 30;
+    -fx-text-fill: #000000;
+    -fx-opacity: 1;
+}
+
+.backgroundImage {
+    /*-fx-background-position: center;*/
+    -fx-background-image: url("/images/background.jpg");
+    /*-fx-background-size: 30px;*/
+    -fx-pref-width: 1000px;
+    -fx-pref-height: 538px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
+    /*-fx-background-size: 50px 50px;*/
+    /*-fx-background-color: #80a7ea;*/
+    -fx-opacity: 0.55;
 }
