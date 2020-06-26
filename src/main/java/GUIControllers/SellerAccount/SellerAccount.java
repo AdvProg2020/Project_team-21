@@ -41,8 +41,14 @@ public class SellerAccount extends GraphicFather implements Initializable {
         Phone.setText(seller.getPhoneNumber());
         Email.setText(seller.getEmail());
         Password.setText("*****");
-        companyAddress.setText(seller.getCompany().getLocation());
-        companyName.setText(seller.getCompany().getName());
+        if(seller.getCompany() != null){
+            companyAddress.setText(seller.getCompany().getLocation());
+            companyName.setText(seller.getCompany().getName());
+        }
+        else{
+            companyName.setText("----");
+            companyAddress.setText("----");
+        }
         balance.setText(Double.toString(seller.getCredit()));
         showImageUser(photoCircle);
     }

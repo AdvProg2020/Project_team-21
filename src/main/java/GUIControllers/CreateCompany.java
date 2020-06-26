@@ -29,7 +29,7 @@ public class CreateCompany extends GraphicFather {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner((Stage)((Node)event.getSource()).getScene().getWindow());
         VBox dialogVbox = new VBox(20);
-        Text txt = new Text("Your account request has been sent" + " ( ͡° ͜ʖ ͡°)");
+        Text txt = new Text("Your account request has been sent" + " (▀ Ĺ̯▀ )");
         txt.setFill(Paint.valueOf("069438"));
         Font font = new Font("Hiragino Sans W3" , 20);
         txt.setFont(font);
