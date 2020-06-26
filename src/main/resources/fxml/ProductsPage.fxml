@@ -105,54 +105,114 @@
 
         </AnchorPane>
 
-        <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">
+<!--        <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">-->
 
-            <AnchorPane AnchorPane.leftAnchor="10">
-                <Button
-                        onAction="#goBack"
-                        styleClass="backButton"
-                >
-                    <graphic>
-                        <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#goBack">
-                            <image>
-                                <Image url="@../images/back.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </AnchorPane>
+<!--            <AnchorPane AnchorPane.leftAnchor="10">-->
+<!--                <Button-->
+<!--                        onAction="#goBack"-->
+<!--                        styleClass="backButton"-->
+<!--                >-->
+<!--                    <graphic>-->
+<!--                        <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#goBack">-->
+<!--                            <image>-->
+<!--                                <Image url="@../images/back.png" />-->
+<!--                            </image>-->
+<!--                        </ImageView>-->
+<!--                    </graphic>-->
+<!--                </Button>-->
+<!--            </AnchorPane>-->
 
-            <AnchorPane AnchorPane.rightAnchor="10">
+<!--            <AnchorPane AnchorPane.rightAnchor="10">-->
 
-                <HBox>
-                    <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">
-                        <ComboBox promptText="Sorts" >
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="ProductId" />
-                                    <String fx:value="Rate" />
-                                    <String fx:value="ProductAlphabet" />
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-                    </VBox>
+<!--                <HBox>-->
+<!--                    <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">-->
+<!--                        <ComboBox promptText="Sorts" >-->
+<!--                            <items>-->
+<!--                                <FXCollections fx:factory="observableArrayList">-->
+<!--                                    <String fx:value="ProductId" />-->
+<!--                                    <String fx:value="Rate" />-->
+<!--                                    <String fx:value="ProductAlphabet" />-->
+<!--                                </FXCollections>-->
+<!--                            </items>-->
+<!--                        </ComboBox>-->
+<!--                    </VBox>-->
 
-                    <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >
-                        <ComboBox promptText="Filters">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Manager" />
-                                    <String fx:value="Seller" />
-                                    <String fx:value="Customer" />
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-                    </VBox>
+<!--                    <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >-->
+<!--                        <ComboBox promptText="Filters">-->
+<!--                            <items>-->
+<!--                                <FXCollections fx:factory="observableArrayList">-->
+<!--                                    <String fx:value="Manager" />-->
+<!--                                    <String fx:value="Seller" />-->
+<!--                                    <String fx:value="Customer" />-->
+<!--                                </FXCollections>-->
+<!--                            </items>-->
+<!--                        </ComboBox>-->
+<!--                    </VBox>-->
 
-                </HBox>
+<!--                </HBox>-->
 
-            </AnchorPane>
+<!--            </AnchorPane>-->
+<!--        </AnchorPane>-->
+
+    <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">
+
+        <AnchorPane AnchorPane.leftAnchor="10">
+            <Button
+                    onAction="#goBack"
+                    styleClass="backButton"
+                    text="Back"
+                    prefHeight="40"
+                    prefWidth="60"
+            >
+
+            </Button>
         </AnchorPane>
+
+
+    </AnchorPane>
+    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="63">
+
+        <HBox>
+            <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">
+                <ComboBox promptText="Sorts" fx:id="sortsDropDown">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <VBox style="-fx-padding: 12 0 0 0;">
+                    <Button
+                            onAction="#sort"
+                            text="Sort"
+                    >
+
+                    </Button>
+                </VBox>
+            </VBox>
+
+            <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >
+                <ComboBox promptText="Filters" fx:id="filtersDropDown">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <VBox style="-fx-padding: 12 0 0 0;">
+                    <Button
+                            text="Filter"
+                    >
+
+                    </Button>
+                </VBox>
+            </VBox>
+
+        </HBox>
+
+    </AnchorPane>
 
 
         <Label

@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Product {
+public class Product implements Comparable<Product>{
 
     public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
@@ -261,7 +261,9 @@ public class Product {
         for (Score score : getScoresList()) {
             totalScore += score.getScore();
         }
-        totalScore /= getScoresList().size();
+        if(scoresList.size()!=0){
+            totalScore /= scoresList.size();
+        }
 
         return totalScore;
     }
@@ -351,4 +353,14 @@ public class Product {
         }
     }
 
+    public static int sortType = 0; //  1 --> Price // 2 --> buyers average score
+
+    @Override
+    public int compareTo(Product o) {
+        if(sortType==1){
+            return (int)(getPrice()-(o.getPrice()));
+        } else {
+            return (int)((o.getBuyersAverageScore()) - getBuyersAverageScore());
+        }
+    }
 }

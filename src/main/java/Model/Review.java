@@ -78,7 +78,7 @@ public class Review implements Comparable<Review> {
     }
 
     public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.categoryFile)));
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.reviewFile)));
         for (Object object : objects) {
             allReviews.add((Review) (object));
         }
