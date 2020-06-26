@@ -82,6 +82,12 @@ public class Main extends Application {
         for (String s : Account.getAllAccounts().keySet()) {
             System.out.println(s + "  "+Account.getAllAccounts().get(s).getType() + " " + Account.getAllAccounts().get(s).getImagePath());
         }
+        for (Category category : Category.getAllCategories()) {
+            System.out.println(category.getName());
+            for (Product product : category.getProductsList()) {
+                System.out.println(product.getName());
+            }
+        }
         launch(args);
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
         ConsoleView.getInstance().processInput("main menu");

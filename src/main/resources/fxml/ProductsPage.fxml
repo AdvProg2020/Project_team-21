@@ -170,10 +170,54 @@
 
 
     </AnchorPane>
-    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="63">
+<!--    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="63">-->
+
+<!--        <HBox>-->
+<!--            <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">-->
+<!--                <ComboBox promptText="Sorts" fx:id="sortsDropDown">-->
+<!--                    <items>-->
+<!--                        <FXCollections fx:factory="observableArrayList">-->
+
+<!--                        </FXCollections>-->
+<!--                    </items>-->
+<!--                </ComboBox>-->
+
+<!--                <VBox style="-fx-padding: 12 0 0 0;">-->
+<!--                    <Button-->
+<!--                            onAction="#sort"-->
+<!--                            text="Sort"-->
+<!--                    >-->
+
+<!--                    </Button>-->
+<!--                </VBox>-->
+<!--            </VBox>-->
+
+<!--            <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >-->
+<!--                <ComboBox promptText="Filters" fx:id="filtersDropDown">-->
+<!--                    <items>-->
+<!--                        <FXCollections fx:factory="observableArrayList">-->
+
+<!--                        </FXCollections>-->
+<!--                    </items>-->
+<!--                </ComboBox>-->
+
+<!--                <VBox style="-fx-padding: 12 0 0 0;">-->
+<!--                    <Button-->
+<!--                            text="Filter"-->
+<!--                    >-->
+
+<!--                    </Button>-->
+<!--                </VBox>-->
+<!--            </VBox>-->
+
+<!--        </HBox>-->
+
+<!--    </AnchorPane>-->
+
+    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="75">
 
         <HBox>
-            <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">
+            <HBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">
                 <ComboBox promptText="Sorts" fx:id="sortsDropDown">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -182,7 +226,7 @@
                     </items>
                 </ComboBox>
 
-                <VBox style="-fx-padding: 12 0 0 0;">
+                <VBox style="-fx-padding: 1 0 0 10;">
                     <Button
                             onAction="#sort"
                             text="Sort"
@@ -190,30 +234,11 @@
 
                     </Button>
                 </VBox>
-            </VBox>
-
-            <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >
-                <ComboBox promptText="Filters" fx:id="filtersDropDown">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-
-                <VBox style="-fx-padding: 12 0 0 0;">
-                    <Button
-                            text="Filter"
-                    >
-
-                    </Button>
-                </VBox>
-            </VBox>
+            </HBox>
 
         </HBox>
 
     </AnchorPane>
-
 
         <Label
                 AnchorPane.leftAnchor="0"
@@ -227,18 +252,46 @@
         </Label>
 
 
-    <ScrollPane
-    fitToWidth="true"
-    AnchorPane.leftAnchor="10"
-    AnchorPane.rightAnchor="10"
-    AnchorPane.topAnchor="170"
-    AnchorPane.bottomAnchor="10">
+    <HBox
+            AnchorPane.leftAnchor="10"
+            AnchorPane.rightAnchor="10"
+            AnchorPane.topAnchor="170"
+            AnchorPane.bottomAnchor="10">
 
-        <GridPane  fx:id="productsGridPane"
-                   alignment="CENTER">
+        <ScrollPane  style="-fx-padding: 10 8 5 8;" minWidth="822">
+            <GridPane  fx:id="productsGridPane"
+                       alignment="CENTER">
 
-        </GridPane>
-    </ScrollPane>
+            </GridPane>
+        </ScrollPane>
+
+
+        <VBox style="-fx-padding: 0 0 0 15; -fx-min-height: 500;">
+            <VBox style="-fx-padding: 10 0 30 0;">
+                <Label text="Limit Price"/>
+
+                <Slider max="10000" min="0" blockIncrement="50" showTickLabels="true" showTickMarks="true" fx:id="slider" value="10000">
+
+                </Slider>
+
+                <Label fx:id="sliderLabel">
+
+                </Label>
+            </VBox>
+            <Label text="Categories">
+
+            </Label>
+            <ScrollPane  style="-fx-padding: 10 3 5 3;" minWidth="140">
+                <GridPane  fx:id="filtersGridPane"
+                           style="-fx-label-padding: 2 2 3 2;"
+                           alignment="CENTER">
+
+                </GridPane>
+            </ScrollPane>
+        </VBox>
+
+
+    </HBox>
 
 
 </AnchorPane>
