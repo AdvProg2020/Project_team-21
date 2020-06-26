@@ -54,12 +54,11 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
         int serial = 1;
         double totalAmount = 0;
         for (Product product : shoppingCart.getProductsQuantity().keySet()) {
-            ShoppingCartCard shoppingCartCard = new ShoppingCartCard(shoppingCart, serial, product, product.getPrice(), shoppingCart.getProductsQuantity().get(product), cartGridPane, totalAmountLabel);
-            cartGridPane.add(shoppingCartCard, 2, serial);
-            serial++;
-            totalAmount+= (product.getPrice()*shoppingCart.getProductsQuantity().get(product));
+                ShoppingCartCard shoppingCartCard = new ShoppingCartCard(shoppingCart, serial, product, product.getPrice(), shoppingCart.getProductsQuantity().get(product), cartGridPane, totalAmountLabel);
+                cartGridPane.add(shoppingCartCard, 2, serial);
+                serial++;
+                totalAmount+= (product.getPrice()*shoppingCart.getProductsQuantity().get(product));
         }
-
         totalAmountToPay = totalAmount;
         totalAmountLabel.setText(totalAmount + "$");
 

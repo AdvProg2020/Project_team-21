@@ -92,10 +92,14 @@ public class ShoppingCart {
         }
     }
     public void removeProduct(Product product){
-        productsQuantity.remove(product.getProductId());
-        price -= product.getPrice();
-        productSeller.remove(product.getProductId());
+        if(productsQuantity.containsKey(product.getProductId())){
+            productsQuantity.remove(product.getProductId());
+            price -= product.getPrice();
+            productSeller.remove(product.getProductId());
+        }
     }
+
+
     public void clearShoppingCart()
     {
         price = 0;

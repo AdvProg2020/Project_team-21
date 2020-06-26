@@ -81,6 +81,10 @@ public class Log implements Comparable<Log>{
         }
         return res;
     }
+    public void removeProduct(Product product){
+        if(allProducts.contains(product.getProductId()))
+            allProducts.remove(product.getProductId());
+    }
 
     public String getSellerName() {
         return sellerUserName;

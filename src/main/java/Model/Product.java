@@ -4,6 +4,7 @@ import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Seller;
 import Model.Log.BuyLog;
+import Model.Log.SellLog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Product implements Comparable<Product>{
     public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
     public static ArrayList<Product> allProductWithOff=new ArrayList<>();
+    public static ArrayList<Product> emergencyAfterDelete = new ArrayList<>();
     private ArrayList<String> buyers = new ArrayList<>();
     private String company;
     private ArrayList<String> sellers = new ArrayList<>();
@@ -107,12 +109,13 @@ public class Product implements Comparable<Product>{
 
     public static void removeProduct(Product product)
     {
-        allProducts.remove(product.getProductId());
-        for (Seller seller : product.getSellers()){
-            seller.getAllProducts().remove(product);
-        }
 
-        for (Seller seller : product.getSellers()) {
+        for (Seller seller : product.getSellers()){
+//            seller.getAllProducts().remove(product);
+            for (SellLog log : seller.getSellLogs()) {
+                if(log.getAllProducts().contains(product))
+                    log.removeProduct(product);
+            }
             seller.removeProduct(product);
         }
 
@@ -123,8 +126,12 @@ public class Product implements Comparable<Product>{
 
         for (Customer buyer : product.getBuyers()) {
             for (BuyLog log : buyer.getBuyLogs()) {
-                log.getAllProducts().remove(product);
+                log.removeProduct(product);
             }
+        }
+
+        for (Customer customer : Customer.getaAllCustomers()) {
+            customer.getShoppingCart().removeProduct(product);
         }
 
         if(product.getCategory() != null)
@@ -133,6 +140,7 @@ public class Product implements Comparable<Product>{
         if(product.getCompany() != null)
             product.getCompany().removeProduct(product);
 
+        allProducts.remove(product.getProductId());
 
         for (Score score : product.getScoresList()) {
             Score.removeScore(score);
