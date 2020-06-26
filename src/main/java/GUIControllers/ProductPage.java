@@ -17,6 +17,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.Rating;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,12 +47,14 @@ public class ProductPage extends GraphicFather implements Initializable {
     public Label alertLabel;
     public Button submitScore;
     public GridPane pane;
+    public Rating rating;
 
     private ToggleGroup toggleGroup = new ToggleGroup();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        rating.setDisable(true);
         if(!(Control.getInstance().getUser() instanceof Customer)){
             increaseButton.setDisable(true);
             decreaseButton.setDisable(true);
@@ -105,7 +108,8 @@ public class ProductPage extends GraphicFather implements Initializable {
                 + " -At Location: " + product.getCompany().getLocation() + "\n" + "Category: " + categoryName + "\n" + "Original Price: " + product.getOrgPrice() + "$" +"\n"
                 + offDetails));
         productDescription.setWrapText(true);
-        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
+//        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
+        rating.setRating(product.getBuyersAverageScore());
 
         VBox vBox = new VBox();
         for (Review review : product.getReviewsList()) {
@@ -153,12 +157,12 @@ public class ProductPage extends GraphicFather implements Initializable {
         radioButton4.setDisable(true);
         radioButton5.setDisable(true);
         submitScore.setDisable(true);
-        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
+//        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
+        rating.setRating(product.getBuyersAverageScore());
 
         Product.rewriteFiles();
         Score.rewriteFiles();
         Customer.rewriteFiles();
-        System.out.println("file rewritten");
     }
 
     private Seller getSeller() throws Exception {

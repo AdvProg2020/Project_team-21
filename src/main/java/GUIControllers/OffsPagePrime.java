@@ -7,12 +7,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import org.controlsfx.control.Rating;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,12 +85,25 @@ public class OffsPagePrime extends GraphicFather implements Initializable {
             cardTitle.setText(product.getName());
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
             hBox.getChildren().add(cardTitle);
-            Label scoreLabel = new Label();
-            scoreLabel.setText("Score: " + product.getBuyersAverageScore());
-            scoreLabel.getStyleClass().add("scoreLabel");
-            hBox.getChildren().add(scoreLabel);
+
+
+//            Label scoreLabel = new Label();
+//            scoreLabel.setText("Score: " + product.getBuyersAverageScore());
+//            scoreLabel.getStyleClass().add("scoreLabel");
+//            hBox.getChildren().add(scoreLabel);
+            HBox hBox1 = new HBox();
+            Rating rating = new Rating();
+            rating.setRating(product.getBuyersAverageScore());
+            rating.setDisable(true);
+            rating.setMaxWidth(10);
+            rating.setPrefWidth(10);
+            hBox1.getChildren().add(rating);
+
+            Separator separator = new Separator();
+            hBox1.getChildren().add(separator);
 
             vBox.getChildren().add(hBox);
+            vBox.getChildren().add(hBox1);
 
             Label cardTitle2 = new Label();
             cardTitle2.setText(String.valueOf(product.getPrice()) + "$");

@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="GUIControllers.ProductPage"
@@ -36,19 +37,20 @@
                     </ImageView>
 
                     <HBox style="-fx-padding: 14 15 0 12">
-                        <Label
-                                text="Score: 4.3"
-                                fx:id="averageScore"
-                                style="-fx-label-padding: 10 3 0 0"
-                        >
-                            <font>
-                                <Font name="Hiragino Sans W3" size="10" />
-                            </font>
+<!--                        <Label-->
+<!--                                text="Score: 4.3"-->
+<!--                                fx:id="averageScore"-->
+<!--                                style="-fx-label-padding: 10 3 0 0"-->
+<!--                        >-->
+<!--                            <font>-->
+<!--                                <Font name="Hiragino Sans W3" size="10" />-->
+<!--                            </font>-->
 
-                        </Label>
+<!--                        </Label>-->
+                        <Rating fx:id="rating" prefHeight="10" prefWidth="10"/>
 
                         <Button
-                                text="+Add to Cart"
+                                text="+"
                                 prefHeight="42"
                                 prefWidth="90"
                                 styleClass="basketBuyButton"

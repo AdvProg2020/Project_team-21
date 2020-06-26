@@ -54,6 +54,7 @@ public class Main extends Application {
         SellerRequest.getObjectFromDatabase();
         Company.getObjectFromDatabase();
         Score.getObjectFromDatabase();
+        Review.getObjectFromDatabase();
         putToAbstract();
     }
     MediaPlayer mediaPlayer;
