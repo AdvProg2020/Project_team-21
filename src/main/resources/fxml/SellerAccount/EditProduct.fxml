@@ -16,7 +16,7 @@
    </Label>
    <Label fx:id="alertLabel" layoutX="108.0" layoutY="722.0" prefHeight="58.0" prefWidth="1055.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="36.0">
       <font>
-         <Font size="30.0" />
+         <Font size="20.0" />
       </font>
    </Label>
    <TextField fx:id="name" layoutX="469.0" layoutY="206.0" prefHeight="31.0" prefWidth="554.0" promptText="Enter new value" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="206.0" />
@@ -62,7 +62,7 @@
    </Label>
    <Label fx:id="okLabel" layoutX="113.0" layoutY="629.0" prefHeight="49.0" prefWidth="1048.0" text="----" textFill="#cfb936" AnchorPane.bottomAnchor="100.0">
       <font>
-         <Font size="30.0" />
+         <Font size="20.0" />
       </font>
    </Label>
 
