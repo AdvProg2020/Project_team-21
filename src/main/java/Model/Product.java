@@ -130,9 +130,9 @@ public class Product implements Comparable<Product>{
             }
         }
 
-        for (Customer customer : Customer.getaAllCustomers()) {
-            customer.getShoppingCart().removeProduct(product);
-        }
+//        for (Customer customer : Customer.getaAllCustomers()) {
+//            customer.getShoppingCart().removeProduct(product);
+//        }
 
         if(product.getCategory() != null)
             product.getCategory().removeProductFromCategory(product);
@@ -146,6 +146,7 @@ public class Product implements Comparable<Product>{
             Score.removeScore(score);
         }
 
+        System.out.println("8");
         File file = new File(product.getProductId()+".json");
         if(file.delete()){
 //            System.out.println("yes");

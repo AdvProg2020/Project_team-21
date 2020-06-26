@@ -93,6 +93,7 @@ public class ShoppingCart {
     }
     public void removeProduct(Product product){
         if(productsQuantity.containsKey(product.getProductId())){
+            System.out.println("*");
             productsQuantity.remove(product.getProductId());
             price -= product.getPrice();
             productSeller.remove(product.getProductId());
