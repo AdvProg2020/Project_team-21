@@ -153,10 +153,12 @@ public class ProductPage extends GraphicFather implements Initializable {
         radioButton4.setDisable(true);
         radioButton5.setDisable(true);
         submitScore.setDisable(true);
+        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
 
         Product.rewriteFiles();
         Score.rewriteFiles();
         Customer.rewriteFiles();
+        System.out.println("file rewritten");
     }
 
     private Seller getSeller() throws Exception {

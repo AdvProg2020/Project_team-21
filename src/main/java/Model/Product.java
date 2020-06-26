@@ -17,8 +17,8 @@ public class Product {
     private String company;
     private ArrayList<String> sellers = new ArrayList<>();
     private String category;
-    private ArrayList<String> scoresList;
-    private ArrayList<String> reviewsList;
+    private ArrayList<String> scoresList = new ArrayList<>();
+    private ArrayList<String> reviewsList = new ArrayList<>();
     private String off;
 
     private String productId;
@@ -31,13 +31,6 @@ public class Product {
     private HashMap<String,String> specialFeatures = new HashMap<String, String>();
     private String imagePath;
     private String requestID;
-
-
-    // Initialization Block
-    {
-        scoresList = new ArrayList<>();
-        reviewsList = new ArrayList<>();
-    }
 
     public Product(String productId, String name, Company company, double price, Category category,Seller seller,String imagePath){
         setProductId(productId);
@@ -57,6 +50,14 @@ public class Product {
         for (String s : allProducts.keySet()) {
             SaveData.saveDataRunning(allProducts.get(s), s, SaveData.productFile);
         }
+    }
+
+    public void setScoresList(ArrayList<String> scoresList) {
+        this.scoresList = scoresList;
+    }
+
+    public void setReviewsList(ArrayList<String> reviewsList) {
+        this.reviewsList = reviewsList;
     }
 
     public void setRequestID(String requestID) {
