@@ -4,6 +4,7 @@ import Controller.Control;
 import Controller.ControlSeller;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
+import GUIControllers.OffsPagePrime;
 import GUIControllers.Page;
 import Model.Account.Seller;
 import Model.Off;
@@ -47,8 +48,12 @@ public class OFFs extends GraphicFather implements Initializable {
 
     public void viewOFF(MouseEvent mouseEvent) {
         if(ControlSeller.getInstance().checkOffExistance(offToView.getText()) && ControlSeller.getInstance().checkSellerGotOff(offToView.getText(),seller)){
-            ControlSeller.getInstance().setOffToView(offToView.getText());
-            goToNextPage(Page.VIEWOFF,mouseEvent);
+//            ControlSeller.getInstance().setOffToView(offToView.getText());
+//            goToNextPage(Page.VIEWOFF,mouseEvent);
+            Off off = Off.getAllOffs().get(offToView.getText());
+            OffsPagePrime.setProducts(off.getProductsList());
+            OffsPagePrime.setOff(off);
+            goToNextPage(Page.OFFSPRIMEPAGE,mouseEvent);
         }
         else {
             showError(alertLabel,"This OFF does not exist!", Error.NEGATIVE);

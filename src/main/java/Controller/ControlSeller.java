@@ -197,10 +197,6 @@ public class ControlSeller {
     {
         Seller seller = (Seller) Control.getInstance().getUser();
         String requestID = Control.getInstance().randomString(10);
-        if(!checkOffExistance(offID) || !checkSellerGotOff(offID,seller))
-        {
-            throw new Exception("This off doesn't Exist!");
-        }
         if(!productID.equalsIgnoreCase("null") && !Product.getAllProducts().containsKey(productID))
         {
             throw new Exception("This product doesn't exist!");
@@ -217,7 +213,7 @@ public class ControlSeller {
         {
             throw new Exception("Amount format is wrong!");
         }
-        if(!seller.getAllProducts().contains(Product.getAllProducts().get(productID)))
+        if(!productID.equalsIgnoreCase("null") && !seller.getAllProducts().contains(Product.getAllProducts().get(productID)))
         {
             throw new Exception("You don't have this product!");
         }
