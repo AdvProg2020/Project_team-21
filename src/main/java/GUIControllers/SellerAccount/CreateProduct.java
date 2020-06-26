@@ -5,6 +5,7 @@ import Controller.ControlSeller;
 import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import GUIControllers.Page;
+import Model.Company;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -53,6 +54,7 @@ public class CreateProduct extends GraphicFather implements Initializable {
         }catch (Exception e){
             showError(alertLabel, e.getMessage(), Error.NEGATIVE);
         }
+
     }
 
     private void putImage(File sourceFile,String id){

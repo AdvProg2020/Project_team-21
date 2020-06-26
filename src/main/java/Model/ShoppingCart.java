@@ -102,6 +102,11 @@ public class ShoppingCart {
         productsQuantity.clear();
         productSeller.clear();
     }
+    public boolean containsProduct(Product product){
+        if(productsQuantity.containsKey(product.getProductId()))
+            return true;
+        return false;
+    }
 
     public static ArrayList<ShoppingCart> getAllShoppingCarts() {
         return allShoppingCarts;

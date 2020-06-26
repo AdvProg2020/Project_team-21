@@ -126,11 +126,13 @@ public class Product implements Comparable<Product>{
                 log.getAllProducts().remove(product);
             }
         }
+
         if(product.getCategory() != null)
             product.getCategory().removeProductFromCategory(product);
 
         if(product.getCompany() != null)
             product.getCompany().removeProduct(product);
+
 
         for (Score score : product.getScoresList()) {
             Score.removeScore(score);
