@@ -47,14 +47,14 @@ public class MakeManagerFirst extends GraphicFather {
         dialog.initOwner((Stage)((Node)event.getSource()).getScene().getWindow());
         VBox dialogVbox = new VBox(20);
         Text txt = new Text("Wellcome " + Account.getAllAccounts().get(username.getText()).getFirstName() + " \\\\(•◡•)//");
-        txt.setFill(Paint.valueOf("7AF513"));
+        txt.setFill(Paint.valueOf("069438"));
         Font font = new Font("Hiragino Sans W3" , 20);
         txt.setFont(font);
         dialogVbox.getChildren().add(txt);
-        dialogVbox.setBackground(new Background(new BackgroundFill(Paint.valueOf("1365F5"), CornerRadii.EMPTY, Insets.EMPTY)));
+        dialogVbox.setBackground(new Background(new BackgroundFill(Paint.valueOf("80A7EB"), CornerRadii.EMPTY, Insets.EMPTY)));
         dialogVbox.setAlignment(Pos.CENTER);
         Scene dialogScene = new Scene(dialogVbox, 400, 200);
-        dialogScene.setFill(Paint.valueOf("1365F5"));
+        dialogScene.setFill(Paint.valueOf("80A7EB"));
         dialog.setScene(dialogScene);
         dialog.show();
     }
