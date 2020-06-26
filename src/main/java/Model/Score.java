@@ -75,6 +75,9 @@ public class Score implements Comparable<Score>{
             allScores.add((Score) (object));
         }
     }
+    public static void removeScore(Score score){
+        allScores.remove(score);
+    }
 
     @Override
     public int compareTo(Score o) {

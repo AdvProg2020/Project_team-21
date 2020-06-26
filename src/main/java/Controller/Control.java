@@ -96,9 +96,9 @@ public class Control {
 
     public void login(String userName, String password) throws notFoundUserOrPass {
         if (!(Account.getAllAccounts().containsKey(userName))){
-            throw new notFoundUserOrPass("userName didn't found!");
+            throw new notFoundUserOrPass("userName isn't found!");
         } else if (!(Account.getAllAccounts().get(userName).getPassword().equals(password))) {
-            throw new notFoundUserOrPass("password didn't match!");
+            throw new notFoundUserOrPass("password doesn't match!");
         }
         Account account = Account.getAllAccounts().get(userName);
         setUser(account);

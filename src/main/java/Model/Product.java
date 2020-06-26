@@ -3,6 +3,7 @@ package Model;
 import Model.Account.Account;
 import Model.Account.Customer;
 import Model.Account.Seller;
+import Model.Log.BuyLog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -113,6 +114,26 @@ public class Product implements Comparable<Product>{
 
         for (Seller seller : product.getSellers()) {
             seller.removeProduct(product);
+        }
+
+        if(product.getOff() != null){
+            Off off = product.getOff();
+            off.removeProduct(product);
+        }
+
+        for (Customer buyer : product.getBuyers()) {
+            for (BuyLog log : buyer.getBuyLogs()) {
+                log.getAllProducts().remove(product);
+            }
+        }
+        if(product.getCategory() != null)
+            product.getCategory().removeProductFromCategory(product);
+
+        if(product.getCompany() != null)
+            product.getCompany().removeProduct(product);
+
+        for (Score score : product.getScoresList()) {
+            Score.removeScore(score);
         }
 
         File file = new File(product.getProductId()+".json");
