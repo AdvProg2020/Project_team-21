@@ -253,6 +253,12 @@ public class GUICenter {
         else if(page.equals(Page.BUYLOGSPRIMEPAGE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/BuyLogsPage_Prime.fxml"));
         }
+        else if(page.equals(Page.SELLLOGSPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellLogsPage.fxml"));
+        }
+        else if(page.equals(Page.SELLLOGSPRIMEPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellLogsPage_Prime.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

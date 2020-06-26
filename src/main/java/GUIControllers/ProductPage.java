@@ -224,7 +224,7 @@ public class ProductPage extends GraphicFather implements Initializable {
         Image image = productPic.getImage();
 
         ivTarget.setImage(image);
-        Rectangle2D view=new Rectangle2D(x*22,y*16,200,200);
+        Rectangle2D view=new Rectangle2D(x*27,y*26,200,200);
         ivTarget.setViewport(view);
         if(!pane.getChildren().contains(ivTarget))
             pane.add(ivTarget,1,0);

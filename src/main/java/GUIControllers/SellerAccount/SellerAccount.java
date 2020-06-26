@@ -52,7 +52,7 @@ public class SellerAccount extends GraphicFather implements Initializable {
     }
 
     public void goToSalesHistory(MouseEvent mouseEvent) {
-        goToNextPage(Page.SALESHISTORY,mouseEvent);
+        goToNextPage(Page.SELLLOGSPAGE,mouseEvent);
     }
 
     public void goToOFFs(MouseEvent mouseEvent) {
