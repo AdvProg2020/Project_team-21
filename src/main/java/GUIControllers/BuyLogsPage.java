@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,9 +21,13 @@ import java.util.ResourceBundle;
 
 public class BuyLogsPage extends GraphicFather implements Initializable {
     public GridPane logsGridPane;
+    public Button userPage;
+    public Circle profilePhoto;
+    public Label profileName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        topBarShowRest(profilePhoto,profileName,userPage);
         Customer customer = (Customer) Control.getInstance().getUser();
         int i=0;
         for (BuyLog buyLog : customer.getBuyLogs()) {

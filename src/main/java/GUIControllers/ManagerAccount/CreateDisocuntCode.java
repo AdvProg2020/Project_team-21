@@ -6,6 +6,7 @@ import GUIControllers.Error;
 import GUIControllers.GraphicFather;
 import Model.Account.Account;
 import Model.Account.Customer;
+import Model.DiscountCode;
 import Model.Product;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

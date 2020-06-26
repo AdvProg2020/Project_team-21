@@ -91,7 +91,7 @@ public class ProductsPage extends GraphicFather implements Initializable {
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
 
             Label cardDescription = new Label();
-            cardDescription.setText((product.getName() + "\n" + "Company: " + product.getCompany().getName() + "\n" + "Category: " + product.getCategory().getName() + "\n" + "Price: " + product.getPrice() + "\n" + "Score" + product.getBuyersAverageScore()));
+            cardDescription.setText((product.getName() + "\n" + "Company: " + product.getCompany().getName() + "\n" + "Category: " + product.getCategory().getName() + "\n" + "Original Price: " + product.getOrgPrice() + "\n" + "Score: " + product.getBuyersAverageScore()));
             this.getChildren().add(cardDescription);
             cardDescription.getStyleClass().add("mainPageProductCardsDetail");
             cardDescription.setWrapText(true);

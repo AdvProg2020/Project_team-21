@@ -9,9 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -42,6 +45,8 @@ public class ProductPage extends GraphicFather implements Initializable {
     public Button commentButton;
     public Label alertLabel;
     public Button submitScore;
+    public GridPane pane;
+
     private ToggleGroup toggleGroup = new ToggleGroup();
 
 
@@ -93,11 +98,11 @@ public class ProductPage extends GraphicFather implements Initializable {
             offDetails = "NO OFF IS AVAILABLE!";
             productPrice.setText("Price: " + product.getPrice() + "$");
         } else {
-            offDetails = "Off: " + product.getOff().getOffId() + " With Amount of: " + product.getOff().getOffAmount();
-            productPrice.setText("Price: " + product.getPrice() * (100 - product.getOff().getOffAmount())/100 + "$");
+            offDetails = "Off: " + product.getOff().getOffId() + " With Amount of: " + product.getOff().getOffAmount() + "%";
+            productPrice.setText("Price: " + product.getPrice() + "$");
         }
         productDescription.setText((product.getName() + "\n" + "Product Id: " + product.getProductId() + "\n" + "Company: " + product.getCompany().getName()
-                + " -At Location: " + product.getCompany().getLocation() + "\n" + "Category: " + categoryName + "\n" + "Price: " + product.getPrice() + "$" +"\n"
+                + " -At Location: " + product.getCompany().getLocation() + "\n" + "Category: " + categoryName + "\n" + "Original Price: " + product.getOrgPrice() + "$" +"\n"
                 + offDetails));
         productDescription.setWrapText(true);
         averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
@@ -138,9 +143,20 @@ public class ProductPage extends GraphicFather implements Initializable {
         } else if(radioButtonId.equalsIgnoreCase("radioButton5")){
             score = 5;
         }
-        product.addScore(new Score(Control.getInstance().getUser(),product,score));
-        Product.rewriteFiles();
+        Score scoore = new Score(Control.getInstance().getUser(),product,score);
+        product.addScore(scoore);
+
         showError(alertLabel,"Your score has been submitted." , Error.POSITIVE);
+        radioButton1.setDisable(true);
+        radioButton2.setDisable(true);
+        radioButton3.setDisable(true);
+        radioButton4.setDisable(true);
+        radioButton5.setDisable(true);
+        submitScore.setDisable(true);
+
+        Product.rewriteFiles();
+        Score.rewriteFiles();
+        Customer.rewriteFiles();
     }
 
     private Seller getSeller() throws Exception {
@@ -180,6 +196,41 @@ public class ProductPage extends GraphicFather implements Initializable {
         Customer user = (Customer)Control.getInstance().getUser();
         product.addReview(new Review(user,product,addComment.getText(),user.hasBought(product)));
         showError(alertLabel,"Your comment has been added.",Error.POSITIVE);
+        commentButton.setDisable(true);
+
         Product.rewriteFiles();
+        Review.rewriteFiles();
+        Customer.rewriteFiles();
+    }
+
+
+    ImageView ivTarget = new ImageView();
+    public void zoom(MouseEvent mouseEvent) {
+        double x=mouseEvent.getX();
+        double y=mouseEvent.getY();
+
+//        if(x < productPic.getTranslateX() + 25){
+//            x = (int)productPic.getTranslateX() + 25;
+//        }
+//        if(x > productPic.getTranslateX() + 210){
+//            x = (int)productPic.getTranslateX() + 210;
+//        }
+//        if(y <  productPic.getTranslateY() + 25){
+//            y = (int)productPic.getTranslateY() + 25;
+//        }
+//        if(y > productPic.getTranslateX() + 210){
+//            y = (int)productPic.getTranslateY() + 210;
+//        }
+        Image image = productPic.getImage();
+
+        ivTarget.setImage(image);
+        Rectangle2D view=new Rectangle2D(x*22,y*16,200,200);
+        ivTarget.setViewport(view);
+        if(!pane.getChildren().contains(ivTarget))
+            pane.add(ivTarget,1,0);
+    }
+
+    public void unzoom(MouseEvent mouseEvent) {
+        pane.getChildren().remove(ivTarget);
     }
 }

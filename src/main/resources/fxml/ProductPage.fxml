@@ -15,7 +15,7 @@
           fx:controller="GUIControllers.ProductPage"
           prefHeight="400.0" prefWidth="600.0"
           stylesheets="@/css/productPageStyle.css"
-          alignment="CENTER">
+          alignment="CENTER" fx:id="pane">
 
     <VBox styleClass="mainPageProductCards" prefWidth="700" prefHeight="500">
         <HBox prefWidth="700" prefHeight="73" styleClass="topBar" alignment="CENTER_LEFT">
@@ -29,7 +29,7 @@
 
             <HBox>
                 <VBox>
-                    <ImageView fitHeight="200" fitWidth="200" layoutX="1463.0" layoutY="551.0" fx:id="productPic">
+                    <ImageView fitHeight="200" fitWidth="200" layoutX="1463.0" layoutY="551.0" fx:id="productPic" onMouseMoved="#zoom" onMouseExited="#unzoom" >
                         <image>
                             <Image url="@/images/product4.png"/>
                         </image>

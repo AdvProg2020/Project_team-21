@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.ManagerAccount.MoneyPage">
+	<Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="Hiragino Sans W2" size="30.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="92.0">
+               <image>
+                  <Image url="@../../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   <Button layoutX="542.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#addMoney" prefHeight="89.0" prefWidth="86.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936">
+      <font>
+         <Font name="Hiragino Sans W2" size="30.0" />
+      </font>
+      <graphic>
+         <ImageView fitHeight="67.0" fitWidth="69.0">
+            <image>
+               <Image url="@../../images/ok.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Button>
+   <Label layoutX="102.0" layoutY="142.0" prefHeight="39.0" prefWidth="225.0" text="Enter Username:" textFill="#cfb936" AnchorPane.leftAnchor="50.0">
+      <font>
+         <Font size="29.0" />
+      </font>
+   </Label>
+   <TextField fx:id="customerToAdd" layoutX="258.0" layoutY="194.0" prefHeight="39.0" prefWidth="190.0" promptText="Enter Username" AnchorPane.leftAnchor="258.0" />
+   <Label layoutX="419.0" layoutY="16.0" prefHeight="66.0" prefWidth="188.0" text="Give Money" textFill="#cfb936" AnchorPane.topAnchor="16.0">
+      <font>
+         <Font size="35.0" />
+      </font>
+   </Label>
+   <TableView fx:id="listCustomers" editable="true" layoutX="785.0" layoutY="3.0" onMouseClicked="#selection" prefHeight="857.0" prefWidth="335.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+   </TableView>
+   <Label fx:id="alertLabel" layoutX="91.0" layoutY="758.0" prefHeight="45.0" prefWidth="693.0" text="---" textAlignment="CENTER" textFill="#b31215" AnchorPane.bottomAnchor="10.0">
+      <font>
+         <Font name="Hiragino Sans W5" size="25.0" />
+      </font>
+   </Label>
+   <Label layoutX="52.0" layoutY="241.0" prefHeight="39.0" prefWidth="191.0" text="Enter Amount:" textFill="#cfb936">
+      <font>
+         <Font size="29.0" />
+      </font>
+   </Label>
+   <TextField fx:id="amountMoney" layoutX="254.0" layoutY="305.0" prefHeight="39.0" prefWidth="198.0" promptText="Enter Amount" AnchorPane.leftAnchor="258.0" />
+
+</AnchorPane>

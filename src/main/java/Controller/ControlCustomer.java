@@ -91,7 +91,7 @@ public class ControlCustomer {
     {
         String logID = Control.getInstance().randomString(10);
         ShoppingCart cart = customer.getShoppingCart();
-        if(!customer.getDiscountCodes().containsKey(discountCode) && !discountCode.equalsIgnoreCase("next"))
+        if(!customer.getDiscountCodes().containsKey(discountCode) && !discountCode.isEmpty())
         {
             throw new Exception("You don't have this discount code!");
         }
@@ -129,21 +129,30 @@ public class ControlCustomer {
         {
             cartSellers.add(seller.getUsername());
         }
-        DiscountCode discount = DiscountCode.getAllDiscountCodes().get(discountCode);
-        double price = cart.getPrice() - calculateTotalOffCart(productsSellers);
-        double totalDiscountAmount = price*(discount.getDiscountPercentage()/100);
-        if(totalDiscountAmount > discount.getMaxDiscountAmount())
-        {
-            totalDiscountAmount = discount.getMaxDiscountAmount();
+
+        DiscountCode discount = null;
+        double totalDiscountAmount = 0;
+        double price = cart.getPrice();
+        if(!discountCode.isEmpty()){
+            discount = DiscountCode.getAllDiscountCodes().get(discountCode);
+            totalDiscountAmount = price*(discount.getDiscountPercentage()/100);
+            if(totalDiscountAmount > discount.getMaxDiscountAmount())
+            {
+                totalDiscountAmount = discount.getMaxDiscountAmount();
+            }
         }
+
         if(!canPay(price,totalDiscountAmount,customer))
         {
             throw new Exception("You don't have enough money.");
         }
         new BuyLog(logID,LocalDateTime.now(),totalDiscountAmount,price-totalDiscountAmount,cartProducts,cartSellers.get(0),
                 customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode,cartSellers);
-        customer.addDiscountUse(discount);
+        if(!discountCode.isEmpty())
+            customer.addDiscountUse(discount);
+
         customer.setBalance(customer.getBalance()-(price-totalDiscountAmount));
+
         for (Product product : cartProducts) {
             product.addBuyer(customer);
         }

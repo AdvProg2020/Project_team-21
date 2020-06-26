@@ -131,7 +131,10 @@ public class ControlManager {
         String[] endDateParsed = endDate.split("\\s+");
         LocalDateTime startDateDate = LocalDateTime.of(makeInt(startDateParsed[0]),makeInt(startDateParsed[1]),makeInt(startDateParsed[2]),makeInt(startDateParsed[3]),makeInt(startDateParsed[4]));
         LocalDateTime endDateDate = LocalDateTime.of(makeInt(endDateParsed[0]),makeInt(endDateParsed[1]),makeInt(endDateParsed[2]),makeInt(endDateParsed[3]),makeInt(endDateParsed[4]));
-        new DiscountCode(discountID,startDateDate,endDateDate,makeDouble(percentage),makeDouble(maxDiscount),makeInt(maxNumber),codeOwners);
+        DiscountCode discountCode = new DiscountCode(discountID,startDateDate,endDateDate,makeDouble(percentage),makeDouble(maxDiscount),makeInt(maxNumber),codeOwners);
+        for (String s : codeOwners.keySet()) {
+            codeOwners.get(s).addDiscountCode(discountCode);
+        }
     }
     public boolean editDiscountCodeValidField(String field)
     {

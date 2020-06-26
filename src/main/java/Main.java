@@ -80,9 +80,6 @@ public class Main extends Application {
         for (String s : Account.getAllAccounts().keySet()) {
             System.out.println(s + "  "+Account.getAllAccounts().get(s).getType() + " " + Account.getAllAccounts().get(s).getImagePath());
         }
-        for (String s : Company.getAllCompanies().keySet()) {
-            System.out.println(s);
-        }
         launch(args);
         ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
         ConsoleView.getInstance().processInput("main menu");

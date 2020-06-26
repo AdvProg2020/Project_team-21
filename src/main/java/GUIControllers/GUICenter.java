@@ -193,6 +193,9 @@ public class GUICenter {
         else if(page.equals(Page.EDITCATEGORY)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/EditCategory.fxml"));
         }
+        else if(page.equals(Page.MONEYPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/MoneyPage.fxml"));
+        }
         else if(page.equals(Page.SALESHISTORY)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/SalesHistory.fxml"));
         }

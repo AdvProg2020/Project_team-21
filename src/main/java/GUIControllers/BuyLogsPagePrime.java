@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,9 @@ public class BuyLogsPagePrime extends GraphicFather implements Initializable {
     public GridPane logsGridPane;
     public Label phoneNumberLabel;
     public Label buyerName;
+    public Button userPage;
+    public Label profileName;
+    public Circle profilePhoto;
 
     public static void setProducts(ArrayList<Product> products) {
         BuyLogsPagePrime.products = products;
@@ -42,6 +46,7 @@ public class BuyLogsPagePrime extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        topBarShowRest(profilePhoto,profileName,userPage);
         int i=0;
         int j=0;
         for (Product product : products) {

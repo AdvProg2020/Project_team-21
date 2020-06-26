@@ -52,6 +52,9 @@ public class Customer extends Account implements Comparable<Customer>{
         File file = new File(customer.getUsername()+".json");
         file.delete();
     }
+    public void addBuyLogs (BuyLog buyLog){
+        buyLogs.add(buyLog.getLogId());
+    }
 
     public static ArrayList<Customer> getaAllCustomers() {
         return allCustomer;
@@ -73,7 +76,7 @@ public class Customer extends Account implements Comparable<Customer>{
     public ArrayList<BuyLog> getBuyLogs() {
         ArrayList<BuyLog> res = new ArrayList<>();
         for (String log : buyLogs) {
-            BuyLog.getAllBuyLogs().get(log);
+            res.add(BuyLog.getAllBuyLogs().get(log));
         }
         return res;
     }
@@ -89,6 +92,7 @@ public class Customer extends Account implements Comparable<Customer>{
         if(discountCodesUsed.get(discountCode.getDiscountId()) >= discountCode.getDiscountNumberForEachUser())
         {
             removeDiscountCode(discountCode);
+            discountCode.removeDiscountOwner(this);
         }
     }
 
@@ -113,10 +117,7 @@ public class Customer extends Account implements Comparable<Customer>{
         return res;
     }
 
-    public void addBuyLogs (BuyLog buyLog){
 
-        buyLogs.add(buyLog.getLogId());
-    }
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart.getCartID();
@@ -177,4 +178,8 @@ public class Customer extends Account implements Comparable<Customer>{
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
         }
     }
+    public void addBalance(double amount){
+        balance += amount;
+    }
+
 }

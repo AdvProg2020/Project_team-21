@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 
 import java.io.File;
@@ -32,6 +33,9 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
     public GridPane cartGridPane;
     public Label totalAmountLabel;
     private static double totalAmountToPay;
+    public Circle profilePhoto;
+    public Label profileName;
+    public Button userPage;
 
     public static double getTotalAmountToPay() {
         return totalAmountToPay;
@@ -43,6 +47,7 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        topBarShowRest(profilePhoto,profileName,userPage);
         Customer customer = (Customer) Control.getInstance().getUser();
         ShoppingCart shoppingCart = customer.getShoppingCart();
 

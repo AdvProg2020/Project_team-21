@@ -17,8 +17,8 @@ public class Product {
     private String company;
     private ArrayList<String> sellers = new ArrayList<>();
     private String category;
-    ArrayList<String> scoresList;
-    ArrayList<String> reviewsList;
+    private ArrayList<String> scoresList;
+    private ArrayList<String> reviewsList;
     private String off;
 
     private String productId;
@@ -159,6 +159,11 @@ public class Product {
     }
 
     public double getPrice() {
+        if(getOff() != null)
+            return price * (100 - getOff().getOffAmount()) /100;
+        return price;
+    }
+    public double getOrgPrice(){
         return price;
     }
 

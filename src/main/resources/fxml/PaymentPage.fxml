@@ -62,7 +62,22 @@
                 </VBox>
 
 
-                <VBox style="-fx-padding: 38 150 0 150;">
+            <VBox style="-fx-padding: 24 150 0 150;">
+                <Label
+                        text="Receiver Name"
+                >
+
+                </Label>
+
+                <TextField
+                        styleClass="inputField"
+                        fx:id="receiverName"
+                >
+
+                </TextField>
+            </VBox>
+
+            <VBox style="-fx-padding: 38 150 0 150;">
                     <Label
                             text="Address"
                     >
@@ -72,6 +87,7 @@
                     <TextField
                             prefHeight="50"
                             styleClass="inputField"
+                            fx:id="address"
                     >
 
                     </TextField>
@@ -86,11 +102,27 @@
 
                     <TextField
                             styleClass="inputField"
+                            fx:id="phone"
                     >
 
                     </TextField>
 
                 </VBox>
+            <VBox style="-fx-padding: 24 150 0 150;">
+                <Label
+                        text="Postal Code"
+                >
+
+                </Label>
+
+                <TextField
+                        styleClass="inputField"
+                        fx:id="postalCode"
+                >
+
+                </TextField>
+
+            </VBox>
 
                 <HBox style="-fx-padding: 30 180 0 180;">
                     <Label
@@ -101,6 +133,7 @@
 
                     <TextField
                             styleClass="inputField"
+                            fx:id="discountCode"
                     >
 
                     </TextField>
@@ -111,10 +144,14 @@
                    <Button
                            styleClass="payBtn"
                            text="Pay"
+                           onMouseClicked="#pay"
                    >
 
                    </Button>
                </HBox>
+            <HBox alignment="CENTER">
+                <Label fx:id="alertLabel"/>
+            </HBox>
             </VBox>
 
     </VBox>
