@@ -221,4 +221,5 @@ public class GraphicFather {
     public void goToOffsPage(MouseEvent mouseEvent) {
         goToNextPage(Page.OFFSPAGE,mouseEvent);
     }
+
 }
