@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.ManagerAccount.EditDiscountCode">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUIControllers.ManagerAccount.EditDiscountCode">
    <Label layoutX="432.0" layoutY="21.0" prefHeight="68.0" prefWidth="343.0" text="EDIT Discount Code" textFill="#cfb936" AnchorPane.leftAnchor="432.0" AnchorPane.rightAnchor="424.0" AnchorPane.topAnchor="21.0">
       <font>
          <Font size="40.0" />

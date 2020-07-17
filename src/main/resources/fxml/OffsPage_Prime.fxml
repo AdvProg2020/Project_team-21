@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUIControllers.OffsPagePrime"
+            fx:controller="Client.GUIControllers.OffsPagePrime"
             prefHeight="400.0" prefWidth="600.0"
             stylesheets="@/css/offsPageStyle.css">
 

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signInPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SignInPage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signInPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUIControllers.SignInPage">
 
     <AnchorPane maxWidth="Infinity" styleClass="navBarContainer" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 

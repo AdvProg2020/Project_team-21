@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signUpPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.SignUpPage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="wholePageContainer" stylesheets="@/css/signUpPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUIControllers.SignUpPage">
 
     <AnchorPane maxWidth="Infinity" styleClass="navBarContainer" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane styleClass="wholePageContainer" stylesheets="@/css/mainPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIControllers.MainPage">
+<AnchorPane styleClass="wholePageContainer" stylesheets="@/css/mainPageStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUIControllers.MainPage">
 
     <AnchorPane maxWidth="Infinity" styleClass="navBarContainer" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 

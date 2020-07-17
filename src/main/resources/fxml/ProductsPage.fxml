@@ -13,7 +13,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             prefHeight="400.0" prefWidth="600.0"
-            fx:controller="GUIControllers.ProductsPage"
+            fx:controller="Client.GUIControllers.ProductsPage"
             stylesheets="@/css/productsPageStyle.css">
 
 
@@ -350,7 +350,7 @@
 
 <!--                <Button-->
 <!--                        styleClass="navBarButtons"-->
-<!--                        text="Main Page">-->
+<!--                        text="Client.Main Page">-->
 
 <!--                </Button>-->
 
@@ -493,7 +493,7 @@
 <!--                    <HBox alignment="TOP_CENTER" styleClass="viewProductBtnBox">-->
 <!--                        <Button-->
 <!--                                onAction="#viewProductButton"-->
-<!--                                text="View Product"-->
+<!--                                text="Client.View Product"-->
 <!--                                styleClass="viewProductBtn"-->
 <!--                        >-->
 
@@ -524,7 +524,7 @@
 
 <!--                    <HBox alignment="TOP_CENTER" styleClass="viewProductBtnBox">-->
 <!--                        <Button-->
-<!--                                text="View Product"-->
+<!--                                text="Client.View Product"-->
 <!--                                styleClass="viewProductBtn"-->
 <!--                        >-->
 
@@ -556,7 +556,7 @@
 
 <!--                    <HBox alignment="TOP_CENTER" styleClass="viewProductBtnBox">-->
 <!--                        <Button-->
-<!--                                text="View Product"-->
+<!--                                text="Client.View Product"-->
 <!--                                styleClass="viewProductBtn"-->
 <!--                        >-->
 
@@ -587,7 +587,7 @@
 
 <!--                    <HBox alignment="TOP_CENTER" styleClass="viewProductBtnBox">-->
 <!--                        <Button-->
-<!--                                text="View Product"-->
+<!--                                text="Client.View Product"-->
 <!--                                styleClass="viewProductBtn"-->
 <!--                        >-->
 
@@ -619,7 +619,7 @@
 
 <!--                    <HBox alignment="TOP_CENTER" styleClass="viewProductBtnBox">-->
 <!--                        <Button-->
-<!--                                text="View Product"-->
+<!--                                text="Client.View Product"-->
 <!--                                styleClass="viewProductBtn"-->
 <!--                        >-->
 

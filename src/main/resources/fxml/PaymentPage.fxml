@@ -10,7 +10,7 @@
 <?import javafx.scene.image.Image?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="GUIControllers.PaymentPage"
+          fx:controller="Client.GUIControllers.PaymentPage"
           prefHeight="400.0" prefWidth="600.0"
           stylesheets="@/css/paymentPageStyle.css"
           alignment="CENTER">

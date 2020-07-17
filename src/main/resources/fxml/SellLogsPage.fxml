@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUIControllers.SellLogsPage"
+            fx:controller="Client.GUIControllers.SellLogsPage"
             prefHeight="400.0" prefWidth="600.0"
             stylesheets="@/css/buyLogsPageStyle.css"
             styleClass="wholePageContainer">
