@@ -20,6 +20,7 @@ public abstract class Account {
     private double credit;
     private String address = "--";
     private String imagePath;
+    private String bankAccountId;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         this.username = username;
@@ -30,6 +31,7 @@ public abstract class Account {
         this.password = password;
         this.credit = 0;
         imagePath = photo;
+        bankAccountId = "";
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
         SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
@@ -59,6 +61,14 @@ public abstract class Account {
         if(address == null)
             address = "No Address";
         this.address = address;
+    }
+
+    public String getBankAccountId() {
+        return bankAccountId;
+    }
+
+    public void setBankAccountId(String bankAccountId) {
+        this.bankAccountId = bankAccountId;
     }
 
     public void setImagePath(String imagePath) {
