@@ -32,7 +32,7 @@ public abstract class Account {
         imagePath = photo;
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
-        SaveData.saveData(this, (getUsername()+getPassword()), SaveData.accountFile);
+        SaveData.saveData(this, getUsername()+getPassword(), SaveData.accountFile);
     }
 
 //    public static void rewriteFiles(){

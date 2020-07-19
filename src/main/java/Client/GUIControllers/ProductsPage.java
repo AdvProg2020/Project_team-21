@@ -23,8 +23,10 @@ package Client.GUIControllers;//package Products;
 //    }
 //}
 
-import Server.Model.Category;
-import Server.Model.Product;
+import Client.ClientCenter;
+import Client.Model.Category;
+import Client.Model.Product;
+import Client.ServerRequest;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -37,8 +39,6 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import org.controlsfx.control.Rating;
 import javafx.beans.value.ChangeListener;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,7 +58,9 @@ public class ProductsPage extends GraphicFather implements Initializable {
     public GridPane filtersGridPane;
     public Slider slider;
     public Label sliderLabel;
-
+    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Image> productImages = new ArrayList<>();
+    HashMap<Category,String> categories = new HashMap<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,7 +68,34 @@ public class ProductsPage extends GraphicFather implements Initializable {
         topBarShowRest(profilePhoto,profileName,userPage);
         int i = 0;
         int j = 0;
-        for (Product product : Product.getAllProducts().values()) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETPRODUCTSPAGE);
+        try {
+            String dataInput = ClientCenter.getInstance().readMessageFromServer();
+            if(!dataInput.equalsIgnoreCase("NONE")){
+                String[] inputParsed = dataInput.split(" - ");
+                for (int k = 0; k < inputParsed.length; k++) {
+                    productImages.add(ClientCenter.getInstance().recieveImage());
+                }
+                for (int k = 0; k < inputParsed.length; k++) {
+                    String[] productData = inputParsed[k].split("&");
+                    products.add(new Product(productData[0],Double.parseDouble(productData[1]),Double.parseDouble(productData[3]),
+                            Double.parseDouble(productData[2]),productData[4],productData[5],productData[6],productImages.get(k),productData[7]));
+                }
+            }
+        } catch (IOException e) {
+        }
+
+
+//        for (Product product : Product.getAllProducts().values()) {
+//            if(i==4){
+//                i=0;
+//                j++;
+//            }
+//            ProductsCard card = new ProductsCard(product);
+//            productsGridPane.add(card, i, j);
+//            i++;
+//        }
+        for (Product product : products) {
             if(i==4){
                 i=0;
                 j++;
@@ -88,8 +117,19 @@ public class ProductsPage extends GraphicFather implements Initializable {
 //        filtersDropDown.setItems(FXCollections.observableArrayList(filterTypes));
 //        filtersDropDown.getSelectionModel().selectFirst();
 
+        for (Product product : products) {
+            if(!categories.containsValue(product.getCategoryName()))
+                categories.put(new Category(product.getCategoryName()),product.getCategoryName());
+        }
+
+//        int k = 0;
+//        for (Category category : Category.getAllCategories()) {
+//            FilterCards filterCard = new FilterCards(category, productsGridPane, filtersGridPane, sortsDropDown, filtersDropDown);
+//            filtersGridPane.add(filterCard, 1, k);
+//            k++;
+//        }
         int k = 0;
-        for (Category category : Category.getAllCategories()) {
+        for (Category category : categories.keySet()) {
             FilterCards filterCard = new FilterCards(category, productsGridPane, filtersGridPane, sortsDropDown, filtersDropDown);
             filtersGridPane.add(filterCard, 1, k);
             k++;
@@ -102,13 +142,17 @@ public class ProductsPage extends GraphicFather implements Initializable {
                     ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
                 sliderLabel.textProperty().setValue(String.valueOf(newValue.intValue()));
                 ArrayList<Product> prodArrayList = new ArrayList<>();
-                for (Product prod : Product.getAllProducts().values()) {
-                    if(prod.getPrice()<=newValue.intValue()){
-                        prodArrayList.add(prod);
+//                for (Product prod : Product.getAllProducts().values()) {
+//                    if(prod.getPrice()<=newValue.intValue()){
+//                        prodArrayList.add(prod);
+//                    }
+//                }
+                for (Product product : products) {
+                    if(product.getPrice()<=newValue.intValue()){
+                        prodArrayList.add(product);
                     }
                 }
                 update(prodArrayList);
-
             }
         });
     }
@@ -121,15 +165,18 @@ public class ProductsPage extends GraphicFather implements Initializable {
     public void sort(ActionEvent actionEvent) throws Exception {
         String sortType = getSortType();
         ArrayList<Product> productArrayList = new ArrayList<>();
+        HashMap<String,Product> productsHashMap = new HashMap<>();
+        for (Product product : products) {
+            productsHashMap.put(product.getName(),product);
+        }
+
         if(sortType.equalsIgnoreCase("By Name")){
-            productArrayList.addAll(ProductSort.sortProductHashMap(Product.getAllProducts()).values());
+            productArrayList.addAll(ProductSort.sortProductHashMap(productsHashMap).values());
         } else if(sortType.equalsIgnoreCase("By Price")){
             Product.sortType = 1;
-            ArrayList<Product> products = new ArrayList<>(Product.getAllProducts().values());
             productArrayList.addAll(ProductSort.sortProductByPrice(products));
         } else if(sortType.equalsIgnoreCase("By Score")){
             Product.sortType = 2;
-            ArrayList<Product> products = new ArrayList<>(Product.getAllProducts().values());
             productArrayList.addAll(ProductSort.sortProductByBuyersAverageScore(products));
         }
 
@@ -196,13 +243,11 @@ public class ProductsPage extends GraphicFather implements Initializable {
 
         private ProductsCard(Product product){
 
-            File file = new File(product.getImagePath());
-            Image cardImage = new Image(file.toURI().toString());
-            ImageView cardImageView = new ImageView(cardImage);
+            ImageView cardImageView = new ImageView(product.getImage());
 
             cardImageView.setFitHeight(140);
             cardImageView.setFitWidth(140);
-            cardImageView.setImage(cardImage);
+            cardImageView.setImage(product.getImage());
             this.getChildren().add(cardImageView);
 
             Label cardTitle = new Label();
@@ -211,7 +256,7 @@ public class ProductsPage extends GraphicFather implements Initializable {
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
 
             Label cardDescription = new Label();
-            cardDescription.setText((product.getName() + "\n" + "Company: " + product.getCompany().getName() + "\n" + "Category: " + product.getCategory().getName() + "\n" + "Original Price: " + product.getOrgPrice()));
+            cardDescription.setText((product.getName() + "\n" + "Company: " + product.getCompanyName() + "\n" + "Category: " + product.getCategoryName() + "\n" + "Original Price: " + product.getOrgPrice()));
             this.getChildren().add(cardDescription);
             cardDescription.getStyleClass().add("mainPageProductCardsDetail");
             cardDescription.setWrapText(true);
@@ -258,6 +303,7 @@ public class ProductsPage extends GraphicFather implements Initializable {
 
         public void viewProductButton(ActionEvent actionEvent, Product product) throws IOException {
             ProductPage.setProduct(product);
+            System.out.println("Going to product page");
             new GraphicFather().goToNextPage(Page.PRODUCTPAGE,actionEvent);
         }
     }
@@ -297,17 +343,17 @@ public class ProductsPage extends GraphicFather implements Initializable {
             checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    ArrayList<Product> products = new ArrayList<>();
+                    ArrayList<Product> newProducts = new ArrayList<>();
                     for (CheckBox box : categoriesArrayList.keySet()) {
                         if(box.isSelected()){
                             for (Product product : categoriesArrayList.get(box).getProductsList()) {
-                                if(!isThereProductAtArrayList(product, products)){
-                                    products.add(product);
+                                if(!isThereProductAtArrayList(product, newProducts)){
+                                    newProducts.add(product);
                                 }
                             }
                         }
                     }
-                    update(products);
+                    update(newProducts);
                 }
             });
         }

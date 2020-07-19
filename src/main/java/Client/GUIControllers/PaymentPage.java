@@ -1,12 +1,7 @@
 package Client.GUIControllers;
 
-import Server.Controller.Control;
-import Server.Controller.ControlCustomer;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Seller;
-import Server.Model.Category;
-import Server.Model.Product;
+import Client.ClientCenter;
+import Client.ServerRequest;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -67,24 +62,16 @@ public class PaymentPage extends GraphicFather implements Initializable {
     }
 
     public void pay(MouseEvent mouseEvent) {
-        Customer customer = (Customer) Control.getInstance().getUser();
 
-        try
-        {
-            String logID = ControlCustomer.getInstance().purchase(customer,receiverName.getText(),address.getText(),phone.getText(),postalCode.getText(),discountCode.getText());
-
-            Customer.rewriteFiles();
-            Account.rewriteFiles();
-            Product.rewriteFiles();
-            Seller.rewriteFiles();
-            Category.rewriteFiles();
-
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTPAYMENT,receiverName.getText() +"//" + address.getText() + "//" + phone.getText() + "//" +
+                postalCode.getText() + "//" + discountCode.getText());
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            String[] parsed = message.split(" - ");
             goToMain(mouseEvent);
-            showPopup(mouseEvent , "Your purchase has been finalized successfully with logID: " + logID + "/n your new balance is: " + customer.getBalance());
-        }
-        catch (Exception e)
-        {
-            showError(alertLabel,"Sorry your purchase didn't get complete with error: " + e.getMessage(),Error.NEGATIVE);
+            showPopup(mouseEvent , "Your purchase has been finalized successfully with logID: " + parsed[1] + "/n your new balance is: " + parsed[2]);
+        }else{
+            showError(alertLabel,"Sorry your purchase didn't get complete with error: " + ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
         }
     }
 }

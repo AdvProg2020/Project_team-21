@@ -1,17 +1,10 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Account.Seller;
-import Server.Model.Off;
-import Server.Model.Product;
-import Server.Model.Request.OffRequest;
-import Server.Model.Request.ProductRequest;
-import Server.Model.Request.Request;
-import Server.Model.Request.SellerRequest;
+import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,58 +25,22 @@ public class ViewRequest extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            String requestId = ControlManager.getInstance().getRequestToView();
-            Request request = Request.getAllRequests().get(requestId);
-            if(request instanceof SellerRequest)
-            {
-                info.setText("A seller with these infos is waiting for you!");
-                Seller seller = Request.getRequestedSellers().get(requestId);
-                field1.setText("Username");
-                field2.setText("Name");
-                field3.setText("Email");
-                field4.setText("Phone Number");
-                field5.setText("Company");
-                field6.setText("Password");
-                field1Info.setText(seller.getUsername());
-                field2Info.setText(seller.getFirstName() + " " + seller.getLastName());
-                field3Info.setText(seller.getEmail());
-                field4Info.setText(seller.getPhoneNumber());
-                field5Info.setText(seller.getCompany().getName());
-                field6Info.setText(seller.getPassword());
-            }
-            else if(request instanceof OffRequest)
-            {
-                info.setText("An Off with these infos is waiting for you!");
-                Off off = Request.getRequestedOffs().get(requestId);
-                field1.setText("Request Type");
-                field1Info.setText(request.getType() + " " + request.getRequestType());
-                field2.setText("OFF ID");
-                field2Info.setText(off.getOffId());
-                field3.setText("Start Time");
-                field3Info.setText(off.getStartTime().toString());
-                field4.setText("End Time");
-                field4Info.setText(off.getEndTime().toString());
-                field5.setText("Off percentage");
-                field5Info.setText(Double.toString(off.getOffAmount()));
-                field6.setText("");
-                field6Info.setText("");
-            }
-            else if(request instanceof ProductRequest)
-            {
-                info.setText("A Product with these infos is waiting for you!");
-                Product product = Request.getRequestedProducts().get(requestId);
-                field1.setText("Request Type" );
-                field1Info.setText(request.getType() + " " + request.getRequestType());
-                field2.setText("Name");
-                field2Info.setText(product.getName());
-                field3.setText("ID");
-                field3Info.setText(product.getProductId());
-                field4.setText("Company Name");
-                field4Info.setText(product.getCompany().getName());
-                field5.setText("Price");
-                field5Info.setText(Double.toString(product.getPrice()));
-                field6.setText("Category");
-                field6Info.setText(product.getCategory().getName());
-            }
+            String requestId = ClientCenter.getInstance().getRequestToView();
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETREQUESTINFOS,requestId);
+            String response = ClientCenter.getInstance().readMessageFromServer();
+            String[] parsedData = response.split(" - ");
+            info.setText(parsedData[0]);
+            field1.setText(parsedData[1]);
+            field2.setText(parsedData[2]);
+            field3.setText(parsedData[3]);
+            field4.setText(parsedData[4]);
+            field5.setText(parsedData[5]);
+            field6.setText(parsedData[6]);
+            field1Info.setText(parsedData[7]);
+            field2Info.setText(parsedData[8]);
+            field3Info.setText(parsedData[9]);
+            field4Info.setText(parsedData[10]);
+            field5Info.setText(parsedData[11]);
+            field6Info.setText(parsedData[12]);
     }
 }

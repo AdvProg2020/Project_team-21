@@ -5,7 +5,6 @@ import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
 import Server.Model.Log.BuyLog;
 import Server.Model.Log.SellLog;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;

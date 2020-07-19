@@ -1,19 +1,19 @@
 package Client.GUIControllers;
 
-import Server.Controller.Control;
-import Server.Model.Account.Customer;
-import Server.Model.Log.BuyLog;
-import Server.Model.Product;
+import Client.ClientCenter;
+import Client.Model.BuyLog;
+import Client.Model.Product;
+import Client.ServerRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,14 +27,43 @@ public class BuyLogsPage extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        topBarShowRest(profilePhoto,profileName,userPage);
-        Customer customer = (Customer) Control.getInstance().getUser();
-        int i=0;
-        for (BuyLog buyLog : customer.getBuyLogs()) {
-            LogCard logCart = new LogCard(buyLog);
-            logsGridPane.add(logCart, 0, i);
-            i++;
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETBUYLOGS);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        if(!response.equalsIgnoreCase("NONE")){
+            String[] allBuyLogs = response.split(" - ");
+
+            int i = 0;
+            for (String buyLog : allBuyLogs) {
+                String[] parsedData = buyLog.split("&");
+                BuyLog log = new BuyLog(parsedData[0],parsedData[1],parsedData[2],parsedData[3],parsedData[4],parsedData[5],parsedData[6]);
+                ClientCenter.getInstance().sendReqToServer(ServerRequest.GETBUYLOGPRODUCTS,parsedData[0]);
+                String message = ClientCenter.getInstance().readMessageFromServer();
+                if(!message.equalsIgnoreCase("NONE")){
+                    String[] allProducts = message.split(" - ");
+                    for (String product : allProducts){
+                        Image image = null;
+                        try {
+                            image = ClientCenter.getInstance().recieveImage();
+                        } catch (IOException e) {
+                        }
+                        String[] productData = product.split("&");
+                        log.addProduct(new Product(productData[0],Double.parseDouble(productData[1]),Double.parseDouble(productData[3]),
+                                Double.parseDouble(productData[2]),productData[4],productData[5],productData[6],image,productData[7]));
+                    }
+                }
+                LogCard logCart = new LogCard(log);
+                logsGridPane.add(logCart, 0, i);
+                i++;
+            }
         }
+        topBarShowRest(profilePhoto,profileName,userPage);
+//        Customer customer = (Customer) Control.getInstance().getUser();
+//        int i=0;
+//        for (BuyLog buyLog : customer.getBuyLogs()) {
+//            LogCard logCart = new LogCard(buyLog);
+//            logsGridPane.add(logCart, 0, i);
+//            i++;
+//        }
     }
 
     private static class LogCard extends GridPane {
@@ -64,7 +93,7 @@ public class BuyLogsPage extends GraphicFather implements Initializable {
             label2.getStyleClass().add("offLabels1");
             label2.setText("Total Discount Amount");
             Label label2_Prime = new Label();
-            label2_Prime.setText((int)buyLog.getTotalDiscountAmount() + "$");
+            label2_Prime.setText(buyLog.getTotalDiscountAmount() + "$");
             vBox2.getChildren().add(label2);
             vBox2.getChildren().add(label2_Prime);
             hBox.getChildren().add(vBox2);
@@ -118,7 +147,6 @@ public class BuyLogsPage extends GraphicFather implements Initializable {
 
             this.getStyleClass().add("offDetailsCard");
             this.getStyleClass().add("offBox");
-
         }
 
         public void viewProductButton(ActionEvent actionEvent, ArrayList<Product> productArrayList) throws IOException {

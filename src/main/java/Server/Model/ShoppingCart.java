@@ -1,8 +1,10 @@
 package Server.Model;
 
 import Server.Model.Account.Account;
+import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,7 +22,7 @@ public class ShoppingCart {
             setCustomer(customer);
         allShoppingCarts.add(this);
         cartID = id;
-//        SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
+        SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
     }
 
 //    public static void rewriteFiles(){
@@ -30,6 +32,11 @@ public class ShoppingCart {
 //            SaveData.saveData(cart, cart.getCustomer().getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
 //        }
 //    }
+    public static void rewriteFiles(){
+        for (ShoppingCart shoppingCart : ShoppingCart.getAllShoppingCarts()) {
+            SaveData.saveDataRunning(shoppingCart, shoppingCart.getCustomer().getUsername() + "ShoppingCart", SaveData.shoppingCartFile);
+        }
+    }
 
     public void setCustomer(Account customer){
         this.customer = customer.getUsername();
@@ -116,10 +123,11 @@ public class ShoppingCart {
     public static ArrayList<ShoppingCart> getAllShoppingCarts() {
         return allShoppingCarts;
     }
-    //    public static void getObjectFromDatabase(){
-//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
-//        for (Object object : objects) {
-//            allShoppingCarts.add((ShoppingCart)(object));
-//        }
-//    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
+        for (Object object : objects) {
+            allShoppingCarts.add((ShoppingCart)(object));
+        }
+    }
 }

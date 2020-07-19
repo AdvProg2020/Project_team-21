@@ -2,7 +2,7 @@ package Client;
 
 import Client.GUIControllers.GUICenter;
 import Client.GUIControllers.Page;
-import Server.Controller.ServerRequest;
+
 import Server.Model.*;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;

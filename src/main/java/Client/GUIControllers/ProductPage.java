@@ -1,9 +1,8 @@
 package Client.GUIControllers;
 
-import Server.Controller.Control;
-import Server.Model.*;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Seller;
+import Client.ClientCenter;
+import Client.Model.Product;
+import Client.ServerRequest;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -15,8 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.Rating;
-
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -50,8 +47,14 @@ public class ProductPage extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("in product page");
         rating.setDisable(true);
-        if(!(Control.getInstance().getUser() instanceof Customer)){
+        String message = "null";
+        if(!ClientCenter.getInstance().getActiveToken().equalsIgnoreCase("NULL")){
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETACCOUNTTYPE);
+            message = ClientCenter.getInstance().readMessageFromServer();
+        }
+        if(!(message.equalsIgnoreCase("Customer"))){
             increaseButton.setDisable(true);
             decreaseButton.setDisable(true);
             commentButton.setDisable(true);
@@ -62,16 +65,15 @@ public class ProductPage extends GraphicFather implements Initializable {
             radioButton5.setDisable(true);
             submitScore.setDisable(true);
         }else{
-            Customer customer = (Customer) Control.getInstance().getUser();
-            for (Score score : product.getScoresList()) {
-                if(score.getUser().equals(customer)){
-                    radioButton1.setDisable(true);
-                    radioButton2.setDisable(true);
-                    radioButton3.setDisable(true);
-                    radioButton4.setDisable(true);
-                    radioButton5.setDisable(true);
-                    submitScore.setDisable(true);
-                }
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETUSERHASSCORED,product.getProductId());
+            message = ClientCenter.getInstance().readMessageFromServer();
+            if(message.equalsIgnoreCase(ServerRequest.TRUE.toString())){
+                radioButton1.setDisable(true);
+                radioButton2.setDisable(true);
+                radioButton3.setDisable(true);
+                radioButton4.setDisable(true);
+                radioButton5.setDisable(true);
+                submitScore.setDisable(true);
             }
         }
         radioButton1.setToggleGroup(toggleGroup);
@@ -80,47 +82,63 @@ public class ProductPage extends GraphicFather implements Initializable {
         radioButton4.setToggleGroup(toggleGroup);
         radioButton5.setToggleGroup(toggleGroup);
 
-        File file = new File(product.getImagePath());
-        Image productImage = new Image(file.toURI().toString());
-        productPic.setImage(productImage);
+        productPic.setImage(product.getImage());
         productLabel.setText(product.getName());
 
-        String categoryName;
-        if (product.getCategory()==null){
-            categoryName = "NO CATEGORY IS AVAILABLE!";
-        } else {
-            categoryName = product.getCategory().getName();
-        }
+        String categoryName = product.getCategoryName();
 
         String offDetails;
-        if(product.getOff()==null){
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETPRODUCTOFF,product.getProductId());
+        message = ClientCenter.getInstance().readMessageFromServer();
+
+        if(message.equalsIgnoreCase(ServerRequest.NULL.toString())){
             offDetails = "NO OFF IS AVAILABLE!";
             productPrice.setText("Price: " + product.getPrice() + "$");
         } else {
-            offDetails = "Off: " + product.getOff().getOffId() + " With Amount of: " + product.getOff().getOffAmount() + "%";
+            String[] offData = message.split("&");
+            offDetails = "Off: " + offData[0] + " With Amount of: " + offData[1] + "%";
             productPrice.setText("Price: " + product.getPrice() + "$");
         }
-        productDescription.setText((product.getName() + "\n" + "Product Id: " + product.getProductId() + "\n" + "Company: " + product.getCompany().getName()
-                + " -At Location: " + product.getCompany().getLocation() + "\n" + "Category: " + categoryName + "\n" + "Original Price: " + product.getOrgPrice() + "$" +"\n"
+
+        productDescription.setText((product.getName() + "\n" + "Product Id: " + product.getProductId() + "\n" + "Company: " + product.getCompanyName()
+                + " -At Location: " + product.getCompanyAddress() + "\n" + "Category: " + categoryName + "\n" + "Original Price: " + product.getOrgPrice() + "$" +"\n"
                 + offDetails));
         productDescription.setWrapText(true);
 //        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
         rating.setRating(product.getBuyersAverageScore());
 
         VBox vBox = new VBox();
-        for (Review review : product.getReviewsList()) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETPRODUCTREVIEWS,product.getProductId());
+        message = ClientCenter.getInstance().readMessageFromServer();
+
+        String[] reviews = message.split(" - ");
+        for (String review : reviews) {
             Label comment = new Label();
-            comment.setText(review.getReviewText());
+            comment.setText(review);
             comment.setMinHeight(15);
             comment.getStyleClass().add("commentLabels");
             vBox.getChildren().add(comment);
         }
+//        for (Review review : product.getReviewsList()) {
+//            Label comment = new Label();
+//            comment.setText(review.getReviewText());
+//            comment.setMinHeight(15);
+//            comment.getStyleClass().add("commentLabels");
+//            vBox.getChildren().add(comment);
+//        }
         commentsGridPane.getChildren().add(vBox);
 
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETPRODUCTSELLERS,product.getProductId());
+        message = ClientCenter.getInstance().readMessageFromServer();
+
         ArrayList<String> sellerNames = new ArrayList<>();
-        for (Seller seller : product.getSellers()) {
-            sellerNames.add(seller.getUsername());
+        String[] sellers = message.split(" - ");
+        for (String sellerName : sellers) {
+            sellerNames.add(sellerName);
         }
+//        for (Seller seller : product.getSellers()) {
+//            sellerNames.add(seller.getUsername());
+//        }
         sellersDropDown.setItems(FXCollections.observableArrayList(sellerNames));
     }
 
@@ -143,10 +161,12 @@ public class ProductPage extends GraphicFather implements Initializable {
         } else if(radioButtonId.equalsIgnoreCase("radioButton5")){
             score = 5;
         }
-        Score scoore = new Score(Control.getInstance().getUser(),product,score);
-        product.addScore(scoore);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTSCORE,product.getProductId() + "&" + score);
 
-        showError(alertLabel,"Your score has been submitted." , Error.POSITIVE);
+        String message = null;
+        message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString()))
+            showError(alertLabel,"Your score has been submitted." , Error.POSITIVE);
         radioButton1.setDisable(true);
         radioButton2.setDisable(true);
         radioButton3.setDisable(true);
@@ -154,55 +174,50 @@ public class ProductPage extends GraphicFather implements Initializable {
         radioButton5.setDisable(true);
         submitScore.setDisable(true);
 //        averageScore.setText("Score: " + String.valueOf(product.getBuyersAverageScore()));
-        rating.setRating(product.getBuyersAverageScore());
-
-        Product.rewriteFiles();
-        Score.rewriteFiles();
-        Customer.rewriteFiles();
+        int newScore = Integer.parseInt(message.split("&")[1]);
+        rating.setRating(newScore);
+//        Product.rewriteFiles();
+//        Score.rewriteFiles();
+//        Customer.rewriteFiles();
     }
 
-    private Seller getSeller() throws Exception {
-        return Seller.getSellerWithUsername(String.valueOf(sellersDropDown.getSelectionModel().getSelectedItem()));
-    }
-
-    public void removeButton(ActionEvent actionEvent) {
-        Customer user = (Customer)Control.getInstance().getUser();
-        ShoppingCart cart = user.getShoppingCart();
-        if(cart.getProductsQuantity().containsKey(product)){
-            cart.decreaseQuantity(product);
-            showError(alertLabel,"Now you have " + cart.getProductsQuantity().get(product) + " of this product",Error.POSITIVE);
-        }
-        else{
-            showError(alertLabel,"You don't have this product.",Error.NEGATIVE);
-        }
+    private String getSeller(){
+        return String.valueOf(sellersDropDown.getSelectionModel().getSelectedItem());
     }
 
     public void addButton(ActionEvent actionEvent) {
-        Customer user = (Customer)Control.getInstance().getUser();
-        ShoppingCart cart = user.getShoppingCart();
-        if(!cart.getProductsQuantity().containsKey(product)){
-            try {
-                cart.addProduct(product,1,getSeller());
-                showError(alertLabel,"Product has added to your cart",Error.POSITIVE);
-            } catch (Exception e) {
-                showError(alertLabel,e.getMessage(),Error.NEGATIVE);
-            }
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEADDPRODUCTTOCART,product.getProductId()+"&"+ getSeller());
+        String message = null;
+        message = ClientCenter.getInstance().readMessageFromServer();
+
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            showError(alertLabel,message.split("&")[1],Error.POSITIVE);
         }
         else{
-            cart.increaseQuantity(product);
-            showError(alertLabel,"Now you have " + cart.getProductsQuantity().get(product) + " of this product.", Error.POSITIVE);
+            showError(alertLabel,message.split("&")[1],Error.NEGATIVE);
+        }
+    }
+
+    public void removeButton(ActionEvent actionEvent) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEREMOVEPRODUCTTOCART,product.getProductId());
+        String message;
+        message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            showError(alertLabel,message.split("&")[1],Error.POSITIVE);
+        }
+        else{
+            showError(alertLabel,message.split("&")[1],Error.NEGATIVE);
         }
     }
 
     public void addCommentButton(ActionEvent actionEvent) {
-        Customer user = (Customer)Control.getInstance().getUser();
-        product.addReview(new Review(user,product,addComment.getText(),user.hasBought(product)));
-        showError(alertLabel,"Your comment has been added.",Error.POSITIVE);
-        commentButton.setDisable(true);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTREVIEW,product.getProductId() + "//" + addComment.getText());
+        String message = null;
+        message = ClientCenter.getInstance().readMessageFromServer();
 
-        Product.rewriteFiles();
-        Review.rewriteFiles();
-        Customer.rewriteFiles();
+        if(message.equalsIgnoreCase(ServerRequest.DONE.toString()))
+            showError(alertLabel,"Your comment has been added.",Error.POSITIVE);
+        commentButton.setDisable(true);
     }
 
 
@@ -210,19 +225,6 @@ public class ProductPage extends GraphicFather implements Initializable {
     public void zoom(MouseEvent mouseEvent) {
         double x=mouseEvent.getX();
         double y=mouseEvent.getY();
-
-//        if(x < productPic.getTranslateX() + 25){
-//            x = (int)productPic.getTranslateX() + 25;
-//        }
-//        if(x > productPic.getTranslateX() + 210){
-//            x = (int)productPic.getTranslateX() + 210;
-//        }
-//        if(y <  productPic.getTranslateY() + 25){
-//            y = (int)productPic.getTranslateY() + 25;
-//        }
-//        if(y > productPic.getTranslateX() + 210){
-//            y = (int)productPic.getTranslateY() + 210;
-//        }
         Image image = productPic.getImage();
 
         ivTarget.setImage(image);

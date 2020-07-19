@@ -1,13 +1,10 @@
 package Client.GUIControllers.SellerAccount;
 
-import Server.Controller.Control;
-import Server.Controller.ControlSeller;
+import Client.ClientCenter;
 import Client.GUIControllers.*;
 import Client.GUIControllers.Error;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
-import Server.Model.Product;
-import Server.Model.Request.ProductRequest;
+import Client.Model.Product;
+import Client.ServerRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -16,9 +13,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Products extends GraphicFather implements Initializable {
@@ -29,11 +28,11 @@ public class Products extends GraphicFather implements Initializable {
     public TextField productToView;
     public Label alertLabel;
     public TextField productToAdd;
-    Seller seller = (Seller)Control.getInstance().getUser();
+    private ArrayList<Product> allProducts = new ArrayList<>();
 
     ObservableList<Product> getProducts(){
         ObservableList<Product> result =  FXCollections.observableArrayList();
-        result.addAll(seller.getAllProducts());
+        result.addAll(allProducts);
         return result;
     }
 
@@ -42,6 +41,24 @@ public class Products extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSELLERPRODUCTS);
+        try{
+            String response = ClientCenter.getInstance().readMessageFromServer();
+            if(!response.equalsIgnoreCase("NONE")){
+                ArrayList<Image> allImages = new ArrayList<>();
+                String[] allProductsString = response.split(" - ");
+                for (int i = 0; i < allProductsString.length; i++) {
+                    allImages.add(ClientCenter.getInstance().recieveImage());
+                }
+
+                for (int i = 0; i < allProductsString.length ; i++) {
+                    String[] productData = allProductsString[i].split("&");
+                    allProducts.add(new Product(productData[0],Double.parseDouble(productData[1]),Double.parseDouble(productData[3]),
+                            Double.parseDouble(productData[2]),productData[4],productData[5],productData[6],allImages.get(i),productData[7]));
+                }
+            }
+        }catch (IOException e){
+        }
         listProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         id.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -55,62 +72,71 @@ public class Products extends GraphicFather implements Initializable {
     }
 
     public void removeProduct(MouseEvent mouseEvent) {
-        try
-        {
-            String reqID = ControlSeller.getInstance().sendRemoveProductReq(productToRemove.getText());
-            showError(alertLabel,"Your request with ID " + reqID + " has been sent!",Error.POSITIVE);
-            Product.rewriteFiles();
-            ProductRequest.rewriteFiles();
-            Manager.rewriteFiles();
-        }
-        catch (Exception e)
-        {
-            showError(alertLabel,e.getMessage(),Error.NEGATIVE);
-        }
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTREMOVEPRODUCTREQ,productToRemove.getText());
+            String messageFromServer = ClientCenter.getInstance().readMessageFromServer();
+            if(messageFromServer.startsWith(ServerRequest.DONE.toString()))
+                showError(alertLabel,"Your request with ID " + ClientCenter.getInstance().getMessageFromError(messageFromServer) + " has been sent!",Error.POSITIVE);
+            else
+                showError(alertLabel,ClientCenter.getInstance().getMessageFromError(messageFromServer),Error.NEGATIVE);
     }
 
+    private boolean sellerGotProduct(String productId){
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSELLERGOTPRODUCT,productId);
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.TRUE.toString()))
+            return true;
+        return false;
+    }
+
+
     public void editProduct(MouseEvent mouseEvent) {
-        if(ControlSeller.getInstance().checkProductExists(productToEdit.getText())&&ControlSeller.getInstance().checkSellerGotProduct(productToEdit.getText(), seller)){
-            ControlSeller.getInstance().setProductToEdit(productToEdit.getText());
+        if(sellerGotProduct(productToEdit.getText())){
+            ClientCenter.getInstance().setProductToEdit(productToEdit.getText());
             goToNextPage(Page.EDITPRODUCT,mouseEvent);
-        }
-        else{
+        }else{
             showError(alertLabel,"You don't have this product!",Error.NEGATIVE);
         }
     }
 
     public void viewBuyers(MouseEvent mouseEvent) {
-        if(ControlSeller.getInstance().checkProductExists(productToBuyers.getText())&&ControlSeller.getInstance().checkSellerGotProduct(productToBuyers.getText(), seller)){
-            ControlSeller.getInstance().setProductViewBuyers(productToBuyers.getText());
+        if(sellerGotProduct(productToBuyers.getText())){
+            ClientCenter.getInstance().setProductToViewBuyers(productToBuyers.getText());
             goToNextPage(Page.VIEWBUYERSPRODUCT,mouseEvent);
-        }
-        else{
+        }else{
             showError(alertLabel,"You don't have this product!",Error.NEGATIVE);
         }
     }
 
     public void viewProduct(MouseEvent mouseEvent) {
-        if(ControlSeller.getInstance().checkProductExists(productToView.getText())&&ControlSeller.getInstance().checkSellerGotProduct(productToView.getText(), seller)){
-            ControlSeller.getInstance().setProductToView(productToView.getText());
-            ProductPage.setProduct(Product.getAllProducts().get(productToView.getText()));
+        if(sellerGotProduct(productToView.getText())){
+            ClientCenter.getInstance().setProductToView(productToView.getText());
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETPRODUCT,productToView.getText());
+            String response = ClientCenter.getInstance().readMessageFromServer();
+            Image productImage = null;
+            try {
+                productImage = ClientCenter.getInstance().recieveImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String[] productData = response.split("&");
+            Product product = new Product(productData[0],Double.parseDouble(productData[1]),Double.parseDouble(productData[3]),
+                    Double.parseDouble(productData[2]),productData[4],productData[5],productData[6],productImage,productData[7]);
+            ProductPage.setProduct(product);
             goToNextPage(Page.PRODUCTPAGE,mouseEvent);
-        }
-        else{
-            showError(alertLabel,"You don't have this product!", Error.NEGATIVE);
+        }else{
+            showError(alertLabel,"You don't have this product!",Error.NEGATIVE);
         }
     }
 
     public void addProductToList(MouseEvent mouseEvent) {
-        try
-        {
-            String reqID = ControlSeller.getInstance().sendAddSellerProductReq(productToAdd.getText());
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTADDPRODUCTTOSELLERLIST,productToAdd.getText());
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            String reqID = ClientCenter.getInstance().getMessageFromError(message);
             showError(alertLabel,"Your request with id " + reqID + " has been sent!",Error.POSITIVE);
-            ProductRequest.rewriteFiles();
-            Product.rewriteFiles();
-        }
-        catch (Exception e)
-        {
-            showError(alertLabel,e.getMessage(),Error.NEGATIVE);
+        }else{
+            String error = ClientCenter.getInstance().getMessageFromError(message);
+            showError(alertLabel,error,Error.NEGATIVE);
         }
     }
 

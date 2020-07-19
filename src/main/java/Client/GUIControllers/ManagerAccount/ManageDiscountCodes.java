@@ -1,19 +1,19 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-import Server.Model.Account.Customer;
-import Server.Model.DiscountCode;
+import Client.Model.DiscountCode;
+import Client.ServerRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManageDiscountCodes extends GraphicFather implements Initializable {
@@ -24,39 +24,54 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
     public TextField codeToEdit;
     public TextField codeToRemove;
     public TextField codeToView;
+    private ArrayList<DiscountCode> allDiscountCodes = new ArrayList<>();
 
     ObservableList<DiscountCode> getDiscountCode(){
         ObservableList<DiscountCode> result =  FXCollections.observableArrayList();
-        for (String s : DiscountCode.getAllDiscountCodes().keySet()) {
-            result.add(DiscountCode.getAllDiscountCodes().get(s));
-        }
+        result.addAll(allDiscountCodes);
         return result;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLDISCOUNTCODES);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        if(!response.equalsIgnoreCase("NONE")){
+            String[] allDiscountCodesString = response.split(" - ");
+            for (String s : allDiscountCodesString){
+                String[] parsed = s.split("&");
+                allDiscountCodes.add(new DiscountCode(parsed[0],parsed[1],parsed[2],parsed[3]));
+            }
+        }
         listDiscountCodes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         id.setCellValueFactory(new PropertyValueFactory<>("discountId"));
         listDiscountCodes.setItems(getDiscountCode());
         listDiscountCodes.getColumns().add(id);
     }
+    private boolean checkDiscountCodeExist(String id){
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETDISCOUNTCODEEXISTS,id);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        if(response.startsWith(ServerRequest.TRUE.toString()))
+            return true;
+        return false;
+    }
 
     public void viewDiscountCode(MouseEvent mouseEvent) {
-        if(!DiscountCode.getAllDiscountCodes().containsKey(codeToView.getText()))
-            showError(alertLabel,"This code doesn't exist!", Error.NEGATIVE);
-        else{
-            ControlManager.getInstance().setDiscountCodeToView(codeToView.getText());
+        if(checkDiscountCodeExist(codeToView.getText())){
+            ClientCenter.getInstance().setDiscountCodeToView(codeToView.getText());
             goToNextPage(Page.VIEWDISCOUNTCODE,mouseEvent);
+        }else{
+            showError(alertLabel,"This code doesn't exist!", Error.NEGATIVE);
         }
     }
 
     public void RemoveDiscountCode(MouseEvent mouseEvent) {
-        try {
-            ControlManager.getInstance().removeDiscountCode(codeToRemove.getText());
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTREMOVEDISCOUNTCODE,codeToRemove.getText());
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
             showError(alertLabel,"Code " + codeToRemove.getText()+" has been successfully deleted!",Error.POSITIVE);
-            Customer.rewriteFiles();
-        } catch (Exception e) {
-            showError(alertLabel,e.getMessage(),Error.NEGATIVE);
+        }else{
+            showError(alertLabel,ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
         }
     }
 
@@ -65,8 +80,8 @@ public class ManageDiscountCodes extends GraphicFather implements Initializable 
     }
 
     public void EditDiscountCode(MouseEvent mouseEvent) {
-        if(DiscountCode.getAllDiscountCodes().containsKey(codeToEdit.getText())){
-            ControlManager.getInstance().setDiscountCodeToEdit(codeToEdit.getText());
+        if(checkDiscountCodeExist(codeToEdit.getText())){
+            ClientCenter.getInstance().setDiscountCodeToEdit(codeToEdit.getText());
             goToNextPage(Page.EDITDISCOUNTCODE,mouseEvent);
         }else{
             showError(alertLabel,"This code doesn't exist!",Error.NEGATIVE);

@@ -1,7 +1,7 @@
 package Client.GUIControllers;
 
-import Server.Controller.Control;
-import Server.Model.Account.Account;
+import Client.ClientCenter;
+import Client.ServerRequest;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -24,7 +24,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -46,7 +45,7 @@ public class MakeManagerFirst extends GraphicFather {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner((Stage)((Node)event.getSource()).getScene().getWindow());
         VBox dialogVbox = new VBox(20);
-        Text txt = new Text("Wellcome " + Account.getAllAccounts().get(username.getText()).getFirstName() + " \\\\(•◡•)//");
+        Text txt = new Text("Wellcome " + firstName.getText() + " \\\\(•◡•)//");
         txt.setFill(Paint.valueOf("069438"));
         Font font = new Font("Hiragino Sans W3" , 20);
         txt.setFont(font);
@@ -59,13 +58,13 @@ public class MakeManagerFirst extends GraphicFather {
         dialog.show();
     }
 
-    private void putImage(File sourceFile,String username){
+    private void sendImage(File sourceFile){
         File copyToTemp = new File("temp");
-        File finalCopy = new File("profilePhotos/" + username +"."+ getFileExt(sourceFile));
         try {
             FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
-            File copied = new File(copyToTemp + "/" +sourceFile.getName());
-            copied.renameTo(finalCopy);
+            ClientCenter.getInstance().sendImage(copyToTemp + "/" +sourceFile.getName());
+            File file = new File(copyToTemp + "/" +sourceFile.getName());
+            file.delete();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,19 +84,26 @@ public class MakeManagerFirst extends GraphicFather {
     }
 
     public void submit(MouseEvent mouseEvent) {
-        try{
-            String imagePath = "profilePhotos/account_icon.png" ;
-            if(imageFile !=null)
-                imagePath = "profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
-            Control.getInstance().createAccount("Manager",username.getText(),password.getText(),firstName.getText(),lastName.getText(),
-                    email.getText(),phoneNumber.getText(),confirmPassword.getText(),null,true,imagePath);
-            if(imageFile != null)
-                putImage(imageFile, username.getText());
+
+        if(imageFile == null){
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTMAKEMANAGERFIRST,username.getText() + "//"
+                    +password.getText() + "//" + firstName.getText() + "//" + lastName.getText() + "//" + email.getText()+"//"+phoneNumber.getText()+"//"+
+                    confirmPassword.getText() +"//"+"NULL");
+        }
+        else{
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTMAKEMANAGERFIRST,username.getText() + "//"
+                    +password.getText() + "//" + firstName.getText() + "//" + lastName.getText() + "//" + email.getText()+"//"+phoneNumber.getText()+"//"+
+                    confirmPassword.getText() + "//" + getFileExt(imageFile));
+            sendImage(imageFile);
+        }
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            ClientCenter.getInstance().setActiveToken(ClientCenter.getInstance().getMessageFromError(message));
             goToNextPage(Page.MAIN,mouseEvent);
             showPopupLogin(mouseEvent);
-        }catch (Exception e){
-            showError(alertLabel, e.getMessage(), Error.NEGATIVE);
         }
+        else
+            showError(alertLabel, ClientCenter.getInstance().getMessageFromError(message), Error.NEGATIVE);
     }
 
     public void uploadPhotoButton(ActionEvent actionEvent) {

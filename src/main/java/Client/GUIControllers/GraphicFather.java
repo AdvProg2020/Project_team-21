@@ -6,7 +6,7 @@ package Client.GUIControllers;
 //import Server.Model.Account.Manager;
 //import Server.Model.Account.Seller;
 import Client.ClientCenter;
-import Server.Controller.ServerRequest;
+import Client.ServerRequest;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.scene.Node;
@@ -193,12 +193,8 @@ public class GraphicFather {
         {
             ClientCenter.getInstance().sendReqToServer(ServerRequest.GETNAME);
             String name = "";
-            try {
 //                name = ClientCenter.getInstance().getDataInputStream().readUTF();
-                name = ClientCenter.getInstance().readMessageFromServer();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            name = ClientCenter.getInstance().readMessageFromServer();
             signinButton.setText("");
             signinButton.setDisable(true);
             signupButton.setText("View Your Account");
@@ -215,10 +211,7 @@ public class GraphicFather {
         {
             ClientCenter.getInstance().sendReqToServer(ServerRequest.GETNAME);
             String name = "";
-            try {
-                name = ClientCenter.getInstance().readMessageFromServer();
-            } catch (IOException e) {
-            }
+            name = ClientCenter.getInstance().readMessageFromServer();
             accountName.setText(name);
             showImageUser(profilePhoto);
             userPage.setText("User Page");

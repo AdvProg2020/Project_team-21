@@ -1,6 +1,6 @@
 package Client.GUIControllers;
 
-import Server.Model.Product;
+import Client.Model.Product;
 
 import java.util.*;
 

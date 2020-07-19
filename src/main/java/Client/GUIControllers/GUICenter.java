@@ -1,6 +1,5 @@
 package Client.GUIControllers;
 
-import Server.Model.Account.Seller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,9 +20,8 @@ public class GUICenter {
     private double musicVolume = 0.7;
     private MediaPlayer mediaPlayer;
     private String currentToken;
-
     private Page landing;
-    private Seller sellerToAddCompany;
+
     private GUICenter()
     {
         seenPages = new ArrayList<>();
@@ -50,14 +48,6 @@ public class GUICenter {
 
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
-    }
-
-    public Seller getSellerToAddCompany() {
-        return sellerToAddCompany;
-    }
-
-    public void setSellerToAddCompany(Seller sellerToAddCompany) {
-        this.sellerToAddCompany = sellerToAddCompany;
     }
 
     public void setLanding(Page landing) {
@@ -204,9 +194,6 @@ public class GUICenter {
         else if(page.equals(Page.MONEYPAGE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/MoneyPage.fxml"));
         }
-        else if(page.equals(Page.SALESHISTORY)){
-            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/SalesHistory.fxml"));
-        }
         else if(page.equals(Page.SELLEROFFS)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/OFFs.fxml"));
         }
@@ -219,17 +206,11 @@ public class GUICenter {
         else if(page.equals(Page.EDITFIELDSELLER)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditFieldSeller.fxml"));
         }
-        else if(page.equals(Page.VIEWOFF)){
-            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/ViewOFF.fxml"));
-        }
         else if(page.equals(Page.EDITOFF)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/EditOFF.fxml"));
         }
         else if(page.equals(Page.CREATEOFF)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateOFF.fxml"));
-        }
-        else if(page.equals(Page.VIEWPRODUCT)){
-            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/ViewProduct.fxml"));
         }
         else if(page.equals(Page.VIEWBUYERSPRODUCT)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/ViewBuyersProduct.fxml"));

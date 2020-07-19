@@ -1,12 +1,9 @@
 package Client.GUIControllers.SellerAccount;
 
-import Server.Controller.ControlSeller;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
-import Server.Model.Product;
-import Server.Model.Request.ProductRequest;
+import Client.ServerRequest;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -22,34 +19,32 @@ public class EditProduct extends GraphicFather {
     private ArrayList<String> errors = new ArrayList<>();
 
     public void makeChange(MouseEvent mouseEvent) {
-        String productID = ControlSeller.getInstance().getProductToEdit();
+        String productID = ClientCenter.getInstance().getProductToEdit();
         ArrayList<String> reqIDs = new ArrayList<>();
         if(!name.getText().isEmpty()){
-            try
-            {
-                String reqID = ControlSeller.getInstance().sendProductEditReq(productID,"name",name.getText());
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTEDITPRODUCTREQ,productID + "//name//" + name.getText());
+            String message = ClientCenter.getInstance().readMessageFromServer();
+            if(message.startsWith(ServerRequest.DONE.toString())){
+                String reqID = ClientCenter.getInstance().getMessageFromError(message);
                 System.out.println("edit name sent");
                 reqIDs.add(reqID);
                 oks.add("Name");
-            }
-            catch (Exception e)
-            {
+            }else{
                 System.out.println("name rid");
-               errors.add("Name: " + e.getMessage());
+                errors.add("Name: " + ClientCenter.getInstance().getMessageFromError(message));
             }
         }
         if(!price.getText().isEmpty()){
-            try
-            {
-                String reqID = ControlSeller.getInstance().sendProductEditReq(productID,"price",price.getText());
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTEDITPRODUCTREQ,productID + "//price//" + price.getText());
+            String message = ClientCenter.getInstance().readMessageFromServer();
+            if(message.startsWith(ServerRequest.DONE.toString())){
+                String reqID = ClientCenter.getInstance().getMessageFromError(message);
                 System.out.println("edit price sent");
                 reqIDs.add(reqID);
                 oks.add("Price");
-            }
-            catch (Exception e)
-            {
-                System.out.println("price ride");
-                errors.add("Price: " + e.getMessage());
+            }else{
+                System.out.println("price rid");
+                errors.add("Price: " + ClientCenter.getInstance().getMessageFromError(message));
             }
         }
         String ok="";
@@ -65,10 +60,6 @@ public class EditProduct extends GraphicFather {
         for (String reqID : reqIDs) {
             okLabel.setText(okLabel.getText() + "\n" + reqID);
         }
-        Product.rewriteFiles();
-        ProductRequest.rewriteFiles();
-        Manager.rewriteFiles();
-        Seller.rewriteFiles();
     }
 
 }

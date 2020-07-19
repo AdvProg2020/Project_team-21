@@ -150,7 +150,6 @@
             <ComboBox fx:id="type" promptText="Account Type">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Manager" />
                         <String fx:value="Seller" />
                         <String fx:value="Customer" />
                     </FXCollections>

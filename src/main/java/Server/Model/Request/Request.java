@@ -13,6 +13,7 @@ public abstract class Request {
     protected static HashMap<String, Seller> requestedSellers = new HashMap<>();
     private RequestType requestType;
     private String requestId;
+    private String providerUsername;
     public Request(RequestType requestType)
     {
         this.requestType = requestType;
@@ -70,6 +71,14 @@ public abstract class Request {
 
     public static void setRequestedProducts(HashMap<String, Product> requestedProducts) {
         Request.requestedProducts = requestedProducts;
+    }
+
+    public void setProviderUsername(String providerUsername) {
+        this.providerUsername = providerUsername;
+    }
+
+    public String getProviderUsername() {
+        return providerUsername;
     }
 
     public static void setRequestedSellers(HashMap<String, Seller> requestedSellers) {

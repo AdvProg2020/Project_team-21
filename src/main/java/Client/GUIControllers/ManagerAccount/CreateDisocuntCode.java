@@ -1,18 +1,12 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.Control;
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Product;
+import Client.ServerRequest;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CreateDisocuntCode extends GraphicFather{
     public TextField startDate;
@@ -24,34 +18,23 @@ public class CreateDisocuntCode extends GraphicFather{
     public TextField usersToAdd;
 
     public void done(MouseEvent mouseEvent) {
-        String discountCode = Control.getInstance().randomString(10);
-        ArrayList<String> usersNotExist = new ArrayList<>();
-        ArrayList<String> usersNotCustomer = new ArrayList<>();
-        HashMap<String,Customer> codeOwners = new HashMap<>();
-        String[] userInputUsers = usersToAdd.getText().split(",");
-        for (String owner : userInputUsers){
-            owner = owner.trim();
-            if(!Account.getAllAccounts().containsKey(owner)){
-                usersNotExist.add(owner);
-                continue;
+        if(startDate.getText().isEmpty() || endDate.getText().isEmpty()||percentage.getText().isEmpty()||maxAmount.getText().isEmpty()||maxPercentage.getText().isEmpty()){
+            showError(alertLabel,"You should fill all necessary fields",Error.NEGATIVE);
+        }else{
+            String users = usersToAdd.getText();
+            if (usersToAdd.getText().isEmpty())
+                users = "NULL";
+            String output = startDate.getText() + "&" + endDate.getText() + "&" + percentage.getText() +"&" + maxPercentage.getText() + "&" + maxAmount.getText() + "//" +
+                    users;
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTCREATEDISCOUNTCODE,output);
+            String message = ClientCenter.getInstance().readMessageFromServer();
+            if(message.startsWith(ServerRequest.ERROR.toString())){
+                showError(alertLabel,ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
+            }else{
+                String[] parsed = message.split(" - ");
+                showError(alertLabel,"New Discount Code with id " + parsed[1] + " has been successfully been made.\nUsers not detected: " + parsed[2]+"\nUsers not customer " + parsed[3]
+                        , Error.POSITIVE);
             }
-            if(!(Account.getAllAccounts().get(owner) instanceof Customer))
-            {
-                usersNotCustomer.add(owner);
-                continue;
-            }
-            codeOwners.put(owner,(Customer) Account.getAllAccounts().get(owner));
-        }
-        try {
-            ControlManager.getInstance().createDiscountCode(discountCode,startDate.getText(),endDate.getText()
-            ,percentage.getText(),maxPercentage.getText(),maxAmount.getText(),codeOwners);
-            showError(alertLabel,"New Discount Code with id " + discountCode + " has been successfully been made.\nUsers not detected: " + usersNotExist+"\nUsers not customer " + usersNotCustomer
-                    , Error.POSITIVE);
-
-            Customer.rewriteFiles();
-            Product.rewriteFiles();
-        } catch (Exception e) {
-            showError(alertLabel,e.getMessage(),Error.NEGATIVE);
         }
     }
 }

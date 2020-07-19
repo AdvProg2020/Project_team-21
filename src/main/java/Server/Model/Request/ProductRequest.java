@@ -11,7 +11,7 @@ public class ProductRequest extends Request {
     private String editField;
     private String newValueEdit;
     private String seller;
-    private String providerUsername;
+
     public ProductRequest(String requestId, String productId, String name, Company company, double price, Category category, Seller provider, RequestType requestType, Seller seller, Product product,String imagePath)
     {
         super(requestType);
@@ -21,7 +21,8 @@ public class ProductRequest extends Request {
         requestedProducts.put(requestId,product);
         Request.addRequest(requestId,this);
         this.provider = provider.getUsername();
-        providerUsername = provider.getUsername();
+
+        setProviderUsername(provider.getUsername());
         setRequestId(requestId);
         SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
         SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
@@ -40,10 +41,6 @@ public class ProductRequest extends Request {
             Product product = requestedProducts.get(s);
             SaveData.saveDataRunning(product, s+product.getProductId(), SaveData.productRequestFile);
         }
-    }
-
-    public String getProviderUsername() {
-        return providerUsername;
     }
 
     public void setEditField(String editField) {

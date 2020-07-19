@@ -1,9 +1,9 @@
 package Client.GUIControllers.SellerAccount;
 
-import Server.Controller.Control;
-import Server.Controller.ControlSeller;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
+import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -15,7 +15,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -39,28 +38,30 @@ public class CreateProduct extends GraphicFather implements Initializable {
     }
 
     public void done(MouseEvent mouseEvent) {
-        String productID = Control.getInstance().randomString(10);
-        try{
-            String imagePath = "productPhotos/product.png" ;
-            if(imageFile !=null)
-                imagePath = "productPhotos/" + productID +"."+ getFileExt(imageFile);
-            String reqID = ControlSeller.getInstance().sendAddProductReq(name.getText(),companyName.getText(),category.getText(),price.getText(),companyLocation.getText(),productID,imagePath);
-            showError(alertLabel,"Your request with id " + reqID + " has been sent!",Error.POSITIVE);
-            if(imageFile != null)
-                putImage(imageFile, productID);
-        }catch (Exception e){
-            showError(alertLabel, e.getMessage(), Error.NEGATIVE);
-        }
+        if(imageFile !=null)
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTCREATEPRODUCTREQ,name.getText() + "//" + companyName.getText()+"//" +category.getText()+"//" +
+                price.getText()+"//" +companyLocation.getText() +"//" + getFileExt(imageFile));
+        else
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTCREATEPRODUCTREQ,name.getText() + "//" + companyName.getText()+"//" +category.getText()+"//" +
+                    price.getText()+"//" +companyLocation.getText() +"//" + "NULL");
 
+        if(imageFile != null)
+            sendImage(imageFile);
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            showError(alertLabel,"Your request with id " + ClientCenter.getInstance().getMessageFromError(message) + " has been sent!",Error.POSITIVE);
+        }else{
+            showError(alertLabel, ClientCenter.getInstance().getMessageFromError(message), Error.NEGATIVE);
+        }
     }
 
-    private void putImage(File sourceFile,String id){
+    private void sendImage(File sourceFile){
         File copyToTemp = new File("temp");
-        File finalCopy = new File("productPhotos/" + id +"."+ getFileExt(sourceFile));
         try {
             FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
-            File copied = new File(copyToTemp + "/" +sourceFile.getName());
-            copied.renameTo(finalCopy);
+            ClientCenter.getInstance().sendImage(copyToTemp + "/" +sourceFile.getName());
+            File file = new File(copyToTemp + "/" +sourceFile.getName());
+            file.delete();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,7 +10,9 @@ import Server.Model.DisAndOffStatus;
 import Server.Model.Off;
 import Server.Model.Filters.*;
 import Server.Model.Sorts.ProductsSort;
+import Server.ServerCenter;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -21,20 +23,20 @@ public class Control {
     public static String currentProductSort = "";
     public static String currentUserSort = "";
     public static String currentRequestSort = "";
-    Account user = null;
-    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
+//    Account user = null;
+//    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
 
     private Control() {
     }
 
-    public ShoppingCart getSignOutCart() {
-        return signOutCart;
-    }
-
-    public void setSignOutCart(ShoppingCart signOutCart) {
-        this.signOutCart = signOutCart;
-    }
+//    public ShoppingCart getSignOutCart() {
+//        return signOutCart;
+//    }
+//
+//    public void setSignOutCart(ShoppingCart signOutCart) {
+//        this.signOutCart = signOutCart;
+//    }
 
     public String randomString(int n) {
 
@@ -76,15 +78,15 @@ public class Control {
         return instance;
     }
 
-    public Account getUser() {
-        if (user == null)
-            return null;
-        return user;
-    }
-
-    public void setUser(Account user) {
-        this.user = user;
-    }
+//    public Account getUser() {
+//        if (user == null)
+//            return null;
+//        return user;
+//    }
+//
+//    public void setUser(Account user) {
+//        this.user = user;
+//    }
 
     public void showPopularProducts()
     {
@@ -100,25 +102,29 @@ public class Control {
         } else if (!(Account.getAllAccounts().get(userName).getPassword().equals(password))) {
             throw new notFoundUserOrPass("password doesn't match!");
         }
-        Account account = Account.getAllAccounts().get(userName);
-        setUser(account);
-        if(account instanceof Customer)
-        {
-            signOutCart.setCustomer(account);
-            ((Customer) account).setShoppingCart(signOutCart);
-        }
+//        Account account = Account.getAllAccounts().get(userName);
+//        setUser(account);
+//
+//        if(account instanceof Customer)
+//        {
+//            signOutCart.setCustomer(account);
+//            ((Customer) account).setShoppingCart(signOutCart);
+//        }
     }
 
-    public void createAccount(String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login, String photo) throws Exception {
+    public void createAccount(String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login, String photo,String token) throws Exception {
         //5 errors
+        if(!token.equalsIgnoreCase("NULL")){
+//            Account user = ServerCenter.getInstance().getAccountFromToken(token);
+            if (checkIfCustomer(token)) {
+                throw new Exception("You are a customer and can't make a new user");
+            }
+//            if (!(user instanceof Manager) && type.equalsIgnoreCase("manager") && !Manager.getAllManagers().isEmpty()) {
+//                throw new Exception("You should be a manager to create a manager account");
+//            }
+        }
         if (!verifyPassword.equals(password)) {
             throw new Exception("Your password doesn't match");
-        }
-        if (checkIfCustomer()) {
-            throw new Exception("You are a customer and can't make a new user");
-        }
-        if (!(user instanceof Manager) && type.equalsIgnoreCase("manager") && !Manager.getAllManagers().isEmpty()) {
-            throw new Exception("You should be a manager to create a manager account");
         }
         if (!(type.matches("(?i)customer|manager|seller"))) {
             throw new Exception("There is no type of account like that!");
@@ -141,21 +147,26 @@ public class Control {
             login(username, password);
     }
 
-    public boolean checkIfCustomer() {
-        if (Control.getInstance().getUser() != null && Control.getInstance().getUser() instanceof Customer) {
-            return true;
+    public boolean checkIfCustomer(String token) {
+        if(!token.equalsIgnoreCase("NULL")){
+            Account user = ServerCenter.getInstance().getAccountFromToken(token);
+            if (user instanceof Customer) {
+                return true;
+            }
         }
         return false;
     }
 
-    public void deleteUser(String username) throws Exception {
+    public void deleteUser(String username,String token) throws Exception {
+        Account user = ServerCenter.getInstance().getAccountFromToken(token);
         if (!Account.getAllAccounts().keySet().contains(username)) {
             throw new Exception("This username doesn't exist!");
         }
         if (Account.getAllAccounts().get(username).equals(user)) {
             throw new Exception("you can't delete yourself!");
         }
-        if (Account.getAllAccounts().get(username) instanceof Manager) {
+        Account account = Account.getAllAccounts().get(username);
+        if (account instanceof Manager) {
             Manager.removeManager((Manager) Account.getAllAccounts().get(username));
         } else if (Account.getAllAccounts().get(username) instanceof Seller) {
             Seller.removeSeller((Seller) Account.getAllAccounts().get(username));
@@ -163,6 +174,8 @@ public class Control {
             Customer.removeCustomer((Customer) Account.getAllAccounts().get(username));
         }
         Account.getAllAccounts().remove(username);
+        File file = new File(username+account.getPassword() +".json");
+        file.delete();
     }
     public boolean timeCorrectMatch(String time)
     {
@@ -195,13 +208,9 @@ public class Control {
 
     }
 
-    public void logout() {
-        setUser(null);
-    }
-
     public class notFoundUserOrPass extends Exception {
         notFoundUserOrPass(String message) {
-            super(message + "\ntry again");
+            super(message);
         }
     }
 
@@ -417,40 +426,40 @@ public class Control {
             return "No products with off to show";
         return offProducts;
     }
-    public void addToCart(Product product,String sellerUsername, String quantity) throws Exception
-    {
-        boolean sellerExists = false;
-        Seller seller = null;
-        for (Seller seller1 : Seller.getAllSeller())
-        {
-            if(seller1.getUsername().equals(sellerUsername))
-            {
-                sellerExists = true;
-                seller = seller1;
-                break;
-            }
-        }
-        if(!sellerExists)
-        {
-            throw new Exception("This seller does not exist!");
-        }
-        if(!quantity.matches("\\d+"))
-        {
-            throw new Exception("Your quantity format is wrong!");
-        }
-        if(user == null)
-        {
-            signOutCart.addProduct(product,Integer.parseInt(quantity),seller);
-        }
-        else if(!(user instanceof Customer))
-        {
-            throw new Exception("You should be a customer to buy stuff.");
-        }
-        else
-        {
-            ((Customer)user).getShoppingCart().addProduct(product,Integer.parseInt(quantity),seller);
-        }
-    }
+//    public void addToCart(Product product,String sellerUsername, String quantity) throws Exception
+//    {
+//        boolean sellerExists = false;
+//        Seller seller = null;
+//        for (Seller seller1 : Seller.getAllSeller())
+//        {
+//            if(seller1.getUsername().equals(sellerUsername))
+//            {
+//                sellerExists = true;
+//                seller = seller1;
+//                break;
+//            }
+//        }
+//        if(!sellerExists)
+//        {
+//            throw new Exception("This seller does not exist!");
+//        }
+//        if(!quantity.matches("\\d+"))
+//        {
+//            throw new Exception("Your quantity format is wrong!");
+//        }
+//        if(user == null)
+//        {
+//            signOutCart.addProduct(product,Integer.parseInt(quantity),seller);
+//        }
+//        else if(!(user instanceof Customer))
+//        {
+//            throw new Exception("You should be a customer to buy stuff.");
+//        }
+//        else
+//        {
+//            ((Customer)user).getShoppingCart().addProduct(product,Integer.parseInt(quantity),seller);
+//        }
+//    }
 
     public String showAllProducts(){
         String allProducts="";

@@ -1,9 +1,9 @@
 package Client.GUIControllers.SellerAccount;
 
-import Server.Controller.Control;
+import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-import Server.Model.Account.Seller;
+import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,26 +31,41 @@ public class SellerAccount extends GraphicFather implements Initializable {
     public Button viewPassButton;
     public ImageView viewPassImage;
     private boolean showPass;
+    String username;
+    String name;
+    String password;
+    String email;
+    String address;
+    String phoneNumber;
+    String companyNameString;
+    String companyAddressString;
+    String credit;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showPass = false;
-        Seller seller = (Seller) Control.getInstance().getUser();
-        Username.setText(seller.getUsername());
-        Name.setText(seller.getFirstName() + " " + seller.getLastName());
-        Address.setText(seller.getAddress());
-        Phone.setText(seller.getPhoneNumber());
-        Email.setText(seller.getEmail());
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSELLERINFO);
+        String input = ClientCenter.getInstance().readMessageFromServer();
+        String[] parsedInput = input.split(" - ");
+        username = parsedInput[0];
+        name = parsedInput[1] + " " + parsedInput[2];
+        email = parsedInput[3];
+        address = parsedInput[4];
+        phoneNumber = parsedInput[5];
+        password = parsedInput[6];
+        companyNameString = parsedInput[7];
+        companyAddressString = parsedInput[8];
+        credit = parsedInput[9];
+
+        Username.setText(username);
+        Name.setText(name);
+        Address.setText(address);
+        Phone.setText(phoneNumber);
+        Email.setText(email);
         Password.setText("*****");
-        if(seller.getCompany() != null){
-            companyAddress.setText(seller.getCompany().getLocation());
-            companyName.setText(seller.getCompany().getName());
-        }
-        else{
-            companyName.setText("----");
-            companyAddress.setText("----");
-        }
-        balance.setText(Double.toString(seller.getCredit()));
+        companyAddress.setText(companyAddressString);
+        companyName.setText(companyNameString);
+        balance.setText(credit);
         showImageUser(photoCircle);
     }
 
@@ -74,9 +90,8 @@ public class SellerAccount extends GraphicFather implements Initializable {
     }
 
     public void viewPass(MouseEvent mouseEvent) {
-        Seller seller = (Seller) Control.getInstance().getUser();
         if(!showPass){
-            Password.setText(seller.getPassword());
+            Password.setText(password);
             viewPassImage.setImage(new Image(getClass().getResource("/Images/unview.png").toString()));
         }else{
             Password.setText("*****");

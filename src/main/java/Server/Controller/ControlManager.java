@@ -7,14 +7,13 @@ import Server.Model.DiscountCode;
 import Server.Model.Account.Manager;
 import Server.Model.Product;
 import Server.Model.Request.Request;
+import Server.ServerCenter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ControlManager {
-
-    Manager user = (Manager)(Control.getInstance().getUser());
     private String userToView;
     private String discountCodeToView;
     private String discountCodeToEdit;
