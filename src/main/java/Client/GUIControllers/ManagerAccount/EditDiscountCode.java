@@ -1,16 +1,12 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Account.Customer;
-import Server.Model.DiscountCode;
-import Server.Model.Product;
+import Client.ServerRequest;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
-import java.util.ArrayList;
 
 public class EditDiscountCode extends GraphicFather{
     public TextField startTime;
@@ -22,82 +18,56 @@ public class EditDiscountCode extends GraphicFather{
     public TextField removeUsers;
     public Label alertLabel;
     public Label okLabel;
-    private ArrayList<String> oks = new ArrayList<>();
-    private ArrayList<String> errors = new ArrayList<>();
 
     public void makeChange(MouseEvent mouseEvent) {
-        String code = ControlManager.getInstance().getDiscountCodeToEdit();
+        if(startTime.getText().isEmpty() && endTime.getText().isEmpty() && percentage.getText().isEmpty() && maxPerUser.getText().isEmpty() && addUsers.getText().isEmpty() &&
+        removeUsers.getText().isEmpty() && maxPercentage.getText().isEmpty()){
+            okLabel.setText("");
+            showError(alertLabel,"You should fill at least one field.",Error.NEGATIVE);
+        }else{
+            String code = ClientCenter.getInstance().getDiscountCodeToEdit();
 
-        if(!startTime.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("Start date",startTime.getText(),code);
-                oks.add("Start time");
-            } catch (Exception e) {
+            String output = "";
+            if(!startTime.getText().isEmpty()){
+                output += "startTime&" + startTime.getText() + "&" + code;
+            }
+            if(!endTime.getText().isEmpty()){
+                if(!output.isEmpty())
+                    output += "//";
+                output += "endTime&" + endTime.getText() + "&" + code;
+            }
+            if(!percentage.getText().isEmpty()){
+                if(!output.isEmpty())
+                    output += "//";
+                output += "percentage&" + percentage.getText() + "&" + code;
+            }
+            if(!maxPerUser.getText().isEmpty()){
+                if(!output.isEmpty())
+                    output += "//";
+                output += "maxTimes&" + maxPerUser.getText() + "&" + code;
+            }
+            if(!addUsers.getText().isEmpty()){
+                if(!output.isEmpty())
+                    output += "//";
+                output += "addOwner&" + addUsers.getText() + "&" + code;
+            }
+            if(!removeUsers.getText().isEmpty()){
+                if(!output.isEmpty())
+                    output += "//";
+                output += "removeOwner&" + removeUsers.getText() + "&" + code;
+            }
+            if(!maxPercentage.getText().isEmpty()){
+                if(!output.isEmpty())
+                    output += "//";
+                output += "maxPercentage&" + maxPercentage.getText() + "&" + code;
+            }
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEEDITDISCOUNTCODE,output);
+            String message = ClientCenter.getInstance().readMessageFromServer();
+            String ok=message.split( " - ")[0];
+            String error=message.split(" - ")[1];
 
-                errors.add("Start time: "+ e.getMessage());
-            }
+            showError(alertLabel,"Fields " + error + " had problems", Error.NEGATIVE);
+            showError(okLabel,"Fields " + ok + " had been successfully changed",Error.POSITIVE);
         }
-        if(!endTime.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("End date",endTime.getText(),code);
-                oks.add("End time");
-            } catch (Exception e) {
-                errors.add("End time: "+ e.getMessage());
-            }
-        }
-        if(!percentage.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("Percentage",percentage.getText(),code);
-                oks.add("Percentage");
-            } catch (Exception e) {
-                errors.add("Percentage: " + e.getMessage());
-            }
-        }
-        if(!maxPerUser.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("Max times",maxPerUser.getText(),code);
-                oks.add("Max per user");
-            } catch (Exception e) {
-                errors.add("Max per user: " + e.getMessage());
-            }
-        }
-        if(!addUsers.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("add owner",addUsers.getText(),code);
-                oks.add("Add user");
-            } catch (Exception e) {
-                errors.add("Add user: "+e.getMessage());
-            }
-        }
-        if(!removeUsers.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("remove owner",removeUsers.getText(),code);
-                oks.add("Remove user");
-            } catch (Exception e) {
-                errors.add("Remove user: " + e.getMessage());
-            }
-        }
-        if(!maxPercentage.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().editDiscountCode("Max amount",maxPercentage.getText(),code);
-                oks.add("Max percentage");
-            } catch (Exception e) {
-                errors.add("Max percentage: " + e.getMessage());
-            }
-        }
-        String ok="";
-        String error="";
-        for (String s : oks) {
-            ok += s +" ";
-        }
-        for (String s : errors) {
-            error += s+" ";
-        }
-        showError(alertLabel,"Fields " + error + "had problems", Error.NEGATIVE);
-        showError(okLabel,"Fields " + ok + "had been successfully changed",Error.POSITIVE);
-
-        Customer.rewriteFiles();
-        DiscountCode.rewriteFiles();
-        Product.rewriteFiles();
     }
 }

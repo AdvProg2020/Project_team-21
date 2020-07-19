@@ -1,16 +1,11 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-import Server.Model.Account.Account;
-import Server.Model.Account.Seller;
-import Server.Model.Category;
-import Server.Model.Company;
-import Server.Model.Off;
-import Server.Model.Product;
-import Server.Model.Request.*;
+import Client.Model.Request;
+import Client.ServerRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -20,8 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManageRequests extends GraphicFather implements Initializable {
@@ -30,6 +25,7 @@ public class ManageRequests extends GraphicFather implements Initializable {
     public TextField requestToDecline;
     public TableView<Request> listRequests;
     public Label alertLabel;
+    private ArrayList<Request> allRequests = new ArrayList<>();
 
     public TableColumn<Request,String> type = new TableColumn<>("Type");
     public TableColumn<Request,String> id = new TableColumn<>("RequestId");
@@ -38,88 +34,58 @@ public class ManageRequests extends GraphicFather implements Initializable {
 
     ObservableList<Request> getRequests(){
         ObservableList<Request> result =  FXCollections.observableArrayList();
-        for (String s : Request.getAllRequests().keySet()) {
-            result.add(Request.getAllRequests().get(s));
-        }
+        result.addAll(allRequests);
         return result;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLREQUESTS);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        if(!response.equalsIgnoreCase("NONE")){
+            String[] reqs = response.split(" - ");
+            for (String req : reqs) {
+                String[] parseData = req.split("&");
+                allRequests.add(new Request(parseData[0],parseData[1],parseData[2]));
+            }
+        }
         listRequests.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
         id.setCellValueFactory(new PropertyValueFactory<>("requestId"));
-        provider.setCellValueFactory(new PropertyValueFactory<>("providerUsername"));
+        provider.setCellValueFactory(new PropertyValueFactory<>("provider"));
         listRequests.setItems(getRequests());
         listRequests.getColumns().add(type);
         listRequests.getColumns().add(id);
         listRequests.getColumns().add(provider);
     }
-    private void rewriteFiles(){
-        Seller.rewriteFiles();
-        Account.rewriteFiles();
-        Product.rewriteFiles();
-        Off.rewriteFiles();
-        ProductRequest.rewriteFiles();
-        OffRequest.rewriteFiles();
-        Seller.rewriteFiles();
-        Category.rewriteFiles();
-        Company.rewriteFiles();
-    }
 
     public void acceptReq(MouseEvent mouseEvent) {
-        String requestId = requestToAccept.getText();
-        if(ControlManager.getInstance().checkRequestIdExistance(requestId))
-        {
-            if(Request.getAllRequests().get(requestId).getRequestType().equals(RequestType.ADD))
-            {
-                showError(alertLabel,"It has been successfully added!", Error.POSITIVE);
-            }
-            else if(Request.getAllRequests().get(requestId).getRequestType().equals(RequestType.DELETE))
-            {
-                showError(alertLabel,"It has been successfully deleted!", Error.POSITIVE);
-            }
-            else if(Request.getAllRequests().get(requestId).getRequestType().equals(RequestType.EDIT))
-            {
-                showError(alertLabel,"It has been successfully edited!", Error.POSITIVE);
-            }
-            else if(Request.getAllRequests().get(requestId).getRequestType().equals(RequestType.ADD_SELLER))
-            {
-                showError(alertLabel,"It has been successfully added!", Error.POSITIVE);
-            }
-            Request.getAllRequests().get(requestId).acceptReq(requestId);
-
-            rewriteFiles();
-
-        }
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTACCEPTREQUEST,requestToAccept.getText());
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString()))
+            showError(alertLabel,ClientCenter.getInstance().getMessageFromError(message), Error.POSITIVE);
         else
-        {
-            showError(alertLabel,"This request ID doesn't exist!",Error.NEGATIVE);
-        }
+            showError(alertLabel,ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
     }
 
     public void declineReq(MouseEvent mouseEvent) {
-        String requestId = requestToDecline.getText();
-        if(ControlManager.getInstance().checkRequestIdExistance(requestId))
-        {
-            Request.getAllRequests().get(requestId).declineReq(requestId);
-            showError(alertLabel,"It has been declined successfully!",Error.POSITIVE);
 
-            rewriteFiles();
-        }
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTDECLINEREQUEST,requestToDecline.getText());
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString()))
+            showError(alertLabel,ClientCenter.getInstance().getMessageFromError(message), Error.POSITIVE);
         else
-        {
-            showError(alertLabel,"This request ID doesn't exist!",Error.NEGATIVE);
-        }
+            showError(alertLabel,ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
     }
 
     public void viewReq(MouseEvent mouseEvent) {
         String requestId = requestToView.getText();
-        if(ControlManager.getInstance().checkRequestIdExistance(requestId)){
-            ControlManager.getInstance().setRequestToView(requestToView.getText());
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETCHECKREQUESTEXISTS,requestId);
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.TRUE.toString())){
+            ClientCenter.getInstance().setRequestToView(requestToView.getText());
             goToNextPage(Page.VIEWREQUEST,mouseEvent);
-        }
-        else{
+        }else {
             showError(alertLabel,"This request ID doesn't exist!",Error.NEGATIVE);
         }
     }

@@ -1,10 +1,9 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.Control;
+import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-import Server.Model.Account.Account;
-import Server.Model.Account.Manager;
+import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,17 +27,32 @@ public class ManagerAccount extends GraphicFather implements Initializable {
     public Label Password;
     public ImageView viewPassImage;
     private boolean showPass;
+    String password;
+    String username;
+    String name;
+    String email;
+    String address;
+    String phoneNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETMANAGERINFO);
+        String input = ClientCenter.getInstance().readMessageFromServer();
+        String[] parsedInput = input.split(" - ");
+        username = parsedInput[0];
+        name = parsedInput[1] + " " + parsedInput[2];
+        email = parsedInput[3];
+        address = parsedInput[4];
+        phoneNumber = parsedInput[5];
+        password = parsedInput[6];
+
         showPass = false;
         showImageUser(photoCircle);
-        Account user = Control.getInstance().getUser();
-        Username.setText(user.getUsername());
-        Name.setText(user.getFirstName() + " " + user.getLastName());
-        Address.setText(user.getAddress());
-        Phone.setText(user.getPhoneNumber());
-        Email.setText(user.getEmail());
+        Username.setText(username);
+        Name.setText(name);
+        Address.setText(address);
+        Phone.setText(phoneNumber);
+        Email.setText(email);
         Password.setText("*****");
     }
 
@@ -66,9 +81,8 @@ public class ManagerAccount extends GraphicFather implements Initializable {
     }
 
     public void viewPass(MouseEvent mouseEvent) {
-        Manager seller = (Manager) Control.getInstance().getUser();
         if(!showPass){
-            Password.setText(seller.getPassword());
+            Password.setText(password);
             viewPassImage.setImage(new Image(getClass().getResource("/Images/unview.png").toString()));
         }else{
             Password.setText("*****");

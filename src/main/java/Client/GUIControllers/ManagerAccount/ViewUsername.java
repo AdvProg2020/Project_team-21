@@ -1,15 +1,14 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Account.Account;
+import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-
-import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,17 +23,23 @@ public class ViewUsername extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Account user = Account.getAllAccounts().get(ControlManager.getInstance().getUserToView());
-        File file = new File(user.getImagePath());
-        Image image = new Image(file.toURI().toString());
+
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETUSERINFOS,ClientCenter.getInstance().getUserToView());
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        String[] parseData = response.split(" - ");
+        Image image = null;
+        try {
+            image = ClientCenter.getInstance().recieveImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ImagePattern img = new ImagePattern(image);
         photoCircle.setFill(img);
-
-        phone.setText(user.getPhoneNumber());
-        email.setText(user.getEmail());
-        name.setText(user.getFirstName() + " " + user.getLastName());
-        address.setText(user.getAddress());
-        username.setText(user.getUsername());
-        password.setText(user.getPassword());
+        phone.setText(parseData[0]);
+        email.setText(parseData[1]);
+        name.setText(parseData[2]);
+        address.setText(parseData[3]);
+        username.setText(parseData[4]);
+        password.setText(parseData[5]);
     }
 }

@@ -6,7 +6,7 @@ import Server.Model.Company;
 import Server.Model.Off;
 import Server.Model.Product;
 import Server.Model.Request.*;
-
+import Server.ServerCenter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -85,10 +85,10 @@ public class ControlSeller {
             return true;
         return false;
     }
-    public String sendProductEditReq(String productID , String field , String value) throws Exception
+    public String sendProductEditReq(String productID , String field , String value,String token) throws Exception
     {
         String requestID = Control.getInstance().randomString(10);
-        Seller user = (Seller) Control.getInstance().getUser();
+        Seller user = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
         if(!checkProductExists(productID))
         {
             throw new Exception("This product doesn't exist");
@@ -109,14 +109,14 @@ public class ControlSeller {
             }
         }
         Product product = Product.getAllProducts().get(productID);
-        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,(Seller)Control.getInstance().getUser(),RequestType.EDIT,null,product,"");
+        ProductRequest req = new ProductRequest(requestID,"","",null,0,null,user,RequestType.EDIT,null,product,"");
         req.setEditField(field);
         req.setNewValueEdit(value);
         return requestID;
     }
-    public String sendAddProductReq(String name, String companyName, String categoryName, String price,String companyLocation,String productID,String imagePath) throws Exception
+    public String sendAddProductReq(String name, String companyName, String categoryName, String price,String companyLocation,String productID,String imagePath,String token) throws Exception
     {
-        Seller seller = (Seller) Control.getInstance().getUser();
+        Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
         Category category = null;
         Company company = null;
         double priceNum = 0;
@@ -149,9 +149,9 @@ public class ControlSeller {
         new ProductRequest(requestID,productID,name,company,priceNum,category,seller,RequestType.ADD,seller,null,imagePath);
         return requestID;
     }
-    public String sendAddSellerProductReq(String productID) throws Exception
+    public String sendAddSellerProductReq(String productID,String token) throws Exception
     {
-        Seller seller = (Seller) Control.getInstance().getUser();
+        Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
         if(!Product.getAllProducts().containsKey(productID))
         {
             throw new Exception("This product doesn't exist!");
@@ -165,12 +165,12 @@ public class ControlSeller {
         new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.ADD_SELLER,seller,product,"");
         return requestID;
     }
-    public String sendRemoveProductReq(String productID) throws Exception
+    public String sendRemoveProductReq(String productID,String token) throws Exception
     {
         if(!ControlSeller.getInstance().checkProductExists(productID)) {
             throw new Exception("This product doesn't exist! So you can see it as a deleted one :)");
         }
-            Seller seller = (Seller) Control.getInstance().getUser();
+            Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
             Product product = Product.getAllProducts().get(productID);
             String requestID = Control.getInstance().randomString(10);
             new ProductRequest(requestID,productID,"",null,0,null,seller,RequestType.DELETE,seller,product,"");
@@ -190,9 +190,9 @@ public class ControlSeller {
         }
         return false;
     }
-    public String sendEditOffRequest(String offID,String field,String value,String productID) throws Exception
+    public String sendEditOffRequest(String offID,String field,String value,String productID,String token) throws Exception
     {
-        Seller seller = (Seller) Control.getInstance().getUser();
+        Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
         String requestID = Control.getInstance().randomString(10);
         if(!productID.equalsIgnoreCase("null") && !Product.getAllProducts().containsKey(productID))
         {
@@ -227,9 +227,9 @@ public class ControlSeller {
     {
         return Integer.parseInt(string);
     }
-    public String sendAddOfRequest(ArrayList<Product> products,String amount,String start,String end) throws Exception
+    public String sendAddOfRequest(ArrayList<Product> products,String amount,String start,String end,String token) throws Exception
     {
-        Seller seller = (Seller) Control.getInstance().getUser();
+        Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
         String requestID = Control.getInstance().randomString(10);
         String offID = Control.getInstance().randomString(10);
         if(!Control.getInstance().timeCorrectMatch(start) || !Control.getInstance().timeCorrectMatch(end))

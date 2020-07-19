@@ -1,9 +1,7 @@
 package Client.GUIControllers;
 
 import Client.ClientCenter;
-import Server.Controller.Control;
-//import Server.Model.Account.Account;
-import Server.Controller.ServerRequest;
+import Client.ServerRequest;
 import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -52,7 +50,6 @@ public class SignInPage extends GraphicFather {
     public void done(MouseEvent mouseEvent) {
         ClientCenter.getInstance().sendReqToServer(ServerRequest.LOGIN,username.getText() + "&" + password.getText());
         try {
-//            String message = ClientCenter.getInstance().getDataInputStream().readUTF();
             String message = ClientCenter.getInstance().readMessageFromServer();
             if(message.startsWith(ServerRequest.DONE.toString())){
                 String[] parsedMessage = message.split("&");

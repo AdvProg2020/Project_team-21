@@ -1,9 +1,8 @@
 package Client.GUIControllers;
 
-import Server.Controller.Control;
-import Server.Model.Account.Customer;
-import Server.Model.Product;
-import Server.Model.ShoppingCart;
+import Client.ClientCenter;
+import Client.Model.Product;
+import Client.ServerRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -16,10 +15,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ShoppingCartPage extends GraphicFather implements Initializable {
@@ -30,6 +29,8 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
     public Circle profilePhoto;
     public Label profileName;
     public Button userPage;
+    HashMap<Product,Integer> productQuantity = new HashMap<>();
+    ArrayList<Image> productImages = new ArrayList<>();
 
     public static double getTotalAmountToPay() {
         return totalAmountToPay;
@@ -42,35 +43,44 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         topBarShowRest(profilePhoto,profileName,userPage);
-        Customer customer = (Customer) Control.getInstance().getUser();
-        ShoppingCart shoppingCart = customer.getShoppingCart();
-
-        int serial = 1;
-        double totalAmount = 0;
-        for (Product product : shoppingCart.getProductsQuantity().keySet()) {
-                ShoppingCartCard shoppingCartCard = new ShoppingCartCard(shoppingCart, serial, product, product.getPrice(), shoppingCart.getProductsQuantity().get(product), cartGridPane, totalAmountLabel);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSHOPPINGCART);
+        String dataInput = ClientCenter.getInstance().readMessageFromServer();
+        if(!dataInput.equalsIgnoreCase("NONE")){
+            try {
+                String[] inputParsed = dataInput.split(" - ");
+                for (int k = 0; k < inputParsed.length; k++) {
+                    productImages.add(ClientCenter.getInstance().recieveImage());
+                }
+                for (int k = 0; k < inputParsed.length; k++) {
+                    String[] productData = inputParsed[k].split("&");
+                    productQuantity.put(new Product(productData[0],Double.parseDouble(productData[1]),Double.parseDouble(productData[3]),
+                            Double.parseDouble(productData[2]),productData[4],productData[5],productData[6],productImages.get(k),productData[7]),Integer.parseInt(productData[8]));
+                }
+            } catch (IOException e) {
+            }
+            int serial = 1;
+            double totalAmount = 0;
+            for (Product product : productQuantity.keySet()) {
+                ShoppingCartCard shoppingCartCard = new ShoppingCartCard(serial, product, product.getPrice(), productQuantity.get(product), cartGridPane, totalAmountLabel);
                 cartGridPane.add(shoppingCartCard, 2, serial);
                 serial++;
-                totalAmount+= (product.getPrice()*shoppingCart.getProductsQuantity().get(product));
+                totalAmount+= (product.getPrice()*productQuantity.get(product));
+            }
+            totalAmountToPay = totalAmount;
+            totalAmountLabel.setText(totalAmount + "$");
         }
-        totalAmountToPay = totalAmount;
-        totalAmountLabel.setText(totalAmount + "$");
-
     }
 
     private static class ShoppingCartCard extends HBox {
 
-        private ShoppingCart shoppingCart;
         private Product product;
         private double price;
         private int quantity;
         private GridPane cartGridPane;
         private Label totalAmountLabel;
 
-        private ShoppingCartCard(ShoppingCart shoppingCart, int serial, Product product, double price, int quantity, GridPane cartGridPane, Label totoalAmountLabel){
+        private ShoppingCartCard(int serial, Product product, double price, int quantity, GridPane cartGridPane, Label totoalAmountLabel){
 
-
-            this.shoppingCart = shoppingCart;
             this.product = product;
             this.price = price;
             this.quantity = quantity;
@@ -137,12 +147,10 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
 
             VBox imageVBox = new VBox();
             imageVBox.getStyleClass().add("productImage");
-            File file = new File(product.getImagePath());
-            Image cardImage = new Image(file.toURI().toString());
-            ImageView cardImageView = new ImageView(cardImage);
+            ImageView cardImageView = new ImageView(product.getImage());
             cardImageView.setFitHeight(32);
             cardImageView.setFitWidth(32);
-            cardImageView.setImage(cardImage);
+            cardImageView.setImage(product.getImage());
             imageVBox.getChildren().add(cardImageView);
 
             hBox.getChildren().add(imageVBox);
@@ -211,36 +219,52 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
         }
 
         private void addProduct() throws IOException {
-            shoppingCart.increaseQuantity(product);
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEINCREASECART,product.getProductId());
             update();
 
         }
 
         private void removeProduct() throws IOException {
-            shoppingCart.decreaseQuantity(product);
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEDECREASECART,product.getProductId());
             update();
         }
 
         private void throwProductToBin() throws IOException {
-            shoppingCart.removeProduct(product);
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEREMOVECART,product.getProductId());
             update();
         }
 
 
         public void update(){
+            ArrayList<Image> productImages = new ArrayList<>();
+            HashMap<Product,Integer> productQuantity = new HashMap<>();
 
-            int serial = 1;
-            double totalAmount = 0;
-            cartGridPane.getChildren().removeAll(cartGridPane.getChildren());
-            for (Product product : shoppingCart.getProductsQuantity().keySet()) {
-                ShoppingCartCard shoppingCartCard = new ShoppingCartCard(shoppingCart, serial, product, product.getPrice(), shoppingCart.getProductsQuantity().get(product), cartGridPane, totalAmountLabel);
-                cartGridPane.add(shoppingCartCard, 2, serial);
-                serial++;
-                totalAmount+= (product.getPrice()*shoppingCart.getProductsQuantity().get(product));
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSHOPPINGCART);
+            String dataInput = ClientCenter.getInstance().readMessageFromServer();
+            if(!dataInput.equalsIgnoreCase("NONE")){
+                try {
+                    String[] inputParsed = dataInput.split(" - ");
+                    for (int k = 0; k < inputParsed.length; k++) {
+                        productImages.add(ClientCenter.getInstance().recieveImage());
+                    }
+                    for (int k = 0; k < inputParsed.length; k++) {
+                        String[] productData = inputParsed[k].split("&");
+                        productQuantity.put(new Product(productData[0],Double.parseDouble(productData[1]),Double.parseDouble(productData[3]),
+                                Double.parseDouble(productData[2]),productData[4],productData[5],productData[6],productImages.get(k),productData[7]),Integer.parseInt(productData[8]));
+                    }
+                } catch (IOException e) {
+                }
+                int serial = 1;
+                double totalAmount = 0;
+                for (Product product : productQuantity.keySet()) {
+                    ShoppingCartCard shoppingCartCard = new ShoppingCartCard(serial, product, product.getPrice(), productQuantity.get(product), cartGridPane, totalAmountLabel);
+                    cartGridPane.add(shoppingCartCard, 2, serial);
+                    serial++;
+                    totalAmount+= (product.getPrice()*productQuantity.get(product));
+                }
+                ShoppingCartPage.setTotalAmountToPay(totalAmount);
+                totalAmountLabel.setText(totalAmount + "$");
             }
-
-            ShoppingCartPage.setTotalAmountToPay(totalAmount);
-            totalAmountLabel.setText(totalAmount + "$");
         }
     }
 

@@ -5,7 +5,7 @@ import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
 //import Server.Model.Account.Customer;
-import Server.Controller.ServerRequest;
+import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -41,21 +41,16 @@ public class CustomerAccount extends GraphicFather implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showPass = false;
         ClientCenter.getInstance().sendReqToServer(ServerRequest.GETCUSTOMERINFOS);
-        try {
 //            String input = ClientCenter.getInstance().getDataInputStream().readUTF();
-            String input = ClientCenter.getInstance().readMessageFromServer();
-            System.out.println(input);
-            String[] parsedInput = input.split(" - ");
-            username = parsedInput[0];
-            name = parsedInput[1] + " " + parsedInput[2];
-            address = parsedInput[3];
-            phoneNumber = parsedInput[4];
-            email = parsedInput[5];
-            password = parsedInput[6];
-            balanceText = parsedInput[7];
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String input = ClientCenter.getInstance().readMessageFromServer();
+        String[] parsedInput = input.split(" - ");
+        username = parsedInput[0];
+        name = parsedInput[1] + " " + parsedInput[2];
+        address = parsedInput[3];
+        phoneNumber = parsedInput[4];
+        email = parsedInput[5];
+        password = parsedInput[6];
+        balanceText = parsedInput[7];
 
         showImageUser(photoCircle);
         Username.setText(username);

@@ -1,12 +1,6 @@
 package Server;
 
-import Server.Controller.Control;
-import Server.Controller.ServerRequest;
 import Server.Model.Account.Account;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class ServerCenter {
@@ -40,13 +34,13 @@ public class ServerCenter {
     public void addToken(String id,Account account){
         getAllTokens().put(id,account);
         getActiveTokens().put(id,account);
-        System.out.println("Token for " + account.getUsername() + " has been created with token id: " + id);
+        System.out.println(account.getUsername() + " ADDED!");
     }
 
     public void expireToken(String id){
-        Account account = allTokens.get(id);
+        Account account = activeTokens.get(id);
         getExpiredTokens().put(id,account);
         activeTokens.remove(id);
+        System.out.println(account.getUsername() + " EXPIRED!");
     }
-
 }

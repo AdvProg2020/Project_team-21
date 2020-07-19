@@ -1,7 +1,7 @@
 package Client.GUIControllers;
 
-import Server.Controller.Control;
-import Server.Model.Account.Account;
+import Client.ClientCenter;
+import Client.ServerRequest;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -50,7 +50,7 @@ public class SignUpPage extends GraphicFather {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner((Stage)((Node)event.getSource()).getScene().getWindow());
         VBox dialogVbox = new VBox(20);
-        Text txt = new Text("Wellcome " + Account.getAllAccounts().get(username.getText()).getFirstName() + " \\\\(•◡•)//");
+        Text txt = new Text("Wellcome " + firstName.getText() + " \\\\(•◡•)//");
         txt.setFill(Paint.valueOf("069438"));
         Font font = new Font("Hiragino Sans W3" , 20);
         txt.setFont(font);
@@ -76,17 +76,18 @@ public class SignUpPage extends GraphicFather {
         return ext;
     }
 
-    private void putImage(File sourceFile,String username){
+    private void sendImage(File sourceFile){
         File copyToTemp = new File("temp");
-        File finalCopy = new File("profilePhotos/" + username +"."+ getFileExt(sourceFile));
         try {
             FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
-            File copied = new File(copyToTemp + "/" +sourceFile.getName());
-            copied.renameTo(finalCopy);
+            ClientCenter.getInstance().sendImage(copyToTemp + "/" +sourceFile.getName());
+            File file = new File(copyToTemp + "/" +sourceFile.getName());
+            file.delete();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public void uploadPhotoButton(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
@@ -102,27 +103,39 @@ public class SignUpPage extends GraphicFather {
     }
 
     public void submit(MouseEvent mouseEvent) {
+        if(imageFile == null){
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.SIGNUP,username.getText() + "//"
+                    +password.getText() + "//" + firstName.getText() + "//" + lastName.getText() + "//" + email.getText()+"//"+phoneNumber.getText()+"//"+
+                    confirmPassword.getText() +"//"+"NULL"+ "//"+ type.getValue());
+        }
+        else{
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.SIGNUP,username.getText() + "//"
+                    +password.getText() + "//" + firstName.getText() + "//" + lastName.getText() + "//" + email.getText()+"//"+phoneNumber.getText()+"//"+
+                    confirmPassword.getText() + "//" + getFileExt(imageFile) + "//" + type.getValue());
+            sendImage(imageFile);
+        }
+
+
         boolean login = true;
         Page pageToGo = GUICenter.getInstance().getLanding();
         if(((String)type.getValue()).equalsIgnoreCase("seller")){
             login = false;
             pageToGo = Page.CREATECOMPANY;
+            ClientCenter.getInstance().setSellerToAddCompany(username.getText());
         }
-        try{
-            String imagePath = "profilePhotos/account_icon.png" ;
-            if(imageFile !=null)
-                imagePath = "profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
-            Control.getInstance().createAccount(type.getValue(),username.getText(),password.getText(),firstName.getText(),lastName.getText(),
-                    email.getText(),phoneNumber.getText(),confirmPassword.getText(),null,login,imagePath);
-            if(imageFile != null){
-                putImage(imageFile, username.getText());
+
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString())){
+            if(login){
+                ClientCenter.getInstance().setActiveToken(ClientCenter.getInstance().getMessageFromError(message));
             }
             goToNextPage(pageToGo,mouseEvent);
-            if(login)
+            if(login){
                 showPopupLogin(mouseEvent);
-        }catch (Exception e){
-            showError(alertLabel, e.getMessage(), Error.NEGATIVE);
+            }
         }
+        else
+            showError(alertLabel, ClientCenter.getInstance().getMessageFromError(message), Error.NEGATIVE);
     }
 
 

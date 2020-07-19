@@ -1,7 +1,7 @@
 package Client.GUIControllers;
 
-import Server.Model.Log.BuyLog;
-import Server.Model.Product;
+import Client.Model.BuyLog;
+import Client.Model.Product;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -13,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -73,12 +72,10 @@ public class BuyLogsPagePrime extends GraphicFather implements Initializable {
             this.getStyleClass().add("mainPageProductCards");
 
             VBox imageVBox = new VBox();
-            File file = new File(product.getImagePath());
-            Image cardImage = new Image(file.toURI().toString());
-            ImageView cardImageView = new ImageView(cardImage);
+            ImageView cardImageView = new ImageView(product.getImage());
             cardImageView.setFitHeight(80);
             cardImageView.setFitWidth(80);
-            cardImageView.setImage(cardImage);
+            cardImageView.setImage(product.getImage());
             imageVBox.getChildren().add(cardImageView);
             this.getChildren().add(imageVBox);
 

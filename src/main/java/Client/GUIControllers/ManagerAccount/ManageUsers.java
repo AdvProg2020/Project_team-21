@@ -1,22 +1,22 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.Control;
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
+import Client.Model.Account.Account;
+import Client.Model.Account.Customer;
+import Client.Model.Account.Manager;
+import Client.Model.Account.Seller;
+import Client.ServerRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManageUsers extends GraphicFather implements Initializable {
@@ -27,17 +27,31 @@ public class ManageUsers extends GraphicFather implements Initializable {
     public TextField userToView;
     public TextField userToRemove;
     public Label AlertLabel;
+    private ArrayList<Account> allAccounts = new ArrayList<>();
 
     ObservableList<Account> getAccounts(){
         ObservableList<Account> result =  FXCollections.observableArrayList();
-        for (String s : Account.getAllAccounts().keySet()) {
-            result.add(Account.getAllAccounts().get(s));
-        }
+        result.addAll(allAccounts);
         return result;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLACCOUNTS);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        if(!response.equalsIgnoreCase("NONE")){
+            String[] parsed = response.split(" - ");
+            for (String s : parsed) {
+                String username = s.split("&")[0];
+                String type = s.split("&")[1];
+                if(type.equalsIgnoreCase("Customer"))
+                    allAccounts.add(new Customer(username));
+                else if(type.equalsIgnoreCase("Seller"))
+                    allAccounts.add(new Seller(username));
+                else if(type.equalsIgnoreCase("Manager"))
+                    allAccounts.add(new Manager(username));
+            }
+        }
         listUsers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         userName.setCellValueFactory(new PropertyValueFactory<>("username"));
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -47,29 +61,24 @@ public class ManageUsers extends GraphicFather implements Initializable {
     }
 
     public void viewUser(MouseEvent mouseEvent){
-        if(Account.getAllAccounts().keySet().contains(userToView.getText())){
-            ControlManager.getInstance().setUserToView(userToView.getText());
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETCHECKUSEREXISTS,userToView.getText());
+        String response = ClientCenter.getInstance().readMessageFromServer();
+
+        if(response.startsWith(ServerRequest.TRUE.toString())){
+            ClientCenter.getInstance().setUserToView(userToView.getText());
             goToNextPage(Page.VIEWUSER,mouseEvent);
-        }
-        else{
+        }else{
             showError(AlertLabel,"This username doesn't Exist",Error.NEGATIVE);
         }
     }
 
     public void removeUser(MouseEvent mouseEvent){
-        try
-        {
-            Control.getInstance().deleteUser(userToRemove.getText());
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTREMOVEUSER,userToRemove.getText());
+        String response = ClientCenter.getInstance().readMessageFromServer();
+        if(response.startsWith(ServerRequest.DONE.toString()))
             showError(AlertLabel,"User "+userToRemove.getText()+" has been deleted successfully!",Error.POSITIVE);
-            Account.rewriteFiles();
-            Customer.rewriteFiles();
-            Manager.rewriteFiles();
-            Seller.rewriteFiles();
-        }
-        catch (Exception e)
-        {
-            showError(AlertLabel,e.getMessage(),Error.NEGATIVE);
-        }
+        else
+            showError(AlertLabel,ClientCenter.getInstance().getMessageFromError(response),Error.NEGATIVE);
     }
 
     public void createManage(MouseEvent mouseEvent) {

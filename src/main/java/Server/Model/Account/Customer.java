@@ -23,8 +23,9 @@ public class Customer extends Account implements Comparable<Customer>{
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewCustomer(this);
         SaveData.saveData(this, getUsername(), SaveData.customerFile);
-        ShoppingCart cart = new ShoppingCart(this, Control.getInstance().randomString(5));
-        setShoppingCart(cart);
+        String cartID = Control.getInstance().randomString(5);
+        ShoppingCart cart = new ShoppingCart(this, cartID);
+        setShoppingCart(cartID);
     }
 
     //    public static void rewriteFiles(){
@@ -67,8 +68,13 @@ public class Customer extends Account implements Comparable<Customer>{
     public ShoppingCart getShoppingCart() {
         ShoppingCart shoppingCart = null;
         for (ShoppingCart cart : ShoppingCart.getAllShoppingCarts()) {
-            if(cart.getCartID().equals(this.shoppingCart))
+            if(cart.getCustomer().equals(this)){
                 shoppingCart = cart;
+                break;
+            }
+//            if(cart.getCartID().equals(this.shoppingCart)){
+//
+//            }
         }
         return shoppingCart;
     }
@@ -119,8 +125,8 @@ public class Customer extends Account implements Comparable<Customer>{
 
 
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart.getCartID();
+    public void setShoppingCart(String id) {
+        this.shoppingCart = id;
     }
 
 //    public void addOffs (Off off){
@@ -174,7 +180,6 @@ public class Customer extends Account implements Comparable<Customer>{
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.customerFile)));
         for (Object object : objects) {
             allCustomer.add((Customer) (object));
-
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
         }
     }

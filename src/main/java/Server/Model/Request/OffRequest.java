@@ -13,7 +13,7 @@ public class OffRequest extends Request {
     private String provider;
     private String editField;
     private String newValueForField;
-    private String providerUsername;
+
     String product;
 
     public OffRequest(String requestId, String offId, ArrayList<Product> productList, LocalDateTime startTime, LocalDateTime endTime, double percentage, Seller provider, RequestType requestType)
@@ -28,7 +28,7 @@ public class OffRequest extends Request {
         requestedOffs.put(requestId,off);
         Request.addRequest(requestId,this);
         this.provider = provider.getUsername();
-        providerUsername = provider.getUsername();
+        setProviderUsername(provider.getUsername());
         setRequestId(requestId);
         SaveData.saveData(this, getRequestId(), SaveData.offReqFile);
         SaveData.saveData(off, (getRequestId()+off.getOffId()), SaveData.offRequestFile);
@@ -67,10 +67,6 @@ public class OffRequest extends Request {
             Off off = requestedOffs.get(s);
             SaveData.saveDataRunning(off, s+off.getOffId(), SaveData.offRequestFile);
         }
-    }
-
-    public String getProviderUsername() {
-        return providerUsername;
     }
 
     public void setEditField(String editField) {

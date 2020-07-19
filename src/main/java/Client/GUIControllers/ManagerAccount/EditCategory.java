@@ -1,10 +1,9 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.ControlManager;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Category;
-import Server.Model.Product;
+import Client.ServerRequest;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -19,59 +18,46 @@ public class EditCategory extends GraphicFather {
     public Label okLabel;
 
     public void makeChange(MouseEvent mouseEvent) {
-        String editCategory = ControlManager.getInstance().getCategoryToEdit();
+        String editCategory = ClientCenter.getInstance().getCategoryToEdit();
+        String output = "";
+
         ArrayList<String> oks = new ArrayList<>();
         ArrayList<String> errors = new ArrayList<>();
         if(!newName.getText().isEmpty()){
-            try {
-                ControlManager.getInstance().changeCategoryName(newName.getText(),editCategory);
-                oks.add("Name");
-            } catch (Exception e) {
-                errors.add("Name: " + e.getMessage());
-            }
+            output += "name&" + newName.getText()+"&" + editCategory;
         }
         if(!productsToAdd.getText().isEmpty()){
-            if(!Product.getAllProducts().containsKey(productsToAdd.getText())){
-                errors.add("Add Product: This product doesn't exist!");
-            }else{
-                for (Category category : Category.getAllCategories()) {
-                    if(category.getName().equalsIgnoreCase(editCategory))
-                    {
-                        category.addProductToCategory(Product.getAllProducts().get(productsToAdd.getText()));
-                        oks.add("Add Product: Added");
-                    }
-                }
-            }
+            if(!output.isEmpty())
+                output += "//";
+            output += "addproduct&" + productsToAdd.getText() +"&" + editCategory;
         }
         if(!productsToRemove.getText().isEmpty()){
-            if(!Product.getAllProducts().containsKey(productsToRemove.getText())){
-                errors.add("Remove Product: This product doesn't exist!");
-            }else{
-                for (Category category : Category.getAllCategories()) {
-                    if(category.getName().equalsIgnoreCase(editCategory))
-                    {
-                        if(category.getProductsList().contains(Product.getAllProducts().get(productsToRemove.getText()))){
-                            category.removeProductFromCategory(Product.getAllProducts().get(productsToRemove.getText()));
-                            oks.add("Remove Product: Removed");
-                        }
-                        else
-                            errors.add("Remove product: This product isn't in this category!");
-                    }
-                }
+            if(!output.isEmpty())
+                output += "//";
+            output += "removeproduct&" + productsToRemove.getText()+"&" + editCategory;
+        }
+        if(!output.isEmpty()){
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEEDITCATEGORY,output);
+            String response = ClientCenter.getInstance().readMessageFromServer();
+            String[] parsed = response.split(" - ");
+            String[] oksString = parsed[0].split("&");
+            String[] errorsString = parsed[1].split("&");
+            for (String s : oksString) {
+                oks.add(s);
             }
+            for (String s : errorsString) {
+                errors.add(s);
+            }
+            String ok = "";
+            String error = "";
+            for (String s : errors) {
+                error += s+ " ";
+            }
+            for (String s : oks) {
+                ok += s+ " ";
+            }
+            showError(alertLabel,"Fields: " + error + " had problems", Error.NEGATIVE);
+            showError(okLabel,"Fields: " + ok + " had been successfully changed",Error.POSITIVE);
         }
-        String ok = "";
-        String error = "";
-        for (String s : errors) {
-            error += s+ " ";
-        }
-        for (String s : oks) {
-            ok += s+ " ";
-        }
-        showError(alertLabel,"Fields " + error + "had problems", Error.NEGATIVE);
-        showError(okLabel,"Fields " + ok + "had been successfully changed",Error.POSITIVE);
-
-        Category.rewriteFiles();
-        Product.rewriteFiles();
     }
 }

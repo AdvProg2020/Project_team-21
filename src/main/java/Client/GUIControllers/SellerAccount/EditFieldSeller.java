@@ -1,11 +1,9 @@
 package Client.GUIControllers.SellerAccount;
 
-import Server.Controller.Control;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Account.Account;
-import Server.Model.Account.Seller;
-import Server.Model.Company;
+import Client.ServerRequest;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -25,52 +23,65 @@ public class EditFieldSeller extends GraphicFather {
     private ArrayList<String> editedFields = new ArrayList<>();
 
     public void makeChange(MouseEvent mouseEvent) {
-        Seller user =(Seller)Control.getInstance().getUser();
+        String output = "";
 
         if(!firstName.getText().isEmpty()){
             editedFields.add("First Name");
-            user.setFirstName(firstName.getText());
+            output += "firstname&" + firstName.getText();
         }
         if(!lastName.getText().isEmpty()){
             editedFields.add("Last Name");
-            user.setLastName(lastName.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "lastname&" + lastName.getText();
         }
         if(!Phone.getText().isEmpty()){
             editedFields.add("Phone Number");
-            user.setPhoneNumber(Phone.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "phone&" + Phone.getText();
         }
         if(!Email.getText().isEmpty()){
             editedFields.add("Email");
-            user.setEmail(Email.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "email&" + Email.getText();
         }
         if(!Address.getText().isEmpty()){
             editedFields.add("Address");
-            user.setAddress(Address.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "address&" + Address.getText();
         }
         if(!Password.getText().isEmpty()){
             editedFields.add("Password");
-            user.setPassword(Password.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "password&" + Password.getText();
         }
         if(!companyName.getText().isEmpty()){
             editedFields.add("Company Name");
-            user.getCompany().setName(companyName.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "companyname&" + companyName.getText();
         }
         if(!companyAddress.getText().isEmpty()){
             editedFields.add("Company Address");
-            user.getCompany().setLocation(companyAddress.getText());
+            if(!output.isEmpty())
+                output += "//";
+            output += "companyaddress&" + companyAddress.getText();
         }
         if(editedFields.isEmpty()){
             showError(alertLabel,"No field has been updated!", Error.NEGATIVE);
         }
         else{
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEEDITFIELDSELLER,output);
             String fields = "";
             for (String editedField : editedFields) {
                 fields += editedField + " ";
             }
             showError(alertLabel,"Fields: " + fields + "has been updated for you!",Error.POSITIVE);
-            Seller.rewriteFiles();
-            Account.rewriteFiles();
-            Company.rewriteFiles();
+
         }
     }
 }

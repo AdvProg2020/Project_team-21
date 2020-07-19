@@ -76,6 +76,18 @@ public class Seller extends Account implements Comparable<Seller>{
         return Company.getAllCompanies().get(company);
     }
 
+    public String getCompanyName(){
+        if(getCompany() != null)
+            return getCompany().getName();
+        return "Not Set";
+    }
+
+    public String getCompanyAddress(){
+        if(getCompany() != null)
+            return getCompany().getLocation();
+        return "Not Set";
+    }
+
     public ArrayList<Product> getAllProducts() {
         ArrayList<Product> res = new ArrayList<>();
         for (String product : allProducts) {

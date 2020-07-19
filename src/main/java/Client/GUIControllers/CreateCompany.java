@@ -1,6 +1,7 @@
 package Client.GUIControllers;
 
-import Server.Model.Company;
+import Client.ClientCenter;
+import Client.ServerRequest;
 import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -42,16 +43,8 @@ public class CreateCompany extends GraphicFather {
     }
 
     public void submit(MouseEvent mouseEvent) {
-        Company company;
-        if(Company.getAllCompanies().containsKey(companyName.getText()))
-        {
-            company = Company.getAllCompanies().get(companyName.getText());
-        }
-        else
-        {
-            company = new Company(companyName.getText(),companyAddress.getText());
-        }
-        GUICenter.getInstance().getSellerToAddCompany().setCompany(company);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTCREATECOMPANY,ClientCenter.getInstance().getSellerToAddCompany()  +"//"+
+               companyName.getText() + "//" + companyAddress.getText() );
         goToNextPage(GUICenter.getInstance().getLanding(),mouseEvent);
         showPopup(mouseEvent);
     }

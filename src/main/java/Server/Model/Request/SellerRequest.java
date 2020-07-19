@@ -1,26 +1,27 @@
 package Server.Model.Request;
 
-import Client.GUIControllers.GUICenter;
 import Server.Model.Account.Seller;
 import Server.Model.Company;
 import Server.Model.SaveData;
+import Server.ServerCenter;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class SellerRequest extends Request {
-    private String providerUsername;
+
     public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType,String photo)
     {
         super(requestType);
         Seller seller = new Seller(userName,firstName,lastName,email,phoneNumber,password,company,photo);
         seller.setRequestID(requestId);
-        GUICenter.getInstance().setSellerToAddCompany(seller);
+//        ServerCenter.getInstance().setSellerToAddCompany(seller);
         Request.addRequest(requestId,this);
         requestedSellers.put(requestId,seller);
 
         setRequestId(requestId);
-        providerUsername = userName;
+
+        setProviderUsername(userName);
         SaveData.saveData(seller, (getRequestId()+seller.getUsername()), SaveData.sellerRequestFile);
         SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
     }
@@ -37,10 +38,6 @@ public class SellerRequest extends Request {
             Seller seller = requestedSellers.get(s);
             SaveData.saveDataRunning(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
         }
-    }
-
-    public String getProviderUsername() {
-        return providerUsername;
     }
 
     @Override

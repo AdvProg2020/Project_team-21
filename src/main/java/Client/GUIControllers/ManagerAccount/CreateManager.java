@@ -1,8 +1,9 @@
 package Client.GUIControllers.ManagerAccount;
 
-import Server.Controller.Control;
+import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
+import Client.ServerRequest;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -29,13 +30,13 @@ public class CreateManager extends GraphicFather {
     public ImageView profilePhoto;
     private File imageFile = null;
 
-    private void putImage(File sourceFile, String username){
+    private void sendImage(File sourceFile){
         File copyToTemp = new File("temp");
-        File finalCopy = new File("profilePhotos/" + username +"."+ getFileExt(sourceFile));
         try {
             FileUtils.copyFileToDirectory(sourceFile,copyToTemp);
-            File copied = new File(copyToTemp + "/" +sourceFile.getName());
-            copied.renameTo(finalCopy);
+            ClientCenter.getInstance().sendImage(copyToTemp + "/" +sourceFile.getName());
+            File file = new File(copyToTemp + "/" +sourceFile.getName());
+            file.delete();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,18 +56,23 @@ public class CreateManager extends GraphicFather {
     }
 
     public void submit(MouseEvent mouseEvent) {
-        try{
-            String imagePath = "profilePhotos/account_icon.png" ;
-            if(imageFile !=null)
-                imagePath = "profilePhotos/" + username.getText() +"."+ getFileExt(imageFile);
-            Control.getInstance().createAccount("Manager",username.getText(),password.getText(),firstName.getText(),lastName.getText(),
-                    email.getText(),phoneNumber.getText(),confirmPassword.getText(),null,false,imagePath);
-            if(imageFile != null)
-                putImage(imageFile, username.getText());
-            showError(alertLabel,"Manager " + username.getText() + " has been created successfully.",Error.POSITIVE);
-        }catch (Exception e){
-            showError(alertLabel, e.getMessage(), Error.NEGATIVE);
+        if(imageFile == null){
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTCREATEMANAGERPROFILE,username.getText() + "//"
+                    +password.getText() + "//" + firstName.getText() + "//" + lastName.getText() + "//" + email.getText()+"//"+phoneNumber.getText()+"//"+
+                    confirmPassword.getText() +"//"+"NULL");
         }
+        else{
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTCREATEMANAGERPROFILE,username.getText() + "//"
+                    +password.getText() + "//" + firstName.getText() + "//" + lastName.getText() + "//" + email.getText()+"//"+phoneNumber.getText()+"//"+
+                    confirmPassword.getText() + "//" + getFileExt(imageFile));
+            sendImage(imageFile);
+        }
+        String message = ClientCenter.getInstance().readMessageFromServer();
+        if(message.startsWith(ServerRequest.DONE.toString()))
+            showError(alertLabel,"Manager " + username.getText() + " has been created successfully.",Error.POSITIVE);
+        else
+            showError(alertLabel, ClientCenter.getInstance().getMessageFromError(message), Error.NEGATIVE);
+
     }
 
     public void uploadPhotoButton(ActionEvent actionEvent) {
