@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.Base64;
 
 public class ClientCenter {
+    private String bankAccountToken="";
     private static ClientCenter instance;
     private String activeToken = "NULL";
     private DataInputStream dataInputStream;
@@ -146,6 +147,14 @@ public class ClientCenter {
 
     public void setDataInputStream(DataInputStream dataInputStream) {
         this.dataInputStream = dataInputStream;
+    }
+
+    public String getBankAccountToken() {
+        return bankAccountToken;
+    }
+
+    public void setBankAccountToken(String bankAccountToken) {
+        this.bankAccountToken = bankAccountToken;
     }
 
     public DataOutputStream getDataOutputStream() {
