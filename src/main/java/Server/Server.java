@@ -1,5 +1,7 @@
 package Server;
 
+import Server.ChatServers.Group.Group_Server;
+import Server.ChatServers.TwoByTwo.ChatServer;
 import Server.Controller.*;
 import Server.Model.*;
 import Server.Model.Account.Account;
@@ -1470,15 +1472,54 @@ public class Server {
             Socket clientSocket;
             while (true){
                 clientSocket = serverSocket.accept();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                readFilesFromDatabase();
+                for (String s : Account.getAllAccounts().keySet()) {
+                    System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
+                }
+                for (String s : Product.getAllProducts().keySet()) {
+                    System.out.println(s + " " + Product.getAllProducts().get(s).getName());
+                }
+                try {
+                    ServerSocket serverSocket = new ServerSocket(8080);
+                    Socket clientSocket;
+                    while (true){
+                        clientSocket = serverSocket.accept();
 //                DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 //                DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-                DataOutputStream dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
-                DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
-                new HandleClient(clientSocket,dataOutputStream,dataInputStream,serverSocket,clientSocket.getInputStream(),clientSocket.getOutputStream()).start();
+                        DataOutputStream dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
+                        DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
+                        new HandleClient(clientSocket,dataOutputStream,dataInputStream,serverSocket,clientSocket.getInputStream(),clientSocket.getOutputStream()).start();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error in server socket");
+                }
             }
-        } catch (IOException e) {
-            System.out.println("Error in server socket");
-        }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new ChatServer();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new Group_Server();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 }
