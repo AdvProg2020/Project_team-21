@@ -26,7 +26,7 @@ public class ClientChatController extends GraphicFather implements Initializable
     public Label whoToChatLabel;
     public Label activityLabel;
     public Label errorLabel;
-    private Client client;
+    private static Client client;
 
     private ArrayList<Button> contactButtons = new ArrayList<>();
     public static HashMap<String, UserStatusEnum> activityMap = new HashMap<>();
@@ -51,7 +51,10 @@ public class ClientChatController extends GraphicFather implements Initializable
     }
 
     public ClientChatController() throws IOException {
-        client = new Client(this);
+        if(client==null){
+            client = new Client(this);
+        }
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 System.out.println("Running Shutdown Hook");
@@ -91,10 +94,6 @@ public class ClientChatController extends GraphicFather implements Initializable
 
 //        if(!a){
             Platform.runLater(()->messagesGridPane.getChildren().removeAll(messagesGridPane.getChildren()));
-            if(activityMap.get(client.chatOtherSide)==null){
-                activityLabel.setText(UserStatusEnum.OFFLINE.toString());
-            }
-
 //            a = false;
 //        }
 
@@ -156,6 +155,12 @@ public class ClientChatController extends GraphicFather implements Initializable
                 {
                     client.chatOtherSide = contactButton.getText();
                     whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
+                    if(!activityMap.containsKey(client.chatOtherSide)){
+                        activityLabel.setText(UserStatusEnum.OFFLINE.toString());
+                    } else {
+                        activityLabel.setText(activityMap.get(client.chatOtherSide).toString());
+                    }
+
                     printMessages();
                 }
             };
