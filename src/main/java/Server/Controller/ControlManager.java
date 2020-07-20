@@ -7,6 +7,7 @@ import Server.Model.DiscountCode;
 import Server.Model.Account.Manager;
 import Server.Model.Product;
 import Server.Model.Request.Request;
+import Server.Model.Wallet;
 import Server.ServerCenter;
 
 import java.time.LocalDateTime;
@@ -296,5 +297,9 @@ public class ControlManager {
                 return true;
         }
         return false;
+    }
+
+    public static void defineLeastAmountForUsersWallet (double amount){
+        Wallet.setLeastAmount(amount);
     }
 }
