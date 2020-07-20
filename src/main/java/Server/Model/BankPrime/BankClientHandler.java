@@ -27,13 +27,35 @@ public class BankClientHandler implements Runnable{
         while (true){
             String in = dis.readUTF();
             String[] splitted = in.split("\\s");
-
+            if (splitted[0].equals("create_account")){
+                createAccount(splitted);
+            }else if (splitted[0].equals("get_balance")){
+                getBalance(splitted);
+            }else if (splitted[0].equals("pay")){
+                pay(splitted);
+            }else if (splitted[0].equals("get_transaction")){
+                getTransactions(splitted);
+            }else if (splitted[0].equals("create_receipt")){
+                createReceipt(in);
+            }else if (splitted[0].equals("get_token")){
+                getToken(splitted);
+            }else if (splitted[0].equals("exit")){
+                socket.close();
+                break;
+            }else {
+                dos.writeUTF("invalid input");
+                dos.flush();
+            }
         }
     }
 
     @Override
     public void run() {
-
+        try {
+            handler();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
