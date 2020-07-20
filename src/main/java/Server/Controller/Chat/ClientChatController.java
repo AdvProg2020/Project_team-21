@@ -1,4 +1,4 @@
-package Client.GUIControllers.Chat;
+package Server.Controller.Chat;
 
 import Client.GUIControllers.GraphicFather;
 import Client.Model.Chat.Message;
@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ClientChatController extends GraphicFather implements Initializable {
@@ -29,12 +28,6 @@ public class ClientChatController extends GraphicFather implements Initializable
     private Client client;
 
     private ArrayList<Button> contactButtons = new ArrayList<>();
-    public static HashMap<String, UserStatusEnum> activityMap = new HashMap<>();
-
-    static {
-        activityMap.put("NOBODY", UserStatusEnum.NO_STATUS);
-    }
-
 //    public static Vector<TwoByTwoChat.Server.ClientHandler> allClients = new Vector<>();
 
     @Override
@@ -43,10 +36,6 @@ public class ClientChatController extends GraphicFather implements Initializable
         nameLabel.setText("You are: " + client.getId());
         whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
 //        activityLabel.setText(ClientHandler.allClients.get(this.client));
-
-        activityMap.put(client.getId(), UserStatusEnum.ONLINE);
-
-        activityLabel.setText(activityMap.get(client.chatOtherSide).toString());
 
     }
 
@@ -91,10 +80,6 @@ public class ClientChatController extends GraphicFather implements Initializable
 
 //        if(!a){
             Platform.runLater(()->messagesGridPane.getChildren().removeAll(messagesGridPane.getChildren()));
-            if(activityMap.get(client.chatOtherSide)==null){
-                activityLabel.setText(UserStatusEnum.OFFLINE.toString());
-            }
-
 //            a = false;
 //        }
 

@@ -1,4 +1,4 @@
-package Client.GUIControllers.Chat;
+package Server.Controller.Chat;
 
 import Client.Model.Chat.Message;
 
@@ -177,7 +177,6 @@ public class Client {
 
     public void sendFinalMessage() throws IOException {
         dos.writeUTF("finish");
-        ClientChatController.activityMap.replace(this.getId(), UserStatusEnum.OFFLINE);
     }
 
     public String getId() {

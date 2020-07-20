@@ -1,6 +1,6 @@
-package Client.GUIControllers.Chat;
+package Server.Controller.Chat;
 
-import Client.Model.Chat.Message;
+import Client.Model.Chat.Group_Message;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Client {
+public class Group_Client {
 
-    final static int ServerPort = 8091;
+    final static int ServerPort = 9091;
     public String chatOtherSide = "NOBODY";
 
      private DataInputStream dis;
      private DataOutputStream dos;
-     private ClientChatController clientChatController;
+     private Group_ClientChatController groupClientChatController;
      public static ArrayList<String> allClientsArr = new ArrayList<>();
 
-     private static ArrayList<Client> allClients = new ArrayList<>();
+     private static ArrayList<Group_Client> allGroupClients = new ArrayList<>();
 
      private String id;
 
-    public Client(ClientChatController clientChatController) throws IOException {
-         this.clientChatController = clientChatController;
+    public Group_Client(Group_ClientChatController groupClientChatController) throws IOException {
+         this.groupClientChatController = groupClientChatController;
 
 //         new Thread(new Runnable() {
 //
@@ -58,12 +58,12 @@ public class Client {
 //             }
 //         }).start();
         handleConnection();
-        allClients.add(this);
+        allGroupClients.add(this);
 //        allClientsArr.add(this.id);
 
-        System.out.println(allClients.size());
-        for (Client allClient : allClients) {
-            allClient.clientChatController.showContacts();
+        System.out.println(allGroupClients.size());
+        for (Group_Client allGroupClient : allGroupClients) {
+            allGroupClient.groupClientChatController.showContacts();
             System.out.println("tamam");
         }
 
@@ -141,9 +141,9 @@ public class Client {
                         System.out.println(msg);
                             String sender = msg.substring(0, msg.indexOf(" : "));
 
-                            new Message(sender, id, msg);
+                            new Group_Message(sender, id, msg, groupClientChatController.getGroupChatId());
                             System.out.println(msg);
-                            clientChatController.printMessages();
+                            groupClientChatController.printMessages();
 
 
                     } catch (IOException e) {
@@ -166,10 +166,10 @@ public class Client {
             String[] strings = msg.split("#");
             String message = "You" + ": ";
             message += msg;//strings[0];
-            new Message(this.id, chatOtherSide, message);
-            if(!chatOtherSide.equals("NOBODY")){
-                dos.writeUTF(msg + "#" + chatOtherSide);
-            }
+            new Group_Message(this.id, chatOtherSide, message, Group_ClientChatController.getGroupChatId());
+//            if(!chatOtherSide.equals("NOBODY")){
+                dos.writeUTF(msg + "#" + Group_ClientChatController.getGroupChatId());
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -177,7 +177,6 @@ public class Client {
 
     public void sendFinalMessage() throws IOException {
         dos.writeUTF("finish");
-        ClientChatController.activityMap.replace(this.getId(), UserStatusEnum.OFFLINE);
     }
 
     public String getId() {
@@ -192,7 +191,7 @@ public class Client {
         String[] contacts = contactsStr.split("#");
         allClientsArr.clear();
         allClientsArr.addAll(Arrays.asList(contacts));
-        clientChatController.showContacts();
+        groupClientChatController.showContacts();
     }
 
 //    public static void main(String[] args) throws IOException {
