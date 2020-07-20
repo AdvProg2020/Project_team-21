@@ -11,7 +11,7 @@ public class Group_Server {
     //    private static Vector<ClientHandler> allClients = new Vector<>();
     private static int numberOfClients = 0;
 
-    private ServerSocket serverSocket = new ServerSocket(8090);
+    private ServerSocket serverSocket = new ServerSocket(9091);
     private Socket server;
 
     private static Group_Server groupServerInstance;

@@ -12,7 +12,7 @@ public class ChatServer {
     //    private static Vector<ClientHandler> allClients = new Vector<>();
     private static int numberOfClients = 0;
 
-    private ServerSocket serverSocket = new ServerSocket(9091);
+    private ServerSocket serverSocket = new ServerSocket(8091);
     private Socket server;
 
     private static ChatServer chatServerInstance;
