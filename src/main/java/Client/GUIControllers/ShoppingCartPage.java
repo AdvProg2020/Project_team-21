@@ -45,6 +45,7 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
         topBarShowRest(profilePhoto,profileName,userPage);
         ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSHOPPINGCART);
         String dataInput = ClientCenter.getInstance().readMessageFromServer();
+        System.out.println(dataInput);
         if(!dataInput.equalsIgnoreCase("NONE")){
             try {
                 String[] inputParsed = dataInput.split(" - ");
@@ -221,7 +222,6 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
         private void addProduct() throws IOException {
             ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEINCREASECART,product.getProductId());
             update();
-
         }
 
         private void removeProduct() throws IOException {
@@ -234,8 +234,8 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
             update();
         }
 
-
         public void update(){
+            cartGridPane.getChildren().removeAll(cartGridPane.getChildren());
             ArrayList<Image> productImages = new ArrayList<>();
             HashMap<Product,Integer> productQuantity = new HashMap<>();
 

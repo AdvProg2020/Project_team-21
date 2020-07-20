@@ -64,7 +64,7 @@
 
             <VBox style="-fx-padding: 24 150 0 150;">
                 <Label
-                        text="Receiver Name"
+                        text="Receiver Name *"
                 >
 
                 </Label>
@@ -79,7 +79,7 @@
 
             <VBox style="-fx-padding: 38 150 0 150;">
                     <Label
-                            text="Address"
+                            text="Address *"
                     >
 
                     </Label>
@@ -95,7 +95,7 @@
 
                 <VBox style="-fx-padding: 24 150 0 150;">
                     <Label
-                            text="Phone Number"
+                            text="Phone Number *"
                     >
 
                     </Label>
@@ -110,7 +110,7 @@
                 </VBox>
             <VBox style="-fx-padding: 24 150 0 150;">
                 <Label
-                        text="Postal Code"
+                        text="Postal Code *"
                 >
 
                 </Label>

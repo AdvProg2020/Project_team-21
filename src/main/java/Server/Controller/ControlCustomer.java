@@ -51,11 +51,11 @@ public class ControlCustomer {
             customer.getShoppingCart().decreaseQuantity(product);
         }
     }
-    private double calculateTotalPrice(ArrayList<Product> products,double totalOff)
+    private double calculateTotalPrice(HashMap<Product,Integer> products,double totalOff)
     {
         double price = 0;
-        for (Product product : products) {
-            price+=product.getPrice();
+        for (Product product : products.keySet()) {
+            price += product.getPrice() * products.get(product);
         }
         return price - totalOff;
     }
@@ -90,7 +90,7 @@ public class ControlCustomer {
     {
         String logID = Control.getInstance().randomString(10);
         ShoppingCart cart = customer.getShoppingCart();
-        if(!customer.getDiscountCodes().containsKey(discountCode) && !discountCode.isEmpty())
+        if(!customer.getDiscountCodes().containsKey(discountCode) && !discountCode.equalsIgnoreCase("NONE"))
         {
             throw new Exception("You don't have this discount code!");
         }
@@ -132,7 +132,7 @@ public class ControlCustomer {
         DiscountCode discount = null;
         double totalDiscountAmount = 0;
         double price = cart.getPrice();
-        if(!discountCode.isEmpty()){
+        if(!discountCode.equalsIgnoreCase("NONE")){
             discount = DiscountCode.getAllDiscountCodes().get(discountCode);
             totalDiscountAmount = price*(discount.getDiscountPercentage()/100);
             if(totalDiscountAmount > discount.getMaxDiscountAmount())
@@ -147,7 +147,7 @@ public class ControlCustomer {
         }
         new BuyLog(logID,LocalDateTime.now(),totalDiscountAmount,price-totalDiscountAmount,cartProducts,cartSellers.get(0),
                 customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode,cartSellers);
-        if(!discountCode.isEmpty())
+        if(!discountCode.equalsIgnoreCase("NONE"))
             customer.addDiscountUse(discount);
 
         customer.setBalance(customer.getBalance()-(price-totalDiscountAmount));
@@ -157,10 +157,13 @@ public class ControlCustomer {
         }
 
         double totalOffMoneyPerSeller;
-        for (Seller seller : productsSellers.keySet())
-        {
+        for (Seller seller : productsSellers.keySet()){
             totalOffMoneyPerSeller = 0;
             ArrayList<Product> products = productsSellers.get(seller);
+            HashMap<Product,Integer> productsNumbers = new HashMap<>();
+            for (Product product : products) {
+                productsNumbers.put(product,cart.getProductsQuantity().get(product));
+            }
             for (Product product : products)
             {
                 for (Off off : seller.getAllOffs())
@@ -172,9 +175,10 @@ public class ControlCustomer {
                     }
                 }
             }
-            new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),totalOffMoneyPerSeller,calculateTotalPrice(products,totalOffMoneyPerSeller),
+
+            new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),totalOffMoneyPerSeller,calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller),
                     products,seller.getUsername(),customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
-            seller.setCredit(seller.getCredit() + calculateTotalPrice(products,totalOffMoneyPerSeller));
+            seller.setCredit(seller.getCredit() + calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller));
         }
         cart.clearShoppingCart();
         return logID;
