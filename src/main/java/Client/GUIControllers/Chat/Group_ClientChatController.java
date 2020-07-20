@@ -1,7 +1,7 @@
 package Client.GUIControllers.Chat;
 
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Chat.Group_Message;
+import Client.Model.Chat.Group_Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;

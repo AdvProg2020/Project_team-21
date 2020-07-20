@@ -230,10 +230,6 @@ public class ProductsPage extends GraphicFather implements Initializable {
         filterTypes.add("By CompanyName");
     }
 
-    public void gotoAuctionsPage(ActionEvent actionEvent) {
-
-    }
-
     private static class ProductsCard extends VBox {
 
         private ProductsCard(Product product){

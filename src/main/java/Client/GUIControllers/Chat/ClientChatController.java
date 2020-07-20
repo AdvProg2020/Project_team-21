@@ -1,7 +1,7 @@
 package Client.GUIControllers.Chat;
 
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Chat.Message;
+import Client.Model.Chat.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -1,6 +1,6 @@
 package Client.GUIControllers.Chat;
 
-import Server.Model.Chat.Message;
+import Client.Model.Chat.Message;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

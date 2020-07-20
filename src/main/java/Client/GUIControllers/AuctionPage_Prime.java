@@ -1,5 +1,6 @@
 package Client.GUIControllers;
 
+import Client.GUIControllers.Chat.Group_ClientChatController;
 import Client.Model.Auction;
 import Client.Model.Product;
 import javafx.event.ActionEvent;
@@ -52,9 +53,8 @@ public class AuctionPage_Prime extends GraphicFather implements Initializable {
     }
 
     public void gotoChat(ActionEvent actionEvent) throws IOException {
-//        sample.ScreenController screenController = new sample.ScreenController(Main.getScene());
-//        screenController.addScreen("AuctionsChatPage", FXMLLoader.load(getClass().getResource( "/Auction/Chat/AuctionsChatPage.fxml" )));
-//        screenController.activate("AuctionsChatPage");
+        Group_ClientChatController.setGroupChatId(auction.getAuctionId());
+        goToNextPage(Page.GROUPCHATPAGE, actionEvent);
     }
 
     private static class ProductCard extends HBox {
