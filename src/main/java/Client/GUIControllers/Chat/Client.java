@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    final static int ServerPort = 8080;
+    final static int ServerPort = 8091;
     public String chatOtherSide = "NOBODY";
 
      private DataInputStream dis;

@@ -254,6 +254,9 @@ public class GUICenter {
         else if(page.equals(Page.AUCTIONPAGEPRIME)){
             template = FXMLLoader.load(getClass().getResource("/fxml/AuctionPage_Prime.fxml"));
         }
+        else if(page.equals(Page.CHATPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/Chat/ClientChat.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

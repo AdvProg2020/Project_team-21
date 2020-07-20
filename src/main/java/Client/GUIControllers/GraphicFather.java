@@ -8,6 +8,7 @@ package Client.GUIControllers;
 import Client.ClientCenter;
 import Client.ServerRequest;
 //import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -249,6 +250,9 @@ public class GraphicFather {
     }
     public void goToOffsPage(MouseEvent mouseEvent) {
         goToNextPage(Page.OFFSPAGE,mouseEvent);
+    }
+    public void gotoAuctionsPage(ActionEvent actionEvent){
+        goToNextPage(Page.AUCTIONPAGE,actionEvent);
     }
 
 }

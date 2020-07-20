@@ -52,10 +52,6 @@ public class MainPage extends GraphicFather implements Initializable {
     }
 
     public void gotoChatRoom(ActionEvent actionEvent) {
-
-    }
-
-    public void gotoAuctionsPage(ActionEvent actionEvent) {
-
+        goToNextPage(Page.CHATPAGE,actionEvent);
     }
 }
