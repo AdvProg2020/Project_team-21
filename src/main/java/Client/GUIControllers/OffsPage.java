@@ -70,6 +70,10 @@ public class OffsPage extends GraphicFather implements Initializable {
 //        }
     }
 
+    public void gotoAuctionsPage(ActionEvent actionEvent) {
+
+    }
+
     private static class OffsCard extends GridPane {
 
         private Off off;

@@ -1,40 +1,64 @@
 package Server.Model;
 
 import Server.Model.Account.Account;
+import Server.Model.Account.Customer;
+import Server.Model.Account.Seller;
 
 public class Wallet {
-    private static int leastAmount= 0;
-    private final Account account;
-    private int amount;
+    private Customer customer;
+    private Seller seller;
+    private double balance;
+    private static double leastAmount = 0;
 
-    public Wallet(Account account, int amount) {
-        this.account = account;
-        this.amount = amount;
+    public Wallet(Customer customer, double balance) {
+        this.customer = customer;
+        this.balance = balance;
     }
 
-    public static int getLeastAmount() {
+    public Wallet(Seller seller, double balance) {
+        this.seller = seller;
+        this.balance = balance;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public static double getLeastAmount() {
         return leastAmount;
     }
 
-    public static void setLeastAmount(int leastAmount) {
+    public static void setLeastAmount(double leastAmount) {
         Wallet.leastAmount = leastAmount;
     }
 
-    public Account getAccount() {
-        return account;
+    public void increaseAmount(int amount) {
+        this.balance += amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void increaseAmount (int amount){
-        this.amount += amount;
-    }
-
-    public void decreaseAmount (int amount) throws Exception{
-        if (this.amount - amount < leastAmount)
+    public void decreaseAmount(int amount) throws Exception {
+        if (this.balance - amount < leastAmount)
             throw new Exception("Can't decrease this amount !");
-        this.amount-=amount;
+        this.balance -= amount;
     }
 }

@@ -96,3 +96,8 @@
     /*-fx-background-color: #80a7ea;*/
     -fx-opacity: 0.55;
 }
+
+.chatBtn:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}

@@ -1,13 +1,16 @@
-package Server.Controller;
-
+//package Server.Controller;
+//
 //import Server.Model.Account.Manager;
+//import com.google.gson.Gson;
 //
 //import java.io.*;
 //import java.net.Socket;
+//import java.nio.file.Files;
 //
 //public class BankTransactionController {
 //    private static BankTransactionController bankTransactionController;
 //    private String mainBankId = "";
+//    private int wage = 0;
 //    private Socket socket;
 //    private DataInputStream dis;
 //    private DataOutputStream dos;
@@ -29,18 +32,53 @@ package Server.Controller;
 //        return bankTransactionController;
 //    }
 //
+//    public void setWage(int wage) {
+//        String value = String.valueOf(wage);
+//        Gson gson = new Gson();
+//        String content = gson.toJson(value);
+//        String path = File.separator + "Wage.gson";
+//        File file = new File(path);
+//        FileWriter writer = null;
+//        try {
+//            writer = new FileWriter(file);
+//            writer.write(content);
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
 //    public String getMainBankId() {
 //        return mainBankId;
 //    }
 //
-//    public void setMainBankId() {
-//        Manager manager = (Manager) (Control.getInstance().getUser());
-//        if (!manager.getBankAccountId().equals("")) {
-//            mainBankId = manager.getBankAccountId();
-//        } else if (manager.getBankAccountId().equals("")) {
-//            mainBankId = addAccountToBank(manager.getFirstName() , manager.getLastName() , manager.getUsername()
-//                    , manager.getPassword() ,manager.getPassword());
-//            manager.setBankAccountId(mainBankId);
+//    public void setMainBankId() throws IOException {
+////        Manager manager = (Manager) (Control.getInstance().getUser());
+////        if (!manager.getBankAccountId().equals("")) {
+////            mainBankId = manager.getBankAccountId();
+////        } else if (manager.getBankAccountId().equals("")) {
+////            mainBankId = addAccountToBank(manager.getFirstName(), manager.getLastName(), manager.getUsername()
+////                    , manager.getPassword(), manager.getPassword());
+////            manager.setBankAccountId(mainBankId);
+////        }
+//        String path = File.separator + "Wage.gson";
+//        File file = new File(path);
+//        Gson gson = new Gson();
+//        if (!(file.exists())) {
+//            file.createNewFile();
+//            Manager manager = (Manager) (Control.getInstance().getUser());
+//            addAccountToBank(manager.getFirstName(), manager.getLastName(), manager.getUsername()
+//                    , manager.getPassword(), manager.getPassword());
+//            String wagePercent="10";
+//            String contentToSave = gson.toJson(wagePercent);
+//            FileWriter writer = new FileWriter(file);
+//            writer.close();
+//            wage=10;
+//        }
+//        else if (file.exists()){
+//            String content = new String(Files.readAllBytes(file.toPath()));
+//            String string = gson.fromJson(content,String.class);
+//            wage=Integer.parseInt(string.substring(1,string.length()-1));
 //        }
 //    }
 //

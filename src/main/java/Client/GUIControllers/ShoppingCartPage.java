@@ -72,6 +72,10 @@ public class ShoppingCartPage extends GraphicFather implements Initializable {
         }
     }
 
+    public void gotoAuctionsPage(ActionEvent actionEvent) {
+
+    }
+
     private static class ShoppingCartCard extends HBox {
 
         private Product product;

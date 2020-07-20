@@ -1,5 +1,6 @@
 package Client.GUIControllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -50,4 +51,11 @@ public class MainPage extends GraphicFather implements Initializable {
         goToNextPage(Page.SETTINGS,mouseEvent);
     }
 
+    public void gotoChatRoom(ActionEvent actionEvent) {
+
+    }
+
+    public void gotoAuctionsPage(ActionEvent actionEvent) {
+
+    }
 }

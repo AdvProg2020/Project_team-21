@@ -41,7 +41,7 @@
 
         </Separator>
         <GridPane
-                AnchorPane.leftAnchor="380"
+                AnchorPane.leftAnchor="333"
                 AnchorPane.topAnchor="30"
                 alignment="TOP_CENTER">
 
@@ -70,6 +70,10 @@
                 <Button
                         styleClass="navBarButtons"
                         text="Offs Page" onMouseClicked="#goToOffsPage">
+
+                </Button>
+
+                <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
 
                 </Button>
 
