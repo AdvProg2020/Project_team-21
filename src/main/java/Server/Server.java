@@ -1466,12 +1466,11 @@ public class Server {
         for (String s : Company.getAllCompanies().keySet()) {
             System.out.println("Comp " + s);
         }
-        ((Customer)Account.getAllAccounts().get("customer")).setBalance(10000);
-        try {
-            ServerSocket serverSocket = new ServerSocket(8080);
-            Socket clientSocket;
-            while (true){
-                clientSocket = serverSocket.accept();
+//        ((Customer)Account.getAllAccounts().get("customer")).setBalance(10000);
+//            ServerSocket serverSocket = new ServerSocket(8080);
+//            Socket clientSocket;
+//            while (true){
+//                clientSocket = serverSocket.accept();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1521,5 +1520,6 @@ public class Server {
             }
         }).start();
 
-    }
+
+}
 }
