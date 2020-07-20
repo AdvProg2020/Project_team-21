@@ -61,6 +61,10 @@ public class OffsPagePrime extends GraphicFather implements Initializable {
         offAmountLabel.setText((int)off.getOffAmount() + "% Off");
     }
 
+    public void gotoAuctionsPage(ActionEvent actionEvent) {
+
+    }
+
     private static class ProductsCard extends HBox {
 
         private ProductsCard(Product product){

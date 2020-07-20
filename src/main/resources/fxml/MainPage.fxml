@@ -35,7 +35,7 @@
         <Separator orientation="HORIZONTAL" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="200" AnchorPane.topAnchor="144">
 
         </Separator>
-        <GridPane alignment="TOP_CENTER" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="148">
+        <GridPane alignment="TOP_CENTER"   AnchorPane.leftAnchor="333" AnchorPane.topAnchor="148">
 
         <HBox alignment="TOP_CENTER">
 
@@ -56,14 +56,41 @@
 
             </Button>
 
+            <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
+
+            </Button>
+
 
         </HBox>
+
          <columnConstraints>
             <ColumnConstraints />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints />
          </rowConstraints>
+        </GridPane>
+
+        <GridPane   AnchorPane.rightAnchor="19"
+                    AnchorPane.topAnchor="140"
+                    alignment="CENTER_LEFT">
+
+            <HBox>
+
+                <VBox
+
+                >
+                    <Button
+                            styleClass="chatBtn"
+                            text="Go to Chat Room!"
+                            onAction="#gotoChatRoom"
+                            style="-fx-alignment: center; -fx-label-padding: 4 4 4 4; -fx-background-color: #2a447e; -fx-text-fill: #bdc2be;"
+                    >
+
+                    </Button>
+                </VBox>
+            </HBox>
+
         </GridPane>
 
         <VBox styleClass="navBarRightContainer" AnchorPane.rightAnchor="20">
