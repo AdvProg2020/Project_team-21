@@ -1,5 +1,6 @@
 package Server.Model.Account;
 
+import Server.Model.BankPrime.BankAccount;
 import Server.Model.SaveData;
 
 import java.io.File;
@@ -13,6 +14,7 @@ public class Manager extends Account implements Comparable<Manager>{
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewManager(this);
         SaveData.saveData(this, getUsername(), SaveData.managerFile);
+        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
     //    public static void rewriteFiles(){
 //        for (Manager manager : Manager.getAllManagers()) {

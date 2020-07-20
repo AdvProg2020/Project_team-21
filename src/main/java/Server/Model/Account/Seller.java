@@ -1,11 +1,9 @@
 package Server.Model.Account;
 
 import Server.Controller.Sort;
-import Server.Model.Company;
-import Server.Model.Off;
-import Server.Model.Product;
+import Server.Model.*;
+import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.SellLog;
-import Server.Model.SaveData;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class Seller extends Account implements Comparable<Seller>{
     private ArrayList<String> allProducts = new ArrayList<>();
     private ArrayList<String> allOffs = new ArrayList<>();
     private ArrayList<String> sellLogs = new ArrayList<>();
-
+    private Wallet wallet;
     private String requestID;
 
 
@@ -26,6 +24,9 @@ public class Seller extends Account implements Comparable<Seller>{
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         if(company != null)
             this.company = company.getName();
+        //TODO ASK MOHAMMAD : in chera credit nadare?
+        this.wallet = new Wallet(this , (int) getCredit());
+        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
     //    public static void rewriteFiles(){
 //        for (Seller seller : Seller.getAllSeller()) {
@@ -168,5 +169,9 @@ public class Seller extends Account implements Comparable<Seller>{
 
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
         }
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 }

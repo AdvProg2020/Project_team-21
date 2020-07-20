@@ -3,6 +3,7 @@ package Server.Model.Account;
 import Server.Controller.Control;
 import Server.Controller.Sort;
 import Server.Model.*;
+import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.BuyLog;
 
 import java.io.File;
@@ -18,6 +19,7 @@ public class Customer extends Account implements Comparable<Customer>{
     private ArrayList<String> buyLogs = new ArrayList<>();
     public ArrayList<String> offs = new ArrayList<>();
     public double balance;
+    private Wallet wallet;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
@@ -26,6 +28,8 @@ public class Customer extends Account implements Comparable<Customer>{
         String cartID = Control.getInstance().randomString(5);
         ShoppingCart cart = new ShoppingCart(this, cartID);
         setShoppingCart(cartID);
+        this.wallet = new Wallet(this , balance);
+        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
 
     //    public static void rewriteFiles(){
@@ -187,4 +191,7 @@ public class Customer extends Account implements Comparable<Customer>{
         balance += amount;
     }
 
+    public Wallet getWallet() {
+        return wallet;
+    }
 }
