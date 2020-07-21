@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Client.GUIControllers.Bank.BankGUIControllers.WalletPageControllers"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@/css/walletStyle.css">
+
+
+    <Separator orientation="HORIZONTAL" AnchorPane.leftAnchor="480" AnchorPane.rightAnchor="480" AnchorPane.topAnchor="380"/>
+
+
+    <GridPane
+            AnchorPane.topAnchor="0"
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            minHeight="150"
+            alignment="CENTER"
+            styleClass="walletNav"
+    >
+
+        <HBox>
+            <ImageView fitHeight="80" fitWidth="80" layoutX="1463.0" layoutY="551.0">
+                <image>
+                    <Image url="@/images/bank_logo.png"/>
+                </image>
+            </ImageView>
+
+            <Label
+                    styleClass="walletTitle"
+                    text="Wallet"
+            >
+
+            </Label>
+        </HBox>
+
+    </GridPane>
+
+
+    <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">
+
+        <AnchorPane AnchorPane.leftAnchor="10">
+            <Button
+                    onAction="#goBack"
+                    styleClass="backButton"
+            >
+                <graphic>
+                    <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#goBack">
+                        <image>
+                            <Image url="@/images/back.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </AnchorPane>
+
+    </AnchorPane>
+
+    <GridPane
+            AnchorPane.topAnchor="250"
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            alignment="CENTER"
+    >
+
+        <VBox GridPane.rowIndex="1">
+
+            <Label
+                    text="Charge Wallet"
+                    styleClass="transactionTitle"
+            >
+
+            </Label>
+            <HBox style="-fx-padding: 15 0 0 0;">
+
+                <VBox styleClass="amountField">
+                    <TextField
+                            promptText="Amount"
+                            styleClass="walletTextField"
+                    >
+
+                    </TextField>
+                </VBox>
+
+                <VBox style="-fx-padding: 4 0 0 15">
+                    <Button
+                            text="Change Wallet"
+                            styleClass="changeWalletBtn"
+                    >
+
+                    </Button>
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+
+
+
+        <VBox  GridPane.rowIndex="4"
+               style="-fx-padding: 100 0 0 0;"
+        >
+            <Label
+                    text="Withdraw from Wallet"
+                    styleClass="transactionTitle"
+            >
+
+            </Label>
+
+            <HBox style="-fx-padding: 15 0 0 0;">
+
+                <VBox styleClass="amountField">
+                    <TextField
+                            promptText="Amount"
+                            styleClass="walletTextField"
+                    >
+
+                    </TextField>
+                </VBox>
+
+                <VBox style="-fx-padding: 4 0 0 15">
+                    <Button
+                            text="Change Wallet"
+                            styleClass="changeWalletBtn"
+                    >
+
+                    </Button>
+
+                </VBox>
+            </HBox>
+        </VBox>
+
+    </GridPane>
+
+</AnchorPane>

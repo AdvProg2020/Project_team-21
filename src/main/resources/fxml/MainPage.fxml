@@ -71,27 +71,37 @@
          </rowConstraints>
         </GridPane>
 
-        <GridPane   AnchorPane.rightAnchor="19"
+        <GridPane   AnchorPane.rightAnchor="9"
                     AnchorPane.topAnchor="140"
                     alignment="CENTER_LEFT">
 
             <HBox>
 
-                <VBox
+                <HBox
 
                 >
                     <Button
                             styleClass="chatBtn"
                             text="Go to Chat Room!"
                             onAction="#gotoChatRoom"
-                            style="-fx-alignment: center; -fx-label-padding: 4 4 4 4; -fx-background-color: #2a447e; -fx-text-fill: #bdc2be;"
+                            style="-fx-alignment: center; -fx-label-padding: 4 4 4 8; -fx-background-color: #2a447e; -fx-text-fill: #bdc2be;"
                     >
 
                     </Button>
-                </VBox>
+
+                    <Button
+                            styleClass="walletBtn"
+                            prefWidth="40"
+                            prefHeight="40"
+                            onAction="#goToWalletPage"
+                    >
+
+                    </Button>
+                </HBox>
             </HBox>
 
         </GridPane>
+
 
         <VBox styleClass="navBarRightContainer" AnchorPane.rightAnchor="20">
             <HBox>
