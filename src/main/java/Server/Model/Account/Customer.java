@@ -18,6 +18,7 @@ public class Customer extends Account implements Comparable<Customer>{
     private HashMap<String,Integer> discountCodesUsed = new HashMap<>();
     private ArrayList<String> buyLogs = new ArrayList<>();
     public ArrayList<String> offs = new ArrayList<>();
+    private ArrayList<String> files = new ArrayList<>();
     public double balance;
     private Wallet wallet;
 
@@ -193,5 +194,12 @@ public class Customer extends Account implements Comparable<Customer>{
 
     public Wallet getWallet() {
         return wallet;
+    }
+
+    public ArrayList<String> getFiles() {
+        return files;
+    }
+    public void addFile(String file){
+        files.add(file);
     }
 }

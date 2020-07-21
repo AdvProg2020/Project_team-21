@@ -102,6 +102,6 @@ public class SellerAccount extends GraphicFather implements Initializable {
     }
 
     public void goToFiles(MouseEvent mouseEvent) {
-
+        goToNextPage(Page.SELLERFILES,mouseEvent);
     }
 }

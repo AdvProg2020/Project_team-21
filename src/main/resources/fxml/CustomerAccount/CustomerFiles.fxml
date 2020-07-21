@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -11,10 +8,10 @@
 <?import javafx.scene.shape.Circle?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.GUIControllers.BuyLogsPage"
             prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@/css/buyLogsPageStyle.css"
-            styleClass="wholePageContainer">
+            fx:controller="Client.GUIControllers.CustomerAccount.CustomerFiles"
+            stylesheets="@/css/productsPageStyle.css">
+
 
     <AnchorPane
             AnchorPane.leftAnchor="0"
@@ -78,23 +75,12 @@
 
                 </Button>
 
-                <Button styleClass="navBarButtons" onAction="#goToFiles" text="Files">
-
-                </Button>
 
             </HBox>
         </GridPane>
 
         <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
             <HBox>
-<!--                <Button-->
-<!--                        styleClass="navBarAccountBtn"-->
-<!--                        prefHeight="50"-->
-<!--                        prefWidth="50"-->
-
-<!--                >-->
-
-<!--                </Button>-->
                 <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccountCircle" radius="30" stroke="BLACK" strokeType="INSIDE" styleClass="profilePhoto" />
                 <Label
                         styleClass="navBarAccountLabel"
@@ -125,35 +111,39 @@
             </Button>
         </AnchorPane>
 
+
     </AnchorPane>
 
+    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="75">
+
+    </AnchorPane>
 
     <Label
             AnchorPane.leftAnchor="0"
             AnchorPane.rightAnchor="0"
             AnchorPane.topAnchor="90"
             alignment="CENTER"
-            text="Buy Logs Page"
-
-            style="-fx-text-fill: #2ab9e2; -fx-font-weight: bold; -fx-font-size: 18px;"
+            text="Your Files"
             styleClass="productsPageTitle"
     >
 
     </Label>
 
-    <ScrollPane
-            fitToWidth="true"
+
+    <HBox
             AnchorPane.leftAnchor="10"
             AnchorPane.rightAnchor="10"
             AnchorPane.topAnchor="170"
-            AnchorPane.bottomAnchor="10"
-            style="-fx-padding: 35 20 20 20;">
+            AnchorPane.bottomAnchor="10">
 
-        <GridPane  fx:id="logsGridPane"
-                   alignment="CENTER">
+        <ScrollPane  style="-fx-padding: 10 8 5 8;" minWidth="822">
+            <GridPane  fx:id="productsGridPane"
+                       alignment="CENTER">
 
-        </GridPane>
+            </GridPane>
+        </ScrollPane>
 
-    </ScrollPane>
+        <VBox style="-fx-padding: 10 10 10 10;"/>
 
+    </HBox>
 </AnchorPane>

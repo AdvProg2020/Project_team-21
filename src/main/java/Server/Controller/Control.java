@@ -517,8 +517,8 @@ public class Control {
             String character;
             while ((character = reader.readLine()) != null) {
                 String[] parsed = character.split(" - ");
-                String infos = parsed[0] + " - " + parsed[1];
-                File file = new File("Files/" + parsed[2]);
+                String infos = parsed[0] + " - " + parsed[1] + " - " + parsed[2];
+                File file = new File(parsed[3]);
                 allFiles.put(infos,file);
                 character = "";
             }
@@ -527,11 +527,13 @@ public class Control {
     }
 
     public void addFile(String infos,File file){
-        allFiles.put(infos,file);
-        FileWriter writer2;
+        System.out.println("added " + infos + file);
+        String unique = randomString(5);
+        allFiles.put(infos + " - " + unique ,file);
         try {
-            writer2 = new FileWriter("Database/files.txt", true);
-            writer2.write((infos+ " - "+file.getName()+'\n'));
+            FileWriter writer = new FileWriter("Database/Files.txt", true);
+            writer.write(infos + " - " + unique + " - "+file + '\n');
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

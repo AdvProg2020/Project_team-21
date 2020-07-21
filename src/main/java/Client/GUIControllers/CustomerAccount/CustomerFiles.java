@@ -1,8 +1,7 @@
-package Client.GUIControllers;//package Products;
+package Client.GUIControllers.CustomerAccount;//package Products;
 
 
 import Client.ClientCenter;
-import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
 import Client.ServerRequest;
 import javafx.event.ActionEvent;
@@ -13,7 +12,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -21,18 +22,16 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.commons.io.FileUtils;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class FilesPage extends GraphicFather implements Initializable {
+public class CustomerFiles extends GraphicFather implements Initializable {
 
 
     public GridPane productsGridPane;
@@ -44,7 +43,7 @@ public class FilesPage extends GraphicFather implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         topBarShowRest(profilePhoto,profileName,userPage);
 
-        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLFILES);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETCUSTOMERFILES);
         String dataInput = ClientCenter.getInstance().readMessageFromServer();
 
         if(!dataInput.equalsIgnoreCase("NONE")){
@@ -57,7 +56,7 @@ public class FilesPage extends GraphicFather implements Initializable {
                     j++;
                 }
                 String[] data = s.split("&");
-                FileCard card = new FileCard(data[1],data[0],data[2],ClientCenter.getInstance().getImageExt(data[3]),data[4]);
+                FileCard card = new FileCard(data[0],data[2],ClientCenter.getInstance().getImageExt(data[1]));
                 productsGridPane.add(card, i, j);
                 i++;
             }
@@ -73,11 +72,8 @@ public class FilesPage extends GraphicFather implements Initializable {
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.initOwner((Stage)((Node)event.getSource()).getScene().getWindow());
             VBox dialogVbox = new VBox(20);
-            Text txt = new Text(ClientCenter.getInstance().getMessageFromError(message));
-            if(message.startsWith(ServerRequest.DONE.toString()))
-                txt.setFill(Paint.valueOf("069438"));
-            else
-                txt.setFill(Paint.valueOf("f21a25"));
+            Text txt = new Text(message);
+            txt.setFill(Paint.valueOf("069438"));
             Font font = new Font("Hiragino Sans W3" , 20);
             txt.setFont(font);
             dialogVbox.getChildren().add(txt);
@@ -89,7 +85,7 @@ public class FilesPage extends GraphicFather implements Initializable {
             dialog.show();
         }
 
-        private FileCard(String name,String price,String space,Image image,String seller){
+        private FileCard(String name,String space,Image image){
 
             ImageView cardImageView = new ImageView(image);
 
@@ -104,7 +100,7 @@ public class FilesPage extends GraphicFather implements Initializable {
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
 
             Label cardDescription = new Label();
-            cardDescription.setText(("Name: " + name + "\n" + "Size: " + space + "MB" + "\n" + "Price: " + price + "\nSeller: " + seller));
+            cardDescription.setText(("Name: " + name + "\n" + "Size: " + space + "MB"));
             this.getChildren().add(cardDescription);
             cardDescription.getStyleClass().add("mainPageProductCardsDetail");
             cardDescription.setWrapText(true);
@@ -113,14 +109,14 @@ public class FilesPage extends GraphicFather implements Initializable {
             this.getChildren().add(separator);
 
             Button cardButton = new Button();
-            URL res = getClass().getClassLoader().getResource("images/buy.png");
-            Image buy = null;
+            URL res = getClass().getClassLoader().getResource("images/download.png");
+            Image download = null;
             try {
-                buy = new Image(res.toURI().toString());
+                download = new Image(res.toURI().toString());
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-            ImageView show = new ImageView(buy);
+            ImageView show = new ImageView(download);
             show.setFitHeight(50);
             show.setFitWidth(50);
             cardButton.setGraphic(show);
@@ -138,7 +134,7 @@ public class FilesPage extends GraphicFather implements Initializable {
                 public void handle(ActionEvent e)
                 {
                     try {
-                        buy(e, name,price,seller);
+                        download(e, name);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -149,10 +145,10 @@ public class FilesPage extends GraphicFather implements Initializable {
             this.getStyleClass().add("mainPageProductCards");
         }
 
-        public void buy(ActionEvent actionEvent, String file,String price,String seller) throws IOException {
-            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTBUYFILE,file + "//" + price + "//"+ seller);
-            String response = ClientCenter.getInstance().readMessageFromServer();
-            showPopup(actionEvent,response);
+        public void download(ActionEvent actionEvent, String file) throws IOException {
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETFILE,file);
+            ClientCenter.getInstance().downloadFile();
+            showPopup(actionEvent,"Enjoy ᕙ(⇀‸↼‶)ᕗ");
         }
     }
 }

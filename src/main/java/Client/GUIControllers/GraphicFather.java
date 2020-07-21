@@ -254,9 +254,12 @@ public class GraphicFather {
     public void gotoAuctionsPage(ActionEvent actionEvent){
         goToNextPage(Page.AUCTIONPAGE,actionEvent);
     }
-
+    public void goToFiles(ActionEvent actionEvent){
+        goToNextPage(Page.FILESPAGE,actionEvent);
+    }
     public void goToWalletPage(ActionEvent actionEvent) {
         goToNextPage(Page.WALLETPAGE, actionEvent);
     }
+
 
 }

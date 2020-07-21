@@ -1468,19 +1468,22 @@ public class Server {
                             sendImage(auction.getAuctionProduct().getImagePath(),"Product:" + auction.getAuctionProduct().getProductId());
                         }
                     }
-//                    else if(request.equalsIgnoreCase(ServerRequest.GETALLFILES.toString())){
-//                        String output = "NONE";
-//                        int i =0;
-//                        for (String s : ServerCenter.getInstance().getAllFiles().keySet()) {
-//                            if(i!=0)
-//                                output += " - ";
-//                            else
-//                                output = "";
-//                            File file = ServerCenter.getInstance().getAllFiles().get(s);
-//                            output += file.getName() + "&" + file.getTotalSpace() + "&" + getFileExt(file.getPath());
-//                            i++;
-//                        }
-//                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETALLFILES.toString())){
+                        String output = "NONE";
+                        int i =0;
+                        for (String s : Control.getInstance().getAllFiles().keySet()) {
+                            if(i!=0)
+                                output += " - ";
+                            else
+                                output = "";
+                            File file = Control.getInstance().getAllFiles().get(s);
+                            String[] parsed = s.split(" - ");
+                            output +=  parsed[1] + "&" +file.getName() + "&" + file.length()/1000000 + "&" + getFileExt(file.getPath()) + "&" +parsed[0];
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                    }
+
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLSELLERFILES.toString())){
                         String output = "NONE";
                         int i=0;
@@ -1495,19 +1498,57 @@ public class Server {
                                 output = "";
                             File file = Control.getInstance().getAllFiles().get(s);
 
-                            output += parsed[1] + "&" + file.getName() + "&" + file.getTotalSpace() + "&" + getFileExt(file.getPath());
+                            output += parsed[1] + "&" + file.getName() + "&" + file.length()/1000000 + "&" + getFileExt(file.getPath());
                             i++;
                         }
                         sendMessageToClient(output);
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.POSTUPLOADFILE.toString())){
-                        if(!data.matches("\\d+")){
-                            sendError("Your price format is wrong",true);
-                        }else{
                             Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
-                            Control.getInstance().addFile(seller.getUsername() + " - " + data,receiveFile());
-                            sendError("Uploaded to our dear servers !",false);
+                            File file = receiveFile();
+                            Control.getInstance().addFile(seller.getUsername() + " - " + data,file);
+                            sendError("Uploaded to our dear servers (*˘︶˘*)♡",false);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTBUYFILE.toString())){
+                        if(token.equalsIgnoreCase("NULL")){
+                            sendError("You should first login.",true);
+                        }else{
+                            Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                            if(!(account instanceof Customer))
+                                sendError("You should be a Customer",true);
+                            else{
+                                Customer customer = (Customer) account;
+                                String[] parsedData = data.split("//");
+                                File file = new File("Files/" + parsedData[0]);
+                                Double price = Double.parseDouble(parsedData[1]);
+                                Seller seller = (Seller) Account.getAllAccounts().get(parsedData[2]);
+                                if(customer.getBalance() < price)
+                                    sendError("You don't have enough money to buy it",true);
+                                else{
+                                    customer.addFile(parsedData[0]);
+                                    customer.setBalance(customer.getBalance() - price);
+                                    seller.setCredit(seller.getCredit() + price);
+                                    sendError("File is added to your files ಠ‿↼",false);
+                                }
+                            }
                         }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETCUSTOMERFILES.toString())){
+                        Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
+                        String output = "NONE";
+                        int i = 0;
+                        for (String file : customer.getFiles()) {
+                            if(i!=0)
+                                output += " - ";
+                            else
+                                output = "";
+                            File theOne = new File("Files/" + file);
+                            output += file + "&" + getFileExt(file) + "&" + theOne.length()/1000000;
+                        }
+                        sendMessageToClient(output);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETFILE.toString())){
+                        sendImage("Files/" + data,data);
                     }
                 } catch (IOException e) {
 //                    System.out.println("error in reading req in server");
@@ -1517,18 +1558,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-//        readFilesFromDatabase();
-//        for (String s : Account.getAllAccounts().keySet()) {
-//            System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
-//        }
-//        for (String s : Company.getAllCompanies().keySet()) {
-//            System.out.println("Comp " + s);
-//        }
-//        ((Customer)Account.getAllAccounts().get("customer")).setBalance(10000);
-//            ServerSocket serverSocket = new ServerSocket(8080);
-//            Socket clientSocket;
-//            while (true){
-//                clientSocket = serverSocket.accept();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1539,6 +1568,11 @@ public class Server {
                 for (String s : Product.getAllProducts().keySet()) {
                     System.out.println(s + " " + Product.getAllProducts().get(s).getName());
                 }
+                System.out.println("FILES");
+                for (String s : Control.getInstance().getAllFiles().keySet()) {
+                    System.out.println(s + " " + Control.getInstance().getAllFiles().get(s));
+                }
+                ((Customer)Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
                 try {
                     ServerSocket serverSocket = new ServerSocket(8080);
                     Socket clientSocket;
