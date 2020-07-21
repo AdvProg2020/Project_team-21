@@ -60,6 +60,9 @@ public class Group_ClientChatController extends GraphicFather implements Initial
                 }
             }
         });
+
+        Platform.runLater(()->nameLabel.setText("You are: " + Group_Client.getId()));
+        Platform.runLater(()->whoToChatLabel.setText("Group Chat: " + getGroupChatId()));
     }
 
 
@@ -114,6 +117,11 @@ public class Group_ClientChatController extends GraphicFather implements Initial
     }
 
     public void showContacts(){
+
+        Platform.runLater(()->nameLabel.setText("You are: " + Group_Client.getId()));
+        Platform.runLater(()->whoToChatLabel.setText("Group Chat: " + getGroupChatId()));
+
+
 //        if(!a){
                     Platform.runLater(()->contactsGridPane.getChildren().removeAll(contactsGridPane.getChildren()));
 
