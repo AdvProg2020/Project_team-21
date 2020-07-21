@@ -1526,10 +1526,14 @@ public class Server {
                                 if(customer.getBalance() < price)
                                     sendError("You don't have enough money to buy it",true);
                                 else{
-                                    customer.addFile(parsedData[0]);
-                                    customer.setBalance(customer.getBalance() - price);
-                                    seller.setCredit(seller.getCredit() + price);
-                                    sendError("File is added to your files ಠ‿↼",false);
+                                    if(customer.getFiles().contains(parsedData[0]))
+                                        sendError("You already have this file!",true);
+                                    else {
+                                        customer.addFile(parsedData[0]);
+                                        customer.setBalance(customer.getBalance() - price);
+                                        seller.setCredit(seller.getCredit() + price);
+                                        sendError("File is added to your files ಠ‿↼",false);
+                                    }
                                 }
                             }
                         }
@@ -1568,18 +1572,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-//        readFilesFromDatabase();
-//        for (String s : Account.getAllAccounts().keySet()) {
-//            System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
-//        }
-//        for (String s : Company.getAllCompanies().keySet()) {
-//            System.out.println("Comp " + s);
-//        }
-//        ((Customer)Account.getAllAccounts().get("customer")).setBalance(10000);
-//            ServerSocket serverSocket = new ServerSocket(8080);
-//            Socket clientSocket;
-//            while (true){
-//                clientSocket = serverSocket.accept();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1590,6 +1582,7 @@ public class Server {
                 for (String s : Product.getAllProducts().keySet()) {
                     System.out.println(s + " " + Product.getAllProducts().get(s).getName());
                 }
+                ((Customer) Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
                 try {
                     ServerSocket serverSocket = new ServerSocket(8080);
                     Socket clientSocket;

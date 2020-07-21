@@ -201,5 +201,7 @@ public class Customer extends Account implements Comparable<Customer>{
     }
     public void addFile(String file){
         files.add(file);
+        rewriteFiles();
+        Account.rewriteFiles();
     }
 }
