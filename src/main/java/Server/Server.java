@@ -1509,6 +1509,15 @@ public class Server {
                             sendError("Uploaded to our dear servers !",false);
                         }
                     }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETACCOUNT.toString())){
+                        if(!token.equalsIgnoreCase("NULL")){
+                            Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                            sendMessageToClient(account.getUsername() + "-" + account.getType());
+                        } else {
+                            sendMessageToClient("guest");
+                        }
+
+                    }
                 } catch (IOException e) {
 //                    System.out.println("error in reading req in server");
                 }
