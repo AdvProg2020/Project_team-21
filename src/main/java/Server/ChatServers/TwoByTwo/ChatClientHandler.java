@@ -55,6 +55,13 @@ public class ChatClientHandler implements Runnable {
                 received = dis.readUTF();
                 System.out.println(received);
 
+                if(received.startsWith("activity")){
+                    String[] splited = received.split("&");
+                    String toSend = String.valueOf(allClients.get(splited[1]));
+                    dos.writeUTF(toSend);
+                    continue;
+                }
+
                 if(received.equals("getContacts")){
                     String toSend = "";
                     for (ChatClientHandler chatClientHandler : allClients.keySet()) {

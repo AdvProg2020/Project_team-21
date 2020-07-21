@@ -29,11 +29,9 @@ public class ClientChatController extends GraphicFather implements Initializable
     private static Client client;
 
     private ArrayList<Button> contactButtons = new ArrayList<>();
-    public static HashMap<String, UserStatusEnum> activityMap = new HashMap<>();
 
-    static {
-        activityMap.put("NOBODY", UserStatusEnum.NO_STATUS);
-    }
+
+
 
 //    public static Vector<TwoByTwoChat.Server.ClientHandler> allClients = new Vector<>();
 
@@ -44,9 +42,7 @@ public class ClientChatController extends GraphicFather implements Initializable
         whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
 //        activityLabel.setText(ClientHandler.allClients.get(this.client));
 
-        activityMap.put(client.getId(), UserStatusEnum.ONLINE);
 
-        activityLabel.setText(activityMap.get(client.chatOtherSide).toString());
 
     }
 
@@ -155,12 +151,13 @@ public class ClientChatController extends GraphicFather implements Initializable
                 {
                     client.chatOtherSide = contactButton.getText();
                     whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
-                    if(!activityMap.containsKey(client.chatOtherSide)){
-                        activityLabel.setText(UserStatusEnum.OFFLINE.toString());
+                    if(!client.activityMap.containsKey(client.chatOtherSide)){
+//                        activityLabel.setText(UserStatusEnum.OFFLINE.toString());
                     } else {
-                        activityLabel.setText(activityMap.get(client.chatOtherSide).toString());
+//                        activityLabel.setText(client.activityMap.get(client.chatOtherSide).toString());
                     }
 
+//                    client.sendActivityStatus();
                     printMessages();
                 }
             };

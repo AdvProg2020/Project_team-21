@@ -1,6 +1,7 @@
 package Client.GUIControllers.Chat;
 
 import Client.Model.Chat.Message;
+import javafx.application.Platform;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Client {
@@ -24,8 +26,16 @@ public class Client {
 
      private String id;
 
+    public static HashMap<String, UserStatusEnum> activityMap = new HashMap<>();
+    static {
+        activityMap.put("NOBODY", UserStatusEnum.NO_STATUS);
+    }
+
     public Client(ClientChatController clientChatController) throws IOException {
          this.clientChatController = clientChatController;
+        activityMap.put(getId(), UserStatusEnum.ONLINE);
+
+//        clientChatController.activityLabel.setText(activityMap.get(chatOtherSide).toString());
 
 //         new Thread(new Runnable() {
 //
@@ -135,6 +145,21 @@ public class Client {
                         String cont = dis.readUTF();
                         getContacts(cont);
 
+//                        sendActivityStatus();
+
+//                        String message = "activity&" + chatOtherSide;
+//
+//                        if(!chatOtherSide.equals("NOBODY")){
+//                            dos.writeUTF(message);
+//                            String read = dis.readUTF();
+//                            Platform.runLater(()->clientChatController.activityLabel.setText(read));
+//                        } else {
+//                            String read = "NO_STATUS";
+//                            Platform.runLater(()->clientChatController.activityLabel.setText(read));
+//                        }
+
+
+
 
 
                         String msg = dis.readUTF();
@@ -177,7 +202,7 @@ public class Client {
 
     public void sendFinalMessage() throws IOException {
         dos.writeUTF("finish");
-        ClientChatController.activityMap.replace(this.getId(), UserStatusEnum.OFFLINE);
+        activityMap.replace(this.getId(), UserStatusEnum.OFFLINE);
     }
 
     public String getId() {
@@ -193,6 +218,20 @@ public class Client {
         allClientsArr.clear();
         allClientsArr.addAll(Arrays.asList(contacts));
         clientChatController.showContacts();
+    }
+
+    public void sendActivityStatus() {
+        try {
+            // write on the output stream
+            String message = "activity&" + chatOtherSide;
+            if(!chatOtherSide.equals("NOBODY")){
+                dos.writeUTF(message);
+            }
+            String read = dis.readUTF();
+            Platform.runLater(()->clientChatController.activityLabel.setText(read));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //    public static void main(String[] args) throws IOException {
