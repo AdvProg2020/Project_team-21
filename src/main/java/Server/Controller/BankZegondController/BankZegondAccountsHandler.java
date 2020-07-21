@@ -1,5 +1,7 @@
 package Server.Controller.BankZegondController;
 
+import Client.ClientCenter;
+import Client.ServerRequest;
 import Server.Controller.Control;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
@@ -35,11 +37,16 @@ public class BankZegondAccountsHandler {
         String response = Control.getInstance().getBankAccountsController().createBankAccount(requestForServer.getInputs().get(0), requestForServer.getInputs().get(1),
                 requestForServer.getInputs().get(2), requestForServer.getInputs().get(3), requestForServer.getInputs().get(4));
         if (!response.startsWith("password") && !response.startsWith("username")) {
-            //Account user; //TODO = Shop.getInstance().findUser(requestForServer.getInputs().get(2));
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.GETACCOUNT);
+            String res = ClientCenter.getInstance().readMessageFromServer();
+            //Shop.getInsta.findUser(requestForServer.getInputs().get(2));
+            String[] splitted = res.split("-");
+            Account user = Account.getAccountFromUserName(splitted[0]);
             if (user instanceof Customer)
                 ((Customer) user).setBankAccountId(response);
-            if (user == null) {
-                //TODO Shop.getInstance().findRegisteringSellerRequestForServer(requestForServer.getInputs().get(2)).setBankAccountId(response);
+            if (res.equals("guest")) {
+                //TODO Ask
+                // Shop.getInstance().findRegisteringSellerRequestForServer(requestForServer.getInputs().get(2)).setBankAccountId(response);
             }
         }
         String answer = Control.getInstance().getBankTransactionsController().depositFirstAfterCreating(requestForServer.getInputs().get(2), requestForServer.getInputs().get(3), "10000000");

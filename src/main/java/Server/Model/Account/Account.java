@@ -174,4 +174,12 @@ public abstract class Account {
             allAccounts.put(((Account)object).getUsername() ,(Account)(object));
         }
     }
+
+    public static Account getAccountFromUserName(String user){
+        for (Account account : allAccounts.values()) {
+            if (account.getUsername().equals(user))
+                return account;
+        }
+        return null;
+    }
 }
