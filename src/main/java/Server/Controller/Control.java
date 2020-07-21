@@ -1,6 +1,8 @@
 package Server.Controller;
 
 
+import Server.Controller.BankZegondController.BankZegondAccountsController;
+import Server.Controller.BankZegondController.BankZegondTransactionsController;
 import Server.Model.*;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
@@ -27,7 +29,13 @@ public class Control {
 //    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
 
+
+    private BankZegondAccountsController bankAccountsController;
+    private BankZegondTransactionsController bankTransactionsController;
+
     private Control() {
+        this.bankAccountsController = new BankZegondAccountsController(8090);
+        this.bankTransactionsController = new BankZegondTransactionsController();
     }
 
 //    public ShoppingCart getSignOutCart() {
@@ -505,4 +513,11 @@ public class Control {
         seller.getWallet().setBalance(seller.getWallet().getBalance() + amount);
     }
 
+    public BankZegondAccountsController getBankAccountsController() {
+        return bankAccountsController;
+    }
+
+    public BankZegondTransactionsController getBankTransactionsController() {
+        return bankTransactionsController;
+    }
 }
