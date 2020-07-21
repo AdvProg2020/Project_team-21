@@ -260,6 +260,12 @@ public class GUICenter {
         else if(page.equals(Page.FILESPAGE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/FilesPage.fxml"));
         }
+        else if(page.equals(Page.GROUPCHATPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/Chat/Group_ClientChat.fxml"));
+        }
+        else if(page.equals(Page.WALLETPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/BankAndWallet/WalletPage.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

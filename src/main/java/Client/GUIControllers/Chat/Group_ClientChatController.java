@@ -1,7 +1,7 @@
 package Client.GUIControllers.Chat;
 
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Chat.Group_Message;
+import Client.Model.Chat.Group_Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -22,7 +22,7 @@ public class Group_ClientChatController extends GraphicFather implements Initial
     public Label whoToChatLabel;
     public Label activityLabel;
 //    public Label errorLabel;
-    private Group_Client Group_Client;
+    private static Group_Client Group_Client;
 
 //    private ArrayList<Button> contactButtons = new ArrayList<>();
 //    public static Vector<TwoByTwoChat.Server.ClientHandler> allClients = new Vector<>();
@@ -47,7 +47,9 @@ public class Group_ClientChatController extends GraphicFather implements Initial
     }
 
     public Group_ClientChatController() throws IOException {
-        Group_Client = new Group_Client(this);
+        if(Group_Client==null) {
+            Group_Client = new Group_Client(this);
+        }
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 System.out.println("Running Shutdown Hook");

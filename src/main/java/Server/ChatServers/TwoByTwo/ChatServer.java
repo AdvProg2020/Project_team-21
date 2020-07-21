@@ -1,5 +1,8 @@
 package Server.ChatServers.TwoByTwo;
 
+import Client.GUIControllers.GUICenter;
+import Client.GUIControllers.GraphicFather;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

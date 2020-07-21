@@ -1,7 +1,7 @@
 package Client.GUIControllers.Chat;
 
 import Client.GUIControllers.GraphicFather;
-import Server.Model.Chat.Message;
+import Client.Model.Chat.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ClientChatController extends GraphicFather implements Initializable {
@@ -25,9 +26,13 @@ public class ClientChatController extends GraphicFather implements Initializable
     public Label whoToChatLabel;
     public Label activityLabel;
     public Label errorLabel;
-    private Client client;
+    private static Client client;
 
     private ArrayList<Button> contactButtons = new ArrayList<>();
+
+
+
+
 //    public static Vector<TwoByTwoChat.Server.ClientHandler> allClients = new Vector<>();
 
     @Override
@@ -37,10 +42,15 @@ public class ClientChatController extends GraphicFather implements Initializable
         whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
 //        activityLabel.setText(ClientHandler.allClients.get(this.client));
 
+
+
     }
 
     public ClientChatController() throws IOException {
-        client = new Client(this);
+        if(client==null){
+            client = new Client(this);
+        }
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 System.out.println("Running Shutdown Hook");
@@ -141,6 +151,13 @@ public class ClientChatController extends GraphicFather implements Initializable
                 {
                     client.chatOtherSide = contactButton.getText();
                     whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
+                    if(!client.activityMap.containsKey(client.chatOtherSide)){
+//                        activityLabel.setText(UserStatusEnum.OFFLINE.toString());
+                    } else {
+//                        activityLabel.setText(client.activityMap.get(client.chatOtherSide).toString());
+                    }
+
+//                    client.sendActivityStatus();
                     printMessages();
                 }
             };

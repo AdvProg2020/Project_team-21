@@ -1,6 +1,6 @@
 package Server.Controller.Chat;
 
-import Server.Model.Chat.Group_Message;
+import Client.Model.Chat.Group_Message;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Group_Client {
 
-    final static int ServerPort = 8091;
+    final static int ServerPort = 9091;
     public String chatOtherSide = "NOBODY";
 
      private DataInputStream dis;

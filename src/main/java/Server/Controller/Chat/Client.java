@@ -1,6 +1,6 @@
 package Server.Controller.Chat;
 
-import Server.Model.Chat.Message;
+import Client.Model.Chat.Message;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Client {
 
-    final static int ServerPort = 8090;
+    final static int ServerPort = 8091;
     public String chatOtherSide = "NOBODY";
 
      private DataInputStream dis;

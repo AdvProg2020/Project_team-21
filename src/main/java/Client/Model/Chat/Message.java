@@ -1,4 +1,4 @@
-package Server.Model.Chat;
+package Client.Model.Chat;
 
 import java.util.ArrayList;
 

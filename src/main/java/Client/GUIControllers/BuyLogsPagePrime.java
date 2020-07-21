@@ -65,10 +65,6 @@ public class BuyLogsPagePrime extends GraphicFather implements Initializable {
         phoneNumberLabel.setText("Buyer's Phone Num: " + buyLog.getReceiverPhoneNo());
     }
 
-    public void gotoAuctionsPage(ActionEvent actionEvent) {
-
-    }
-
     private static class ProductsCard extends HBox {
 
         private ProductsCard(Product product){

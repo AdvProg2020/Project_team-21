@@ -1,6 +1,7 @@
 package Server.Controller.Chat;
 
-import Server.Model.Chat.Message;
+import Client.GUIControllers.GraphicFather;
+import Client.Model.Chat.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ClientChatController implements Initializable {
+public class ClientChatController extends GraphicFather implements Initializable {
     public TextField messageTextField;
     public GridPane messagesGridPane;
     public GridPane contactsGridPane;
@@ -145,9 +146,5 @@ public class ClientChatController implements Initializable {
             };
             contactButton.setOnAction(event);
         }
-    }
-
-    public void goBack(ActionEvent actionEvent) {
-
     }
 }

@@ -255,4 +255,8 @@ public class GraphicFather {
         goToNextPage(Page.AUCTIONPAGE,actionEvent);
     }
 
+    public void goToWalletPage(ActionEvent actionEvent) {
+        goToNextPage(Page.WALLETPAGE, actionEvent);
+    }
+
 }

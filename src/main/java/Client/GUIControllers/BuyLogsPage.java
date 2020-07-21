@@ -66,9 +66,6 @@ public class BuyLogsPage extends GraphicFather implements Initializable {
 //        }
     }
 
-    public void gotoAuctionsPage(ActionEvent actionEvent) {
-
-    }
 
     private static class LogCard extends GridPane {
 
