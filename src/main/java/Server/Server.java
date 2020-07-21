@@ -34,6 +34,7 @@ public class Server {
         }
     }
     static void readFilesFromDatabase(){
+        Control.getInstance().fillAllFiles();
         new SaveData();
         SaveData.createAllFiles();
         BuyLog.getObjectFromDatabase();
@@ -129,6 +130,21 @@ public class Server {
             imageOutFile.write(imageByteArray);
             imageOutFile.flush();
         }
+
+        private File receiveFile() throws IOException {
+            System.out.println("File Received!");
+            String message = readMessageFromClient();
+            JSONObject obj1 = (JSONObject) JSONValue.parse(message);
+            String name = obj1.get("filename").toString();
+            String image = obj1.get("file").toString();
+            byte[] imageByteArray = decodeImage(image);
+            FileOutputStream imageOutFile = new FileOutputStream("Files/" + name);
+            imageOutFile.write(imageByteArray);
+            imageOutFile.flush();
+            File file = new File("Files/" + name);
+            return file;
+        }
+
         private void rewriteFilesRequest(){
             Seller.rewriteFiles();
             Account.rewriteFiles();
@@ -1433,11 +1449,13 @@ public class Server {
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLAUCTIONS.toString())){
                         String output = "NONE";
                         int i=0;
+                        System.out.println("n;ojlkh" + output);
                         for (Auction auction : Auction.getAllAuctions()) {
                             if(i != 0)
                                 output += " - ";
                             else
                                 output = "";
+                            System.out.println("hatta inja hm");
                             Product product = auction.getAuctionProduct();
                             output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
                                     + "&" + auction.getMaxSuggestedAmount()+product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
@@ -1450,7 +1468,47 @@ public class Server {
                             sendImage(auction.getAuctionProduct().getImagePath(),"Product:" + auction.getAuctionProduct().getProductId());
                         }
                     }
+//                    else if(request.equalsIgnoreCase(ServerRequest.GETALLFILES.toString())){
+//                        String output = "NONE";
+//                        int i =0;
+//                        for (String s : ServerCenter.getInstance().getAllFiles().keySet()) {
+//                            if(i!=0)
+//                                output += " - ";
+//                            else
+//                                output = "";
+//                            File file = ServerCenter.getInstance().getAllFiles().get(s);
+//                            output += file.getName() + "&" + file.getTotalSpace() + "&" + getFileExt(file.getPath());
+//                            i++;
+//                        }
+//                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETALLSELLERFILES.toString())){
+                        String output = "NONE";
+                        int i=0;
+                        Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                        for (String s : Control.getInstance().getAllFiles().keySet()){
+                            String[] parsed = s.split(" - ");
+                            if(!parsed[0].equals(account.getUsername()))
+                                continue;
+                            if(i!=0)
+                                output += " - ";
+                            else
+                                output = "";
+                            File file = Control.getInstance().getAllFiles().get(s);
 
+                            output += parsed[1] + "&" + file.getName() + "&" + file.getTotalSpace() + "&" + getFileExt(file.getPath());
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTUPLOADFILE.toString())){
+                        if(!data.matches("\\d+")){
+                            sendError("Your price format is wrong",true);
+                        }else{
+                            Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
+                            Control.getInstance().addFile(seller.getUsername() + " - " + data,receiveFile());
+                            sendError("Uploaded to our dear servers !",false);
+                        }
+                    }
                 } catch (IOException e) {
 //                    System.out.println("error in reading req in server");
                 }
@@ -1459,13 +1517,13 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        readFilesFromDatabase();
-        for (String s : Account.getAllAccounts().keySet()) {
-            System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
-        }
-        for (String s : Company.getAllCompanies().keySet()) {
-            System.out.println("Comp " + s);
-        }
+//        readFilesFromDatabase();
+//        for (String s : Account.getAllAccounts().keySet()) {
+//            System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
+//        }
+//        for (String s : Company.getAllCompanies().keySet()) {
+//            System.out.println("Comp " + s);
+//        }
 //        ((Customer)Account.getAllAccounts().get("customer")).setBalance(10000);
 //            ServerSocket serverSocket = new ServerSocket(8080);
 //            Socket clientSocket;

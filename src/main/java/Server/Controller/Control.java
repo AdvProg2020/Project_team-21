@@ -11,9 +11,13 @@ import Server.Model.Off;
 import Server.Model.Filters.*;
 import Server.Model.Sorts.ProductsSort;
 import Server.ServerCenter;
+import javafx.scene.image.Image;
 
-import java.io.File;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Control {
@@ -23,6 +27,7 @@ public class Control {
     public static String currentProductSort = "";
     public static String currentUserSort = "";
     public static String currentRequestSort = "";
+    private HashMap<String,File> allFiles = new HashMap<>();
 //    Account user = null;
 //    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
@@ -503,6 +508,37 @@ public class Control {
 
     public void sellerWalletCharge (Seller seller, double amount){
         seller.getWallet().setBalance(seller.getWallet().getBalance() + amount);
+    }
+
+
+    public void fillAllFiles(){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("Database/files.txt"));
+            String character;
+            while ((character = reader.readLine()) != null) {
+                String[] parsed = character.split(" - ");
+                String infos = parsed[0] + " - " + parsed[1];
+                File file = new File("Files/" + parsed[2]);
+                allFiles.put(infos,file);
+                character = "";
+            }
+        }catch (Exception e){
+        }
+    }
+
+    public void addFile(String infos,File file){
+        allFiles.put(infos,file);
+        FileWriter writer2;
+        try {
+            writer2 = new FileWriter("Database/files.txt", true);
+            writer2.write((infos+ " - "+file.getName()+'\n'));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HashMap<String, File> getAllFiles() {
+        return allFiles;
     }
 
 }

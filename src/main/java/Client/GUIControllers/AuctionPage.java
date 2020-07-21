@@ -31,23 +31,26 @@ public class AuctionPage extends GraphicFather implements Initializable {
         ArrayList<Image> allProductsImages = new ArrayList<>();
         ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLAUCTIONS);
         String response = ClientCenter.getInstance().readMessageFromServer();
-        String[] parsedData = response.split(" - ");
-        for (String s : parsedData) {
-            try {
-                allProductsImages.add(ClientCenter.getInstance().recieveImage());
-            } catch (IOException e) {
+        if(!response.equalsIgnoreCase("NONE")){
+            String[] parsedData = response.split(" - ");
+            for (String s : parsedData) {
+                try {
+                    allProductsImages.add(ClientCenter.getInstance().recieveImage());
+                } catch (IOException e) {
+                }
+            }
+            int i=0;
+            for (String s : parsedData){
+                String[] auctionData = s.split("&");
+                Auction auction = new Auction(auctionData[0],auctionData[1],auctionData[2],auctionData[3],auctionData[4],parsedData[13],parsedData[14]);
+                auction.setAuctionProduct(new Product(auctionData[5],Double.parseDouble(auctionData[6]),Double.parseDouble(auctionData[7]),Double.parseDouble(auctionData[8]),
+                        auctionData[9],auctionData[10],auctionData[11],allProductsImages.get(i),auctionData[12]));
+                AuctionsCard auctionsCard = new AuctionsCard(auction);
+                auctionsGridPane.add(auctionsCard, 0, i);
+                i++;
             }
         }
-        int i=0;
-        for (String s : parsedData){
-            String[] auctionData = s.split("&");
-            Auction auction = new Auction(auctionData[0],auctionData[1],auctionData[2],auctionData[3],auctionData[4],parsedData[13],parsedData[14]);
-            auction.setAuctionProduct(new Product(auctionData[5],Double.parseDouble(auctionData[6]),Double.parseDouble(auctionData[7]),Double.parseDouble(auctionData[8]),
-                    auctionData[9],auctionData[10],auctionData[11],allProductsImages.get(i),auctionData[12]));
-            AuctionsCard auctionsCard = new AuctionsCard(auction);
-            auctionsGridPane.add(auctionsCard, 0, i);
-            i++;
-        }
+
     }
 
     private static class AuctionsCard extends GridPane {

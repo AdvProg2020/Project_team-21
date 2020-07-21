@@ -52,7 +52,7 @@ public class ManageCategories extends GraphicFather implements Initializable {
 
     public void removeCategory(MouseEvent mouseEvent) {
         String categoryName = categoryToRemove.getText();
-        if(categoryName.equals("All Products")){
+        if(categoryName.equals("AllProducts")){
             showError(alertLabel,"You can't remove this category",Error.NEGATIVE);
         }else{
             ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTREMOVECATEGORY,categoryName);
@@ -70,7 +70,7 @@ public class ManageCategories extends GraphicFather implements Initializable {
     }
 
     public void editCategory(MouseEvent mouseEvent) {
-        if(categoryToEdit.getText().equals("All Products")){
+        if(categoryToEdit.getText().equals("AllProducts")){
             showError(alertLabel,"You can't edit this category",Error.NEGATIVE);
         }else{
             ClientCenter.getInstance().sendReqToServer(ServerRequest.GETCATEGORYEXISTS,categoryToEdit.getText());

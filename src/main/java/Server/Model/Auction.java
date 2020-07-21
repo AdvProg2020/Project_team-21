@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Auction {
 
-    private static ArrayList<Auction> allAuctions;
+    private static ArrayList<Auction> allAuctions = new ArrayList<>();
     private String auctionId;
     private Product auctionProduct;
     private LocalDateTime startTime;
@@ -16,13 +16,7 @@ public class Auction {
     private double maxSuggestedAmount;
     private Seller seller;
     private Customer auctionWinner;
-    private HashMap<Customer, Double> customersSuggestionAmount;
-
-    // Initialization Block
-    {
-        allAuctions = new ArrayList<>();
-        customersSuggestionAmount = new HashMap<>();
-    }
+    private HashMap<Customer, Double> customersSuggestionAmount = new HashMap<>();
 
     public Auction(String auctionId, Product auctionProduct, LocalDateTime startTime, LocalDateTime endTime, Seller seller){
         setAuctionId(auctionId);

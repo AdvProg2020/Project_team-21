@@ -25,8 +25,8 @@ public class Seller extends Account implements Comparable<Seller>{
         if(company != null)
             this.company = company.getName();
         //TODO ASK MOHAMMAD : in chera credit nadare?
-        this.wallet = new Wallet(this , (int) getCredit());
-        this.bankAccount = new BankAccount(firstName , lastName , username , password);
+//        this.wallet = new Wallet(this , 0);
+//        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
     //    public static void rewriteFiles(){
 //        for (Seller seller : Seller.getAllSeller()) {

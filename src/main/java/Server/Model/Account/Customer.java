@@ -28,8 +28,8 @@ public class Customer extends Account implements Comparable<Customer>{
         String cartID = Control.getInstance().randomString(5);
         ShoppingCart cart = new ShoppingCart(this, cartID);
         setShoppingCart(cartID);
-        this.wallet = new Wallet(this , balance);
-        this.bankAccount = new BankAccount(firstName , lastName , username , password);
+//        this.wallet = new Wallet(this , balance);
+//        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
 
     //    public static void rewriteFiles(){

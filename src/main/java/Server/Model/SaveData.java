@@ -17,26 +17,26 @@ import java.util.HashMap;
 
 public class SaveData {
 
-    public static final String accountFile = "Account.txt";
-    public static final String buyLogFile = "BuyLog.txt";
-    public static final String categoryFile = "Category.txt";
-    public static final String customerFile = "Customer.txt";
-    public static final String discountCodeFile = "DiscountCode.txt";
-    public static final String managerFile = "Manager.txt";
-    public static final String offFile = "Off.txt";
-    public static final String productFile = "Product.txt";
-    public static final String reviewFile = "Review.txt";
-    public static final String scoreFile = "Score.txt";
-    public static final String sellerFile = "Seller.txt";
-    public static final String sellLogFile = "SellLog.txt";
-    public static final String shoppingCartFile = "ShoppingCart.txt";
-    public static final String offRequestFile = "OffRequest.txt";
-    public static final String productRequestFile = "ProductRequest.txt";
-    public static final String sellerRequestFile = "SellerRequest.txt";
-    public static final String offReqFile = "OffReq.txt";
-    public static final String productReqFile = "ProductReq.txt";
-    public static final String sellerReqFile = "SellerReq.txt";
-    public static final String companyFile = "Company.txt";
+    public static final String accountFile = "Database/Account.txt";
+    public static final String buyLogFile = "Database/BuyLog.txt";
+    public static final String categoryFile = "Database/Category.txt";
+    public static final String customerFile = "Database/Customer.txt";
+    public static final String discountCodeFile = "Database/DiscountCode.txt";
+    public static final String managerFile = "Database/Manager.txt";
+    public static final String offFile = "Database/Off.txt";
+    public static final String productFile = "Database/Product.txt";
+    public static final String reviewFile = "Database/Review.txt";
+    public static final String scoreFile = "Database/Score.txt";
+    public static final String sellerFile = "Database/Seller.txt";
+    public static final String sellLogFile = "Database/SellLog.txt";
+    public static final String shoppingCartFile = "Database/ShoppingCart.txt";
+    public static final String offRequestFile = "Database/OffRequest.txt";
+    public static final String productRequestFile = "Database/ProductRequest.txt";
+    public static final String sellerRequestFile = "Database/SellerRequest.txt";
+    public static final String offReqFile = "Database/OffReq.txt";
+    public static final String productReqFile = "Database/ProductReq.txt";
+    public static final String sellerReqFile = "Database/SellerReq.txt";
+    public static final String companyFile = "Database/Company.txt";
 
     private static HashMap<String, Class> fileToClassMap = new HashMap<>();
     private static Gson gson;
@@ -301,11 +301,11 @@ public class SaveData {
 
         try {
             name += ".json";
-            FileWriter writer = new FileWriter(name, false);
+            FileWriter writer = new FileWriter("Database/"+name, false);
             writer.write(json);
 
             FileWriter writer2 = new FileWriter(typeClass, true);
-            writer2.write((name+'\n'));
+            writer2.write(("Database/"+name+'\n'));
 
             writer.close();
             writer2.close();
@@ -320,7 +320,7 @@ public class SaveData {
 
         try {
             name += ".json";
-            FileWriter writer = new FileWriter(name, false);
+            FileWriter writer = new FileWriter("Database/"+name, false);
             writer.write(json);
             writer.close();
 
