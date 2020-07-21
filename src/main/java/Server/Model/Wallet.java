@@ -1,64 +1,42 @@
 package Server.Model;
 
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Seller;
-
 public class Wallet {
-    private Customer customer;
-    private Seller seller;
-    private double balance;
-    private static double leastAmount = 0;
 
-    public Wallet(Customer customer, double balance) {
-        this.customer = customer;
-        this.balance = balance;
+    private double money;
+    private String bankAccountUsername;
+    private String bankAccountPassword;
+    private String currentBankToken;
+    private int accountId;
+
+    public Wallet(double money, String bankAccountUsername, String bankAccountPassword, int id, String currentBankToken) {
+        this.money = money;
+        this.bankAccountUsername = bankAccountUsername;
+        this.bankAccountPassword = bankAccountPassword;
+        this.currentBankToken = currentBankToken;
+        this.accountId = id;
     }
 
-    public Wallet(Seller seller, double balance) {
-        this.seller = seller;
-        this.balance = balance;
+    public double getMoney() {
+        return money;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getBankAccountUsername() {
+        return bankAccountUsername;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public String getBankAccountPassword() {
+        return bankAccountPassword;
     }
 
-    public Seller getSeller() {
-        return seller;
+    public String getCurrentBankToken() {
+        return currentBankToken;
     }
 
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public static double getLeastAmount() {
-        return leastAmount;
-    }
-
-    public static void setLeastAmount(double leastAmount) {
-        Wallet.leastAmount = leastAmount;
-    }
-
-    public void increaseAmount(int amount) {
-        this.balance += amount;
-    }
-
-    public void decreaseAmount(int amount) throws Exception {
-        if (this.balance - amount < leastAmount)
-            throw new Exception("Can't decrease this amount !");
-        this.balance -= amount;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 }

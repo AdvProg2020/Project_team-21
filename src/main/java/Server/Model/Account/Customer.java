@@ -196,6 +196,10 @@ public class Customer extends Account implements Comparable<Customer>{
         return wallet;
     }
 
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
     public ArrayList<String> getFiles() {
         return files;
     }
