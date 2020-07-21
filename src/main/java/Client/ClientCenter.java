@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Base64;
 
 public class ClientCenter {
@@ -218,6 +221,19 @@ public class ClientCenter {
         return photo;
     }
 
+    public void downloadFile() throws IOException {
+        System.out.println("File Received!");
+        String message = readMessageFromServer();
+        JSONObject obj1 = (JSONObject) JSONValue.parse(message);
+        String name = obj1.get("filename").toString();
+        String image = obj1.get("image").toString();
+        byte[] imageByteArray = decodeImage(image);
+        String home = System.getProperty("user.home");
+        FileOutputStream imageOutFile = new FileOutputStream(home+"/Downloads/" + name);
+        imageOutFile.write(imageByteArray);
+        imageOutFile.flush();
+    }
+
     private String getFileExt(String name){
         String extReversed = "";
         String ext = "";
@@ -246,11 +262,69 @@ public class ClientCenter {
         printWriter.println(obj.toJSONString());
         printWriter.flush();
         System.out.println("File Sent!");
-//        FileInputStream fileInputStream = new FileInputStream(path);
-//        byte[] b = new byte[20000000];
-//        fileInputStream.read(b,0,b.length);
-//        dataOutputStream.write(b,0,b.length);
-//        dataOutputStream.flush();
+    }
+
+    public void sendFile(String path,String name) throws IOException {
+        File file = new File(path);
+        FileInputStream imageInFile = new FileInputStream(file);
+        byte imageData[] = new byte[(int) file.length()];
+        imageInFile.read(imageData);
+        String imageDataString = encodeImage(imageData);
+        System.out.println("Image Successfully Manipulated!");
+        JSONObject obj = new JSONObject();
+        obj.put("filename",name);
+        obj.put("file",imageDataString);
+        printWriter.println(obj.toJSONString());
+        printWriter.flush();
+        System.out.println("File Sent!");
+    }
+
+    public Image getImageExt(String ext){
+        Image result = null;
+        if(ext.equalsIgnoreCase("pdf")){
+            URL res = getClass().getClassLoader().getResource("images/pdf.png");
+            try {
+                result = new Image(res.toURI().toString());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }else if(ext.matches("(?i)docx|doc")){
+            URL res = getClass().getClassLoader().getResource("images/doc.png");
+            try {
+                result = new Image(res.toURI().toString());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }else if(ext.matches("(?i)png|jpg|jpeg")){
+            URL res = getClass().getClassLoader().getResource("images/image.png");
+            try {
+                result = new Image(res.toURI().toString());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }else if(ext.matches("(?i)mp3|wav|m4a")){
+            URL res = getClass().getClassLoader().getResource("images/music.png");
+            try {
+                result = new Image(res.toURI().toString());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }else if(ext.matches("(?i)mp4|mkv|webm")){
+            URL res = getClass().getClassLoader().getResource("images/video.png");
+            try {
+                result = new Image(res.toURI().toString());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }else{
+                URL res = getClass().getClassLoader().getResource("images/file.png");
+                try {
+                    result = new Image(res.toURI().toString());
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+        }
+        return result;
     }
 
 }

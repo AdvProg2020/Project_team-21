@@ -71,7 +71,9 @@ public class ProductsPage extends GraphicFather implements Initializable {
         ClientCenter.getInstance().sendReqToServer(ServerRequest.GETPRODUCTSPAGE);
         try {
             String dataInput = ClientCenter.getInstance().readMessageFromServer();
+            System.out.println(dataInput);
             if(!dataInput.equalsIgnoreCase("NONE")){
+                System.out.println(dataInput);
                 String[] inputParsed = dataInput.split(" - ");
                 for (int k = 0; k < inputParsed.length; k++) {
                     productImages.add(ClientCenter.getInstance().recieveImage());
@@ -84,17 +86,6 @@ public class ProductsPage extends GraphicFather implements Initializable {
             }
         } catch (IOException e) {
         }
-
-
-//        for (Product product : Product.getAllProducts().values()) {
-//            if(i==4){
-//                i=0;
-//                j++;
-//            }
-//            ProductsCard card = new ProductsCard(product);
-//            productsGridPane.add(card, i, j);
-//            i++;
-//        }
         for (Product product : products) {
             if(i==4){
                 i=0;

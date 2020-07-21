@@ -13,9 +13,13 @@ import Server.Model.Off;
 import Server.Model.Filters.*;
 import Server.Model.Sorts.ProductsSort;
 import Server.ServerCenter;
+import javafx.scene.image.Image;
 
-import java.io.File;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Control {
@@ -25,6 +29,7 @@ public class Control {
     public static String currentProductSort = "";
     public static String currentUserSort = "";
     public static String currentRequestSort = "";
+    private HashMap<String,File> allFiles = new HashMap<>();
 //    Account user = null;
 //    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
@@ -520,4 +525,37 @@ public class Control {
     public BankZegondTransactionsController getBankTransactionsController() {
         return bankTransactionsController;
     }
+
+    public void fillAllFiles(){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("Database/files.txt"));
+            String character;
+            while ((character = reader.readLine()) != null) {
+                String[] parsed = character.split(" - ");
+                String infos = parsed[0] + " - " + parsed[1] + " - " + parsed[2];
+                File file = new File(parsed[3]);
+                allFiles.put(infos,file);
+                character = "";
+            }
+        }catch (Exception e){
+        }
+    }
+
+    public void addFile(String infos,File file){
+        System.out.println("added " + infos + file);
+        String unique = randomString(5);
+        allFiles.put(infos + " - " + unique ,file);
+        try {
+            FileWriter writer = new FileWriter("Database/Files.txt", true);
+            writer.write(infos + " - " + unique + " - "+file + '\n');
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HashMap<String, File> getAllFiles() {
+        return allFiles;
+    }
+
 }

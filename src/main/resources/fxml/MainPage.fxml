@@ -35,7 +35,7 @@
         <Separator orientation="HORIZONTAL" AnchorPane.leftAnchor="340" AnchorPane.rightAnchor="200" AnchorPane.topAnchor="144">
 
         </Separator>
-        <GridPane alignment="TOP_CENTER" AnchorPane.leftAnchor="380" AnchorPane.topAnchor="148">
+        <GridPane alignment="TOP_CENTER"   AnchorPane.leftAnchor="333" AnchorPane.topAnchor="148">
 
         <HBox alignment="TOP_CENTER">
 
@@ -56,8 +56,17 @@
 
             </Button>
 
+            <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
+
+            </Button>
+
+            <Button styleClass="navBarButtons" onAction="#goToFiles" text="Files">
+
+            </Button>
+
 
         </HBox>
+
          <columnConstraints>
             <ColumnConstraints />
          </columnConstraints>
@@ -65,6 +74,38 @@
             <RowConstraints />
          </rowConstraints>
         </GridPane>
+
+        <GridPane   AnchorPane.rightAnchor="9"
+                    AnchorPane.topAnchor="140"
+                    alignment="CENTER_LEFT">
+
+            <HBox>
+
+                <HBox
+
+                >
+                    <Button
+                            styleClass="chatBtn"
+                            text="Go to Chat Room!"
+                            onAction="#gotoChatRoom"
+                            style="-fx-alignment: center; -fx-label-padding: 4 4 4 8; -fx-background-color: #2a447e; -fx-text-fill: #bdc2be;"
+                    >
+
+                    </Button>
+
+                    <Button
+                            styleClass="walletBtn"
+                            prefWidth="40"
+                            prefHeight="40"
+                            onAction="#goToWalletPage"
+                    >
+
+                    </Button>
+                </HBox>
+            </HBox>
+
+        </GridPane>
+
 
         <VBox styleClass="navBarRightContainer" AnchorPane.rightAnchor="20">
             <HBox>
@@ -112,6 +153,12 @@
 
 
     </StackPane>
+
+<!--    <AnchorPane AnchorPane.topAnchor="300" AnchorPane.leftAnchor="100">-->
+
+<!--        <Button onAction="#chat"></Button>-->
+
+<!--    </AnchorPane>-->
 
 
 </AnchorPane>

@@ -42,7 +42,7 @@
 
         </Separator>
         <GridPane
-                AnchorPane.leftAnchor="380"
+                AnchorPane.leftAnchor="333"
                 AnchorPane.topAnchor="30"
                 alignment="TOP_CENTER">
 
@@ -74,6 +74,13 @@
 
                 </Button>
 
+                <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
+
+                </Button>
+
+                <Button styleClass="navBarButtons" onAction="#goToFiles" text="Files">
+
+                </Button>
 
             </HBox>
         </GridPane>

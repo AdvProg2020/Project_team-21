@@ -56,7 +56,7 @@ public class EditOFF extends GraphicFather{
             String reqIDs = message.split(" - ")[2];
             showError(alertLabel,"Fields " + error + "had problems", Error.NEGATIVE);
             showError(okLabel,"Fields " + ok + "had been successfully changed with these Request IDs:",Error.POSITIVE);
-            okLabel.setText(okLabel.getId() + "/n" + reqIDs);
+            okLabel.setText(okLabel.getText() + "/n" + reqIDs);
         }
     }
 }

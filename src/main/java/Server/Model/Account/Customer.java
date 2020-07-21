@@ -18,6 +18,7 @@ public class Customer extends Account implements Comparable<Customer>{
     private HashMap<String,Integer> discountCodesUsed = new HashMap<>();
     private ArrayList<String> buyLogs = new ArrayList<>();
     public ArrayList<String> offs = new ArrayList<>();
+    private ArrayList<String> files = new ArrayList<>();
     public double balance;
     private Wallet wallet;
 
@@ -28,8 +29,8 @@ public class Customer extends Account implements Comparable<Customer>{
         String cartID = Control.getInstance().randomString(5);
         ShoppingCart cart = new ShoppingCart(this, cartID);
         setShoppingCart(cartID);
-        this.wallet = new Wallet(this , balance);
-        this.bankAccount = new BankAccount(firstName , lastName , username , password);
+//        this.wallet = new Wallet(this , balance);
+//        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
 
     //    public static void rewriteFiles(){
@@ -193,5 +194,14 @@ public class Customer extends Account implements Comparable<Customer>{
 
     public Wallet getWallet() {
         return wallet;
+    }
+
+    public ArrayList<String> getFiles() {
+        return files;
+    }
+    public void addFile(String file){
+        files.add(file);
+        rewriteFiles();
+        Account.rewriteFiles();
     }
 }

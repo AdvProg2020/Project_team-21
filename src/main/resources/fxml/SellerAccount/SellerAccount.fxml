@@ -17,7 +17,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane layoutX="648.0" layoutY="184.0" prefHeight="232.0" prefWidth="484.0" style="-fx-border-color: WHITE;">
+      <AnchorPane layoutX="648.0" layoutY="184.0" prefHeight="264.0" prefWidth="484.0" style="-fx-border-color: WHITE;">
          <children>
             <Button fx:id="MangeUsers11" layoutX="91.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#goToProducts" prefHeight="51.0" prefWidth="153.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Products" textFill="#cfb936" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
                <font>
@@ -35,6 +35,11 @@
                </font>
             </Button>
             <Button fx:id="MangeUsers111" layoutX="321.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#goToCategories" prefHeight="51.0" prefWidth="171.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Categories" textFill="#cfb936" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="150.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="173.0" layoutY="211.0" mnemonicParsing="false" onMouseClicked="#goToFiles" prefHeight="51.0" prefWidth="143.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Files" textFill="#cfb936" AnchorPane.bottomAnchor="6.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
@@ -156,7 +161,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane layoutX="657.0" layoutY="446.0" prefHeight="174.0" prefWidth="484.0" style="-fx-border-color: WHITE;">
+      <AnchorPane layoutX="647.0" layoutY="458.0" prefHeight="174.0" prefWidth="489.0" style="-fx-border-color: WHITE;">
          <children>
             <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="134.0" text="Balance:" textFill="#3ab214">
                <font>

@@ -1,0 +1,49 @@
+.walletNav {
+    -fx-background-color: #7FDBFF;
+}
+
+.walletTitle {
+    -fx-label-padding: 35 0 0 20;
+    -fx-font-size: 26px;
+    -fx-text-fill: #001f3f;
+}
+
+.amountField {
+    -fx-label-padding: 0 14 0 0;
+}
+
+.backButton {
+    -fx-background-position: center;
+    -fx-background-image: url("/images/back.png");
+    -fx-background-size: 40px 28px;
+    -fx-background-color: #eff3f8;
+    -fx-background-repeat: no-repeat;
+}
+
+.backButton:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+    -fx-background-color: #c3c7cc !important;
+}
+
+.changeWalletBtn {
+     -fx-background-color: #0074D9;
+     -fx-text-fill: white;
+     -fx-label-padding: 4 4 4 4;
+ }
+
+.changeWalletBtn:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.walletTextField {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+}
+
+.transactionTitle {
+    -fx-label-padding: 4 0 0 14;
+    -fx-font-size: 18px;
+    -fx-text-fill: #3D9970;
+}

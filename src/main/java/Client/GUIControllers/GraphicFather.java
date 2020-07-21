@@ -7,7 +7,8 @@ package Client.GUIControllers;
 //import Server.Model.Account.Seller;
 import Client.ClientCenter;
 import Client.ServerRequest;
-import javafx.embed.swing.SwingFXUtils;
+//import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,8 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -238,11 +239,11 @@ public class GraphicFather {
         GUICenter.getInstance().setLanding(Page.MAIN);
     }
     public void click(){
-        MediaPlayer mediaPlayer;
-        Media h = new Media(getClass().getResource("/Musics/click.mp3").toString());
-        mediaPlayer = new MediaPlayer(h);
-        mediaPlayer.play();
-        mediaPlayer.setVolume(GUICenter.getInstance().getClickVolume());
+//        MediaPlayer mediaPlayer;
+//        Media h = new Media(getClass().getResource("/Musics/click.mp3").toString());
+//        mediaPlayer = new MediaPlayer(h);
+//        mediaPlayer.play();
+//        mediaPlayer.setVolume(GUICenter.getInstance().getClickVolume());
     }
     public void gotoProductsPage(Event actionEvent) throws IOException {
         goToNextPage(Page.PRODUCTSPAGE,actionEvent);
@@ -250,5 +251,15 @@ public class GraphicFather {
     public void goToOffsPage(MouseEvent mouseEvent) {
         goToNextPage(Page.OFFSPAGE,mouseEvent);
     }
+    public void gotoAuctionsPage(ActionEvent actionEvent){
+        goToNextPage(Page.AUCTIONPAGE,actionEvent);
+    }
+    public void goToFiles(ActionEvent actionEvent){
+        goToNextPage(Page.FILESPAGE,actionEvent);
+    }
+    public void goToWalletPage(ActionEvent actionEvent) {
+        goToNextPage(Page.WALLETPAGE, actionEvent);
+    }
+
 
 }

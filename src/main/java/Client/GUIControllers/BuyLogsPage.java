@@ -66,6 +66,7 @@ public class BuyLogsPage extends GraphicFather implements Initializable {
 //        }
     }
 
+
     private static class LogCard extends GridPane {
 
         private BuyLog buyLog;

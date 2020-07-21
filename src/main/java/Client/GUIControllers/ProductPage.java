@@ -186,15 +186,20 @@ public class ProductPage extends GraphicFather implements Initializable {
     }
 
     public void addButton(ActionEvent actionEvent) {
-        ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEADDPRODUCTTOCART,product.getProductId()+"&"+ getSeller());
-        String message = null;
-        message = ClientCenter.getInstance().readMessageFromServer();
+        System.out.println(getSeller());;
+        if(getSeller().equalsIgnoreCase("NULL")){
+            showError(alertLabel,"You should choose a seller first.",Error.NEGATIVE);
+        }else{
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEADDPRODUCTTOCART,product.getProductId()+"&"+ getSeller());
+            String message = null;
+            message = ClientCenter.getInstance().readMessageFromServer();
 
-        if(message.startsWith(ServerRequest.DONE.toString())){
-            showError(alertLabel,message.split("&")[1],Error.POSITIVE);
-        }
-        else{
-            showError(alertLabel,message.split("&")[1],Error.NEGATIVE);
+            if(message.startsWith(ServerRequest.DONE.toString())){
+                showError(alertLabel,message.split("&")[1],Error.POSITIVE);
+            }
+            else{
+                showError(alertLabel,message.split("&")[1],Error.NEGATIVE);
+            }
         }
     }
 

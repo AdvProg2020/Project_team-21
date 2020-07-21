@@ -109,7 +109,6 @@ modules.xml
 *.zip
 *.tar.gz
 *.rar
-
 *.txt
 *.json
 

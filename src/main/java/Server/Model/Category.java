@@ -10,7 +10,7 @@ public class Category implements Comparable<Category>{
     private String name;
     private ArrayList<String> productsList;
     private ArrayList<String> subCategories;
-    private static Category allProducts = new Category("All Products",new ArrayList<>());
+    private static Category allProducts = new Category("AllProducts",new ArrayList<>());
 
     private ArrayList<String> specialFeatures = new ArrayList<String>();
 
@@ -28,7 +28,7 @@ public class Category implements Comparable<Category>{
             }
         }
         setName(name);
-        if(!name.equals("All Products"))
+        if(!name.equals("AllProducts"))
             allCategories.add(this);
         SaveData.saveData(this, getName()+"category", SaveData.categoryFile);
     }

@@ -248,6 +248,30 @@ public class GUICenter {
         else if(page.equals(Page.SELLLOGSPRIMEPAGE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/SellLogsPage_Prime.fxml"));
         }
+        else if(page.equals(Page.AUCTIONPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/AuctionPage.fxml"));
+        }
+        else if(page.equals(Page.AUCTIONPAGEPRIME)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/AuctionPage_Prime.fxml"));
+        }
+        else if(page.equals(Page.CHATPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/Chat/ClientChat.fxml"));
+        }
+        else if(page.equals(Page.FILESPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/FilesPage.fxml"));
+        }
+        else if(page.equals(Page.GROUPCHATPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/Chat/Group_ClientChat.fxml"));
+        }
+        else if(page.equals(Page.WALLETPAGE)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/BankAndWallet/WalletPage.fxml"));
+        }
+        else if(page.equals(Page.SELLERFILES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/SellerFiles.fxml"));
+        }
+        else if(page.equals(Page.CUSTOMERFILES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/CustomerFiles.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

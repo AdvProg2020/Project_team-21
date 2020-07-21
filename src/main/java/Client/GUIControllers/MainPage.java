@@ -1,5 +1,7 @@
 package Client.GUIControllers;
 
+import Client.GUIControllers.Chat.Group_ClientChatController;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -50,4 +52,12 @@ public class MainPage extends GraphicFather implements Initializable {
         goToNextPage(Page.SETTINGS,mouseEvent);
     }
 
+    public void gotoChatRoom(ActionEvent actionEvent) {
+        goToNextPage(Page.CHATPAGE,actionEvent);
+    }
+
+//    public void chat(ActionEvent actionEvent) {
+//        Group_ClientChatController.setGroupChatId("123");
+//        goToNextPage(Page.GROUPCHATPAGE, actionEvent);
+//    }
 }

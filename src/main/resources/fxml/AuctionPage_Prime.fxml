@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Client.GUIControllers.AuctionPage_Prime"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@/css/auctionPageStyle.css">
+
+
+    <AnchorPane
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            styleClass="navBarContainer"
+            maxWidth="Infinity">
+
+        <StackPane AnchorPane.leftAnchor="30" >
+            <HBox AnchorPane.leftAnchor="20" styleClass="navBarLeftContainer" StackPane.alignment="CENTER_RIGHT" >
+                <ImageView fitHeight="54" fitWidth="54" layoutX="1463.0" layoutY="551.0">
+                    <image>
+                        <Image url="@/images/market_logo.png"/>
+                    </image>
+                </ImageView>
+
+                <Label
+                        text="Advanced Idiots Market"
+                        styleClass="navBarTitle">
+
+                </Label>
+            </HBox>
+        </StackPane>
+
+        <Separator orientation="HORIZONTAL" AnchorPane.topAnchor="45" AnchorPane.rightAnchor="200" AnchorPane.leftAnchor="340">
+
+        </Separator>
+        <GridPane
+                AnchorPane.leftAnchor="380"
+                AnchorPane.topAnchor="30"
+                alignment="TOP_CENTER">
+
+            <HBox alignment="TOP_CENTER">
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="Main Page">
+
+                </Button>
+
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="User Page">
+
+                </Button>
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="Products Page">
+
+                </Button>
+
+                <Button
+                        styleClass="navBarButtons"
+                        text="Offs Page">
+
+                </Button>
+
+
+            </HBox>
+        </GridPane>
+
+        <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
+            <HBox>
+                <Button
+                        styleClass="navBarAccountBtn"
+                        prefHeight="50"
+                        prefWidth="50"
+
+                >
+
+                </Button>
+                <Label
+                        styleClass="navBarAccountLabel"
+                        text="Account"
+                >
+
+                </Label>
+            </HBox>
+
+        </VBox>
+
+
+
+    </AnchorPane>
+
+    <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">
+
+        <AnchorPane AnchorPane.leftAnchor="10">
+            <Button
+                    onAction="#goBack"
+                    styleClass="backButton"
+                    text="Back"
+                    prefHeight="40"
+                    prefWidth="60"
+            >
+
+            </Button>
+        </AnchorPane>
+
+    </AnchorPane>
+
+
+    <Label
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            AnchorPane.topAnchor="90"
+            alignment="CENTER"
+            text="Auction"
+            fx:id="auctionTitleLabel"
+            style="-fx-text-fill: #815de2; -fx-font-weight: bold; -fx-font-size: 18px;"
+            styleClass="productsPageTitle"
+    >
+
+    </Label>
+
+    <GridPane AnchorPane.topAnchor="134" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" alignment="CENTER">
+
+        <HBox>
+            <Label
+                    fx:id="startTimeLabel"
+                    style="-fx-label-padding: 0 120 0 0; -fx-text-fill: #39c828; -fx-font-size: 15px;"
+                    text="Start Time">
+
+            </Label>
+
+            <Label
+                    fx:id="maxSuggestedAmount"
+                    style="-fx-label-padding: 0 0 0 0; -fx-text-fill: #1cb5ff; -fx-font-size: 19px; -fx-font-weight: bold;"
+                    text="20% Off"
+            >
+
+            </Label>
+
+            <Label
+                    fx:id="endTimeLabel"
+                    style="-fx-label-padding: 0 0 0 120; -fx-text-fill: #39c828; -fx-font-size: 15px;"
+                    text="End Time">
+
+            </Label>
+        </HBox>
+
+    </GridPane>
+
+    <GridPane
+            AnchorPane.topAnchor="155"
+            AnchorPane.rightAnchor="0"
+            AnchorPane.leftAnchor="0"
+            alignment="CENTER"
+    >
+
+        <Label
+                fx:id="winnerLabel"
+                style="-fx-label-padding: 10 0 0 0; -fx-text-fill: #1cb5ff; -fx-font-size: 19px; -fx-font-weight: bold;"
+                text="Winner: NOBODY"
+        >
+
+        </Label>
+
+    </GridPane>
+
+
+
+    <ScrollPane
+            fitToWidth="true"
+            AnchorPane.leftAnchor="10"
+            AnchorPane.rightAnchor="10"
+            AnchorPane.topAnchor="200"
+            AnchorPane.bottomAnchor="10">
+
+       <VBox>
+           <GridPane
+                   alignment="CENTER"
+           >
+               <Label
+                       text="Seller: "
+                       textFill="limegreen"
+                       wrapText="true"
+                       style="-fx-label-padding: 20 0 30 0; -fx-font-size: 15px;"
+                       fx:id="sellerLabel"
+               >
+
+               </Label>
+           </GridPane>
+
+           <GridPane  fx:id="auctionGridPane"
+                      alignment="CENTER">
+
+           </GridPane>
+
+           <GridPane
+                   alignment="CENTER"
+           >
+
+               <HBox  GridPane.rowIndex="1"  style="-fx-padding: 20 0 0 0;">
+                   <TextField
+                           promptText="Your Suggested Amount"
+                           minWidth="80"
+                           minHeight="30"
+
+                   >
+
+                   </TextField>
+
+                  <VBox style="-fx-padding: 0 0 0 10;">
+                      <Button
+                              styleClass="suggestBtn"
+                              text="Suggest!"
+                              style="-fx-alignment: center; -fx-label-padding: 4 4 4 4; -fx-background-color: #437e1a; -fx-text-fill: #bdc2be;"
+                              onAction="#suggestAmountBtn"
+                      >
+
+                      </Button>
+                  </VBox>
+               </HBox>
+
+              <VBox GridPane.rowIndex="2"
+                    style="-fx-padding: 30 10 0 45;"
+              >
+                  <Button
+                          styleClass="chatBtn"
+                          text="Go to Chat Room!"
+                          onAction="#gotoChat"
+                          style="-fx-alignment: center; -fx-label-padding: 4 4 4 4; -fx-background-color: #2a447e; -fx-text-fill: #bdc2be;"
+                  >
+
+                  </Button>
+              </VBox>
+
+           </GridPane>
+       </VBox>
+
+    </ScrollPane>
+
+</AnchorPane>

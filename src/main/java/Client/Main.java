@@ -16,27 +16,28 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.print.attribute.standard.Media;
 import java.io.*;
 import java.net.Socket;
 
 public class Main extends Application {
-    MediaPlayer mediaPlayer;
+//    MediaPlayer mediaPlayer;
     public void music() {
-        Media h = new Media(getClass().getResource("/Musics/back.mp3").toString());
-        mediaPlayer = new MediaPlayer(h);
-        mediaPlayer.play();
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                mediaPlayer.seek(Duration.ZERO);
-            }
-        });
-        mediaPlayer.setVolume(GUICenter.getInstance().getMusicVolume());
-        GUICenter.getInstance().setMediaPlayer(mediaPlayer);
+//        Media h = new Media(getClass().getResource("/Musics/back.mp3").toString());
+//        mediaPlayer = new MediaPlayer(h);
+//        mediaPlayer.play();
+//        mediaPlayer.setOnEndOfMedia(new Runnable() {
+//            public void run() {
+//                mediaPlayer.seek(Duration.ZERO);
+//            }
+//        });
+//        mediaPlayer.setVolume(GUICenter.getInstance().getMusicVolume());
+//        GUICenter.getInstance().setMediaPlayer(mediaPlayer);
     }
     private static void connectToServer(){
         try {

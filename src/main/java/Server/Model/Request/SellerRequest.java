@@ -13,26 +13,22 @@ public class SellerRequest extends Request {
     public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType,String photo)
     {
         super(requestType);
-        Seller seller = new Seller(userName,firstName,lastName,email,phoneNumber,password,company,photo);
-        seller.setRequestID(requestId);
-//        ServerCenter.getInstance().setSellerToAddCompany(seller);
-        Request.addRequest(requestId,this);
-        requestedSellers.put(requestId,seller);
 
         setRequestId(requestId);
-
         setProviderUsername(userName);
-        SaveData.saveData(seller, (getRequestId()+seller.getUsername()), SaveData.sellerRequestFile);
-        SaveData.saveData(this, getRequestId(), SaveData.sellerReqFile);
+//        ServerCenter.getInstance().setSellerToAddCompany(seller);
+
+        Request.addRequest(requestId,this);
+        Seller seller = new Seller(userName,firstName,lastName,email,phoneNumber,password,company,photo);
+        seller.setRequestID(requestId);
+        requestedSellers.put(requestId,seller);
+        System.out.println("0");
+        SaveData.saveData(this, requestId, SaveData.sellerReqFile);
+        System.out.println("1");
+        SaveData.saveData(seller, requestId+userName, SaveData.sellerRequestFile);
+        System.out.println("2");
     }
-    //    public static void rewriteFiles(){
-//        for (String s : requestedSellers.keySet()) {
-//            Seller seller = requestedSellers.get(s);
-//            File file = new File(s + seller.getUsername()+".json");
-//            file.delete();
-//            SaveData.saveData(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
-//        }
-//    }
+
     public static void rewriteFiles(){
         for (String s : requestedSellers.keySet()) {
             Seller seller = requestedSellers.get(s);

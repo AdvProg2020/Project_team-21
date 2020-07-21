@@ -1,5 +1,7 @@
 package Server;
 
+import Server.ChatServers.Group.Group_Server;
+import Server.ChatServers.TwoByTwo.ChatServer;
 import Server.Controller.*;
 import Server.Model.*;
 import Server.Model.Account.Account;
@@ -10,13 +12,12 @@ import Server.Model.Log.BuyLog;
 import Server.Model.Log.Log;
 import Server.Model.Log.SellLog;
 import Server.Model.Request.*;
-import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class Server {
         }
     }
     static void readFilesFromDatabase(){
+        Control.getInstance().fillAllFiles();
         new SaveData();
         SaveData.createAllFiles();
         BuyLog.getObjectFromDatabase();
@@ -129,6 +131,21 @@ public class Server {
             imageOutFile.write(imageByteArray);
             imageOutFile.flush();
         }
+
+        private File receiveFile() throws IOException {
+            System.out.println("File Received!");
+            String message = readMessageFromClient();
+            JSONObject obj1 = (JSONObject) JSONValue.parse(message);
+            String name = obj1.get("filename").toString();
+            String image = obj1.get("file").toString();
+            byte[] imageByteArray = decodeImage(image);
+            FileOutputStream imageOutFile = new FileOutputStream("Files/" + name);
+            imageOutFile.write(imageByteArray);
+            imageOutFile.flush();
+            File file = new File("Files/" + name);
+            return file;
+        }
+
         private void rewriteFilesRequest(){
             Seller.rewriteFiles();
             Account.rewriteFiles();
@@ -239,7 +256,6 @@ public class Server {
                         }
                         sendMessageToClient(output);
                         for (String s : Product.getAllProducts().keySet()) {
-                            System.out.println(Product.getAllProducts().keySet().size());
                             sendImage(Product.getAllProducts().get(s).getImagePath(),"Product:" + Product.getAllProducts().get(s).getProductId());
                         }
                     }
@@ -270,7 +286,7 @@ public class Server {
                         for (Review review : product.getReviewsList()) {
                             if(i != 0)
                                 response += " - ";
-                            response += review.getUser() + ": " + review.getReviewText();
+                            response += review.getUser().getUsername() + ": " + review.getReviewText();
                             i++;
                         }
                         sendMessageToClient(response);
@@ -340,25 +356,6 @@ public class Server {
                         Review.rewriteFiles();
                         Customer.rewriteFiles();
                     }
-                    else if(request.equalsIgnoreCase(ServerRequest.GETSHOPPINGCART.toString())){
-                        Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
-                        ShoppingCart shoppingCart = customer.getShoppingCart();
-                        String output = "NONE";
-                        int i = 0;
-                        for (Product product : shoppingCart.getProductsQuantity().keySet()) {
-                            if(i != 0)
-                                output += " - ";
-                            else
-                                output = "";
-                            output += product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
-                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&" + shoppingCart.getProductsQuantity().get(product);
-                            i++;
-                        }
-                        sendMessageToClient(output);
-                        for (String s : Product.getAllProducts().keySet()) {
-                            sendImage(Product.getAllProducts().get(s).getImagePath(),"Product:" + Product.getAllProducts().get(s).getProductId());
-                        }
-                    }
                     else if(request.equalsIgnoreCase(ServerRequest.UPDATEINCREASECART.toString())){
                         Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
                         ShoppingCart shoppingCart = customer.getShoppingCart();
@@ -376,6 +373,25 @@ public class Server {
                         ShoppingCart shoppingCart = customer.getShoppingCart();
                         Product product = Product.getAllProducts().get(data);
                         shoppingCart.removeProduct(product);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETSHOPPINGCART.toString())){
+                        Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
+                        ShoppingCart shoppingCart = customer.getShoppingCart();
+                        String output = "NONE";
+                        int i = 0;
+                        for (Product product : shoppingCart.getProductsQuantity().keySet()) {
+                            if(i != 0)
+                                output += " - ";
+                            else
+                                output = "";
+                            output += product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&" + shoppingCart.getProductsQuantity().get(product);
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                        for (Product product : shoppingCart.getProductsQuantity().keySet()) {
+                            sendImage(product.getImagePath(),"Product:" + product.getProductId());
+                        }
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETOFFSINFO.toString())){
                         Off off = Off.getAllOffs().get(data);
@@ -574,13 +590,16 @@ public class Server {
                         int i =0;
                         SellLog sellLog = SellLog.getAllSellLogs().get(data);
                         for (Product product : sellLog.getAllProducts()) {
-                            if(i!=0)
-                                output += " - ";
-                            else
-                                output = "";
-                            output += product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
-                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId();
-                            i++;
+                            if(product != null){
+                                if(i!=0)
+                                    output += " - ";
+                                else
+                                    output = "";
+                                System.out.println(product);
+                                output += product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                        product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId();
+                                i++;
+                            }
                         }
                         sendMessageToClient(output);
                         for (Product product : sellLog.getAllProducts()) {
@@ -1274,6 +1293,8 @@ public class Server {
                                 output += s;
                                 i++;
                             }
+                            if(output.isEmpty())
+                                output = "NONE";
 
                             sendMessageToClient(ServerRequest.DONE.toString() + "&" + reqID + "&" + output);
 
@@ -1305,10 +1326,12 @@ public class Server {
                                 account.setAddress(newValue);
                             else if(field.equalsIgnoreCase("password"))
                                 account.setPassword(newValue);
-                            else if(field.equalsIgnoreCase("companyname"))
-                                account.getCompany().setName(newValue);
-                            else if(field.equalsIgnoreCase("companyaddress"))
-                                account.getCompany().setLocation(newValue);
+                            else if(!account.getCompanyName().equalsIgnoreCase("Not Set")){
+                                if(field.equalsIgnoreCase("companyname"))
+                                    account.getCompany().setName(newValue);
+                                else if(field.equalsIgnoreCase("companyaddress"))
+                                    account.getCompany().setLocation(newValue);
+                            }
                         }
                         Seller.rewriteFiles();
                         Account.rewriteFiles();
@@ -1424,7 +1447,123 @@ public class Server {
                             sendError(e.getMessage(),true);
                         }
                     }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETALLAUCTIONS.toString())){
+                        String output = "NONE";
+                        int i=0;
+                        System.out.println("n;ojlkh" + output);
+                        for (Auction auction : Auction.getAllAuctions()) {
+                            if(i != 0)
+                                output += " - ";
+                            else
+                                output = "";
+                            System.out.println("hatta inja hm");
+                            Product product = auction.getAuctionProduct();
+                            output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
+                                    + "&" + auction.getMaxSuggestedAmount()+product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName();
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                        for (Auction auction : Auction.getAllAuctions()) {
+                            sendImage(auction.getAuctionProduct().getImagePath(),"Product:" + auction.getAuctionProduct().getProductId());
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETALLFILES.toString())){
+                        String output = "NONE";
+                        int i =0;
+                        for (String s : Control.getInstance().getAllFiles().keySet()) {
+                            if(i!=0)
+                                output += " - ";
+                            else
+                                output = "";
+                            File file = Control.getInstance().getAllFiles().get(s);
+                            String[] parsed = s.split(" - ");
+                            output +=  parsed[1] + "&" +file.getName() + "&" + file.length()/1000000 + "&" + getFileExt(file.getPath()) + "&" +parsed[0];
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                    }
 
+                    else if(request.equalsIgnoreCase(ServerRequest.GETALLSELLERFILES.toString())){
+                        String output = "NONE";
+                        int i=0;
+                        Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                        for (String s : Control.getInstance().getAllFiles().keySet()){
+                            String[] parsed = s.split(" - ");
+                            if(!parsed[0].equals(account.getUsername()))
+                                continue;
+                            if(i!=0)
+                                output += " - ";
+                            else
+                                output = "";
+                            File file = Control.getInstance().getAllFiles().get(s);
+
+                            output += parsed[1] + "&" + file.getName() + "&" + file.length()/1000000 + "&" + getFileExt(file.getPath());
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTUPLOADFILE.toString())){
+                            Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
+                            File file = receiveFile();
+                            Control.getInstance().addFile(seller.getUsername() + " - " + data,file);
+                            sendError("Uploaded to our dear servers (*˘︶˘*)♡",false);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTBUYFILE.toString())){
+                        if(token.equalsIgnoreCase("NULL")){
+                            sendError("You should first login.",true);
+                        }else{
+                            Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                            if(!(account instanceof Customer))
+                                sendError("You should be a Customer",true);
+                            else{
+                                Customer customer = (Customer) account;
+                                String[] parsedData = data.split("//");
+                                File file = new File("Files/" + parsedData[0]);
+                                Double price = Double.parseDouble(parsedData[1]);
+                                Seller seller = (Seller) Account.getAllAccounts().get(parsedData[2]);
+                                if(customer.getBalance() < price)
+                                    sendError("You don't have enough money to buy it",true);
+                                else{
+                                    if(customer.getFiles().contains(parsedData[0]))
+                                        sendError("You already have this file!",true);
+                                    else {
+                                        customer.addFile(parsedData[0]);
+                                        customer.setBalance(customer.getBalance() - price);
+                                        seller.setCredit(seller.getCredit() + price);
+                                        sendError("File is added to your files ಠ‿↼",false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETACCOUNT.toString())){
+                        if(!token.equalsIgnoreCase("NULL")){
+                            Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                            sendMessageToClient(account.getUsername() + "-" + account.getType());
+                        } else {
+                            sendMessageToClient("guest");
+                        }
+
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETCUSTOMERFILES.toString())){
+                        Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
+                        String output = "NONE";
+                        int i = 0;
+                        for (String file : customer.getFiles()) {
+                            if(i!=0)
+                                output += " - ";
+                            else
+                                output = "";
+                            File theOne = new File("Files/" + file);
+                            output += file + "&" + getFileExt(file) + "&" + theOne.length()/1000000;
+                        }
+                        sendMessageToClient(output);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETFILE.toString())){
+                        sendImage("Files/" + data,data);
+                    }
                 } catch (IOException e) {
 //                    System.out.println("error in reading req in server");
                 }
@@ -1433,27 +1572,56 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        readFilesFromDatabase();
-        for (String s : Account.getAllAccounts().keySet()) {
-            System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
-        }
-        for (String s : Product.getAllProducts().keySet()) {
-            System.out.println(s + " " + Product.getAllProducts().get(s).getName());
-        }
-        try {
-            ServerSocket serverSocket = new ServerSocket(8080);
-            Socket clientSocket;
-            while (true){
-                clientSocket = serverSocket.accept();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                readFilesFromDatabase();
+                for (String s : Account.getAllAccounts().keySet()) {
+                    System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
+                }
+                for (String s : Product.getAllProducts().keySet()) {
+                    System.out.println(s + " " + Product.getAllProducts().get(s).getName());
+                }
+                ((Customer) Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
+                try {
+                    ServerSocket serverSocket = new ServerSocket(8080);
+                    Socket clientSocket;
+                    while (true){
+                        clientSocket = serverSocket.accept();
 //                DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
 //                DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-                DataOutputStream dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
-                DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
-                new HandleClient(clientSocket,dataOutputStream,dataInputStream,serverSocket,clientSocket.getInputStream(),clientSocket.getOutputStream()).start();
+                        DataOutputStream dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
+                        DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
+                        new HandleClient(clientSocket,dataOutputStream,dataInputStream,serverSocket,clientSocket.getInputStream(),clientSocket.getOutputStream()).start();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error in server socket");
+                }
             }
-        } catch (IOException e) {
-            System.out.println("Error in server socket");
-        }
+        }).start();
 
-    }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new ChatServer();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new Group_Server();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+}
 }
