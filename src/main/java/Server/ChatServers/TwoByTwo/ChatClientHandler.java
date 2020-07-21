@@ -46,6 +46,18 @@ public class ChatClientHandler implements Runnable {
             e.printStackTrace();
         }
 
+//        if(received.startsWith("name")){
+        try {
+            String nm = dis.readUTF();
+            name = nm;
+            dos.writeUTF("hi");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ;
+//            continue;
+//        }
+
         String received;
         while (true)
         {
@@ -54,6 +66,12 @@ public class ChatClientHandler implements Runnable {
                 // receive the string
                 received = dis.readUTF();
                 System.out.println(received);
+
+//                if(received.startsWith("name")){
+//                    name = received;
+//                    dos.writeUTF("hi");
+//                    continue;
+//                }
 
                 if(received.startsWith("activity")){
                     String[] splited = received.split("&");

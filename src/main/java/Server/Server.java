@@ -17,6 +17,7 @@ import org.json.simple.JSONValue;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -1533,6 +1534,15 @@ public class Server {
                             }
                         }
                     }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETACCOUNT.toString())){
+                        if(!token.equalsIgnoreCase("NULL")){
+                            Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                            sendMessageToClient(account.getUsername() + "-" + account.getType());
+                        } else {
+                            sendMessageToClient("guest");
+                        }
+
+                    }
                     else if(request.equalsIgnoreCase(ServerRequest.GETCUSTOMERFILES.toString())){
                         Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
                         String output = "NONE";
@@ -1558,6 +1568,18 @@ public class Server {
     }
 
     public static void main(String[] args) {
+//        readFilesFromDatabase();
+//        for (String s : Account.getAllAccounts().keySet()) {
+//            System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
+//        }
+//        for (String s : Company.getAllCompanies().keySet()) {
+//            System.out.println("Comp " + s);
+//        }
+//        ((Customer)Account.getAllAccounts().get("customer")).setBalance(10000);
+//            ServerSocket serverSocket = new ServerSocket(8080);
+//            Socket clientSocket;
+//            while (true){
+//                clientSocket = serverSocket.accept();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1568,11 +1590,6 @@ public class Server {
                 for (String s : Product.getAllProducts().keySet()) {
                     System.out.println(s + " " + Product.getAllProducts().get(s).getName());
                 }
-                System.out.println("FILES");
-                for (String s : Control.getInstance().getAllFiles().keySet()) {
-                    System.out.println(s + " " + Control.getInstance().getAllFiles().get(s));
-                }
-                ((Customer)Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
                 try {
                     ServerSocket serverSocket = new ServerSocket(8080);
                     Socket clientSocket;

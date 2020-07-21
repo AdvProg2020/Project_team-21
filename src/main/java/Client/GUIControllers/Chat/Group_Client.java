@@ -8,12 +8,17 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
+
+import Client.ClientCenter;
+import Client.ServerRequest;
 
 public class Group_Client {
 
     final static int ServerPort = 9091;
     public String chatOtherSide = "NOBODY";
+    private String username;
 
      private DataInputStream dis;
      private DataOutputStream dos;
@@ -78,6 +83,21 @@ public class Group_Client {
         // establish the connection
         Socket s = new Socket("localhost", ServerPort);
 
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETACCOUNT);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+
+        if(response.equalsIgnoreCase("guest")){
+            Random rand = new Random();
+
+// Obtain a number between [0 - 49].
+            int n = rand.nextInt(1000);
+            username = response + "-"  + n;
+        } else {
+            username = response;
+        }
+
+        System.out.println(response);
+
         // obtaining input and out streams
         dis = new DataInputStream(s.getInputStream());
         dos = new DataOutputStream(s.getOutputStream());
@@ -97,6 +117,11 @@ public class Group_Client {
             }
         }
         dos.writeUTF("allClientsArr");
+
+
+        dos.writeUTF(("name" + username));
+        String n = dis.readUTF();
+
 
         // sendMessage thread
         Thread sendMessage = new Thread(new Runnable()
@@ -141,7 +166,7 @@ public class Group_Client {
                         System.out.println(msg);
                             String sender = msg.substring(0, msg.indexOf(" : "));
 
-                            new Group_Message(sender, id, msg, groupClientChatController.getGroupChatId());
+                            new Group_Message(sender, username, msg, groupClientChatController.getGroupChatId());
                             System.out.println(msg);
                             groupClientChatController.printMessages();
 
@@ -166,7 +191,7 @@ public class Group_Client {
             String[] strings = msg.split("#");
             String message = "You" + ": ";
             message += msg;//strings[0];
-            new Group_Message(this.id, chatOtherSide, message, Group_ClientChatController.getGroupChatId());
+            new Group_Message(this.username, chatOtherSide, message, Group_ClientChatController.getGroupChatId());
 //            if(!chatOtherSide.equals("NOBODY")){
                 dos.writeUTF(msg + "#" + Group_ClientChatController.getGroupChatId());
 //            }
@@ -180,7 +205,7 @@ public class Group_Client {
     }
 
     public String getId() {
-        return id;
+        return username;
     }
 
     public void getContacts(String contactsStr) throws IOException {

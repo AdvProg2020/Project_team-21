@@ -46,6 +46,14 @@ public class Group_ClientHandler implements Runnable {
             e.printStackTrace();
         }
 
+        try {
+            String nm = dis.readUTF();
+            name = nm;
+            dos.writeUTF("hi");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String received;
         while (true)
         {

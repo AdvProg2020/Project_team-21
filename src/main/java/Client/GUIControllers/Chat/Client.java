@@ -7,10 +7,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
+
+import Client.ClientCenter;
+import Client.ServerRequest;
 
 public class Client {
 
@@ -23,6 +23,8 @@ public class Client {
      public static ArrayList<String> allClientsArr = new ArrayList<>();
 
      private static ArrayList<Client> allClients = new ArrayList<>();
+     private String username;
+     private static int guestCounter = 0;
 
      private String id;
 
@@ -72,10 +74,10 @@ public class Client {
 //        allClientsArr.add(this.id);
 
         System.out.println(allClients.size());
-        for (Client allClient : allClients) {
-            allClient.clientChatController.showContacts();
-            System.out.println("tamam");
-        }
+//        for (Client allClient : allClients) {
+//            allClient.clientChatController.showContacts();
+//            System.out.println("tamam");
+//        }
 
 
 //        System.out.println(allClientsArr.size());
@@ -88,12 +90,30 @@ public class Client {
         // establish the connection
         Socket s = new Socket("localhost", ServerPort);
 
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETACCOUNT);
+        String response = ClientCenter.getInstance().readMessageFromServer();
+
+        if(response.equalsIgnoreCase("guest")){
+            Random rand = new Random();
+
+// Obtain a number between [0 - 49].
+            int n = rand.nextInt(1000);
+            username = response + "-"  + n;
+        } else {
+            username = response;
+        }
+
+        System.out.println(response);
+
         // obtaining input and out streams
         dis = new DataInputStream(s.getInputStream());
         dos = new DataOutputStream(s.getOutputStream());
 
         id = dis.readUTF();
         dos.writeUTF("done!");
+
+
+
 
         String allClientsStr = dis.readUTF();
         if(allClientsStr.startsWith("allClients")){
@@ -107,6 +127,10 @@ public class Client {
             }
         }
         dos.writeUTF("allClientsArr");
+
+
+        dos.writeUTF(("name" + username));
+        String n = dis.readUTF();
 
         // sendMessage thread
         Thread sendMessage = new Thread(new Runnable()
@@ -162,11 +186,12 @@ public class Client {
 
 
 
+
                         String msg = dis.readUTF();
                         System.out.println(msg);
                             String sender = msg.substring(0, msg.indexOf(" : "));
 
-                            new Message(sender, id, msg);
+                            new Message(sender, username, msg);
                             System.out.println(msg);
                             clientChatController.printMessages();
 
@@ -191,7 +216,7 @@ public class Client {
             String[] strings = msg.split("#");
             String message = "You" + ": ";
             message += msg;//strings[0];
-            new Message(this.id, chatOtherSide, message);
+            new Message(this.username, chatOtherSide, message);
             if(!chatOtherSide.equals("NOBODY")){
                 dos.writeUTF(msg + "#" + chatOtherSide);
             }
@@ -206,7 +231,7 @@ public class Client {
     }
 
     public String getId() {
-        return id;
+        return username;
     }
 
     public void getContacts(String contactsStr) throws IOException {

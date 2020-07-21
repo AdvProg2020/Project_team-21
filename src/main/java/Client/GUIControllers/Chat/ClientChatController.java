@@ -61,6 +61,8 @@ public class ClientChatController extends GraphicFather implements Initializable
                 }
             }
         });
+        Platform.runLater(()->nameLabel.setText("You are: " + client.getId()));
+        Platform.runLater(()->whoToChatLabel.setText("Chat other side: " + client.chatOtherSide));
     }
 
 
@@ -115,6 +117,11 @@ public class ClientChatController extends GraphicFather implements Initializable
     }
 
     public void showContacts(){
+
+        Platform.runLater(()->nameLabel.setText("You are: " + client.getId()));
+        Platform.runLater(()->whoToChatLabel.setText("Chat other side: " + client.chatOtherSide));
+
+
 //        if(!a){
                     Platform.runLater(()->contactsGridPane.getChildren().removeAll(contactsGridPane.getChildren()));
 
