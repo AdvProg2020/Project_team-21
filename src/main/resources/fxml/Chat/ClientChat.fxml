@@ -50,6 +50,16 @@
                >
 
                </Label>
+
+        <Button
+
+                GridPane.rowIndex="6"
+                fx:id="supporterButton"
+                text="Show Online Supporters"
+                onAction="#showSupportersBtn"
+        >
+
+        </Button>
     </GridPane>
 
     <GridPane

@@ -27,6 +27,7 @@ public class ClientChatController extends GraphicFather implements Initializable
     public Label activityLabel;
     public Label errorLabel;
     private static Client client;
+    public Button supporterButton;
 
     private ArrayList<Button> contactButtons = new ArrayList<>();
 
@@ -163,6 +164,50 @@ public class ClientChatController extends GraphicFather implements Initializable
                     } else {
 //                        activityLabel.setText(client.activityMap.get(client.chatOtherSide).toString());
                     }
+
+//                    client.sendActivityStatus();
+                    printMessages();
+                }
+            };
+            contactButton.setOnAction(event);
+        }
+    }
+
+    public void showSupportersBtn(ActionEvent actionEvent) {
+        Platform.runLater(()->nameLabel.setText("You are: " + client.getId()));
+        Platform.runLater(()->whoToChatLabel.setText("Chat other side: " + client.chatOtherSide));
+
+        Platform.runLater(()->contactsGridPane.getChildren().removeAll(contactsGridPane.getChildren()));
+
+        a = false;
+
+        VBox vBox2 = new VBox();
+        contactButtons.clear();
+        for (String client : client.allClientsArr) {
+            if(client.contains("supporter")){
+                VBox v = new VBox();
+                Button comment = new Button();
+                contactButtons.add(comment);
+                comment.setText(client);
+                comment.setMinHeight(15);
+                comment.getStyleClass().add("contactButtonBox");
+                v.getChildren().add(comment);
+                v.getStyleClass().add("conBox");
+                vBox2.getChildren().add(v);
+                System.out.println("hah");
+            }
+
+        }
+        Platform.runLater(()->contactsGridPane.getChildren().add(vBox2));
+
+        for (Button contactButton : contactButtons) {
+
+            // action event
+            EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e)
+                {
+                    client.chatOtherSide = contactButton.getText();
+                    whoToChatLabel.setText("Chat other side: " + client.chatOtherSide);
 
 //                    client.sendActivityStatus();
                     printMessages();
