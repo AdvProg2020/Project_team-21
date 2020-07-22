@@ -1,4 +1,4 @@
-package BankTriplePrime;
+package Bank;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -14,7 +14,11 @@ import java.util.HashMap;
 
 public class BankServer {
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+//        new BankImpl().run();
+//    }
+
+    public BankServer() {
         new BankImpl().run();
     }
 

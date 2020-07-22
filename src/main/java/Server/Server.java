@@ -1,5 +1,6 @@
 package Server;
 
+import Bank.BankServer;
 import Server.ChatServers.Group.Group_Server;
 import Server.ChatServers.TwoByTwo.ChatServer;
 import Server.Controller.*;
@@ -16,6 +17,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
 
 public class Server {
     static void putToAbstract(){
@@ -1772,6 +1776,13 @@ public class Server {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new BankServer();
             }
         }).start();
 

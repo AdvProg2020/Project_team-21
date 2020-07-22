@@ -1,4 +1,4 @@
-package BankTriplePrime;
+package Bank;
 
 import java.util.ArrayList;
 
