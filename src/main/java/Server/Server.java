@@ -836,7 +836,11 @@ public class Server {
                                 output += " - ";
                             else
                                 output = "";
-                            output += s + "&" + Account.getAllAccounts().get(s).getType();
+                            Account account = Account.getAllAccounts().get(s);
+                            String status = "offline";
+                            if(ServerCenter.getInstance().getActiveTokens().containsValue(account))
+                                status = "online";
+                            output += s + "&" + account.getType() + "&" + status;
                             i++;
                         }
                         sendMessageToClient(output);

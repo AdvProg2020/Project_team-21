@@ -12,6 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -21,6 +24,7 @@ public class ManageUsers extends GraphicFather implements Initializable {
     public TableView<Account> listUsers;
     public TableColumn<Account,String> userName = new TableColumn<>("Username");
     public TableColumn<Account,String> type = new TableColumn<>("Type");
+    public TableColumn<Account, Circle> status = new TableColumn<>("Status");
     public TextField userToView;
     public TextField userToRemove;
     public Label AlertLabel;
@@ -41,22 +45,36 @@ public class ManageUsers extends GraphicFather implements Initializable {
             for (String s : parsed){
                 String username = s.split("&")[0];
                 String type = s.split("&")[1];
+                String status = s.split("&")[2];
+                Account account = null;
                 if(type.equalsIgnoreCase("Customer"))
-                    allAccounts.add(new Customer(username));
+                    account = new Customer(username);
                 else if(type.equalsIgnoreCase("Seller"))
-                    allAccounts.add(new Seller(username));
+                    account = new Seller(username);
                 else if(type.equalsIgnoreCase("Manager"))
-                    allAccounts.add(new Manager(username));
+                    account = new Manager(username);
                 else if(type.equalsIgnoreCase("Support"))
-                    allAccounts.add(new Supporter(username));
+                   account = new Supporter(username);
+                allAccounts.add(account);
+                Circle statusCircle = new Circle(10.0);
+                if(status.equalsIgnoreCase("online")){
+                    statusCircle.setFill(Color.GREEN);
+                }else{
+                    statusCircle.setFill(Color.RED);
+                }
+                statusCircle.setStroke(Color.BLACK);
+                statusCircle.setStrokeWidth(1.0);
+                account.setStatus(statusCircle);
             }
         }
         listUsers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         userName.setCellValueFactory(new PropertyValueFactory<>("username"));
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
         listUsers.setItems(getAccounts());
         listUsers.getColumns().add(userName);
         listUsers.getColumns().add(type);
+        listUsers.getColumns().add(status);
     }
 
     public void viewUser(MouseEvent mouseEvent){
