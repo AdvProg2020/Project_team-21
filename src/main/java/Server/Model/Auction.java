@@ -1,5 +1,7 @@
 package Server.Model;
 
+import Server.Controller.ControlCustomer;
+import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
 import java.time.LocalDateTime;
@@ -10,13 +12,14 @@ public class Auction {
 
     private static ArrayList<Auction> allAuctions = new ArrayList<>();
     private String auctionId;
-    private Product auctionProduct;
+    private String auctionProduct;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private double maxSuggestedAmount;
-    private Seller seller;
-    private Customer auctionWinner;
-    private HashMap<Customer, Double> customersSuggestionAmount = new HashMap<>();
+    private double maxSuggestedAmount = 0;
+    private String seller;
+    private String auctionWinner;
+    private HashMap<String, Double> customersSuggestionAmount = new HashMap<>();
+    boolean sold = false;
 
     public Auction(String auctionId, Product auctionProduct, LocalDateTime startTime, LocalDateTime endTime, Seller seller){
         setAuctionId(auctionId);
@@ -25,6 +28,7 @@ public class Auction {
         setEndTime(endTime);
         setSeller(seller);
         allAuctions.add(this);
+        SaveData.saveData(this, "Auction:" + auctionId, SaveData.auctionFile);
     }
 
     private void setAuctionId(String auctionId) {
@@ -32,7 +36,7 @@ public class Auction {
     }
 
     private void setAuctionProduct(Product auctionProduct) {
-        this.auctionProduct = auctionProduct;
+        this.auctionProduct = auctionProduct.getProductId();
     }
 
     private void setStartTime(LocalDateTime startTime) {
@@ -44,18 +48,10 @@ public class Auction {
     }
 
     private void setSeller(Seller seller) {
-        this.seller = seller;
+        this.seller = seller.getUsername();
     }
 
-    public void setMaxSuggestedAmount(double maxSuggestedAmount) {
-        this.maxSuggestedAmount = maxSuggestedAmount;
-    }
-
-    public void setAuctionWinner(Customer auctionWinner) {
-        this.auctionWinner = auctionWinner;
-    }
-
-    public Customer getAuctionWinner() {
+    public String getAuctionWinner() {
         return auctionWinner;
     }
 
@@ -68,7 +64,7 @@ public class Auction {
     }
 
     public Product getAuctionProduct() {
-        return auctionProduct;
+        return Product.getAllProducts().get(auctionProduct);
     }
 
     public LocalDateTime getStartTime() {
@@ -84,26 +80,53 @@ public class Auction {
     }
 
     public Seller getSeller() {
-        return seller;
+        return (Seller)Account.getAllAccounts().get(seller);
     }
 
-    public void addCustomersSuggestion(Customer customer, double amount){
-        customersSuggestionAmount.put(customer, amount);
+    public void addCustomersSuggestion(Customer customer, double amount) throws Exception{
+        if(customer.getBalance() < amount)
+            throw new Exception("You don't have enough balance.");
+        if(amount <= maxSuggestedAmount)
+            throw new Exception("You should place a higher bid.");
+        customersSuggestionAmount.put(customer.getUsername(), amount);
+        maxSuggestedAmount = amount;
+        auctionWinner = customer.getUsername();
     }
+//
+//    public void changeCustomersSuggestion(Customer customer, double amount) throws Exception{
+//        if(!canCustomerChangeAmount(customer, amount))
+//            throw new Exception("Your new suggestion should be higher.");
+//        if(canCustomerGiveSuggestion(customer,amount))
+//            throw new Exception("You don't have enough credit.");
+//        else{
+//            customersSuggestionAmount.replace(customer.getUsername(), amount);
+//            maxSuggestedAmount = amount;
+//            auctionWinner = customer.getUsername();
+//        }
+//    }
 
-    public boolean canCustomerChangeAmount(Customer customer, double newAmount){
-        if(customersSuggestionAmount.get(customer)<newAmount) {
-            return true;
+//    public boolean canCustomerChangeAmount(Customer customer, double newAmount){
+//        if(customersSuggestionAmount.get(customer.getUsername())<newAmount && newAmount > maxSuggestedAmount) {
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public boolean isExpired(){
+        if(LocalDateTime.now().isAfter(endTime) && !sold){
+            if(auctionWinner != null && !auctionWinner.equalsIgnoreCase("NULL")){
+                Customer winner = (Customer) Account.getAllAccounts().get(auctionWinner);
+                ControlCustomer.getInstance().purchaseAuction(winner,getAuctionProduct(),getSeller(),maxSuggestedAmount);
+                sold = true;
+            }
         }
-        return false;
-    }
-
-    public void changeCustomersSuggestion(Customer customer, double amount){
-        if(canCustomerChangeAmount(customer, amount)){
-            customersSuggestionAmount.replace(customer, amount);
-        }
-    }
-    public boolean isExpire(){
         return LocalDateTime.now().isAfter(endTime);
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.auctionFile)));
+        for (Object object : objects) {
+            allAuctions.add((Auction)object);
+        }
     }
 }

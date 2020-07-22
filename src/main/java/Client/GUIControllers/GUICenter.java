@@ -146,6 +146,9 @@ public class GUICenter {
         else if(page.equals(Page.CUSTOMER)){
             template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/CustomerAccount.fxml"));
         }
+        else if(page.equals(Page.SUPPORT)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SupportAccount.fxml"));
+        }
         else if(page.equals(Page.CREATECOMPANY)){
             template = FXMLLoader.load(getClass().getResource("/fxml/CreateCompany.fxml"));
         }
@@ -265,6 +268,21 @@ public class GUICenter {
         }
         else if(page.equals(Page.WALLETPAGE)){
             template = FXMLLoader.load(getClass().getResource("/fxml/BankAndWallet/WalletPage.fxml"));
+        }
+        else if(page.equals(Page.SELLERFILES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/SellerFiles.fxml"));
+        }
+        else if(page.equals(Page.CUSTOMERFILES)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/CustomerFiles.fxml"));
+        }
+        else if(page.equals(Page.SELLERAUCTIONS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/SellerAuctions.fxml"));
+        }
+        else if(page.equals(Page.CREATEAUCTION)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateAuction.fxml"));
+        }
+        else if(page.equals(Page.CREATESUPPORT)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/CreateSupport.fxml"));
         }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());

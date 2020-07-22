@@ -15,7 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -25,9 +28,13 @@ import java.util.TimerTask;
 
 public class AuctionPage extends GraphicFather implements Initializable {
     public GridPane auctionsGridPane;
+    public Button userPage;
+    public Circle profilePhoto;
+    public Label profileName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        topBarShowRest(profilePhoto,profileName,userPage);
         ArrayList<Image> allProductsImages = new ArrayList<>();
         ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLAUCTIONS);
         String response = ClientCenter.getInstance().readMessageFromServer();
@@ -42,8 +49,11 @@ public class AuctionPage extends GraphicFather implements Initializable {
             int i=0;
             for (String s : parsedData){
                 String[] auctionData = s.split("&");
-                Auction auction = new Auction(auctionData[0],auctionData[1],auctionData[2],auctionData[3],auctionData[4],parsedData[13],parsedData[14]);
-                auction.setAuctionProduct(new Product(auctionData[5],Double.parseDouble(auctionData[6]),Double.parseDouble(auctionData[7]),Double.parseDouble(auctionData[8]),
+                boolean isExpired = false;
+                if(auctionData[15].equalsIgnoreCase("true"))
+                    isExpired = true;
+                Auction auction = new Auction(auctionData[0],auctionData[1],auctionData[2],auctionData[3],auctionData[4],auctionData[13],auctionData[14],isExpired,auctionData[16]);
+                auction.setAuctionProduct(new Product(auctionData[5],Double.parseDouble(auctionData[6]),Double.parseDouble(auctionData[8]),Double.parseDouble(auctionData[7]),
                         auctionData[9],auctionData[10],auctionData[11],allProductsImages.get(i),auctionData[12]));
                 AuctionsCard auctionsCard = new AuctionsCard(auction);
                 auctionsGridPane.add(auctionsCard, 0, i);
@@ -80,8 +90,24 @@ public class AuctionPage extends GraphicFather implements Initializable {
             ImageView cardImageView = new ImageView(auction.getAuctionProduct().getImage());
             cardImageView.setFitHeight(32);
             cardImageView.setFitWidth(32);
-            cardImageView.setImage(auction.getAuctionProduct().getImage());
             imageVBox.getChildren().add(cardImageView);
+
+            VBox expiredBox = new VBox();
+            if(auction.isExpired()){
+                URL res = getClass().getClassLoader().getResource("images/expired.png");
+                Image expired = null;
+                try {
+                    expired = new Image(res.toURI().toString());
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                ImageView imageExpired = new ImageView(expired);
+                imageExpired.setFitHeight(50);
+                imageExpired.setFitWidth(90);
+                expiredBox.getChildren().add(imageExpired);
+
+            }
+
 
             VBox vBox2 = new VBox();
             Label label2 = new Label();
@@ -96,6 +122,10 @@ public class AuctionPage extends GraphicFather implements Initializable {
 
             hB.getChildren().add(vBox2);
             hB.getChildren().add(imageVBox);
+            HBox separate = new HBox();
+            separate.getStyleClass().add("hboxSeparate");
+            hB.getChildren().add(separate);
+            hB.getChildren().add(expiredBox);
             hB.getStyleClass().add("proHBox");
             vBoxFather.getChildren().add(hB);
 
@@ -136,7 +166,10 @@ public class AuctionPage extends GraphicFather implements Initializable {
             this.getChildren().add(vBoxFather);
 
             this.getStyleClass().add("offDetailsCard");
-            this.getStyleClass().add("offBox");
+            if(auction.isExpired())
+                this.getStyleClass().add("expiredAuction");
+            else
+                this.getStyleClass().add("offBox");
 
         }
 

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.shape.Circle?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -17,146 +13,93 @@
             stylesheets="@/css/productsPageStyle.css">
 
 
-        <AnchorPane
-                AnchorPane.leftAnchor="0"
-                AnchorPane.rightAnchor="0"
-                styleClass="navBarContainer"
-                maxWidth="Infinity">
+    <AnchorPane
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            styleClass="navBarContainer"
+            maxWidth="Infinity">
 
-            <StackPane AnchorPane.leftAnchor="30" >
-                <HBox AnchorPane.leftAnchor="20" styleClass="navBarLeftContainer" StackPane.alignment="CENTER_RIGHT" >
-                    <ImageView fitHeight="54" fitWidth="54" layoutX="1463.0" layoutY="551.0">
-                        <image>
-                            <Image url="@/images/market_logo.png"/>
-                        </image>
-                    </ImageView>
+        <StackPane AnchorPane.leftAnchor="30" >
+            <HBox AnchorPane.leftAnchor="20" styleClass="navBarLeftContainer" StackPane.alignment="CENTER_RIGHT" >
+                <ImageView fitHeight="54" fitWidth="54" layoutX="1463.0" layoutY="551.0">
+                    <image>
+                        <Image url="@/images/market_logo.png"/>
+                    </image>
+                </ImageView>
 
-                    <Label
-                            text="Advanced Idiots Market"
-                            styleClass="navBarTitle">
+                <Label
+                        text="Advanced Idiots Market"
+                        styleClass="navBarTitle">
 
-                    </Label>
-                </HBox>
-            </StackPane>
+                </Label>
+            </HBox>
+        </StackPane>
 
-            <Separator orientation="HORIZONTAL" AnchorPane.topAnchor="45" AnchorPane.rightAnchor="200" AnchorPane.leftAnchor="340">
+        <Separator orientation="HORIZONTAL" AnchorPane.topAnchor="45" AnchorPane.rightAnchor="200" AnchorPane.leftAnchor="340">
 
-            </Separator>
-            <GridPane
-                    AnchorPane.leftAnchor="333"
-                    AnchorPane.topAnchor="30"
-                    alignment="TOP_CENTER">
+        </Separator>
+        <GridPane
+                AnchorPane.leftAnchor="333"
+                AnchorPane.topAnchor="30"
+                alignment="TOP_CENTER">
 
-                <HBox alignment="TOP_CENTER">
+            <HBox alignment="TOP_CENTER">
 
-                    <Button
-                            styleClass="navBarButtons"
-                            text="Main Page" onMouseClicked="#goToMain">
+                <Button
+                        styleClass="navBarButtons"
+                        text="Main Page" onMouseClicked="#goToMain">
 
-                    </Button>
-
-
-                    <Button
-                            styleClass="navBarButtons"
-                            text="User Page"
-                                fx:id="userPage" onMouseClicked="#goToAccountButton">
-
-                    </Button>
-
-                    <Button
-                            styleClass="navBarButtons"
-                            text="Products Page" onMouseClicked="#gotoProductsPage">
-
-                    </Button>
-
-                    <Button
-                            styleClass="navBarButtons"
-                            text="Offs Page" onMouseClicked="#goToOffsPage">
-
-                    </Button>
-
-                    <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
-
-                    </Button>
+                </Button>
 
 
-                </HBox>
-            </GridPane>
+                <Button
+                        styleClass="navBarButtons"
+                        text="User Page"
+                        fx:id="userPage" onMouseClicked="#goToAccountButton">
 
-            <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
-                <HBox>
-<!--                    <Button-->
-<!--                            styleClass="navBarAccountBtn"-->
-<!--                            prefHeight="30"-->
-<!--                            prefWidth="30"-->
-<!--                            fx:id="profilePhoto"-->
-<!--                    >-->
+                </Button>
 
-<!--                    </Button>-->
-                    <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccountCircle" radius="30" stroke="BLACK" strokeType="INSIDE" styleClass="profilePhoto" />
-                    <Label
-                            styleClass="navBarAccountLabel"
-                            text="Account"
-                            fx:id="profileName"
-                    >
+                <Button
+                        styleClass="navBarButtons"
+                        text="Products Page" onMouseClicked="#gotoProductsPage">
 
-                    </Label>
-                </HBox>
+                </Button>
 
-            </VBox>
+                <Button
+                        styleClass="navBarButtons"
+                        text="Offs Page" onMouseClicked="#goToOffsPage">
+
+                </Button>
+
+                <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
+
+                </Button>
+
+                <Button styleClass="navBarButtons" onAction="#goToFiles" text="Files">
+
+                </Button>
+
+
+            </HBox>
+        </GridPane>
+
+        <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
+            <HBox>
+                <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccountCircle" radius="30" stroke="BLACK" strokeType="INSIDE" styleClass="profilePhoto" />
+                <Label
+                        styleClass="navBarAccountLabel"
+                        text="Account"
+                        fx:id="profileName"
+                >
+
+                </Label>
+            </HBox>
+
+        </VBox>
 
 
 
-        </AnchorPane>
-
-<!--        <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">-->
-
-<!--            <AnchorPane AnchorPane.leftAnchor="10">-->
-<!--                <Button-->
-<!--                        onAction="#goBack"-->
-<!--                        styleClass="backButton"-->
-<!--                >-->
-<!--                    <graphic>-->
-<!--                        <ImageView fitHeight="30" fitWidth="30" onMouseClicked="#goBack">-->
-<!--                            <image>-->
-<!--                                <Image url="@../images/back.png" />-->
-<!--                            </image>-->
-<!--                        </ImageView>-->
-<!--                    </graphic>-->
-<!--                </Button>-->
-<!--            </AnchorPane>-->
-
-<!--            <AnchorPane AnchorPane.rightAnchor="10">-->
-
-<!--                <HBox>-->
-<!--                    <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">-->
-<!--                        <ComboBox promptText="Sorts" >-->
-<!--                            <items>-->
-<!--                                <FXCollections fx:factory="observableArrayList">-->
-<!--                                    <String fx:value="ProductId" />-->
-<!--                                    <String fx:value="Rate" />-->
-<!--                                    <String fx:value="ProductAlphabet" />-->
-<!--                                </FXCollections>-->
-<!--                            </items>-->
-<!--                        </ComboBox>-->
-<!--                    </VBox>-->
-
-<!--                    <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >-->
-<!--                        <ComboBox promptText="Filters">-->
-<!--                            <items>-->
-<!--                                <FXCollections fx:factory="observableArrayList">-->
-<!--                                    <String fx:value="Manager" />-->
-<!--                                    <String fx:value="Seller" />-->
-<!--                                    <String fx:value="Customer" />-->
-<!--                                </FXCollections>-->
-<!--                            </items>-->
-<!--                        </ComboBox>-->
-<!--                    </VBox>-->
-
-<!--                </HBox>-->
-
-<!--            </AnchorPane>-->
-<!--        </AnchorPane>-->
+    </AnchorPane>
 
     <AnchorPane AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="80">
 
@@ -174,86 +117,21 @@
 
 
     </AnchorPane>
-<!--    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="63">-->
-
-<!--        <HBox>-->
-<!--            <VBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">-->
-<!--                <ComboBox promptText="Sorts" fx:id="sortsDropDown">-->
-<!--                    <items>-->
-<!--                        <FXCollections fx:factory="observableArrayList">-->
-
-<!--                        </FXCollections>-->
-<!--                    </items>-->
-<!--                </ComboBox>-->
-
-<!--                <VBox style="-fx-padding: 12 0 0 0;">-->
-<!--                    <Button-->
-<!--                            onAction="#sort"-->
-<!--                            text="Sort"-->
-<!--                    >-->
-
-<!--                    </Button>-->
-<!--                </VBox>-->
-<!--            </VBox>-->
-
-<!--            <VBox alignment="CENTER" style="-fx-padding: 15 0 10 0;" >-->
-<!--                <ComboBox promptText="Filters" fx:id="filtersDropDown">-->
-<!--                    <items>-->
-<!--                        <FXCollections fx:factory="observableArrayList">-->
-
-<!--                        </FXCollections>-->
-<!--                    </items>-->
-<!--                </ComboBox>-->
-
-<!--                <VBox style="-fx-padding: 12 0 0 0;">-->
-<!--                    <Button-->
-<!--                            text="Filter"-->
-<!--                    >-->
-
-<!--                    </Button>-->
-<!--                </VBox>-->
-<!--            </VBox>-->
-
-<!--        </HBox>-->
-
-<!--    </AnchorPane>-->
 
     <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="75">
 
-        <HBox>
-            <HBox alignment="CENTER" style="-fx-padding: 6 10 0 0;">
-                <ComboBox promptText="Sorts" fx:id="sortsDropDown">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-
-                        </FXCollections>
-                    </items>
-                </ComboBox>
-
-                <VBox style="-fx-padding: 1 0 0 10;">
-                    <Button
-                            onAction="#sort"
-                            text="Sort"
-                    >
-
-                    </Button>
-                </VBox>
-            </HBox>
-
-        </HBox>
-
     </AnchorPane>
 
-        <Label
-                AnchorPane.leftAnchor="0"
-                AnchorPane.rightAnchor="0"
-                AnchorPane.topAnchor="90"
-                alignment="CENTER"
-                text="Products Page"
-                styleClass="productsPageTitle"
-        >
+    <Label
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            AnchorPane.topAnchor="90"
+            alignment="CENTER"
+            text="Your Files"
+            styleClass="productsPageTitle"
+    >
 
-        </Label>
+    </Label>
 
 
     <HBox
@@ -269,29 +147,7 @@
             </GridPane>
         </ScrollPane>
 
+        <VBox style="-fx-padding: 10 10 10 10;"/>
 
-        <VBox style="-fx-padding: 0 0 0 15; -fx-min-height: 500;">
-            <VBox style="-fx-padding: 10 0 30 0;">
-                <Label text="Limit Price"/>
-
-                <Slider max="10000" min="0" blockIncrement="50" showTickLabels="true" showTickMarks="true" fx:id="slider" value="10000">
-
-                </Slider>
-
-                <Label fx:id="sliderLabel">
-
-                </Label>
-            </VBox>
-            <Label text="Categories">
-
-            </Label>
-            <ScrollPane  style="-fx-padding: 10 3 5 3;" minWidth="140">
-                <GridPane  fx:id="filtersGridPane"
-                           style="-fx-label-padding: 2 2 3 2;"
-                           alignment="CENTER">
-
-                </GridPane>
-            </ScrollPane>
-        </VBox>
     </HBox>
 </AnchorPane>

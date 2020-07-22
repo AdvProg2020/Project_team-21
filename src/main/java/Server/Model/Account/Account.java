@@ -1,6 +1,7 @@
 package Server.Model.Account;
 
-import Server.Model.BankPrime.BankAccount;
+//import Server.Model.BankPrime.BankAccount;
+import Bank.BankAccount;
 import Server.Model.DiscountCode;
 
 import Server.Controller.Sort;
@@ -173,5 +174,13 @@ public abstract class Account {
         for (Object object : objects) {
             allAccounts.put(((Account)object).getUsername() ,(Account)(object));
         }
+    }
+
+    public static Account getAccountFromUserName(String user){
+        for (Account account : allAccounts.values()) {
+            if (account.getUsername().equals(user))
+                return account;
+        }
+        return null;
     }
 }

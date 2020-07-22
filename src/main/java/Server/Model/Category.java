@@ -99,13 +99,8 @@ public class Category implements Comparable<Category>{
             product.setCategory(allProducts);
         }
         allCategories.remove(category);
-
-        File file = new File(category.getName() + "category" +".json");
-        if(file.delete()){
-//            System.out.println("yes");
-        } else {
-//            System.out.println("hah");
-        }
+        File file = new File("Database/" + category.getName() + "category" +".json");
+        file.delete();
     }
 
     public void setName(String name){

@@ -86,6 +86,7 @@
                     <TextField
                             promptText="Amount"
                             styleClass="walletTextField"
+                            fx:id="ChargeWalletTextField"
                     >
 
                     </TextField>
@@ -95,6 +96,7 @@
                     <Button
                             text="Change Wallet"
                             styleClass="changeWalletBtn"
+                            onAction="#ChangeWallet"
                     >
 
                     </Button>

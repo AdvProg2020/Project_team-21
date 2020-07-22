@@ -11,9 +11,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUIControllers.CustomerAccount.CustomerAccount">
    <children>
-      <AnchorPane layoutX="653.0" layoutY="94.0" prefHeight="406.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="653.0" layoutY="94.0" prefHeight="399.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.topAnchor="10.0">
          <children>
-            <Button layoutX="63.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#goToCart" prefHeight="81.0" prefWidth="281.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Shopping Cart" textFill="#cfb936" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="19.0">
+            <Button layoutX="63.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#goToCart" prefHeight="81.0" prefWidth="281.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Shopping Cart" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="19.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
@@ -25,7 +25,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="71.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#goToOrders" prefHeight="98.0" prefWidth="186.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Orders" textFill="#cfb936" AnchorPane.leftAnchor="70.0">
+            <Button layoutX="78.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#goToOrders" prefHeight="98.0" prefWidth="186.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Orders" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
@@ -37,7 +37,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="52.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#goToDiscountCodes" prefHeight="93.0" prefWidth="320.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Discount Codes" textFill="#cfb936" AnchorPane.leftAnchor="51.0">
+            <Button layoutX="53.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#goToDiscountCodes" prefHeight="93.0" prefWidth="302.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Discount Codes" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="201.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>
@@ -45,6 +45,18 @@
                   <ImageView fitHeight="70.0" fitWidth="70.0">
                      <image>
                         <Image url="@../../images/discountCodes.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="52.0" layoutY="432.0" mnemonicParsing="false" onMouseClicked="#goToFiles" prefHeight="93.0" prefWidth="178.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Files" textFill="#cfb936" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="300.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="70.0">
+                     <image>
+                        <Image url="@../../images/file.png" />
                      </image>
                   </ImageView>
                </graphic>

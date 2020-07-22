@@ -2,10 +2,7 @@ package Server.Controller;
 
 
 import Server.Model.*;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
+import Server.Model.Account.*;
 import Server.Model.DisAndOffStatus;
 import Server.Model.Off;
 import Server.Model.Filters.*;
@@ -32,7 +29,10 @@ public class Control {
 //    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
 
+
+
     private Control() {
+
     }
 
 //    public ShoppingCart getSignOutCart() {
@@ -131,7 +131,7 @@ public class Control {
         if (!verifyPassword.equals(password)) {
             throw new Exception("Your password doesn't match");
         }
-        if (!(type.matches("(?i)customer|manager|seller"))) {
+        if (!(type.matches("(?i)customer|manager|seller|support"))) {
             throw new Exception("There is no type of account like that!");
         }
         if (Account.getAllAccounts().containsKey(username)) {
@@ -147,6 +147,8 @@ public class Control {
             ControlSeller.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber, company,photo);
         } else if (type.equalsIgnoreCase("customer")) {
             ControlCustomer.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber,photo);
+        }else if(type.equalsIgnoreCase("support")){
+            new Supporter(username,firstName,lastName,email,phoneNumber,password,photo);
         }
         if (login)
             login(username, password);
@@ -173,10 +175,12 @@ public class Control {
         Account account = Account.getAllAccounts().get(username);
         if (account instanceof Manager) {
             Manager.removeManager((Manager) Account.getAllAccounts().get(username));
-        } else if (Account.getAllAccounts().get(username) instanceof Seller) {
+        } else if (account instanceof Seller) {
             Seller.removeSeller((Seller) Account.getAllAccounts().get(username));
-        } else if (Account.getAllAccounts().get(username) instanceof Customer) {
+        } else if (account instanceof Customer) {
             Customer.removeCustomer((Customer) Account.getAllAccounts().get(username));
+        } else if (account instanceof Supporter) {
+            Supporter.removeSupport((Supporter) Account.getAllAccounts().get(username));
         }
         Account.getAllAccounts().remove(username);
         File file = new File(username+account.getPassword() +".json");
@@ -502,13 +506,13 @@ public class Control {
         return sorted;
     }
 
-    public void customerWalletCharge (Customer customer , double amount){
-        customer.getWallet().setBalance(customer.getWallet().getBalance() + amount);
-    }
-
-    public void sellerWalletCharge (Seller seller, double amount){
-        seller.getWallet().setBalance(seller.getWallet().getBalance() + amount);
-    }
+//    public void customerWalletCharge (Customer customer , double amount){
+//        customer.getWallet().setBalance(customer.getWallet().getBalance() + amount);
+//    }
+//
+//    public void sellerWalletCharge (Seller seller, double amount){
+//        seller.getWallet().setBalance(seller.getWallet().getBalance() + amount);
+//    }
 
 
     public void fillAllFiles(){
@@ -517,8 +521,8 @@ public class Control {
             String character;
             while ((character = reader.readLine()) != null) {
                 String[] parsed = character.split(" - ");
-                String infos = parsed[0] + " - " + parsed[1];
-                File file = new File("Files/" + parsed[2]);
+                String infos = parsed[0] + " - " + parsed[1] + " - " + parsed[2];
+                File file = new File(parsed[3]);
                 allFiles.put(infos,file);
                 character = "";
             }
@@ -527,11 +531,13 @@ public class Control {
     }
 
     public void addFile(String infos,File file){
-        allFiles.put(infos,file);
-        FileWriter writer2;
+        System.out.println("added " + infos + file);
+        String unique = randomString(5);
+        allFiles.put(infos + " - " + unique ,file);
         try {
-            writer2 = new FileWriter("Database/files.txt", true);
-            writer2.write((infos+ " - "+file.getName()+'\n'));
+            FileWriter writer = new FileWriter("Database/Files.txt", true);
+            writer.write(infos + " - " + unique + " - "+file + '\n');
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

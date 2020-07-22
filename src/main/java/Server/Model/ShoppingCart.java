@@ -25,13 +25,6 @@ public class ShoppingCart {
         SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
     }
 
-//    public static void rewriteFiles(){
-//        for (ShoppingCart cart : allShoppingCarts) {
-//            File file = new File(cart.getCustomer().getUsername()+"ShoppingCart"+".txt");
-//            file.delete();
-//            SaveData.saveData(cart, cart.getCustomer().getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
-//        }
-//    }
     public static void rewriteFiles(){
         for (ShoppingCart shoppingCart : ShoppingCart.getAllShoppingCarts()) {
             SaveData.saveDataRunning(shoppingCart, shoppingCart.getCustomer().getUsername() + "ShoppingCart", SaveData.shoppingCartFile);

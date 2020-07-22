@@ -217,8 +217,22 @@ public class ClientCenter {
         imageOutFile.flush();
         File file = new File("cachedPhotos/" + name);
         Image photo = new Image(file.toURI().toString());
+        file.delete();
         System.out.println("Image Successfully Manipulated!");
         return photo;
+    }
+
+    public void downloadFile() throws IOException {
+        System.out.println("File Received!");
+        String message = readMessageFromServer();
+        JSONObject obj1 = (JSONObject) JSONValue.parse(message);
+        String name = obj1.get("filename").toString();
+        String image = obj1.get("image").toString();
+        byte[] imageByteArray = decodeImage(image);
+        String home = System.getProperty("user.home");
+        FileOutputStream imageOutFile = new FileOutputStream(home+"/Downloads/" + name);
+        imageOutFile.write(imageByteArray);
+        imageOutFile.flush();
     }
 
     private String getFileExt(String name){
@@ -251,7 +265,7 @@ public class ClientCenter {
         System.out.println("File Sent!");
     }
 
-    public void sendFile(String path) throws IOException {
+    public void sendFile(String path,String name) throws IOException {
         File file = new File(path);
         FileInputStream imageInFile = new FileInputStream(file);
         byte imageData[] = new byte[(int) file.length()];
@@ -259,7 +273,7 @@ public class ClientCenter {
         String imageDataString = encodeImage(imageData);
         System.out.println("Image Successfully Manipulated!");
         JSONObject obj = new JSONObject();
-        obj.put("filename","chert" + "." +getFileExt(path));
+        obj.put("filename",name);
         obj.put("file",imageDataString);
         printWriter.println(obj.toJSONString());
         printWriter.flush();

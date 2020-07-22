@@ -3,7 +3,7 @@ package Server.Model.Account;
 import Server.Controller.Control;
 import Server.Controller.Sort;
 import Server.Model.*;
-import Server.Model.BankPrime.BankAccount;
+//import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.BuyLog;
 
 import java.io.File;
@@ -18,6 +18,7 @@ public class Customer extends Account implements Comparable<Customer>{
     private HashMap<String,Integer> discountCodesUsed = new HashMap<>();
     private ArrayList<String> buyLogs = new ArrayList<>();
     public ArrayList<String> offs = new ArrayList<>();
+    private ArrayList<String> files = new ArrayList<>();
     public double balance;
     private Wallet wallet;
 
@@ -53,8 +54,7 @@ public class Customer extends Account implements Comparable<Customer>{
 
     public static void removeCustomer (Customer customer){
         allCustomer.remove(customer);
-
-        File file = new File(customer.getUsername()+".json");
+        File file = new File("Database/" + customer.getUsername()+".json");
         file.delete();
     }
     public void addBuyLogs (BuyLog buyLog){
@@ -193,5 +193,18 @@ public class Customer extends Account implements Comparable<Customer>{
 
     public Wallet getWallet() {
         return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public ArrayList<String> getFiles() {
+        return files;
+    }
+    public void addFile(String file){
+        files.add(file);
+        rewriteFiles();
+        Account.rewriteFiles();
     }
 }

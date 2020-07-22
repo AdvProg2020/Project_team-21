@@ -62,13 +62,8 @@ public class Off implements Comparable<Off>{
     {
         allOffs.remove(off.getOffId());
         allOffsList.remove(off);
-
-        File file = new File(off.getOffId()+".json");
-        if(file.delete()){
-//            System.out.println("yes");
-        } else {
-//            System.out.println("hah");
-        }
+        File file = new File("Database/" + off.getOffId()+".json");
+        file.delete();
     }
 
     public ArrayList<Product> getProductsList() {

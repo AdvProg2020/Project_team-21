@@ -39,9 +39,9 @@ public class SellerRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File(requestId+(requestedSellers.get(requestId).getUsername())+".json");
+        File file = new File("Database/" + requestId+(requestedSellers.get(requestId).getUsername())+".json");
         file.delete();
-        File file1 = new File(requestId+".json");
+        File file1 = new File("Database/" + requestId+".json");
         file1.delete();
         requestedSellers.remove(requestId);
         getAllRequests().remove(requestId);
