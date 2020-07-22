@@ -1,6 +1,7 @@
 package Server.Model.Account;
 
-import Server.Model.BankPrime.BankAccount;
+//import Server.Model.BankPrime.BankAccount;
+import Bank.BankAccount;
 import Server.Model.SaveData;
 
 import java.io.File;
@@ -16,13 +17,7 @@ public class Manager extends Account implements Comparable<Manager>{
         SaveData.saveData(this, getUsername(), SaveData.managerFile);
         this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
-    //    public static void rewriteFiles(){
-//        for (Manager manager : Manager.getAllManagers()) {
-//            File file = new File(manager.getUsername()+".json");
-//            file.delete();
-//            SaveData.saveData(manager, manager.getUsername(), SaveData.managerFile);
-//        }
-//    }
+
     public static void rewriteFiles(){
         for (Manager manager : Manager.getAllManagers()) {
             SaveData.saveDataRunning(manager, manager.getUsername(), SaveData.managerFile);
@@ -34,13 +29,8 @@ public class Manager extends Account implements Comparable<Manager>{
 
     public static void removeManager (Manager manager){
         allManagers.remove(manager);
-
-        File file = new File(manager.getUsername()+".json");
-        if(file.delete()){
-//            System.out.println("yes");
-        } else {
-//            System.out.println("hah");
-        }
+        File file = new File("Database/" + manager.getUsername()+".json");
+        file.delete();
     }
 
     public static ArrayList<Manager> getAllManagers() {

@@ -2,7 +2,7 @@ package Server.Model.Account;
 
 import Server.Controller.Sort;
 import Server.Model.*;
-import Server.Model.BankPrime.BankAccount;
+//import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.SellLog;
 
 import java.io.File;
@@ -28,13 +28,7 @@ public class Seller extends Account implements Comparable<Seller>{
 //        this.wallet = new Wallet(this , 0);
 //        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
-    //    public static void rewriteFiles(){
-//        for (Seller seller : Seller.getAllSeller()) {
-//            File file = new File(seller.getUsername()+".json");
-//            file.delete();
-//            SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
-//        }
-//    }
+
     public static void rewriteFiles(){
         for (Seller seller : Seller.getAllSeller()) {
             SaveData.saveDataRunning(seller, seller.getUsername(), SaveData.sellerFile);
@@ -51,12 +45,8 @@ public class Seller extends Account implements Comparable<Seller>{
 
     public static void removeSeller (Seller seller){
         allSellers.remove(seller);
-        File file = new File(seller.getUsername()+".json");
-        if(file.delete()){
-//            System.out.println("yes");
-        } else {
-//            System.out.println("hah");
-        }
+        File file = new File("Database/" + seller.getUsername()+".json");
+        file.delete();
     }
     public void removeOff(Off off)
     {

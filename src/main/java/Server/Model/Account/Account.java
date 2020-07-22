@@ -1,6 +1,7 @@
 package Server.Model.Account;
 
-import Server.Model.BankPrime.BankAccount;
+//import Server.Model.BankPrime.BankAccount;
+import Bank.BankAccount;
 import Server.Model.DiscountCode;
 
 import Server.Controller.Sort;

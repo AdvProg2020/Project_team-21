@@ -3,7 +3,7 @@ package Server.Model.Account;
 import Server.Controller.Control;
 import Server.Controller.Sort;
 import Server.Model.*;
-import Server.Model.BankPrime.BankAccount;
+//import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.BuyLog;
 
 import java.io.File;
@@ -54,8 +54,7 @@ public class Customer extends Account implements Comparable<Customer>{
 
     public static void removeCustomer (Customer customer){
         allCustomer.remove(customer);
-
-        File file = new File(customer.getUsername()+".json");
+        File file = new File("Database/" + customer.getUsername()+".json");
         file.delete();
     }
     public void addBuyLogs (BuyLog buyLog){

@@ -28,14 +28,6 @@ public class ProductRequest extends Request {
         SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
     }
 
-    //    public static void rewriteFiles(){
-//        for (String s : requestedProducts.keySet()) {
-//            Product product = requestedProducts.get(s);
-//            File file = new File(s + product.getProductId()+".json");
-//            file.delete();
-//            SaveData.saveData(product, s+product.getProductId(), SaveData.productRequestFile);
-//        }
-//    }
     public static void rewriteFiles(){
         for (String s : requestedProducts.keySet()) {
             Product product = requestedProducts.get(s);

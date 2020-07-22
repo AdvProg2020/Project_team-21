@@ -175,10 +175,12 @@ public class Control {
         Account account = Account.getAllAccounts().get(username);
         if (account instanceof Manager) {
             Manager.removeManager((Manager) Account.getAllAccounts().get(username));
-        } else if (Account.getAllAccounts().get(username) instanceof Seller) {
+        } else if (account instanceof Seller) {
             Seller.removeSeller((Seller) Account.getAllAccounts().get(username));
-        } else if (Account.getAllAccounts().get(username) instanceof Customer) {
+        } else if (account instanceof Customer) {
             Customer.removeCustomer((Customer) Account.getAllAccounts().get(username));
+        } else if (account instanceof Supporter) {
+            Supporter.removeSupport((Supporter) Account.getAllAccounts().get(username));
         }
         Account.getAllAccounts().remove(username);
         File file = new File(username+account.getPassword() +".json");

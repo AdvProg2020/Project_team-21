@@ -2,6 +2,7 @@ package Server.Model.Account;
 
 import Server.Model.SaveData;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Supporter extends Account{
@@ -25,6 +26,12 @@ public class Supporter extends Account{
 
     public static void addNewSupporter (Supporter supporter){
         allSupporters.add(supporter);
+    }
+
+    public static void removeSupport (Supporter supporter){
+        allSupporters.remove(supporter);
+        File file = new File("Database/" + supporter.getUsername()+".json");
+        file.delete();
     }
 
     public static void getObjectFromDatabase(){
