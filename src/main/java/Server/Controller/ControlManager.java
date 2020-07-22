@@ -299,7 +299,7 @@ public class ControlManager {
         return false;
     }
 
-    public static void defineLeastAmountForUsersWallet (double amount){
-        Wallet.setLeastAmount(amount);
-    }
+//    public static void defineLeastAmountForUsersWallet (double amount){
+//        Wallet.setLeastAmount(amount);
+//    }
 }

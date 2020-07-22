@@ -25,11 +25,11 @@ public class WalletPageControllers extends GraphicFather {
         String res = ClientCenter.getInstance().readMessageFromServer();
         String[] splitted = res.split("-");
         Account user = Account.getAccountFromUserName(splitted[0]);
-        if (user instanceof Customer){
-            Control.getInstance().customerWalletCharge((Customer) user , Double.parseDouble(ChargeWalletTextField.getText()));
-        }else if (user instanceof Seller){
-            Control.getInstance().sellerWalletCharge((Seller) user ,Double.parseDouble(ChargeWalletTextField.getText()) );
-        }
+//        if (user instanceof Customer){
+//            Control.getInstance().customerWalletCharge((Customer) user , Double.parseDouble(ChargeWalletTextField.getText()));
+//        }else if (user instanceof Seller){
+//            Control.getInstance().sellerWalletCharge((Seller) user ,Double.parseDouble(ChargeWalletTextField.getText()) );
+//        }
 
 //        ArrayList<String> input = new ArrayList<>();
 //        input.add(user.getText());

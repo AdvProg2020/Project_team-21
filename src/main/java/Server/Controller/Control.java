@@ -505,13 +505,13 @@ public class Control {
         return sorted;
     }
 
-    public void customerWalletCharge (Customer customer , double amount){
-        customer.getWallet().setBalance(customer.getWallet().getBalance() + amount);
-    }
-
-    public void sellerWalletCharge (Seller seller, double amount){
-        seller.getWallet().setBalance(seller.getWallet().getBalance() + amount);
-    }
+//    public void customerWalletCharge (Customer customer , double amount){
+//        customer.getWallet().setBalance(customer.getWallet().getBalance() + amount);
+//    }
+//
+//    public void sellerWalletCharge (Seller seller, double amount){
+//        seller.getWallet().setBalance(seller.getWallet().getBalance() + amount);
+//    }
 
 
     public void fillAllFiles(){
