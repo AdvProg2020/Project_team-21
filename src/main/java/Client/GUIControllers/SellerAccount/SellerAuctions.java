@@ -1,17 +1,20 @@
-package Client.GUIControllers;
+package Client.GUIControllers.SellerAccount;
 
 import Client.ClientCenter;
+import Client.GUIControllers.AuctionPage_Prime;
+import Client.GUIControllers.GraphicFather;
+import Client.GUIControllers.Page;
 import Client.Model.Auction;
 import Client.Model.Product;
 import Client.ServerRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,22 +23,20 @@ import javafx.scene.shape.Circle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Timer;
 import java.util.ResourceBundle;
-import java.util.TimerTask;
 
+public class SellerAuctions extends GraphicFather implements Initializable {
 
-public class AuctionPage extends GraphicFather implements Initializable {
     public GridPane auctionsGridPane;
-    public Button userPage;
     public Circle profilePhoto;
     public Label profileName;
+    public Button userPage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         topBarShowRest(profilePhoto,profileName,userPage);
         ArrayList<Image> allProductsImages = new ArrayList<>();
-        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLAUCTIONS);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETSELLERAUCTIONS);
         String response = ClientCenter.getInstance().readMessageFromServer();
         if(!response.equalsIgnoreCase("NONE")){
             String[] parsedData = response.split(" - ");
@@ -59,7 +60,10 @@ public class AuctionPage extends GraphicFather implements Initializable {
                 i++;
             }
         }
+    }
 
+    public void createAuction(MouseEvent mouseEvent) {
+        goToNextPage(Page.CREATEAUCTION,mouseEvent);
     }
 
     private static class AuctionsCard extends GridPane {

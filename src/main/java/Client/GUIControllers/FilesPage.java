@@ -104,7 +104,7 @@ public class FilesPage extends GraphicFather implements Initializable {
             cardTitle.getStyleClass().add("mainPageProductCardsTitle");
 
             Label cardDescription = new Label();
-            cardDescription.setText(("Name: " + name + "\n" + "Size: " + space + "MB" + "\n" + "Price: " + price + "\nSeller: " + seller));
+            cardDescription.setText(("Name: " + name + "\n" + "Size: " + space + "MB" + "\n" + "Price: " + price + "$\nSeller: " + seller));
             this.getChildren().add(cardDescription);
             cardDescription.getStyleClass().add("mainPageProductCardsDetail");
             cardDescription.setWrapText(true);

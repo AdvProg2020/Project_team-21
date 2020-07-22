@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +24,9 @@ public class AuctionPage_Prime extends GraphicFather implements Initializable {
     public Label auctionTitleLabel;
     public Label sellerLabel;
     public Label winnerLabel;
+    public Button userPage;
+    public Circle profilePhoto;
+    public Label profileName;
 
     public static void setAuction(Auction auction) {
         AuctionPage_Prime.auction = auction;
@@ -36,10 +41,10 @@ public class AuctionPage_Prime extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        topBarShowRest(profilePhoto,profileName,userPage);
 
         ProductCard productCard = new ProductCard(auction.getAuctionProduct());
         auctionGridPane.add(productCard, 0, 0);
-
 
         startTimeLabel.setText("Start Time: " + auction.getStartTime());
         endTimeLabel.setText("End Time: " + auction.getEndTime());

@@ -88,14 +88,7 @@
 
         <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
             <HBox>
-<!--                <Button-->
-<!--                        styleClass="navBarAccountBtn"-->
-<!--                        prefHeight="50"-->
-<!--                        prefWidth="50"-->
 
-<!--                >-->
-
-<!--                </Button>-->
                 <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccountCircle" radius="30" stroke="BLACK" strokeType="INSIDE" styleClass="profilePhoto" />
                 <Label
                         styleClass="navBarAccountLabel"

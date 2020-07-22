@@ -1,5 +1,6 @@
 package Server.Model;
 
+import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
 import java.time.LocalDateTime;
@@ -10,13 +11,13 @@ public class Auction {
 
     private static ArrayList<Auction> allAuctions = new ArrayList<>();
     private String auctionId;
-    private Product auctionProduct;
+    private String auctionProduct;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private double maxSuggestedAmount;
-    private Seller seller;
-    private Customer auctionWinner;
-    private HashMap<Customer, Double> customersSuggestionAmount = new HashMap<>();
+    private String seller;
+    private String auctionWinner = "NULL";
+    private HashMap<String, Double> customersSuggestionAmount = new HashMap<>();
 
     public Auction(String auctionId, Product auctionProduct, LocalDateTime startTime, LocalDateTime endTime, Seller seller){
         setAuctionId(auctionId);
@@ -25,6 +26,7 @@ public class Auction {
         setEndTime(endTime);
         setSeller(seller);
         allAuctions.add(this);
+        SaveData.saveData(this, "Auction:" + auctionId, SaveData.auctionFile);
     }
 
     private void setAuctionId(String auctionId) {
@@ -32,7 +34,7 @@ public class Auction {
     }
 
     private void setAuctionProduct(Product auctionProduct) {
-        this.auctionProduct = auctionProduct;
+        this.auctionProduct = auctionProduct.getProductId();
     }
 
     private void setStartTime(LocalDateTime startTime) {
@@ -44,7 +46,7 @@ public class Auction {
     }
 
     private void setSeller(Seller seller) {
-        this.seller = seller;
+        this.seller = seller.getUsername();
     }
 
     public void setMaxSuggestedAmount(double maxSuggestedAmount) {
@@ -52,11 +54,14 @@ public class Auction {
     }
 
     public void setAuctionWinner(Customer auctionWinner) {
-        this.auctionWinner = auctionWinner;
+
+        this.auctionWinner = auctionWinner.getUsername();
     }
 
     public Customer getAuctionWinner() {
-        return auctionWinner;
+        if(auctionWinner.equalsIgnoreCase("NULL"))
+            return null;
+        return (Customer)Account.getAllAccounts().get(auctionWinner);
     }
 
     public static ArrayList<Auction> getAllAuctions() {
@@ -68,7 +73,7 @@ public class Auction {
     }
 
     public Product getAuctionProduct() {
-        return auctionProduct;
+        return Product.getAllProducts().get(auctionProduct);
     }
 
     public LocalDateTime getStartTime() {
@@ -84,26 +89,46 @@ public class Auction {
     }
 
     public Seller getSeller() {
-        return seller;
+        return (Seller)Account.getAllAccounts().get(seller);
     }
 
-    public void addCustomersSuggestion(Customer customer, double amount){
-        customersSuggestionAmount.put(customer, amount);
+    public void addCustomersSuggestion(Customer customer, double amount) throws Exception{
+        if(canCustomerGiveSuggestion(customer,amount))
+            customersSuggestionAmount.put(customer.getUsername(), amount);
+        else
+            throw new Exception("You don't have enough money");
     }
 
     public boolean canCustomerChangeAmount(Customer customer, double newAmount){
-        if(customersSuggestionAmount.get(customer)<newAmount) {
+        if(customersSuggestionAmount.get(customer.getUsername())<newAmount) {
             return true;
         }
         return false;
     }
 
-    public void changeCustomersSuggestion(Customer customer, double amount){
-        if(canCustomerChangeAmount(customer, amount)){
-            customersSuggestionAmount.replace(customer, amount);
-        }
+     public boolean canCustomerGiveSuggestion(Customer customer,double amount){
+        if(customer.getBalance() < amount)
+            return false;
+        return true;
+     }
+
+    public void changeCustomersSuggestion(Customer customer, double amount) throws Exception{
+        if(!canCustomerChangeAmount(customer, amount))
+            throw new Exception("Your new suggestion should be higher.");
+        if(canCustomerGiveSuggestion(customer,amount))
+            throw new Exception("You don't have enough credit.");
+        else
+            customersSuggestionAmount.replace(customer.getUsername(), amount);
     }
-    public boolean isExpire(){
+
+    public boolean isExpired(){
         return LocalDateTime.now().isAfter(endTime);
+    }
+
+    public static void getObjectFromDatabase(){
+        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.auctionFile)));
+        for (Object object : objects) {
+            allAuctions.add((Auction)object);
+        }
     }
 }

@@ -1,10 +1,7 @@
 package Server.Controller;
 
+import Server.Model.*;
 import Server.Model.Account.Seller;
-import Server.Model.Category;
-import Server.Model.Company;
-import Server.Model.Off;
-import Server.Model.Product;
 import Server.Model.Request.*;
 import Server.ServerCenter;
 import java.time.LocalDateTime;
@@ -249,5 +246,15 @@ public class ControlSeller {
         LocalDateTime endTime = LocalDateTime.of(makeInt(endParse[0]),makeInt(endParse[1]),makeInt(endParse[2]),makeInt(endParse[3]),makeInt(endParse[4]));
         new OffRequest(requestID,offID,products,startTime,endTime,Double.parseDouble(amount),seller,RequestType.ADD);
         return requestID;
+    }
+    public void createAuction(int year,int month,int day,int hour,int minute,String productId,Seller seller)throws Exception{
+        if(!Product.getAllProducts().containsKey(productId))
+            throw new Exception("This product doesn't exist.");
+        if(!seller.getAllProducts().contains(Product.getAllProducts().get(productId)))
+            throw new Exception("You don't have this product.");
+        LocalDateTime end = LocalDateTime.of(year,month,day,hour,minute);
+        if(end.isBefore(LocalDateTime.now()))
+            throw new Exception("Your end date should be after now.");
+        new Auction(Control.getInstance().randomString(5),Product.getAllProducts().get(productId),LocalDateTime.now(),end,seller);
     }
 }

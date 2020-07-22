@@ -55,6 +55,7 @@ public class Server {
         Score.getObjectFromDatabase();
         Review.getObjectFromDatabase();
         ShoppingCart.getObjectFromDatabase();
+        Auction.getObjectFromDatabase();
         putToAbstract();
     }
 
@@ -1450,23 +1451,54 @@ public class Server {
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLAUCTIONS.toString())){
                         String output = "NONE";
                         int i=0;
-                        System.out.println("n;ojlkh" + output);
                         for (Auction auction : Auction.getAllAuctions()) {
                             if(i != 0)
                                 output += " - ";
                             else
                                 output = "";
-                            System.out.println("hatta inja hm");
                             Product product = auction.getAuctionProduct();
                             output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
-                                    + "&" + auction.getMaxSuggestedAmount()+product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                    + "&" + auction.getMaxSuggestedAmount() + "&" +product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
                                     product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
-                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName();
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired();
                             i++;
                         }
                         sendMessageToClient(output);
                         for (Auction auction : Auction.getAllAuctions()) {
                             sendImage(auction.getAuctionProduct().getImagePath(),"Product:" + auction.getAuctionProduct().getProductId());
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETSELLERAUCTIONS.toString())){
+                        String output = "NONE";
+                        int i = 0;
+                        Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
+                        for (Auction auction : Auction.getAllAuctions()) {
+                            if(!auction.getSeller().equals(seller))
+                                continue;
+                            if(i != 0)
+                                output += " - ";
+                            else
+                                output = "";
+                            Product product = auction.getAuctionProduct();
+                            output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
+                                    + "&" + auction.getMaxSuggestedAmount() + "&" +product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired();
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                        for (Auction auction : Auction.getAllAuctions()) {
+                            sendImage(auction.getAuctionProduct().getImagePath(),"Product:" + auction.getAuctionProduct().getProductId());
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTCREATEAUCTION.toString())){
+                        String[] parsedData = data.split("&");
+                        try{
+                            ControlSeller.getInstance().createAuction(Integer.parseInt(parsedData[0]),Integer.parseInt(parsedData[1]),Integer.parseInt(parsedData[2]),
+                                    Integer.parseInt(parsedData[3]),Integer.parseInt(parsedData[4]),parsedData[5],(Seller)ServerCenter.getInstance().getAccountFromToken(token));
+                            sendError("Your auction is available from right now.",false);
+                        }catch (Exception e){
+                            sendError(e.getMessage(),true);
                         }
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLFILES.toString())){
@@ -1520,7 +1552,6 @@ public class Server {
                             else{
                                 Customer customer = (Customer) account;
                                 String[] parsedData = data.split("//");
-                                File file = new File("Files/" + parsedData[0]);
                                 Double price = Double.parseDouble(parsedData[1]);
                                 Seller seller = (Seller) Account.getAllAccounts().get(parsedData[2]);
                                 if(customer.getBalance() < price)

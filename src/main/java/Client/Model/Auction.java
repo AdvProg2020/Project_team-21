@@ -13,8 +13,9 @@ public class Auction {
     private String winner;
     private String maxSuggestedAmount;
     private HashMap<String, String> customersSuggestionAmount = new HashMap<>();
+    private boolean isExpired;
 
-    public Auction(String auctionId, String startTime, String endTime, String sellerUsername, String maxSuggestedAmount,String sellerFirstName,String sellerLastName) {
+    public Auction(String auctionId, String startTime, String endTime, String sellerUsername, String maxSuggestedAmount,String sellerFirstName,String sellerLastName,boolean isExpired) {
         this.auctionId = auctionId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -22,6 +23,11 @@ public class Auction {
         this.maxSuggestedAmount = maxSuggestedAmount;
         this.sellerFirstName = sellerFirstName;
         this.sellerLastName = sellerLastName;
+        this.isExpired = isExpired;
+    }
+
+    public boolean isExpired() {
+        return isExpired;
     }
 
     public String getAuctionId() {

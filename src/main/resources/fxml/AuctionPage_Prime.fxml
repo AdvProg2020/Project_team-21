@@ -5,6 +5,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Circle?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Client.GUIControllers.AuctionPage_Prime"
@@ -46,26 +47,35 @@
 
                 <Button
                         styleClass="navBarButtons"
-                        text="Main Page">
+                        text="Main Page" onMouseClicked="#goToMain">
 
                 </Button>
 
 
                 <Button
                         styleClass="navBarButtons"
-                        text="User Page">
+                        text="User Page"
+                        fx:id="userPage" onMouseClicked="#goToAccountButton">
 
                 </Button>
 
                 <Button
                         styleClass="navBarButtons"
-                        text="Products Page">
+                        text="Products Page" onMouseClicked="#gotoProductsPage">
 
                 </Button>
 
                 <Button
                         styleClass="navBarButtons"
-                        text="Offs Page">
+                        text="Offs Page" onMouseClicked="#goToOffsPage">
+
+                </Button>
+
+                <Button styleClass="navBarButtons" onAction="#gotoAuctionsPage" text="Auctions Page">
+
+                </Button>
+
+                <Button styleClass="navBarButtons" onAction="#goToFiles" text="Files">
 
                 </Button>
 
@@ -75,17 +85,11 @@
 
         <VBox AnchorPane.rightAnchor="20" styleClass="navBarRightContainer">
             <HBox>
-                <Button
-                        styleClass="navBarAccountBtn"
-                        prefHeight="50"
-                        prefWidth="50"
-
-                >
-
-                </Button>
+                <Circle fx:id="profilePhoto" fill="DODGERBLUE" layoutX="30" layoutY="30" onMouseClicked="#goToAccountCircle" radius="30" stroke="BLACK" strokeType="INSIDE" styleClass="profilePhoto" />
                 <Label
                         styleClass="navBarAccountLabel"
                         text="Account"
+                        fx:id="profileName"
                 >
 
                 </Label>

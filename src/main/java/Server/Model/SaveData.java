@@ -37,6 +37,7 @@ public class SaveData {
     public static final String productReqFile = "Database/ProductReq.txt";
     public static final String sellerReqFile = "Database/SellerReq.txt";
     public static final String companyFile = "Database/Company.txt";
+    public static final String auctionFile = "Database/Auction.txt";
 
     private static HashMap<String, Class> fileToClassMap = new HashMap<>();
     private static Gson gson;
@@ -64,6 +65,7 @@ public class SaveData {
         fileToClassMap.put(productReqFile, ProductRequest.class);
         fileToClassMap.put(sellerReqFile, SellerRequest.class);
         fileToClassMap.put(companyFile,Company.class);
+        fileToClassMap.put(auctionFile,Auction.class);
 
         gson = new Gson();
     }
@@ -90,6 +92,7 @@ public class SaveData {
         reloadObject(productReqFile);
         reloadObject(sellerReqFile);
         reloadObject(companyFile);
+        reloadObject(auctionFile);
     }
 
     public static ArrayList<Object> reloadObject(String fileName){
@@ -290,6 +293,11 @@ public class SaveData {
         }
         try {
             createFile(companyFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+        try {
+            createFile(auctionFile);
         } catch (IOException e) {
 //            e.printStackTrace();
         }

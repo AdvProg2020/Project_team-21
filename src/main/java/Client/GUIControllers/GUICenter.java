@@ -272,6 +272,12 @@ public class GUICenter {
         else if(page.equals(Page.CUSTOMERFILES)){
             template = FXMLLoader.load(getClass().getResource("/fxml/CustomerAccount/CustomerFiles.fxml"));
         }
+        else if(page.equals(Page.SELLERAUCTIONS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/SellerAuctions.fxml"));
+        }
+        else if(page.equals(Page.CREATEAUCTION)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/SellerAccount/CreateAuction.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

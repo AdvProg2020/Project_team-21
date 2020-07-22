@@ -217,6 +217,7 @@ public class ClientCenter {
         imageOutFile.flush();
         File file = new File("cachedPhotos/" + name);
         Image photo = new Image(file.toURI().toString());
+        file.delete();
         System.out.println("Image Successfully Manipulated!");
         return photo;
     }
