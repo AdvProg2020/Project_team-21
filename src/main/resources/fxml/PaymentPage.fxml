@@ -144,7 +144,7 @@
                    <Button
                            styleClass="payBtn"
                            text="Pay from Wallet"
-                           onMouseClicked="#pay"
+                           onAction="#payFromWallet"
                    >
 
                    </Button>
@@ -152,7 +152,7 @@
                    <Button
                            styleClass="payBtn"
                            text="Pay from Bank"
-                           onMouseClicked="#pay"
+                           onAction="#payFromBank"
                    >
 
                    </Button>

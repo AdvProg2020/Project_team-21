@@ -2,6 +2,7 @@ package Client.GUIControllers;
 
 import Client.ClientCenter;
 import Client.ServerRequest;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -79,5 +80,11 @@ public class PaymentPage extends GraphicFather implements Initializable {
                 showError(alertLabel,"Sorry your purchase didn't get complete with error: " + ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
             }
         }
+    }
+
+    public void payFromWallet(ActionEvent actionEvent) {
+    }
+
+    public void payFromBank(ActionEvent actionEvent) {
     }
 }

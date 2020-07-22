@@ -1,5 +1,6 @@
 package Server;
 
+import Bank.BankServer;
 import Server.ChatServers.Group.Group_Server;
 import Server.ChatServers.TwoByTwo.ChatServer;
 import Server.Controller.*;
@@ -17,7 +18,6 @@ import org.json.simple.JSONValue;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -1613,7 +1613,7 @@ public class Server {
                 for (String s : Product.getAllProducts().keySet()) {
                     System.out.println(s + " " + Product.getAllProducts().get(s).getName());
                 }
-                ((Customer) Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
+//                ((Customer) Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
                 try {
                     ServerSocket serverSocket = new ServerSocket(8080);
                     Socket clientSocket;
@@ -1650,6 +1650,13 @@ public class Server {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new BankServer();
             }
         }).start();
 
