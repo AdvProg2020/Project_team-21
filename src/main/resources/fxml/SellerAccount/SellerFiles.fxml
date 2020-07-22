@@ -76,6 +76,10 @@
 
                     </Button>
 
+                    <Button styleClass="navBarButtons" onAction="#goToFiles" text="Files">
+
+                    </Button>
+
 
                 </HBox>
             </GridPane>
