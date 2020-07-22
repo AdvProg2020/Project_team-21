@@ -1,6 +1,5 @@
 package Server.Model.Account;
 
-import Server.Model.BankPrime.BankAccount;
 import Server.Model.SaveData;
 
 import java.io.File;
@@ -9,12 +8,12 @@ import java.util.ArrayList;
 public class Manager extends Account implements Comparable<Manager>{
     private static ArrayList<Manager> allManagers = new ArrayList<>();
 
+    private int wage = 5;
 
     public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewManager(this);
         SaveData.saveData(this, getUsername(), SaveData.managerFile);
-        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
     //    public static void rewriteFiles(){
 //        for (Manager manager : Manager.getAllManagers()) {
@@ -41,6 +40,14 @@ public class Manager extends Account implements Comparable<Manager>{
         } else {
 //            System.out.println("hah");
         }
+    }
+
+    public int getWage() {
+        return wage;
+    }
+
+    public void setWage(int wage) {
+        this.wage = wage;
     }
 
     public static ArrayList<Manager> getAllManagers() {

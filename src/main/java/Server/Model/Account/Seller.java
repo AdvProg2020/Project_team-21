@@ -2,7 +2,6 @@ package Server.Model.Account;
 
 import Server.Controller.Sort;
 import Server.Model.*;
-import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.SellLog;
 
 import java.io.File;
@@ -17,6 +16,7 @@ public class Seller extends Account implements Comparable<Seller>{
     private ArrayList<String> allOffs = new ArrayList<>();
     private ArrayList<String> sellLogs = new ArrayList<>();
     private Wallet wallet;
+    private double balance;
     private String requestID;
 
 
@@ -177,5 +177,13 @@ public class Seller extends Account implements Comparable<Seller>{
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

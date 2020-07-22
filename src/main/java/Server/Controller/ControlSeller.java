@@ -14,6 +14,7 @@ public class ControlSeller {
     private String productViewBuyers;
     private String productToEdit;
     private static ControlSeller instance;
+    private double minBalance;
     private ControlSeller()
     {
 
@@ -63,6 +64,14 @@ public class ControlSeller {
 
     public void setProductViewBuyers(String productViewBuyers) {
         this.productViewBuyers = productViewBuyers;
+    }
+
+    public double getMinBalance() {
+        return minBalance;
+    }
+
+    public void setMinBalance(double minBalance) {
+        this.minBalance = minBalance;
     }
 
     public void createAccount(String username, String password, String firstName, String lastName, String email, String phoneNumber, Company company, String photo)

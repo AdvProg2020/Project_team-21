@@ -115,7 +115,11 @@ public class BankServer {
                         String[] inputs = input.split("\\s");
                         String token = inputs[1];
                         getBalanceByToken(token);
-                    } else if (input.startsWith("exit")) {
+                    } else if (input.equals("terminate")) {
+                        System.out.println(allAccounts.keySet().toString());
+                        BankFileSavor bankFileSavor = new BankFileSavor(this.allAccounts,this.allAccountIds);
+                        bankFileSavor.dataSavor();
+                    }else if (input.startsWith("exit")) {
                         outputStream.writeUTF("Successfully Logged out!");
                         outputStream.flush();
                         clientSocket.close();

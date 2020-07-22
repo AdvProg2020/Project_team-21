@@ -124,6 +124,7 @@
                     <TextField
                             promptText="Amount"
                             styleClass="walletTextField"
+                            fx:id="WithdrawWalletTextFiled"
                     >
 
                     </TextField>
@@ -133,6 +134,7 @@
                     <Button
                             text="Change Wallet"
                             styleClass="changeWalletBtn"
+                            onAction="#WithDrawWallet"
                     >
 
                     </Button>

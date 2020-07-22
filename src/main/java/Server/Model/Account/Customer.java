@@ -3,7 +3,6 @@ package Server.Model.Account;
 import Server.Controller.Control;
 import Server.Controller.Sort;
 import Server.Model.*;
-import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.BuyLog;
 
 import java.io.File;

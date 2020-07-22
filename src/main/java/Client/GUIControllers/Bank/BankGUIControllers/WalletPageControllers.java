@@ -1,5 +1,6 @@
 package Client.GUIControllers.Bank.BankGUIControllers;
 
+import Bank.BankTransactionController;
 import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
 import Client.Main;
@@ -17,8 +18,13 @@ import java.util.ArrayList;
 public class WalletPageControllers extends GraphicFather {
 
     public TextField ChargeWalletTextField;
+    public TextField WithdrawWalletTextFiled;
 
     public void ChangeWallet(ActionEvent actionEvent) {
-//        Main.BankButtonTest();
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.CHARGEWALLET , ChargeWalletTextField.getText());
+    }
+
+    public void WithDrawWallet(ActionEvent actionEvent) {
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.WITHDRAWWALLET , WithdrawWalletTextFiled.getText());
     }
 }
