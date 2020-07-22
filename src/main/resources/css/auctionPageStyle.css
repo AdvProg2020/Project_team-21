@@ -164,11 +164,23 @@
     -fx-border-color: #858585;
     -fx-border-style: solid;
     -fx-border-width: 1px;
+    -fx-border-radius: 10px;
     /*-fx-border-radius: 5px;*/
     -fx-effect: dropshadow(three-pass-box, #D0D0D0, 10, 0, 0, 0);
     -fx-text-alignment: CENTER;
     -fx-border-insets: 6px;
     -fx-min-width: 350px;
+}
+.expiredAuction{
+    -fx-padding: 10 10 10 10;
+
+    /*-fx-border-radius: 5px;*/
+    -fx-effect: dropshadow(three-pass-box, #D0D0D0, 10, 0, 0, 0);
+    -fx-text-alignment: CENTER;
+    -fx-border-insets: 6px;
+    -fx-min-width: 350px;
+    -fx-background-color: #767681;
+    -fx-background-radius: 10px;
 }
 
 .offLabels1 {
@@ -191,6 +203,10 @@
 
 .proHBox {
     -fx-padding: 0 0 0 170;
+}
+
+.hboxSeparate{
+    -fx-padding: 0 0 0 165;
 }
 
 .walletBtn {

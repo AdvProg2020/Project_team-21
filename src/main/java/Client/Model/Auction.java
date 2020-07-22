@@ -1,7 +1,5 @@
 package Client.Model;
 
-import java.util.HashMap;
-
 public class Auction {
     private String auctionId;
     private String startTime;
@@ -12,10 +10,9 @@ public class Auction {
     private String sellerLastName;
     private String winner;
     private String maxSuggestedAmount;
-    private HashMap<String, String> customersSuggestionAmount = new HashMap<>();
     private boolean isExpired;
 
-    public Auction(String auctionId, String startTime, String endTime, String sellerUsername, String maxSuggestedAmount,String sellerFirstName,String sellerLastName,boolean isExpired) {
+    public Auction(String auctionId, String startTime, String endTime, String sellerUsername, String maxSuggestedAmount,String sellerFirstName,String sellerLastName,boolean isExpired,String winner) {
         this.auctionId = auctionId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -24,6 +21,7 @@ public class Auction {
         this.sellerFirstName = sellerFirstName;
         this.sellerLastName = sellerLastName;
         this.isExpired = isExpired;
+        this.winner = winner;
     }
 
     public boolean isExpired() {
@@ -54,9 +52,6 @@ public class Auction {
         return maxSuggestedAmount;
     }
 
-    public HashMap<String, String> getCustomersSuggestionAmount() {
-        return customersSuggestionAmount;
-    }
 
     public void setAuctionProduct(Product auctionProduct) {
         this.auctionProduct = auctionProduct;
@@ -72,5 +67,20 @@ public class Auction {
 
     public String getSellerLastName() {
         return sellerLastName;
+    }
+
+    public void setExpired(String data) {
+        if(data.equalsIgnoreCase("true"))
+            isExpired = true;
+        else
+            isExpired = false;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    public void setMaxSuggestedAmount(String maxSuggestedAmount) {
+        this.maxSuggestedAmount = maxSuggestedAmount;
     }
 }

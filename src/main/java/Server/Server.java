@@ -18,9 +18,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
+import java.util.*;
 
 public class Server {
     static void putToAbstract(){
@@ -57,6 +55,24 @@ public class Server {
         ShoppingCart.getObjectFromDatabase();
         Auction.getObjectFromDatabase();
         putToAbstract();
+    }
+
+    static void checkAuctions(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    for (Auction auction : Auction.getAllAuctions()) {
+                        auction.isExpired();
+                    }
+                    try {
+                        Thread.sleep(60*1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
 
@@ -1452,6 +1468,8 @@ public class Server {
                         String output = "NONE";
                         int i=0;
                         for (Auction auction : Auction.getAllAuctions()) {
+                            if(auction.isExpired())
+                                continue;
                             if(i != 0)
                                 output += " - ";
                             else
@@ -1460,7 +1478,21 @@ public class Server {
                             output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
                                     + "&" + auction.getMaxSuggestedAmount() + "&" +product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
                                     product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
-                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired();
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired() + "&" + auction.getAuctionWinner();
+                            i++;
+                        }
+                        for (Auction auction : Auction.getAllAuctions()) {
+                            if(!auction.isExpired())
+                                continue;
+                            if(i != 0)
+                                output += " - ";
+                            else
+                                output = "";
+                            Product product = auction.getAuctionProduct();
+                            output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
+                                    + "&" + auction.getMaxSuggestedAmount() + "&" +product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired() + "&" + auction.getAuctionWinner();
                             i++;
                         }
                         sendMessageToClient(output);
@@ -1475,6 +1507,8 @@ public class Server {
                         for (Auction auction : Auction.getAllAuctions()) {
                             if(!auction.getSeller().equals(seller))
                                 continue;
+                            if(auction.isExpired())
+                                continue;
                             if(i != 0)
                                 output += " - ";
                             else
@@ -1483,7 +1517,23 @@ public class Server {
                             output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
                                     + "&" + auction.getMaxSuggestedAmount() + "&" +product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
                                     product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
-                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired();
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired() + "&" + auction.getAuctionWinner();
+                            i++;
+                        }
+                        for (Auction auction : Auction.getAllAuctions()) {
+                            if(!auction.getSeller().equals(seller))
+                                continue;
+                            if(!auction.isExpired())
+                                continue;
+                            if(i != 0)
+                                output += " - ";
+                            else
+                                output = "";
+                            Product product = auction.getAuctionProduct();
+                            output += auction.getAuctionId() + "&" + auction.getStartTime().toString() + "&" + auction.getEndTime().toString() + "&" + auction.getSeller().getUsername()
+                                    + "&" + auction.getMaxSuggestedAmount() + "&" +product.getName() + "&" + product.getPrice() + "&" + product.getBuyersAverageScore() + "&" + product.getOrgPrice() + "&" +
+                                    product.getCompany().getName() + "&" + product.getCompany().getLocation() + "&" + product.getCategory().getName() + "&" + product.getProductId() + "&"
+                                    + auction.getSeller().getFirstName() + "&" + auction.getSeller().getLastName() +"&" + auction.isExpired() + "&" + auction.getAuctionWinner();
                             i++;
                         }
                         sendMessageToClient(output);
@@ -1595,6 +1645,42 @@ public class Server {
                     else if(request.equalsIgnoreCase(ServerRequest.GETFILE.toString())){
                         sendImage("Files/" + data,data);
                     }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTSUGGESTAUCTION.toString())){
+                        if(token.equalsIgnoreCase("NULL"))
+                            sendError("You should first login",true);
+                        else{
+                            if(!(ServerCenter.getInstance().getAccountFromToken(token) instanceof Customer))
+                                sendError("You should be a customer",true);
+                            else{
+                                Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
+                                Auction auction = null;
+                                String auctionId = data.split("&")[0];
+                                for (Auction allAuction : Auction.getAllAuctions()) {
+                                    if(allAuction.getAuctionId().equals(auctionId)){
+                                        auction = allAuction;
+                                        break;
+                                    }
+                                }
+                                double suggestedAmount = Double.parseDouble(data.split("&")[1]);
+                                try {
+                                    auction.addCustomersSuggestion(customer,suggestedAmount);
+                                    sendError("Your bid has been placed.",false);
+                                } catch (Exception e) {
+                                    sendError(e.getMessage(),true);
+                                }
+                            }
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETUPDATEAUCTION.toString())){
+                        Auction auction = null;
+                        for (Auction allAuction : Auction.getAllAuctions()) {
+                            if(allAuction.getAuctionId().equals(data)){
+                                auction = allAuction;
+                                break;
+                            }
+                        }
+                        sendMessageToClient(auction.getMaxSuggestedAmount() + "&" + auction.getAuctionWinner() +"&" + auction.isExpired());
+                    }
                 } catch (IOException e) {
 //                    System.out.println("error in reading req in server");
                 }
@@ -1603,17 +1689,17 @@ public class Server {
     }
 
     public static void main(String[] args) {
+        readFilesFromDatabase();
+        checkAuctions();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                readFilesFromDatabase();
                 for (String s : Account.getAllAccounts().keySet()) {
                     System.out.println(s + "  " + Account.getAllAccounts().get(s).getPassword() + "    " + Account.getAllAccounts().get(s).getType());
                 }
                 for (String s : Product.getAllProducts().keySet()) {
                     System.out.println(s + " " + Product.getAllProducts().get(s).getName());
                 }
-                ((Customer) Account.getAllAccounts().get("kharidkonim")).setBalance(1000);
                 try {
                     ServerSocket serverSocket = new ServerSocket(8080);
                     Socket clientSocket;

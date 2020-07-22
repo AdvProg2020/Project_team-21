@@ -63,9 +63,9 @@ public class ProductRequest extends Request {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File(requestId +(requestedProducts.get(requestId).getProductId())+".json");
+        File file = new File("Database/" + requestId +(requestedProducts.get(requestId).getProductId())+".json");
         file.delete();
-        File file1 = new File(requestId+".json");
+        File file1 = new File("Database/" + requestId+".json");
         file1.delete();
         requestedProducts.remove(requestId);
         Request.getAllRequests().remove(requestId);

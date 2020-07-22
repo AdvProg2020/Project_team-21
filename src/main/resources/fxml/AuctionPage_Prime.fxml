@@ -117,6 +117,27 @@
 
     </AnchorPane>
 
+    <AnchorPane AnchorPane.rightAnchor="10" AnchorPane.topAnchor="100">
+
+            <Button
+                    onAction="#update"
+                    styleClass="backButton"
+                    prefHeight="50"
+                    prefWidth="50"
+            >
+                <graphic>
+                    <ImageView fitHeight="50" fitWidth="50">
+                        <image>
+                            <Image url="@../images/refresh.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+
+            </Button>
+
+
+    </AnchorPane>
+
 
     <Label
             AnchorPane.leftAnchor="0"
@@ -207,24 +228,28 @@
 
            <GridPane
                    alignment="CENTER"
+                   fx:id="clientPane"
            >
 
-               <HBox  GridPane.rowIndex="1"  style="-fx-padding: 20 0 0 0;">
+               <HBox  GridPane.rowIndex="1"  style="-fx-padding: 20 0 0 0;"
+                        fx:id="textFieldToRemove">
                    <TextField
                            promptText="Your Suggested Amount"
                            minWidth="80"
                            minHeight="30"
-
+                           fx:id="suggestedAmount"
                    >
 
                    </TextField>
 
-                  <VBox style="-fx-padding: 0 0 0 10;">
+                  <VBox style="-fx-padding: 0 0 0 10;"
+                        fx:id="suggestButton">
                       <Button
                               styleClass="suggestBtn"
                               text="Suggest!"
                               style="-fx-alignment: center; -fx-label-padding: 4 4 4 4; -fx-background-color: #437e1a; -fx-text-fill: #bdc2be;"
                               onAction="#suggestAmountBtn"
+
                       >
 
                       </Button>
@@ -233,6 +258,7 @@
 
               <VBox GridPane.rowIndex="2"
                     style="-fx-padding: 30 10 0 45;"
+                    fx:id="chatButton"
               >
                   <Button
                           styleClass="chatBtn"

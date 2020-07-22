@@ -90,4 +90,7 @@ public class ManageUsers extends GraphicFather implements Initializable {
         userToRemove.setText(selectedItem.getUsername());
         userToView.setText(selectedItem.getUsername());
     }
+
+    public void createSupport(MouseEvent mouseEvent) {
+    }
 }
