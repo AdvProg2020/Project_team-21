@@ -4,10 +4,7 @@ import Server.ChatServers.Group.Group_Server;
 import Server.ChatServers.TwoByTwo.ChatServer;
 import Server.Controller.*;
 import Server.Model.*;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
+import Server.Model.Account.*;
 import Server.Model.Log.BuyLog;
 import Server.Model.Log.Log;
 import Server.Model.Log.SellLog;
@@ -31,6 +28,9 @@ public class Server {
         for (Customer customer : Customer.getaAllCustomers()) {
             Account.addAccount(customer);
         }
+        for (Supporter supporter : Supporter.getAllSupporters()) {
+            Account.addAccount(supporter);
+        }
     }
     static void readFilesFromDatabase(){
         Control.getInstance().fillAllFiles();
@@ -45,6 +45,7 @@ public class Server {
         Product.getObjectFromDatabase();
         Customer.getObjectFromDatabase();
         Manager.getObjectFromDatabase();
+        Supporter.getObjectFromDatabase();
         Seller.getObjectFromDatabase();
         OffRequest.getObjectFromDatabase();
         ProductRequest.getObjectFromDatabase();
@@ -230,9 +231,10 @@ public class Server {
                             sendMessageToClient("Manager");
                         if(account instanceof Seller)
                             sendMessageToClient("Seller");
+                        if(account instanceof Supporter)
+                            sendMessageToClient("Support");
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.SIGNOUT.toString())){
-//                        Control.getInstance().logout();
                         ServerCenter.getInstance().expireToken(token);
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETPROFILEPHOTO.toString())){
@@ -249,8 +251,11 @@ public class Server {
                         +account.getPhoneNumber()+" - "+account.getEmail()+" - "+account.getPassword()+" - "+account.getBalance());
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETMANAGERINFO.toString())){
-                        Manager account =(Manager) ServerCenter.getInstance().getAccountFromToken(token);
+                        System.out.println("hamchenin inja");
+                        Account account = ServerCenter.getInstance().getAccountFromToken(token);
                         sendMessageToClient(account.getUsername() + " - "+account.getFirstName()+" - "+account.getLastName()+" - "+account.getEmail()+" - "
+                                +account.getAddress()+" - "+account.getPhoneNumber()+" - "+account.getPassword());
+                        System.out.println(account.getUsername() + " - "+account.getFirstName()+" - "+account.getLastName()+" - "+account.getEmail()+" - "
                                 +account.getAddress()+" - "+account.getPhoneNumber()+" - "+account.getPassword());
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETSELLERINFO.toString())){
@@ -872,6 +877,33 @@ public class Server {
                         }
                         try {
                             Control.getInstance().createAccount("Manager",username,password,firstName,lastName,
+                                    email,phoneNumber,confirmPassword,null,false,imagePath,token);
+                            sendError("DONE",false);
+                        } catch (Exception e) {
+                            sendError(e.getMessage(),true);
+                            if(!fileExt.equalsIgnoreCase("NULL")){
+                                File file = new File(imagePath);
+                                file.delete();
+                            }
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTCREATESUPPORT.toString())){
+                        String[] parsedData = data.split("//");
+                        String username = parsedData[0];
+                        String password = parsedData[1];
+                        String firstName = parsedData[2];
+                        String lastName = parsedData[3];
+                        String email = parsedData[4];
+                        String phoneNumber = parsedData[5];
+                        String confirmPassword = parsedData[6];
+                        String fileExt = parsedData[7];
+                        String imagePath = "profilePhotos/account_icon.png";
+                        if(!fileExt.equalsIgnoreCase("NULL")){
+                            imagePath = "profilePhotos/" + username + "." + fileExt;
+                            receiveImage(imagePath);
+                        }
+                        try {
+                            Control.getInstance().createAccount("support",username,password,firstName,lastName,
                                     email,phoneNumber,confirmPassword,null,false,imagePath,token);
                             sendError("DONE",false);
                         } catch (Exception e) {

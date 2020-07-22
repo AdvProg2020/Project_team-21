@@ -138,6 +138,9 @@ public class GraphicFather {
             else if(type.equalsIgnoreCase("Seller")){
                 goToNextPage(Page.SELLER,event);
             }
+            else if(type.equalsIgnoreCase("Support")){
+                goToNextPage(Page.SUPPORT,event);
+            }
         }
         else
             gotoSignInPage(event);
@@ -155,6 +158,9 @@ public class GraphicFather {
             }
             else if(type.equalsIgnoreCase("Seller")){
                 goToNextPage(Page.SELLER,event);
+            }
+            else if(type.equalsIgnoreCase("Support")){
+                goToNextPage(Page.SUPPORT,event);
             }
         }
         else

@@ -2,10 +2,7 @@ package Server.Controller;
 
 
 import Server.Model.*;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
+import Server.Model.Account.*;
 import Server.Model.DisAndOffStatus;
 import Server.Model.Off;
 import Server.Model.Filters.*;
@@ -134,7 +131,7 @@ public class Control {
         if (!verifyPassword.equals(password)) {
             throw new Exception("Your password doesn't match");
         }
-        if (!(type.matches("(?i)customer|manager|seller"))) {
+        if (!(type.matches("(?i)customer|manager|seller|support"))) {
             throw new Exception("There is no type of account like that!");
         }
         if (Account.getAllAccounts().containsKey(username)) {
@@ -150,6 +147,8 @@ public class Control {
             ControlSeller.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber, company,photo);
         } else if (type.equalsIgnoreCase("customer")) {
             ControlCustomer.getInstance().createAccount(username, password, firstName, lastName, email, phoneNumber,photo);
+        }else if(type.equalsIgnoreCase("support")){
+            new Supporter(username,firstName,lastName,email,phoneNumber,password,photo);
         }
         if (login)
             login(username, password);

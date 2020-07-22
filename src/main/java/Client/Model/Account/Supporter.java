@@ -8,6 +8,6 @@ public class Supporter extends Account{
 
     @Override
     public String getType() {
-        return "Supporter";
+        return "Support";
     }
 }

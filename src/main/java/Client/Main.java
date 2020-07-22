@@ -2,16 +2,6 @@ package Client;
 
 import Client.GUIControllers.GUICenter;
 import Client.GUIControllers.Page;
-
-import Server.Model.*;
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
-import Server.Model.Log.BuyLog;
-import Server.Model.Log.Log;
-import Server.Model.Log.SellLog;
-import Server.Model.Request.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,9 +9,6 @@ import javafx.scene.Scene;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import javax.print.attribute.standard.Media;
 import java.io.*;
 import java.net.Socket;
 
@@ -66,10 +53,22 @@ public class Main extends Application {
 //        ConsoleView.getInstance().processInput("main menu");
     }
 
+    private static void expireAfterShut(){
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                if(!ClientCenter.getInstance().getActiveToken().equalsIgnoreCase("NULL"))
+                    ClientCenter.getInstance().sendReqToServer(ServerRequest.SIGNOUT);
+                System.out.println("Running Shutdown Hook");
+            }
+        });
+
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Idiots Market");
 //        music();
+        expireAfterShut();
         ClientCenter.getInstance().sendReqToServer(ServerRequest.HASMANAGER);
 //        String message = ClientCenter.getInstance().getDataInputStream().readUTF();
         String message = ClientCenter.getInstance().readMessageFromServer();
