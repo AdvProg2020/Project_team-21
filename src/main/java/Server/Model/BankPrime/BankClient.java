@@ -1,7 +1,5 @@
 package Server.Model.BankPrime;
 
-import javax.xml.crypto.Data;
-import java.awt.dnd.DropTarget;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,8 +11,6 @@ public class BankClient {
     }
 
     public static class ClientImplement{
-//        public final int PORT = 9000;
-//        public final int SERVER_PORT = 8080;
 
         private DataOutputStream dos;
         private DataInputStream dis;

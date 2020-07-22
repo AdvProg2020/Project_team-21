@@ -174,4 +174,8 @@ public class Seller extends Account implements Comparable<Seller>{
     public Wallet getWallet() {
         return wallet;
     }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
 }

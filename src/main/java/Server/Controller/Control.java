@@ -32,7 +32,10 @@ public class Control {
 //    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
 
+
+
     private Control() {
+
     }
 
 //    public ShoppingCart getSignOutCart() {
