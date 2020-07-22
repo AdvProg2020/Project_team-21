@@ -1,9 +1,6 @@
 package Server.Model;
 
-import Server.Model.Account.Account;
-import Server.Model.Account.Customer;
-import Server.Model.Account.Manager;
-import Server.Model.Account.Seller;
+import Server.Model.Account.*;
 import Server.Model.Log.BuyLog;
 import Server.Model.Log.SellLog;
 import Server.Model.Request.OffRequest;
@@ -23,6 +20,7 @@ public class SaveData {
     public static final String customerFile = "Database/Customer.txt";
     public static final String discountCodeFile = "Database/DiscountCode.txt";
     public static final String managerFile = "Database/Manager.txt";
+    public static final String supportFile = "Database/Support.txt";
     public static final String offFile = "Database/Off.txt";
     public static final String productFile = "Database/Product.txt";
     public static final String reviewFile = "Database/Review.txt";
@@ -49,6 +47,7 @@ public class SaveData {
         fileToClassMap.put(customerFile, Customer.class);
         fileToClassMap.put(discountCodeFile, DiscountCode.class);
         fileToClassMap.put(managerFile, Manager.class);
+        fileToClassMap.put(supportFile, Supporter.class);
         fileToClassMap.put(offFile, Off.class);
         fileToClassMap.put(productFile, Product.class);
         fileToClassMap.put(reviewFile, Review.class);
@@ -77,6 +76,7 @@ public class SaveData {
         reloadObject(customerFile);
         reloadObject(discountCodeFile);
         reloadObject(managerFile);
+        reloadObject(supportFile);
         reloadObject(offFile);
         reloadObject(productFile);
         reloadObject(reviewFile);
@@ -210,6 +210,12 @@ public class SaveData {
 
         try {
             createFile(managerFile);
+        } catch (IOException e) {
+//            e.printStackTrace();
+        }
+
+        try {
+            createFile(supportFile);
         } catch (IOException e) {
 //            e.printStackTrace();
         }

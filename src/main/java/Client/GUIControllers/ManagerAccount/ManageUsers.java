@@ -4,10 +4,7 @@ import Client.ClientCenter;
 import Client.GUIControllers.Error;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-import Client.Model.Account.Account;
-import Client.Model.Account.Customer;
-import Client.Model.Account.Manager;
-import Client.Model.Account.Seller;
+import Client.Model.Account.*;
 import Client.ServerRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,7 +38,7 @@ public class ManageUsers extends GraphicFather implements Initializable {
         String response = ClientCenter.getInstance().readMessageFromServer();
         if(!response.equalsIgnoreCase("NONE")){
             String[] parsed = response.split(" - ");
-            for (String s : parsed) {
+            for (String s : parsed){
                 String username = s.split("&")[0];
                 String type = s.split("&")[1];
                 if(type.equalsIgnoreCase("Customer"))
@@ -50,6 +47,8 @@ public class ManageUsers extends GraphicFather implements Initializable {
                     allAccounts.add(new Seller(username));
                 else if(type.equalsIgnoreCase("Manager"))
                     allAccounts.add(new Manager(username));
+                else if(type.equalsIgnoreCase("Support"))
+                    allAccounts.add(new Supporter(username));
             }
         }
         listUsers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -89,5 +88,9 @@ public class ManageUsers extends GraphicFather implements Initializable {
         Account selectedItem = listUsers.getSelectionModel().getSelectedItem();
         userToRemove.setText(selectedItem.getUsername());
         userToView.setText(selectedItem.getUsername());
+    }
+
+    public void createSupport(MouseEvent mouseEvent) {
+        goToNextPage(Page.CREATESUPPORT,mouseEvent);
     }
 }

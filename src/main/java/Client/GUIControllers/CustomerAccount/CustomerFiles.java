@@ -148,7 +148,7 @@ public class CustomerFiles extends GraphicFather implements Initializable {
         public void download(ActionEvent actionEvent, String file) throws IOException {
             ClientCenter.getInstance().sendReqToServer(ServerRequest.GETFILE,file);
             ClientCenter.getInstance().downloadFile();
-            showPopup(actionEvent,"Enjoy ᕙ(⇀‸↼‶)ᕗ");
+            showPopup(actionEvent,"Downloaded in your Downloads folder.\nEnjoy ᕙ(⇀‸↼‶)ᕗ");
         }
     }
 }

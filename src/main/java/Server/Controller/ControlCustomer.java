@@ -184,6 +184,24 @@ public class ControlCustomer {
         return logID;
     }
 
+    public void purchaseAuction(Customer customer,Product product,Seller seller,double amount){
+        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<String> sellers = new ArrayList<>();
+        sellers.add(seller.getUsername());
+        products.add(product);
+
+        new BuyLog(Control.getInstance().randomString(10),LocalDateTime.now(),0,amount,products,seller.getUsername(),
+                customer.getUsername(),customer.getFirstName() + " " + customer.getLastName(),customer.getAddress(),
+                customer.getPhoneNumber(),"Postal code",sellers);
+
+        customer.setBalance(customer.getBalance()-amount);
+
+        new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),0,amount,
+                products,seller.getUsername(),customer.getUsername(),customer.getFirstName() + " " + customer.getLastName(),
+                customer.getAddress(),customer.getPhoneNumber(),"Postal code");
+        seller.setCredit(seller.getCredit() +  amount);
+    }
+
     public boolean checkCustomerGotOrder(String orderID,Customer customer)
     {
         for (BuyLog log : customer.getBuyLogs()) {

@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -52,8 +53,8 @@ public class SellerAuctions extends GraphicFather implements Initializable {
                 boolean isExpired = false;
                 if(auctionData[15].equalsIgnoreCase("true"))
                     isExpired = true;
-                Auction auction = new Auction(auctionData[0],auctionData[1],auctionData[2],auctionData[3],auctionData[4],auctionData[13],auctionData[14],isExpired);
-                auction.setAuctionProduct(new Product(auctionData[5],Double.parseDouble(auctionData[6]),Double.parseDouble(auctionData[7]),Double.parseDouble(auctionData[8]),
+                Auction auction = new Auction(auctionData[0],auctionData[1],auctionData[2],auctionData[3],auctionData[4],auctionData[13],auctionData[14],isExpired,auctionData[16]);
+                auction.setAuctionProduct(new Product(auctionData[5],Double.parseDouble(auctionData[6]),Double.parseDouble(auctionData[8]),Double.parseDouble(auctionData[7]),
                         auctionData[9],auctionData[10],auctionData[11],allProductsImages.get(i),auctionData[12]));
                 AuctionsCard auctionsCard = new AuctionsCard(auction);
                 auctionsGridPane.add(auctionsCard, 0, i);
@@ -96,6 +97,23 @@ public class SellerAuctions extends GraphicFather implements Initializable {
             cardImageView.setImage(auction.getAuctionProduct().getImage());
             imageVBox.getChildren().add(cardImageView);
 
+            VBox expiredBox = new VBox();
+            if(auction.isExpired()){
+                URL res = getClass().getClassLoader().getResource("images/expired.png");
+                Image expired = null;
+                try {
+                    expired = new Image(res.toURI().toString());
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                ImageView imageExpired = new ImageView(expired);
+                imageExpired.setFitHeight(50);
+                imageExpired.setFitWidth(90);
+                expiredBox.getChildren().add(imageExpired);
+
+            }
+
+
             VBox vBox2 = new VBox();
             Label label2 = new Label();
             label2.getStyleClass().add("offLabels1");
@@ -109,6 +127,10 @@ public class SellerAuctions extends GraphicFather implements Initializable {
 
             hB.getChildren().add(vBox2);
             hB.getChildren().add(imageVBox);
+            HBox separate = new HBox();
+            separate.getStyleClass().add("hboxSeparate");
+            hB.getChildren().add(separate);
+            hB.getChildren().add(expiredBox);
             hB.getStyleClass().add("proHBox");
             vBoxFather.getChildren().add(hB);
 
@@ -149,7 +171,10 @@ public class SellerAuctions extends GraphicFather implements Initializable {
             this.getChildren().add(vBoxFather);
 
             this.getStyleClass().add("offDetailsCard");
-            this.getStyleClass().add("offBox");
+            if(auction.isExpired())
+                this.getStyleClass().add("expiredAuction");
+            else
+                this.getStyleClass().add("offBox");
 
         }
 

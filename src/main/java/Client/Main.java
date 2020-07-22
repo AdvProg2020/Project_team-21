@@ -117,10 +117,22 @@ public class Main extends Application {
         sendMessage.start();
     }
 
+    private static void expireAfterShut(){
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                if(!ClientCenter.getInstance().getActiveToken().equalsIgnoreCase("NULL"))
+                    ClientCenter.getInstance().sendReqToServer(ServerRequest.SIGNOUT);
+                System.out.println("Running Shutdown Hook");
+            }
+        });
+
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Idiots Market");
 //        music();
+        expireAfterShut();
         ClientCenter.getInstance().sendReqToServer(ServerRequest.HASMANAGER);
 //        String message = ClientCenter.getInstance().getDataInputStream().readUTF();
         String message = ClientCenter.getInstance().readMessageFromServer();
