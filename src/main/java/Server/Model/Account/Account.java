@@ -1,6 +1,5 @@
 package Server.Model.Account;
 
-import Server.Model.BankPrime.BankAccount;
 import Server.Model.DiscountCode;
 
 import Server.Controller.Sort;
@@ -22,7 +21,6 @@ public abstract class Account {
     private String address = "--";
     private String imagePath;
     protected String bankAccountId;
-    protected BankAccount bankAccount;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         this.username = username;

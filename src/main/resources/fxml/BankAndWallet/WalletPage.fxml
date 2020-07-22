@@ -143,6 +143,12 @@
             </HBox>
         </VBox>
 
+        <VBox GridPane.rowIndex="6" style="-fx-padding: 18 0 0 0 ;">
+            <Label fx:id="ErrorLabel" style="-fx-text-fill: red ;">
+
+            </Label>
+        </VBox>
+
     </GridPane>
 
 </AnchorPane>
