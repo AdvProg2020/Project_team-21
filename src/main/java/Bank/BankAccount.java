@@ -22,34 +22,39 @@ public class BankAccount {
         this.lastName = lastName;
         this.userName = userName;
         this.passWord = passWord;
-        value = 50.0;
+        if (userName.equals("shop") || userName.equals("temp"))
+            value = 0.0;
+        else {
+            value = 50.0;
+            allAccounts.get(0).setValue(allAccounts.get(0).getValue() + 50);
+        }
         this.accountId = idSetter();
-        if(firstName != null)
+        if (!firstName.equals("temp"))
             allAccounts.add(this);
         withdrawalTransactions = new ArrayList<>();
         depositTransactions = new ArrayList<>();
         allTransactions = new ArrayList<>();
     }
 
-    private int idSetter (){
-        if (allAccounts.size() == 0){
+    private int idSetter() {
+        if (allAccounts.size() == 0) {
             return 1;
         }
         int max = 0;
-        for (BankAccount bankAccount : allAccounts){
-            if (bankAccount.accountId>max)
+        for (BankAccount bankAccount : allAccounts) {
+            if (bankAccount.accountId > max)
                 max = bankAccount.accountId;
         }
-        return max+1;
+        return max + 1;
     }
 
     public int getAccountId() {
         return accountId;
     }
 
-    public BankAccount getAccountById(int id){
+    public BankAccount getAccountById(int id) {
         for (BankAccount account : allAccounts) {
-            if(account.getAccountId() == id)
+            if (account.getAccountId() == id)
                 return account;
         }
         return null;
@@ -67,7 +72,7 @@ public class BankAccount {
         return userName;
     }
 
-    public double getValueByUsername (String username) {
+    public double getValueByUsername(String username) {
         for (BankAccount account : allAccounts) {
             if (account.getUserName().equals(username))
                 return account.getValue();
@@ -75,22 +80,22 @@ public class BankAccount {
         return 0.0;
     }
 
-    public void addWithdrawalTransaction (Receipt receipt) {
+    public void addWithdrawalTransaction(Receipt receipt) {
         this.withdrawalTransactions.add(receipt);
         this.allTransactions.add(receipt);
     }
 
-    public void addDepositTransaction (Receipt receipt) {
+    public void addDepositTransaction(Receipt receipt) {
         this.depositTransactions.add(receipt);
         this.allTransactions.add(receipt);
     }
 
-    public BankAccount getAccountByUsername (String username) {
+    public BankAccount getAccountByUsername(String username) {
         for (BankAccount account : allAccounts) {
             if (account.getUserName().equals(username))
-                return account ;
+                return account;
         }
-        return null ;
+        return null;
     }
 
     public String getAllDepositTransactions() {
@@ -105,7 +110,19 @@ public class BankAccount {
         return convertArrayListToGsonString(this.allTransactions);
     }
 
-    private String convertArrayListToGsonString (ArrayList<Receipt> receipts) {
+    public ArrayList<BankAccount> getAllAccounts() {
+        return allAccounts;
+    }
+
+    public void showAccounts () {
+        System.out.println("*****");
+        for (BankAccount account : allAccounts) {
+            System.out.println(account.getUserName() + " " + account.getAccountId());
+        }
+        System.out.println("*****");
+    }
+
+    private String convertArrayListToGsonString(ArrayList<Receipt> receipts) {
         Gson gson = new Gson();
         String json = "";
         for (Receipt receipt : receipts) {

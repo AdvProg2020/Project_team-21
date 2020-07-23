@@ -11,6 +11,8 @@ public class ServerCenter {
     private HashMap<String, Account> allTokens = new HashMap<>();
     private HashMap<String, Account> activeTokens = new HashMap<>();
     private HashMap<String, Account> expiredTokens = new HashMap<>();
+    private DataOutputStream bankOutput;
+    private DataInputStream bankInput;
 
     public static ServerCenter getInstance() {
         if(instance == null)
@@ -45,5 +47,60 @@ public class ServerCenter {
         getExpiredTokens().put(id,account);
         activeTokens.remove(id);
         System.out.println(account.getUsername() + " EXPIRED!");
+    }
+
+    public void setBankOutput(DataOutputStream bankOutput) {
+        this.bankOutput = bankOutput;
+    }
+
+    public void setBankInput(DataInputStream bankInput) {
+        this.bankInput = bankInput;
+    }
+
+    public void sendMessageToBank(String request,String... data){
+        String result = request;
+        for (String s : data) {
+            result += " " + s;
+        }
+        try {
+            bankOutput.writeUTF(result);
+            bankOutput.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createAccountBank(String firstName, String lastName, String username, String password, String repeat_password){
+        sendMessageToBank("create_account",firstName,lastName,username,password,repeat_password);
+    }
+
+    public void getTokenBank(String username, String password){
+        sendMessageToBank("get_token",username,password);
+    }
+
+    public void createReceiptBank(String token, String receiptType, String money, String sourceID, String destID, String description){
+        sendMessageToBank("create_receipt",token,receiptType,money,sourceID,destID,description);
+    }
+
+    public void getTransactionsBank(String token, String type){
+        sendMessageToBank("get_transactions",token,type);
+    }
+
+    public void payBank(String receiptID){
+        sendMessageToBank("pay",receiptID);
+    }
+
+    public void getBalanceBank(String token){
+        sendMessageToBank("get_balance",token);
+    }
+
+    public String readMessageFromBank(){
+        String response = "NULL";
+        try {
+            response = bankInput.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 }
