@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 
-public class BankFileSavor {
+public class BankDataBase {
 
     private HashMap allAccounts;
     private ArrayList allAccountIDs;
@@ -21,7 +21,7 @@ public class BankFileSavor {
     private YaGson gson = new YaGsonBuilder().setPrettyPrinting().create();
     private static final Type TT_mapStringString = new TypeToken<HashMap<String,String>>(){}.getType();
 
-    public BankFileSavor(HashMap<String, String> allAccounts, ArrayList<Integer> allAccountIDs) {
+    public BankDataBase(HashMap<String, String> allAccounts, ArrayList<Integer> allAccountIDs) {
         this.allAccounts = allAccounts;
         this.allAccountIDs = allAccountIDs;
     }
