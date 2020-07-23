@@ -22,6 +22,9 @@ import java.util.Base64;
 import java.util.HashMap;
 
 public class Server {
+
+    private static BankServer bankServer;
+
     static void putToAbstract() {
         for (Seller seller : Seller.getAllSeller()) {
             Account.addAccount(seller);
@@ -1755,4 +1758,36 @@ public class Server {
 
 
     }
+
+//    private static class ServerImpl {
+//        DataInputStream bankDataInputStream;
+//        DataOutputStream bankDataOutputStream;
+//
+//        private void run() {
+//            try {
+//                Socket bankSocket = new Socket("127.0.0.1", 8787);
+//                bankDataInputStream = new DataInputStream(bankSocket.getInputStream());
+//                bankDataOutputStream = new DataOutputStream(bankSocket.getOutputStream());
+//                bankDataOutputStream.writeUTF("connected");
+//                bankDataOutputStream.flush();
+//                ServerSocket serverSocket = new ServerSocket(9090);
+//
+//                while (true) {
+//                    Socket clientSocket;
+//                    try {
+//                        clientSocket = serverSocket.accept();
+//                        System.out.println("client accepted");
+//                        OutputStream outputStream = clientSocket.getOutputStream();
+//                        InputStream inputStream = clientSocket.getInputStream();
+//                        new ClientHandler(outputStream, inputStream, this).start();
+//                    } catch (Exception e) {
+//                        System.err.println("Error in accepting client!");
+//                        break;
+//                    }
+//                }
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+//    }
 }

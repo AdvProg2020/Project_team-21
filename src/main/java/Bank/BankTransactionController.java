@@ -6,7 +6,10 @@ import Server.Controller.ControlSeller;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
+import Server.Server;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class BankTransactionController {
@@ -14,6 +17,16 @@ public class BankTransactionController {
     private static BankTransactionController instance;
     private int wage;
     private int buyLogCode;
+    private static DataOutputStream bankDos;
+    private static DataInputStream bankDis;
+
+    public static void setBankDos(DataOutputStream bankDos) {
+        BankTransactionController.bankDos = bankDos;
+    }
+
+    public static void setBankDis(DataInputStream bankDis) {
+        BankTransactionController.bankDis = bankDis;
+    }
 
     private BankTransactionController()
     {
@@ -107,17 +120,17 @@ public class BankTransactionController {
     }
     //TODO: ask sina about srevers
     public boolean pay(int id) {
-//        try {
-//            server.bankDataOutputStream.writeUTF("pay " + id);
-//            server.bankDataOutputStream.flush();
-//            String result = server.bankDataInputStream.readUTF();
-//            System.out.println(result);
-//            if (result.startsWith("done"))
-//                return true;
-//            else return false;
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            bankDos.writeUTF("pay " + id);
+            bankDos.flush();
+            String result = bankDis.readUTF();
+            System.out.println(result);
+            if (result.startsWith("done"))
+                return true;
+            else return false;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         return false;
     }
 

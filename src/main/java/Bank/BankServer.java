@@ -47,6 +47,7 @@ public class BankServer {
                 System.out.println(e.getMessage());
             }
         }
+
     }
 
     private static class ClientHandler extends Thread {
@@ -58,8 +59,8 @@ public class BankServer {
         HashMap<String, LocalDateTime> validTokens;
         HashMap<String,String> tokenPerAccount;
         ArrayList<Integer> allAccountIds;
-        private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
-        private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+        private static final SecureRandom secureRandom = new SecureRandom();
+        private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
         public ClientHandler(DataOutputStream outputStream, DataInputStream inputStream , Socket clientSocket , BankAccount shop) {
             this.outputStream = outputStream;
