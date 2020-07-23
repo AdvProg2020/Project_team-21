@@ -1,12 +1,14 @@
 package Server.Model.Request;
 
+import Server.DatabaseHandler;
 import Server.Model.*;
 import Server.Model.Account.Seller;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductRequest extends Request {
+public class ProductRequest extends Request implements Serializable {
     private String provider;
     private String editField;
     private String newValueEdit;
@@ -111,6 +113,18 @@ public class ProductRequest extends Request {
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.productReqFile)));
         for (Object object : objects2) {
             getAllRequests().put(((ProductRequest)object).getRequestId() ,(ProductRequest) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Product> products = new ArrayList<>(DatabaseHandler.selectFromProductAtRequest());
+        for (Product product : products) {
+            requestedProducts.put(product.getRequestID(), product);
+        }
+
+        ArrayList<ProductRequest> productRequests = new ArrayList<>(DatabaseHandler.selectFromProductRequest());
+        for (ProductRequest productRequest : productRequests) {
+            getAllRequests().put(productRequest.getRequestId(), productRequest);
         }
     }
 }

@@ -1,11 +1,13 @@
 package Server.Model.Account;
 
+import Server.DatabaseHandler;
 import Server.Model.SaveData;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Supporter extends Account{
+public class Supporter extends Account implements Serializable {
 
     private static ArrayList<Supporter> allSupporters = new ArrayList<>();
 
@@ -39,6 +41,14 @@ public class Supporter extends Account{
         for (Object object : objects) {
             allSupporters.add((Supporter) (object));
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Supporter> supporters = new ArrayList<>(DatabaseHandler.selectFromSupporter());
+        for (Supporter supporter : supporters) {
+            allSupporters.add(supporter);
+            getAllAccounts().put(supporter.getUsername(), supporter);
         }
     }
 }

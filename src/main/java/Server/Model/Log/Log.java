@@ -1,14 +1,17 @@
 package Server.Model.Log;
 
+import Server.DatabaseHandler;
+import Server.Model.Account.Seller;
 import Server.Model.DiscountCode;
 import Server.Model.Product;
 import Server.Model.SaveData;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Log implements Comparable<Log>{
+public class Log implements Comparable<Log>, Serializable {
 
     private static HashMap<String, Log> allLogs = new HashMap<>();
     private String logId;
@@ -162,6 +165,18 @@ public class Log implements Comparable<Log>{
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
         for (Object object : objects2) {
             allLogs.put(((Log)object).getLogId() ,(Log) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<BuyLog> buyLogs = new ArrayList<>(DatabaseHandler.selectFromBuyLog());
+        for (BuyLog buyLog : buyLogs) {
+            allLogs.put(buyLog.getLogId(), buyLog);
+        }
+
+        ArrayList<SellLog> sellLogs = new ArrayList<>(DatabaseHandler.selectFromSellLog());
+        for (SellLog sellLog : sellLogs) {
+            allLogs.put(sellLog.getLogId(), sellLog);
         }
     }
 

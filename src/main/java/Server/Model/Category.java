@@ -1,10 +1,13 @@
 package Server.Model;
 
+import Server.DatabaseHandler;
+
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Category implements Comparable<Category>{
+public class Category implements Comparable<Category>, Serializable {
     private static ArrayList<Category> allCategories = new ArrayList<>();
     private static HashMap<String,Category> initialAllCategories = new HashMap<>();
     private String name;
@@ -93,6 +96,15 @@ public class Category implements Comparable<Category>{
         }
     }
 
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Category> categories  = new ArrayList<>(DatabaseHandler.selectFromCategory());
+        for (Category category : categories) {
+
+            initialAllCategories.put((category.getName()),category);
+            allCategories.add(category);
+        }
+    }
+
     public static void removeCategory(Category category){
         for (Product product : category.getProductsList())
         {
@@ -169,8 +181,6 @@ public class Category implements Comparable<Category>{
     public boolean isThereSpecialFeature(String specialFeature){
         return specialFeatures.contains(specialFeature);
     }
-
-
 
 }
 

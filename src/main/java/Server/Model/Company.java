@@ -1,14 +1,16 @@
 package Server.Model;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 import Server.Model.Account.Seller;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Company {
+public class Company implements Serializable {
     private static HashMap<String,Company> allCompanies = new HashMap<>();
     private String name;
     private String location;
@@ -73,6 +75,13 @@ public class Company {
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.companyFile)));
         for (Object object : objects) {
             allCompanies.put(((Company)object).getName() ,(Company)(object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Company> companies  = new ArrayList<>(DatabaseHandler.selectFromCompany());
+        for (Company company : companies) {
+            allCompanies.put(company.getName(), company);
         }
     }
 }

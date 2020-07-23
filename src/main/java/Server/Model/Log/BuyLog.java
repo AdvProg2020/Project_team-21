@@ -1,17 +1,19 @@
 package Server.Model.Log;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Product;
 import Server.Model.SaveData;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class BuyLog extends Log{
+public class BuyLog extends Log implements Serializable {
 
     private static HashMap<String, BuyLog> allBuyLogs = new HashMap<>();
     private ArrayList<String> sellersUsernames = new ArrayList<>();
@@ -64,6 +66,13 @@ public class BuyLog extends Log{
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
         for (Object object : objects) {
             allBuyLogs.put(((BuyLog)object).getLogId() ,(BuyLog) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<BuyLog> buyLogs = new ArrayList<>(DatabaseHandler.selectFromBuyLog());
+        for (BuyLog buyLog : buyLogs) {
+            allBuyLogs.put(buyLog.getLogId(), buyLog);
         }
     }
 

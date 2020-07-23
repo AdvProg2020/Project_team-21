@@ -1,5 +1,6 @@
 package Server.Model;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
@@ -121,6 +122,13 @@ public class ShoppingCart {
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
         for (Object object : objects) {
             allShoppingCarts.add((ShoppingCart)(object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<ShoppingCart> shoppingCarts  = new ArrayList<>(DatabaseHandler.selectFromShoppingCart());
+        for (ShoppingCart shoppingCart : shoppingCarts) {
+            allShoppingCarts.add(shoppingCart);
         }
     }
 }

@@ -1,17 +1,19 @@
 package Server.Model.Log;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Seller;
 import Server.Model.Product;
 import Server.Model.SaveData;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 
-public class SellLog extends Log{
+public class SellLog extends Log implements Serializable {
     private static HashMap<String, SellLog> allSellLogs = new HashMap<>();
 
     public SellLog(String logId, LocalDateTime date, double totalDiscountAmount, double totalAmount, ArrayList<Product> allProducts
@@ -53,6 +55,13 @@ public class SellLog extends Log{
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
         for (Object object : objects) {
             allSellLogs.put(((SellLog)object).getLogId() ,(SellLog) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<SellLog> sellLogs = new ArrayList<>(DatabaseHandler.selectFromSellLog());
+        for (SellLog sellLog : sellLogs) {
+            allSellLogs.put(sellLog.getLogId(), sellLog);
         }
     }
 

@@ -1,12 +1,14 @@
 package Server.Model;
 
 import Server.Controller.Control;
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Review implements Comparable<Review> {
+public class Review implements Comparable<Review>, Serializable {
 
     private String user;
     private String product;
@@ -81,6 +83,13 @@ public class Review implements Comparable<Review> {
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.reviewFile)));
         for (Object object : objects) {
             allReviews.add((Review) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Review> reviews  = new ArrayList<>(DatabaseHandler.selectFromReview());
+        for (Review review : reviews) {
+            allReviews.add(review);
         }
     }
 

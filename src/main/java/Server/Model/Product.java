@@ -1,5 +1,6 @@
 package Server.Model;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
@@ -7,10 +8,11 @@ import Server.Model.Log.BuyLog;
 import Server.Model.Log.SellLog;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product>, Serializable {
 
     public static ArrayList<Product> allProductsList = new ArrayList<>();
     private static HashMap<String , Product> allProducts = new HashMap<>();
@@ -382,6 +384,14 @@ public class Product implements Comparable<Product>{
         for (Object object : objects) {
             allProducts.put(((Product)object).getProductId() ,(Product) (object));
             allProductsList.add((Product)(object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Product> products  = new ArrayList<>(DatabaseHandler.selectFromProduct());
+        for (Product product : products) {
+            allProducts.put(product.getProductId(), product);
+            allProductsList.add(product);
         }
     }
 

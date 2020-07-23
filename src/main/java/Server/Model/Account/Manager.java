@@ -2,12 +2,14 @@ package Server.Model.Account;
 
 //import Server.Model.BankPrime.BankAccount;
 import Bank.BankAccount;
+import Server.DatabaseHandler;
 import Server.Model.SaveData;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Manager extends Account implements Comparable<Manager>{
+public class Manager extends Account implements Comparable<Manager>, Serializable {
     private static ArrayList<Manager> allManagers = new ArrayList<>();
 
 
@@ -52,6 +54,14 @@ public class Manager extends Account implements Comparable<Manager>{
             allManagers.add((Manager) (object));
 
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Manager> managers = new ArrayList<>(DatabaseHandler.selectFromManager());
+        for (Manager manager : managers) {
+            allManagers.add(manager);
+            getAllAccounts().put(manager.getUsername(), manager);
         }
     }
 }

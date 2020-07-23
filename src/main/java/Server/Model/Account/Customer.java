@@ -7,10 +7,12 @@ import Server.Model.*;
 import Server.Model.Log.BuyLog;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import Server.DatabaseHandler;
 
-public class Customer extends Account implements Comparable<Customer>{
+public class Customer extends Account implements Comparable<Customer>, Serializable {
 
     private static ArrayList<Customer> allCustomer = new ArrayList<>();
     private String shoppingCart;
@@ -187,6 +189,15 @@ public class Customer extends Account implements Comparable<Customer>{
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
         }
     }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Customer> customers = new ArrayList<>(DatabaseHandler.selectFromCustomer());
+        for (Customer customer : customers) {
+            allCustomer.add(customer);
+            getAllAccounts().put(customer.getUsername(), customer);
+        }
+    }
+
     public void addBalance(double amount){
         balance += amount;
     }

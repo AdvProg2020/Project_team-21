@@ -1,15 +1,17 @@
 package Server.Model.Request;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Seller;
 import Server.Model.Off;
 import Server.Model.Product;
 import Server.Model.SaveData;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class OffRequest extends Request {
+public class OffRequest extends Request implements Serializable {
     private String provider;
     private String editField;
     private String newValueForField;
@@ -171,6 +173,18 @@ public class OffRequest extends Request {
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.offReqFile)));
         for (Object object : objects2) {
             getAllRequests().put(((OffRequest)object).getRequestId() ,(OffRequest) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Off> offs = new ArrayList<>(DatabaseHandler.selectFromOffAtRequest());
+        for (Off off : offs) {
+            requestedOffs.put(off.getRequestID(), off);
+        }
+
+        ArrayList<OffRequest> offRequests = new ArrayList<>(DatabaseHandler.selectFromOffRequest());
+        for (OffRequest offRequest : offRequests) {
+            getAllRequests().put(offRequest.getRequestId(), offRequest);
         }
     }
 }

@@ -1,14 +1,17 @@
 package Server.Model;
 
 import Server.Controller.ControlCustomer;
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Auction {
+public class Auction implements Serializable {
 
     private static ArrayList<Auction> allAuctions = new ArrayList<>();
     private String auctionId;
@@ -127,6 +130,13 @@ public class Auction {
         ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.auctionFile)));
         for (Object object : objects) {
             allAuctions.add((Auction)object);
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Auction> auctions = new ArrayList<>(DatabaseHandler.selectFromAuction());
+        for (Auction auction : auctions) {
+            allAuctions.add(auction);
         }
     }
 }

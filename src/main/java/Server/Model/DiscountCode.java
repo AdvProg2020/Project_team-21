@@ -2,15 +2,17 @@ package Server.Model;
 
 import Server.Controller.Sort;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 import Server.Model.Account.Customer;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DiscountCode {
+public class DiscountCode implements Serializable {
 
     private static HashMap<String, DiscountCode> allDiscountCodes = new HashMap<>();
     private String discountId;
@@ -148,5 +150,11 @@ public class DiscountCode {
         }
     }
 
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<DiscountCode> discountCodes  = new ArrayList<>(DatabaseHandler.selectFromDiscountCode());
+        for (DiscountCode discountCode : discountCodes) {
+            allDiscountCodes.put(discountCode.getDiscountId(), discountCode);
+        }
+    }
 
 }

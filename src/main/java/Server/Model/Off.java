@@ -1,13 +1,15 @@
 package Server.Model;
 
 import Server.Controller.Sort;
+import Server.DatabaseHandler;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Off implements Comparable<Off>{
+public class Off implements Comparable<Off>, Serializable {
 
     private static HashMap<String, Off> allOffs = new HashMap<>();
     public static ArrayList<Off> allOffsList = new ArrayList<>();
@@ -168,6 +170,14 @@ public class Off implements Comparable<Off>{
         for (Object object : objects) {
             allOffs.put(((Off)object).getOffId() ,(Off) (object));
             allOffsList.add((Off) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Off> offs  = new ArrayList<>(DatabaseHandler.selectFromOff());
+        for (Off off : offs) {
+            allOffs.put(off.getOffId(), off);
+            allOffsList.add(off);
         }
     }
 

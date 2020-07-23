@@ -1,5 +1,6 @@
 package Server.Model.Request;
 
+import Server.DatabaseHandler;
 import Server.Model.Account.Seller;
 import Server.Model.Company;
 import Server.Model.SaveData;
@@ -68,6 +69,18 @@ public class SellerRequest extends Request {
         ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.sellerReqFile)));
         for (Object object : objects2) {
             getAllRequests().put(((SellerRequest)object).getRequestId() ,(SellerRequest) (object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Seller> sellers = new ArrayList<>(DatabaseHandler.selectFromSellerAtRequest());
+        for (Seller seller : sellers) {
+            requestedSellers.put(seller.getRequestID(), seller);
+        }
+
+        ArrayList<SellerRequest> sellerRequests = new ArrayList<>(DatabaseHandler.selectFromSellerRequest());
+        for (SellerRequest sellerRequest : sellerRequests) {
+            getAllRequests().put(sellerRequest.getRequestId(), sellerRequest);
         }
     }
 }

@@ -1729,7 +1729,18 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        readFilesFromDatabase();
+//        readFilesFromDatabase();
+
+        startDatabase();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                System.out.println("Running Shutdown Hook");
+
+                DatabaseHandler.deleteDatabases();
+                DatabaseHandler.storeData();
+            }
+        });
+
         checkAuctions();
         new Thread(new Runnable() {
             @Override
@@ -1788,4 +1799,28 @@ public class Server {
 
 
 }
+    private static void startDatabase(){
+        new DatabaseHandler();
+//        DatabaseHandler.reloadAllDatabases();
+
+
+        Company.reloadObjectsFromDatabase();
+        Customer.reloadObjectsFromDatabase();
+        DiscountCode.reloadObjectsFromDatabase();
+        Manager.reloadObjectsFromDatabase();
+        Off.reloadObjectsFromDatabase();
+        OffRequest.reloadObjectsFromDatabase();
+        Product.reloadObjectsFromDatabase();
+        ProductRequest.reloadObjectsFromDatabase();
+        Review.reloadObjectsFromDatabase();
+        Score.reloadObjectsFromDatabase();
+        SellLog.reloadObjectsFromDatabase();
+        Seller.reloadObjectsFromDatabase();
+        SellerRequest.reloadObjectsFromDatabase();
+        ShoppingCart.reloadObjectsFromDatabase();
+        Supporter.reloadObjectsFromDatabase();
+        Auction.reloadObjectsFromDatabase();
+        BuyLog.reloadObjectsFromDatabase();
+        Category.reloadObjectsFromDatabase();
+    }
 }

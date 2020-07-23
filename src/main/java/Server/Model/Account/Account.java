@@ -8,10 +8,11 @@ import Server.Controller.Sort;
 import Server.Model.SaveData;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
     private static HashMap<String, Account> allAccounts = new HashMap<>();
     private String username;
     private String firstName;

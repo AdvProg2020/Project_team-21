@@ -4,9 +4,10 @@ import Server.Model.Account.Seller;
 import Server.Model.Off;
 import Server.Model.Product;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public abstract class Request {
+public abstract class Request implements Serializable {
     private static HashMap<String, Request> allRequests = new HashMap<>();
     protected static HashMap<String, Product> requestedProducts = new HashMap<>();
     protected static HashMap<String, Off> requestedOffs = new HashMap<>();

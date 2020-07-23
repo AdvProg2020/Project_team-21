@@ -311,22 +311,22 @@ public class SaveData {
 
     public static void saveData(Object object, String name, String typeClass) {
 //        typeClass += ".txt";
-        String json = gson.toJson(object);
-
-        try {
-            name += ".json";
-            FileWriter writer = new FileWriter("Database/"+name, false);
-            writer.write(json);
-
-            FileWriter writer2 = new FileWriter(typeClass, true);
-            writer2.write(("Database/"+name+'\n'));
-
-            writer.close();
-            writer2.close();
-
-        } catch (IOException e) {
-           // e.printStackTrace();
-        }
+//        String json = gson.toJson(object);
+//
+//        try {
+//            name += ".json";
+//            FileWriter writer = new FileWriter("Database/"+name, false);
+//            writer.write(json);
+//
+//            FileWriter writer2 = new FileWriter(typeClass, true);
+//            writer2.write(("Database/"+name+'\n'));
+//
+//            writer.close();
+//            writer2.close();
+//
+//        } catch (IOException e) {
+//           // e.printStackTrace();
+//        }
     }
     public static void saveDataRunning(Object object, String name, String typeClass) {
 //        typeClass += ".txt";

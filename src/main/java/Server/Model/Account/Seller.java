@@ -1,14 +1,16 @@
 package Server.Model.Account;
 
 import Server.Controller.Sort;
+import Server.DatabaseHandler;
 import Server.Model.*;
 //import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.SellLog;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Seller extends Account implements Comparable<Seller>{
+public class Seller extends Account implements Comparable<Seller>, Serializable {
 
     private static ArrayList<Seller> allSellers = new ArrayList<>();
 
@@ -158,6 +160,14 @@ public class Seller extends Account implements Comparable<Seller>{
             allSellers.add((Seller) (object));
 
             getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+        }
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Seller> sellers = new ArrayList<>(DatabaseHandler.selectFromSeller());
+        for (Seller seller : sellers) {
+            allSellers.add(seller);
+            getAllAccounts().put(seller.getUsername(), seller);
         }
     }
 

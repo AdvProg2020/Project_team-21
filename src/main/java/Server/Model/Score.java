@@ -1,12 +1,14 @@
 package Server.Model;
 
 import Server.Controller.Control;
+import Server.DatabaseHandler;
 import Server.Model.Account.Account;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Score implements Comparable<Score>{
+public class Score implements Comparable<Score>, Serializable {
 
     private String user;
     private String product;
@@ -75,6 +77,14 @@ public class Score implements Comparable<Score>{
             allScores.add((Score) (object));
         }
     }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Score> scores  = new ArrayList<>(DatabaseHandler.selectFromScore());
+        for (Score score : scores) {
+            allScores.add(score);
+        }
+    }
+
     public static void removeScore(Score score){
         allScores.remove(score);
     }
