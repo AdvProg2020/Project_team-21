@@ -21,7 +21,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -63,6 +62,10 @@ public class PaymentPage extends GraphicFather implements Initializable {
     }
 
     public void pay(MouseEvent mouseEvent) {
+
+    }
+
+    public void payFromWallet(ActionEvent actionEvent) {
         if(receiverName.getText().isEmpty() || address.getText().isEmpty() || phone.getText().isEmpty() || postalCode.getText().isEmpty()){
             showError(alertLabel,"You should fill all the necessary fields.",Error.NEGATIVE);
         }else{
@@ -70,21 +73,35 @@ public class PaymentPage extends GraphicFather implements Initializable {
             if(discountCode.getText().isEmpty())
                 code = "NONE";
             ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTPAYMENT,receiverName.getText() +"//" + address.getText() + "//" + phone.getText() + "//" +
-                    postalCode.getText() + "//" + code);
+                    postalCode.getText() + "//" + code + "//" + "wallet");
             String message = ClientCenter.getInstance().readMessageFromServer();
             if(message.startsWith(ServerRequest.DONE.toString())){
                 String[] parsed = message.split(" - ");
-                goToMain(mouseEvent);
-                showPopup(mouseEvent , "Your purchase has been finalized successfully with logID: " + parsed[1] + "/n your new balance is: " + parsed[2]);
+                goToMain(actionEvent);
+                showPopup(actionEvent , "Your purchase has been finalized successfully with logID: " + parsed[1] + "/n your new balance is: " + parsed[2]);
             }else{
                 showError(alertLabel,"Sorry your purchase didn't get complete with error: " + ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
             }
         }
     }
 
-    public void payFromWallet(ActionEvent actionEvent) {
-    }
-
     public void payFromBank(ActionEvent actionEvent) {
+        if(receiverName.getText().isEmpty() || address.getText().isEmpty() || phone.getText().isEmpty() || postalCode.getText().isEmpty()){
+            showError(alertLabel,"You should fill all the necessary fields.",Error.NEGATIVE);
+        }else{
+            String code = discountCode.getText();
+            if(discountCode.getText().isEmpty())
+                code = "NONE";
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.POSTPAYMENT,receiverName.getText() +"//" + address.getText() + "//" + phone.getText() + "//" +
+                    postalCode.getText() + "//" + code + "//" + "bank");
+            String message = ClientCenter.getInstance().readMessageFromServer();
+            if(message.startsWith(ServerRequest.DONE.toString())){
+                String[] parsed = message.split(" - ");
+                goToMain(actionEvent);
+                showPopup(actionEvent , "Your purchase has been finalized successfully with logID: " + parsed[1] + "/n your new balance is: " + parsed[2]);
+            }else{
+                showError(alertLabel,"Sorry your purchase didn't get complete with error: " + ClientCenter.getInstance().getMessageFromError(message),Error.NEGATIVE);
+            }
+        }
     }
 }

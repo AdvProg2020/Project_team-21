@@ -1,11 +1,11 @@
 package Server.Model.Account;
 
+import Server.Controller.Control;
 import Server.Controller.Sort;
 import Server.DatabaseHandler;
 import Server.Model.*;
-//import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.SellLog;
-
+import Server.ServerCenter;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,22 +13,20 @@ import java.util.ArrayList;
 public class Seller extends Account implements Comparable<Seller>, Serializable {
 
     private static ArrayList<Seller> allSellers = new ArrayList<>();
-
     private String company;
     private ArrayList<String> allProducts = new ArrayList<>();
     private ArrayList<String> allOffs = new ArrayList<>();
     private ArrayList<String> sellLogs = new ArrayList<>();
-    private Wallet wallet;
     private String requestID;
+    private String bankAccountID;
 
 
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, Company company,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         if(company != null)
             this.company = company.getName();
-        //TODO ASK MOHAMMAD : in chera credit nadare?
-//        this.wallet = new Wallet(this , 0);
-//        this.bankAccount = new BankAccount(firstName , lastName , username , password);
+        new Wallet(Control.getInstance().getLeastAmountWallet(),username);
+        bankAccountID = ServerCenter.getInstance().createAccountBank(firstName,lastName,username,password,password);
     }
 
     public static void rewriteFiles(){
@@ -172,10 +170,42 @@ public class Seller extends Account implements Comparable<Seller>, Serializable 
     }
 
     public Wallet getWallet() {
+        Wallet wallet = null;
+        for (Wallet allWallet : Wallet.getAllWallets()) {
+            if(allWallet.getAccount().equals(this.getUsername())){
+                wallet = allWallet;
+                break;
+            }
+        }
         return wallet;
     }
 
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
+    public double getWalletBalance(){
+        return getWallet().getMoney();
+    }
+
+    public void decreaseFromWallet(double amount){
+        getWallet().withdrawMoney(amount);
+    }
+
+    public void increaseToWallet(double amount){
+        getWallet().depositMoney(amount);
+    }
+
+    public String getBankAccountID() {
+        return bankAccountID;
+    }
+
+    public double getAccountBalance() {
+        double result = Double.parseDouble(ServerCenter.getInstance().getBalanceBank(getUsername(),getPassword()));
+        return result;
+    }
+
+    public static boolean sellerExists(String username){
+        for (Seller seller : allSellers) {
+            if(seller.getUsername().equals(username))
+                return true;
+        }
+        return false;
     }
 }

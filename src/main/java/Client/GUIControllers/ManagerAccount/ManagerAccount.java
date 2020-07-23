@@ -92,6 +92,6 @@ public class ManagerAccount extends GraphicFather implements Initializable {
     }
 
     public void giveMoney(MouseEvent mouseEvent) {
-        goToNextPage(Page.MONEYPAGE,mouseEvent);
+        goToNextPage(Page.FINANCIAL,mouseEvent);
     }
 }

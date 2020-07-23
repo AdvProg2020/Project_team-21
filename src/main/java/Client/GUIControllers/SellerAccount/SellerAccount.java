@@ -27,9 +27,10 @@ public class SellerAccount extends GraphicFather implements Initializable {
     public Label Address;
     public Label Name;
     public Label Username;
-    public Label balance;
     public Button viewPassButton;
     public ImageView viewPassImage;
+    public Label walletBalance;
+    public Label accountBalance;
     private boolean showPass;
     String username;
     String name;
@@ -39,7 +40,8 @@ public class SellerAccount extends GraphicFather implements Initializable {
     String phoneNumber;
     String companyNameString;
     String companyAddressString;
-    String credit;
+    String walletMoney;
+    String accountMoney;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,7 +57,8 @@ public class SellerAccount extends GraphicFather implements Initializable {
         password = parsedInput[6];
         companyNameString = parsedInput[7];
         companyAddressString = parsedInput[8];
-        credit = parsedInput[9];
+        walletMoney = parsedInput[9];
+        accountMoney = parsedInput[10];
 
         Username.setText(username);
         Name.setText(name);
@@ -65,7 +68,8 @@ public class SellerAccount extends GraphicFather implements Initializable {
         Password.setText("*****");
         companyAddress.setText(companyAddressString);
         companyName.setText(companyNameString);
-        balance.setText(credit);
+        walletBalance.setText(walletMoney);
+        accountBalance.setText(accountMoney);
         showImageUser(photoCircle);
     }
 
@@ -107,5 +111,9 @@ public class SellerAccount extends GraphicFather implements Initializable {
 
     public void goToAuctions(MouseEvent mouseEvent) {
         goToNextPage(Page.SELLERAUCTIONS,mouseEvent);
+    }
+
+    public void goToWallet(MouseEvent mouseEvent) {
+        goToNextPage(Page.WALLETPAGE, mouseEvent);
     }
 }

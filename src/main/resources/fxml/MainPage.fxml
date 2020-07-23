@@ -93,14 +93,6 @@
 
                     </Button>
 
-                    <Button
-                            styleClass="walletBtn"
-                            prefWidth="40"
-                            prefHeight="40"
-                            onAction="#goToWalletPage"
-                    >
-
-                    </Button>
                 </HBox>
             </HBox>
 

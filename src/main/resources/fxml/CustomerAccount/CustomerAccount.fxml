@@ -157,20 +157,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane layoutX="655.0" layoutY="516.0" prefHeight="183.0" prefWidth="484.0" style="-fx-border-color: WHITE;" AnchorPane.bottomAnchor="10.0">
-         <children>
-            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="176.0" text="Balance:" textFill="#3ab214">
-               <font>
-                  <Font name="Futura Medium" size="33.0" />
-               </font>
-            </Label>
-            <Label fx:id="balance" layoutX="190.0" layoutY="136.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE">
-               <font>
-                  <Font name="Futura Medium" size="35.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
       <Button layoutX="288.0" layoutY="729.0" mnemonicParsing="false" onMouseClicked="#signOut" prefHeight="51.0" prefWidth="146.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Sign Out" textFill="#cfb936" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="250.0">
          <font>
             <Font name="Hiragino Sans W2" size="25.0" />
@@ -181,5 +167,45 @@
             <Font name="Futura Medium" size="25.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="678.0" layoutY="488.0" prefHeight="140.0" prefWidth="489.0" style="-fx-border-color: WHITE;" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="234.0" text="Account Balance" textFill="#3ab214" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="accountBalance" layoutX="192.0" layoutY="93.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Futura Medium" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="667.0" layoutY="674.0" prefHeight="6.0" prefWidth="489.0" style="-fx-border-color: WHITE;" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="234.0" text="Wallet Balance" textFill="#3ab214" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="walletBalance" layoutX="192.0" layoutY="93.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE">
+               <font>
+                  <Font name="Futura Medium" size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="345.0" layoutY="-14.0" mnemonicParsing="false" onMouseClicked="#goToWallet" prefHeight="72.0" prefWidth="94.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="60.0" fitWidth="74.0">
+                     <image>
+                        <Image url="@../../images/wallet_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

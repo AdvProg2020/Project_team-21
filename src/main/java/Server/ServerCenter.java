@@ -70,28 +70,43 @@ public class ServerCenter {
         }
     }
 
-    public void createAccountBank(String firstName, String lastName, String username, String password, String repeat_password){
+    public String createAccountBank(String firstName, String lastName, String username, String password, String repeat_password){
         sendMessageToBank("create_account",firstName,lastName,username,password,repeat_password);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void getTokenBank(String username, String password){
+    public String getTokenBank(String username, String password){
         sendMessageToBank("get_token",username,password);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void createReceiptBank(String token, String receiptType, String money, String sourceID, String destID, String description){
+    public String createReceiptBank(String receiptType, String money, String sourceID, String destID, String description, String username, String password){
+        String token = getTokenBank(username,password);
         sendMessageToBank("create_receipt",token,receiptType,money,sourceID,destID,description);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void getTransactionsBank(String token, String type){
+    public String getTransactionsBank(String type, String username, String password){
+        String token = getTokenBank(username,password);
         sendMessageToBank("get_transactions",token,type);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void payBank(String receiptID){
+    public String payBank(String receiptID){
         sendMessageToBank("pay",receiptID);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void getBalanceBank(String token){
+    public String getBalanceBank(String username, String password){
+        String token = getTokenBank(username,password);
         sendMessageToBank("get_balance",token);
+        String response = readMessageFromBank();
+        return response;
     }
 
     public String readMessageFromBank(){

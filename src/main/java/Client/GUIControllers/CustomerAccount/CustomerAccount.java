@@ -1,10 +1,8 @@
 package Client.GUIControllers.CustomerAccount;
 
-//import Server.Controller.Control;
 import Client.ClientCenter;
 import Client.GUIControllers.GraphicFather;
 import Client.GUIControllers.Page;
-//import Server.Model.Account.Customer;
 import Client.ServerRequest;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -12,9 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,15 +21,17 @@ public class CustomerAccount extends GraphicFather implements Initializable {
     public Label Email;
     public Label Password;
     public Circle photoCircle;
-    public Label balance;
     public ImageView viewPassImage;
+    public Label walletBalance;
+    public Label accountBalance;
     String username;
     String password;
     String name;
     String phoneNumber;
     String address;
     String email;
-    String balanceText = "";
+    String walletMoney;
+    String accountMoney;
     private boolean showPass;
 
     @Override
@@ -50,7 +47,8 @@ public class CustomerAccount extends GraphicFather implements Initializable {
         phoneNumber = parsedInput[4];
         email = parsedInput[5];
         password = parsedInput[6];
-        balanceText = parsedInput[7];
+        walletMoney = parsedInput[7];
+        accountMoney = parsedInput[8];
 
         showImageUser(photoCircle);
         Username.setText(username);
@@ -59,7 +57,8 @@ public class CustomerAccount extends GraphicFather implements Initializable {
         Phone.setText(phoneNumber);
         Email.setText(email);
         Password.setText("*****");
-        balance.setText(balanceText);
+        walletBalance.setText(walletMoney);
+        accountBalance.setText(accountMoney);
     }
 
     public void goToCart(MouseEvent mouseEvent) {
@@ -91,5 +90,9 @@ public class CustomerAccount extends GraphicFather implements Initializable {
 
     public void goToFiles(MouseEvent mouseEvent) {
         goToNextPage(Page.CUSTOMERFILES,mouseEvent);
+    }
+
+    public void goToWallet(MouseEvent mouseEvent) {
+        goToNextPage(Page.WALLETPAGE, mouseEvent);
     }
 }

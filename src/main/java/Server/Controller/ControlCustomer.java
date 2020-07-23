@@ -79,15 +79,15 @@ public class ControlCustomer {
           }
         return totalOffMoneyForCart;
     }
+
     private boolean canPay(double totalPrice,double discount,Customer customer)
     {
-        if(customer.getBalance() >= totalPrice-discount)
+        if(customer.getAccountBalance() >= totalPrice-discount)
             return true;
         return false;
     }
-    public String purchase(Customer customer, String receiverName, String receiverAddress
-            , String receiverPhoneNo, String receiverPostalCode,String discountCode) throws Exception
-    {
+    public String purchaseWithBankAccount(Customer customer, String receiverName, String receiverAddress
+            , String receiverPhoneNo, String receiverPostalCode, String discountCode,String walletOrBank) throws Exception{
         String logID = Control.getInstance().randomString(10);
         ShoppingCart cart = customer.getShoppingCart();
         if(!customer.getDiscountCodes().containsKey(discountCode) && !discountCode.equalsIgnoreCase("NONE"))
@@ -150,7 +150,14 @@ public class ControlCustomer {
         if(!discountCode.equalsIgnoreCase("NONE"))
             customer.addDiscountUse(discount);
 
-        customer.setBalance(customer.getBalance()-(price-totalDiscountAmount));
+//        customer.setBalance(customer.getAccountBalance()-(price-totalDiscountAmount));
+
+        if(walletOrBank.equalsIgnoreCase("wallet") && customer.getWalletBalance() - Control.getInstance().getLeastAmountWallet() < price-totalDiscountAmount)
+            throw new Exception("You don't have enough money in your wallet.");
+        if(walletOrBank.equalsIgnoreCase("bank"))
+            customer.payWithBankAccount(price-totalDiscountAmount);
+        else
+            customer.getWallet().withdrawMoney(price-totalDiscountAmount);
 
         for (Product product : cartProducts) {
             product.addBuyer(customer);
@@ -178,7 +185,8 @@ public class ControlCustomer {
 
             new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),totalOffMoneyPerSeller,calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller),
                     products,seller.getUsername(),customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
-            seller.setCredit(seller.getCredit() + calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller));
+//            seller.setCredit(seller.getCredit() + );
+            seller.increaseToWallet(calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller));
         }
         cart.clearShoppingCart();
         return logID;
@@ -194,12 +202,14 @@ public class ControlCustomer {
                 customer.getUsername(),customer.getFirstName() + " " + customer.getLastName(),customer.getAddress(),
                 customer.getPhoneNumber(),"Postal code",sellers);
 
-        customer.setBalance(customer.getBalance()-amount);
+//        customer.setBalance(customer.getAccountBalance()-amount);
+        customer.getWallet().withdrawMoney(amount);
 
         new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),0,amount,
                 products,seller.getUsername(),customer.getUsername(),customer.getFirstName() + " " + customer.getLastName(),
                 customer.getAddress(),customer.getPhoneNumber(),"Postal code");
-        seller.setCredit(seller.getCredit() +  amount);
+//        seller.setCredit(seller.getCredit() +  amount);
+        seller.getWallet().depositMoney(amount);
     }
 
     public boolean checkCustomerGotOrder(String orderID,Customer customer)

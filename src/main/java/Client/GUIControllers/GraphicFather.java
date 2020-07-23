@@ -166,8 +166,8 @@ public class GraphicFather {
         else
             gotoSignUpPage(event);
     }
-    public void goToMain(MouseEvent mouseEvent) {
-        goToNextPage(Page.MAIN,mouseEvent);
+    public void goToMain(ActionEvent actionEvent) {
+        goToNextPage(Page.MAIN,actionEvent);
     }
     public void signOut(Event event){
         ClientCenter.getInstance().sendReqToServer(ServerRequest.SIGNOUT);
@@ -263,9 +263,5 @@ public class GraphicFather {
     public void goToFiles(ActionEvent actionEvent){
         goToNextPage(Page.FILESPAGE,actionEvent);
     }
-    public void goToWalletPage(ActionEvent actionEvent) {
-        goToNextPage(Page.WALLETPAGE, actionEvent);
-    }
-
 
 }

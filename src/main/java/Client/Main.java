@@ -55,16 +55,16 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ConnectBankClient();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    ConnectBankClient();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
         connectToServer();
         launch(args);
 //        ConsoleView.getInstance().goToNextPage(MainMenuUI.getInstance());
@@ -72,50 +72,50 @@ public class Main extends Application {
 
     }
 
-    private static void ConnectBankClient() throws IOException {
-        Scanner scn = new Scanner(System.in);
-        Socket bankSocket = new Socket("localhost", 8787);
-        dis = new DataInputStream(bankSocket.getInputStream());
-        dos = new DataOutputStream(bankSocket.getOutputStream());
-        Thread sendMessage = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-
-                    // read the message to deliver.
-                    String msg = scn.nextLine();
-                    try {
-                        // write on the output stream
-                        dos.writeUTF(msg);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        // readMessage thread
-        Thread readMessage = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (true) {
-                    try {
-                        // read the message sent to this client
-                        String msg = dis.readUTF();
-                        System.out.println(msg);
-
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        readMessage.start();
-        sendMessage.start();
-    }
+//    private static void ConnectBankClient() throws IOException {
+//        Scanner scn = new Scanner(System.in);
+//        Socket bankSocket = new Socket("localhost", 8787);
+//        dis = new DataInputStream(bankSocket.getInputStream());
+//        dos = new DataOutputStream(bankSocket.getOutputStream());
+//        Thread sendMessage = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//
+//                    // read the message to deliver.
+//                    String msg = scn.nextLine();
+//                    try {
+//                        // write on the output stream
+//                        dos.writeUTF(msg);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//        // readMessage thread
+//        Thread readMessage = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                while (true) {
+//                    try {
+//                        // read the message sent to this client
+//                        String msg = dis.readUTF();
+//                        System.out.println(msg);
+//
+//                    } catch (IOException e) {
+//
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//        readMessage.start();
+//        sendMessage.start();
+//    }
 
     private static void expireAfterShut(){
         Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -155,15 +155,15 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static String BankButtonTest(String msg){
-        String res="";
-        try {
-            dos.writeUTF(msg);
-            res = dis.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return res;
-    }
+//    public static String BankButtonTest(String msg){
+//        String res="";
+//        try {
+//            dos.writeUTF(msg);
+//            res = dis.readUTF();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return res;
+//    }
 
 }

@@ -6,13 +6,10 @@ import Server.Model.DiscountCode;
 
 import Server.Controller.Sort;
 import Server.Model.SaveData;
-
-import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Account implements Serializable {
+public abstract class Account {
     private static HashMap<String, Account> allAccounts = new HashMap<>();
     private String username;
     private String firstName;
@@ -33,22 +30,11 @@ public abstract class Account implements Serializable {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.credit = 0;
         imagePath = photo;
-        bankAccountId = "";
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
         SaveData.saveData(this, getUsername()+getPassword(), SaveData.accountFile);
     }
-
-//    public static void rewriteFiles(){
-//        for (String s : Account.getAllAccounts().keySet()) {
-//            Account account = Account.getAllAccounts().get(s);
-//            File file = new File(s+account.getPassword()+".txt");
-//            file.delete();
-//            SaveData.saveData(account, (s+account.getPassword()), SaveData.accountFile);
-//        }
-//    }
 
     public static void rewriteFiles(){
         for (String s : Account.getAllAccounts().keySet()) {
@@ -109,13 +95,6 @@ public abstract class Account implements Serializable {
         return password;
     }
 
-    public double getCredit() {
-        return credit;
-    }
-
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
 
     public static HashMap<String, Account> getAllAccounts() {
         return allAccounts;
@@ -158,7 +137,6 @@ public abstract class Account implements Serializable {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
-                ", credit=" + credit +
                 '}';
     }
 
