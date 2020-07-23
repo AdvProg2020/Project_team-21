@@ -1612,83 +1612,17 @@ public class Server {
                         }
                         sendMessageToClient(auction.getMaxSuggestedAmount() + "&" + auction.getAuctionWinner() + "&" + auction.isExpired());
                     } else if (request.equalsIgnoreCase(ServerRequest.CHARGEWALLET.toString())) {
-                        Account person = ServerCenter.getInstance().getAccountFromToken(token);
-                        double amount = Double.parseDouble(data);
-                        if (person instanceof Customer) {
-                            Customer customer = (Customer) person;
-                            String charge = "get_token " + customer.getWallet().getBankAccountUsername() + " " +
-                                    customer.getWallet().getBankAccountPassword();
-                            System.out.println(charge);
-                            String BankToken = BankTransactionController.getInstance().getTokenFromBank(charge);
-                            if (token.equalsIgnoreCase("")) {
-                                sendMessageToClient("Bank Token Error!");
-                            }
-                            int receipt = BankTransactionController.getInstance().moveToShopAccount(BankToken, amount, customer.getWallet().getAccountId(), "charging_wallet");
-                            boolean wasPaid = BankTransactionController.getInstance().pay(receipt);
-                            if (wasPaid) {
-                                customer.setBalance(customer.getBalance() + amount);
-                            }
 
-                        } else if (person instanceof Seller) {
-                            Seller seller = (Seller) person;
-                            String charge = "get_token " + seller.getWallet().getBankAccountUsername() + " " +
-                                    seller.getWallet().getBankAccountPassword();
-                            System.out.println(charge);
-                            String BankToken = BankTransactionController.getInstance().getTokenFromBank(charge);
-                            if (token.equalsIgnoreCase("")) {
-                                sendMessageToClient("Bank Token Error!");
-                            }
-                            int receipt = BankTransactionController.getInstance().moveToShopAccount(BankToken, amount, seller.getWallet().getAccountId(), "charging_wallet");
-                            boolean wasPaid = BankTransactionController.getInstance().pay(receipt);
-                            if (wasPaid) {
-                                seller.setBalance(seller.getBalance() + amount);
-                            }
-                        }
                     } else if (request.equalsIgnoreCase(ServerRequest.WITHDRAWWALLET.toString())) {
-                        Account person = ServerCenter.getInstance().getAccountFromToken(token);
-                        double amount = Double.parseDouble(data);
-                        Seller seller = (Seller) person;
-                        String withdraw = "get_token " + seller.getWallet().getBankAccountUsername() + " " +
-                                seller.getWallet().getBankAccountPassword();
-                        double minBalanceInWallet = ControlSeller.getInstance().getMinBalance();
-                        if (BankTransactionController.getInstance().isValidWithdrawal(minBalanceInWallet, seller, amount)) {
-                            String bankToken = BankTransactionController.getInstance().getTokenFromBank(withdraw);
-                            if (token.equalsIgnoreCase("")) {
-                                sendMessageToClient("Bank Token Error!");
-                            }
-                            int receipt = BankTransactionController.getInstance().moveFromShopAccount(bankToken, amount,
-                                    seller.getWallet().getAccountId(), "withdrawing_from_wallet");
-                            boolean wasPaid = BankTransactionController.getInstance().pay(receipt);
-                            if (wasPaid) {
-                                seller.setBalance(seller.getBalance() - amount);
-                            }
-                        }
+
                     } else if (request.equalsIgnoreCase(ServerRequest.SETWAGE.toString())) {
-                        int wagePercentage = Integer.parseInt(data);
-                        //TODO
+
                     } else if (request.equalsIgnoreCase(ServerRequest.SETMINBALANCE.toString())) {
                         double min = Double.parseDouble(data);
                         ControlSeller.getInstance().setMinBalance(min);
                     } else if (request.equalsIgnoreCase(ServerRequest.PAYWITHBANKACCOUNT.toString())) {
-                        Account person = ServerCenter.getInstance().getAccountFromToken(token);
-                        String[] parsedData = data.split("//");
-                        double totalPrice = Double.parseDouble(parsedData[0]);
-                        double percentage = Double.parseDouble(parsedData[1]);
-                        boolean wasSuccessful = BankTransactionController.getInstance().paymentWithBankIsSuccessful(totalPrice, percentage, person);
-                        if (wasSuccessful) {
-//                          purchasingManager.setPerson(storage.getUserByUsername((String) clientMessage.getParameters().get(0)));
-//                          purchasingManager.setCart((Cart) clientMessage.getParameters().get(1));
-//                          purchasingManager.performPaymentWithBankAccount(receiverInformation1, totalPrice1, percentage2, discountUsed1);
-                            //TODO
-                        }
-                    } else if (request.equalsIgnoreCase(ServerRequest.GETSHOPBALANCE.toString())) {
-                        //TODO
 
-//                            String charge = "get_token shop shop";
-//                            String token = getTokenFromBank(charge);
-//                            server.bankDataOutputStream.writeUTF("get_balance " + token);
-//                            server.bankDataOutputStream.flush();
-//                            String balanceToReturn = server.bankDataInputStream.readUTF();
+                    } else if (request.equalsIgnoreCase(ServerRequest.GETSHOPBALANCE.toString())) {
 
                     }
                 } catch (IOException e) {

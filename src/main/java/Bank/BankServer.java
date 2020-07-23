@@ -2,6 +2,7 @@ package Bank;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,8 +28,14 @@ public class BankServer {
         private void run() {
             try {
                 ServerSocket serverSocket = new ServerSocket(8787);
-                BankAccount shop = new BankAccount("shop","shop","shop","shop");
-                System.out.println("initializing shop account with id " + shop.getAccountId());
+                BankAccount shop;
+                File file = new File ("src/main/java/Bank/bankDataBase/allBankAccounts.json");
+                if (!file.exists()){
+                    shop = new BankAccount("shop" , "shop" , "shop" , "shop");
+                }else {
+                    BankAccount bankAccount = new BankAccount("temp" , "temp" , "temp" , "temp");
+                    shop = bankAccount.getAccountByUsername("shop");
+                }
 
                 while (true) {
                     Socket clientSocket;
@@ -71,7 +78,18 @@ public class BankServer {
             validTokens = new HashMap<>();
             tokenPerAccount = new HashMap<>();
             allAccountIds = new ArrayList<>();
-            allAccounts.put("shop","shop");
+            BankFileSavor bankFileSavor = new BankFileSavor(allAccounts,allAccountIds);
+            File file = new File("./bankDataBase/allBankAccounts.json");
+            if (file.exists()) {
+                allAccountIds = bankFileSavor.readAllAccountIds();
+                allAccounts = bankFileSavor.readAllAccounts();
+                bankFileSavor.dataReader();
+            } else {
+                allAccounts.put("shop", "shop");
+                allAccountIds.add(1);
+            }
+            System.out.println(allAccountIds.toString());
+            System.out.println(allAccounts.toString());
         }
 
         private void handleClient() {
@@ -313,8 +331,8 @@ public class BankServer {
         }
 
         private void performPayment(String receiptId) {
-            Receipt receipt = new Receipt(null,null,null,null,null,null);
-            BankAccount bankAccount = new BankAccount(null,null,null,null);
+            Receipt receipt = new Receipt("temp","temp","temp","temp","temp","temp");
+            BankAccount bankAccount = new BankAccount("temp","temp","temp","temp");
             Receipt toBePaid = receipt.getReceiptById(Integer.parseInt(receiptId));
             try {
                 if (toBePaid == null) {
@@ -329,6 +347,7 @@ public class BankServer {
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
+            assert toBePaid != null;
             if (toBePaid.getReceiptType().equals("deposit"))
                 performDepositPayment(toBePaid,bankAccount);
             else if (toBePaid.getReceiptType().equals("withdraw"))
@@ -378,6 +397,7 @@ public class BankServer {
             int dest = Integer.parseInt(receipt.getDestAccountID());
             int src = Integer.parseInt(receipt.getSourceAccountID());
             BankAccount destination = bankAccount.getAccountById(dest);
+            System.out.println(destination.getUserName());
             BankAccount source = bankAccount.getAccountById(src);
             if (source.getValue() > Double.parseDouble(receipt.getMoney())) {
                 source.setValue(source.getValue() - Double.parseDouble(receipt.getMoney()));
@@ -428,8 +448,8 @@ public class BankServer {
                 System.out.println(ex.getMessage());
             }
             String username = tokenPerAccount.get(token);
-            BankAccount temp = new BankAccount(null,null,null,null);
-            Receipt receipt = new Receipt(null,null,null,null,null,null);
+            BankAccount temp = new BankAccount("temp","temp","temp","temp");
+            Receipt receipt = new Receipt("temp","temp","temp","temp","temp","temp");
             BankAccount account = temp.getAccountByUsername(username);
             try {
                 if (type.equals("+")) {
