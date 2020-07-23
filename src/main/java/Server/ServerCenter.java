@@ -11,6 +11,8 @@ public class ServerCenter {
     private HashMap<String, Account> allTokens = new HashMap<>();
     private HashMap<String, Account> activeTokens = new HashMap<>();
     private HashMap<String, Account> expiredTokens = new HashMap<>();
+    private DataOutputStream bankOutput;
+    private DataInputStream bankInput;
 
     public static ServerCenter getInstance() {
         if(instance == null)
@@ -45,5 +47,32 @@ public class ServerCenter {
         getExpiredTokens().put(id,account);
         activeTokens.remove(id);
         System.out.println(account.getUsername() + " EXPIRED!");
+    }
+
+    public void setBankOutput(DataOutputStream bankOutput) {
+        this.bankOutput = bankOutput;
+    }
+
+    public void setBankInput(DataInputStream bankInput) {
+        this.bankInput = bankInput;
+    }
+
+    public void sendMessageToBank(String message){
+        try {
+            bankOutput.writeUTF(message);
+            bankOutput.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String readMessageFromBank(){
+        String response = "NULL";
+        try {
+            response = bankInput.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 }

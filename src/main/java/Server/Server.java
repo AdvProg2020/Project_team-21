@@ -1783,6 +1783,15 @@ public class Server {
             @Override
             public void run() {
                 new BankServer();
+                try {
+                    Socket bankSocket = new Socket("localhost",8787);
+                    DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(bankSocket.getInputStream()));
+                    DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(bankSocket.getOutputStream()));
+                    ServerCenter.getInstance().setBankOutput(dataOutputStream);
+                    ServerCenter.getInstance().setBankInput(dataInputStream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
 
