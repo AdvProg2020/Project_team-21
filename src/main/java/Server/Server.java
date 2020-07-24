@@ -1926,6 +1926,11 @@ public class Server {
                 new BankServer();
             }
         }).start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ServerCenter.getInstance().connectToBank();
 }
     private static void startDatabase(){

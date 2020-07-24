@@ -78,12 +78,12 @@
             <VBox styleClass="inputContainer">
                 <Label text="Password">
                 </Label>
-            <PasswordField fx:id="password" styleClass="inputField"/>
+            <PasswordField fx:id="password" styleClass="inputField" />
             </VBox>
 
 
         <VBox alignment="BOTTOM_CENTER" styleClass="submitBox">
-            <Button onMouseClicked="#done" styleClass="submitButton" text="Submit">
+            <Button fx:id="loginButton" onMouseClicked="#done" styleClass="submitButton" text="Submit">
 
             </Button>
         </VBox>
@@ -97,7 +97,7 @@
       </rowConstraints>
 
     </GridPane>
-   <Label fx:id="AlertLabel" layoutX="138.0" layoutY="338.0" prefHeight="17.0" prefWidth="214.0" text="---" textFill="#b91533">
+   <Label fx:id="AlertLabel" alignment="TOP_LEFT" layoutX="138.0" layoutY="310.0" prefHeight="54.0" prefWidth="414.0" text="---" textFill="#b91533">
       <font>
          <Font size="20.0" />
       </font>
