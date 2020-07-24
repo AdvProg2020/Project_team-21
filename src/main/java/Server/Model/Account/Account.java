@@ -1,15 +1,12 @@
 package Server.Model.Account;
 
-//import Server.Model.BankPrime.BankAccount;
 import Bank.BankAccount;
-import Server.Model.DiscountCode;
-
-import Server.Controller.Sort;
 import Server.Model.SaveData;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
     private static HashMap<String, Account> allAccounts = new HashMap<>();
     private String username;
     private String firstName;
@@ -17,11 +14,8 @@ public abstract class Account {
     private String email;
     private String phoneNumber;
     private String password;
-    private double credit;
     private String address = "--";
     private String imagePath;
-    protected String bankAccountId;
-    protected BankAccount bankAccount;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         this.username = username;
@@ -51,14 +45,6 @@ public abstract class Account {
         if(address == null)
             address = "No Address";
         this.address = address;
-    }
-
-    public String getBankAccountId() {
-        return bankAccountId;
-    }
-
-    public void setBankAccountId(String bankAccountId) {
-        this.bankAccountId = bankAccountId;
     }
 
     public void setImagePath(String imagePath) {

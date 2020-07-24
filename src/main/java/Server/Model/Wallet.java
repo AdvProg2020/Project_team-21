@@ -19,10 +19,12 @@ public class Wallet {
     }
 
     public void depositMoney(double amount){
+        System.out.println(amount + " deposit krd");
         money += amount;
     }
 
     public void withdrawMoney(double amount){
+        System.out.println(amount + " withdraw krd");
         money -= amount;
     }
 

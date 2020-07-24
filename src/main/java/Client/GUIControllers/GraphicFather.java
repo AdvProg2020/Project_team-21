@@ -166,7 +166,7 @@ public class GraphicFather {
         else
             gotoSignUpPage(event);
     }
-    public void goToMain(ActionEvent actionEvent) {
+    public void goToMain(Event actionEvent) {
         goToNextPage(Page.MAIN,actionEvent);
     }
     public void signOut(Event event){

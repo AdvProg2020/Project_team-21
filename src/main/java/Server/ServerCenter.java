@@ -3,6 +3,7 @@ package Server;
 import Server.Model.Account.Account;
 
 import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -62,6 +63,7 @@ public class ServerCenter {
         for (String s : data) {
             result += " " + s;
         }
+        System.out.println("also here " + result);
         try {
             bankOutput.writeUTF(result);
             bankOutput.flush();
@@ -117,5 +119,17 @@ public class ServerCenter {
             e.printStackTrace();
         }
         return response;
+    }
+
+    public void connectToBank(){
+        try {
+            Socket bankSocket = new Socket("localhost",8585);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(bankSocket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(bankSocket.getOutputStream()));
+            ServerCenter.getInstance().setBankOutput(dataOutputStream);
+            ServerCenter.getInstance().setBankInput(dataInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -576,6 +576,9 @@ public class Server {
                         }
                         sendMessageToClient(output);
                     }
+                    else if(request.equalsIgnoreCase(ServerRequest.GETALLBUYLOGS.toString())){
+
+                    }
                     else if(request.equalsIgnoreCase(ServerRequest.GETBUYLOGPRODUCTS.toString())){
                         String output = "NONE";
                         int i =0;
@@ -1641,7 +1644,7 @@ public class Server {
                                 String[] parsedData = data.split("//");
                                 Double price = Double.parseDouble(parsedData[1]);
                                 Seller seller = (Seller) Account.getAllAccounts().get(parsedData[2]);
-                                if(customer.getWalletBalance() < price)
+                                if(customer.getWalletBalance() - Control.getInstance().getLeastAmountWallet() < price)
                                     sendError("You don't have enough money in your wallet to buy it",true);
                                 else{
                                     if(customer.getFiles().contains(parsedData[0]))
@@ -1649,9 +1652,13 @@ public class Server {
                                     else {
                                         customer.addFile(parsedData[0]);
 //                                        customer.setBalance(customer.getAccountBalance() - price);
+                                        System.out.println("avval ke inja");
                                         customer.getWallet().withdrawMoney(price);
+                                        System.out.println("badam inja");
 //                                        seller.setCredit(seller.getCredit() + price);
-                                        seller.getWallet().depositMoney(price);
+                                        seller.getWallet().depositMoney(price - (price*Control.getInstance().getCommission()/100));
+                                        System.out.println("badeshm inja");
+//                                        seller.getWallet().depositMoney(Control.getInstance().calculateFinalAfterCommission(price));
                                         sendError("File is added to your files ಠ‿↼",false);
                                     }
                                 }
@@ -1758,17 +1765,72 @@ public class Server {
                             Account account = Account.getAllAccounts().get(username);
                             if(account instanceof Seller){
                                 Seller seller = (Seller) account;
-                                ServerCenter.getInstance().createReceiptBank("deposit",amount,"-1",seller.getBankAccountID(),"Deposit az asemoon",username,seller.getPassword());
+                                String receiptID = ServerCenter.getInstance().createReceiptBank("deposit",amount,"-1",seller.getBankAccountID(),"Deposit az asemoon",username,seller.getPassword());
+                                ServerCenter.getInstance().payBank(receiptID);
                                 sendError("DEPOSITED",false);
                             }else{
                                 Customer customer = (Customer) account;
-                                ServerCenter.getInstance().createReceiptBank("deposit",amount,"-1",customer.getBankAccountID(),"Deposit az asemoon",username,customer.getPassword());
+                                String receiptID = ServerCenter.getInstance().createReceiptBank("deposit",amount,"-1",customer.getBankAccountID(),"Deposit az asemoon",username,customer.getPassword());
+                                ServerCenter.getInstance().payBank(receiptID);
                                 sendError("DEPOSITED",false);
                             }
                         }else{
                             sendError("This user does not exist.",true);
                         }
-
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTCHARGEWALLET.toString())){
+                        double amount = Double.parseDouble(data);
+                        Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                        if(account instanceof Customer){
+                            Customer customer = (Customer) account;
+                            if(customer.getAccountBalance() >= amount){
+                                String receiptID = ServerCenter.getInstance().createReceiptBank("move",Double.toString(amount),customer.getBankAccountID(),"1","Charging wallet",
+                                        customer.getUsername(),customer.getPassword());
+                                String result = ServerCenter.getInstance().payBank(receiptID);
+                                customer.getWallet().depositMoney(amount);
+                                sendError("Your wallet has been charged.",false);
+                            }else{
+                                sendError("You don't have enough money in your account.",true);
+                            }
+                        }else{
+                            Seller seller = (Seller) account;
+                            if(seller.getAccountBalance() >= amount){
+                                String receiptID = ServerCenter.getInstance().createReceiptBank("move",Double.toString(amount),seller.getBankAccountID(),"1","Charging wallet",
+                                        seller.getUsername(),seller.getPassword());
+                                String result = ServerCenter.getInstance().payBank(receiptID);
+                                seller.getWallet().depositMoney(amount);
+                                sendError("Your wallet has been charged.",false);
+                            }else{
+                                sendError("You don't have enough money in your account.",true);
+                            }
+                        }
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.POSTWITHDRAWWALLET.toString())){
+                        double amount = Double.parseDouble(data);
+                        Account account = ServerCenter.getInstance().getAccountFromToken(token);
+                        if(account instanceof Customer){
+                            Customer customer = (Customer) account;
+                            if(customer.getWalletBalance() - Control.getInstance().getLeastAmountWallet() >= amount){
+                                String receiptID = ServerCenter.getInstance().createReceiptBank("move",Double.toString(amount),"1",customer.getBankAccountID(),"Charging wallet",
+                                        customer.getUsername(),customer.getPassword());
+                                String result = ServerCenter.getInstance().payBank(receiptID);
+                                customer.getWallet().withdrawMoney(amount);
+                                sendError("Moved to your bank account.",false);
+                            }else{
+                                sendError("You don't have enough money in your wallet.",true);
+                            }
+                        }else{
+                            Seller seller = (Seller) account;
+                            if(seller.getWalletBalance() - Control.getInstance().getLeastAmountWallet() >= amount){
+                                String receiptID = ServerCenter.getInstance().createReceiptBank("move",Double.toString(amount),"1",seller.getBankAccountID(),"Charging wallet",
+                                        seller.getUsername(),seller.getPassword());
+                                String result = ServerCenter.getInstance().payBank(receiptID);
+                                seller.getWallet().withdrawMoney(amount);
+                                sendError("Moved to your bank account.",false);
+                            }else{
+                                sendError("You don't have enough money in your wallet.",true);
+                            }
+                        }
                     }
                 } catch (IOException e) {
 //                    System.out.println("error in reading req in server");
@@ -1843,19 +1905,9 @@ public class Server {
             @Override
             public void run() {
                 new BankServer();
-                try {
-                    Socket bankSocket = new Socket("localhost",8787);
-                    DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(bankSocket.getInputStream()));
-                    DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(bankSocket.getOutputStream()));
-                    ServerCenter.getInstance().setBankOutput(dataOutputStream);
-                    ServerCenter.getInstance().setBankInput(dataInputStream);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }).start();
-
-
+        ServerCenter.getInstance().connectToBank();
 }
     private static void startDatabase(){
         new DatabaseHandler();

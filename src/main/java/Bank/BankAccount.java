@@ -74,8 +74,11 @@ public class BankAccount {
 
     public double getValueByUsername(String username) {
         for (BankAccount account : allAccounts) {
-            if (account.getUserName().equals(username))
+            if (account.getUserName().equals(username)){
+                System.out.println("ya ali");
+                System.out.println("ya hossein " + account.getValue());
                 return account.getValue();
+            }
         }
         return 0.0;
     }

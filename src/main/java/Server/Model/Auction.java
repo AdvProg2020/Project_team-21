@@ -92,6 +92,8 @@ public class Auction implements Serializable {
             throw new Exception("You don't have enough money in your wallet.");
         if(amount <= maxSuggestedAmount)
             throw new Exception("You should place a higher bid.");
+        if(isExpired())
+            throw new Exception("Auction has been expired.");
         customersSuggestionAmount.put(customer.getUsername(), amount);
         maxSuggestedAmount = amount;
         auctionWinner = customer.getUsername();

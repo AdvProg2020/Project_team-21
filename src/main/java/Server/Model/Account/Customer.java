@@ -198,6 +198,7 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
     }
 
     public double getWalletBalance(){
+        System.out.println("dar wallet " + getWallet().getMoney());
         return getWallet().getMoney();
     }
 

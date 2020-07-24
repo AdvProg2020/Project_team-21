@@ -23,7 +23,7 @@ public class BankServer {
 
         private void run() {
             try {
-                ServerSocket serverSocket = new ServerSocket(8787);
+                ServerSocket serverSocket = new ServerSocket(8585);
                 BankAccount shop;
                 File file = new File ("src/main/java/Bank/bankDataBase/allBankAccounts.json");
                 if (!file.exists()){
@@ -36,6 +36,7 @@ public class BankServer {
                 while (true) {
                     Socket clientSocket;
                     try {
+                        System.out.println("ghable accept");
                         clientSocket = serverSocket.accept();
                         System.out.println("client accepted");
                         DataOutputStream outputStream = new DataOutputStream(clientSocket.getOutputStream());
@@ -92,8 +93,9 @@ public class BankServer {
             String input = "";
             try {
                 while (!input.equals("exit")) {
+                    System.out.println("mn too bankm");
                     input = inputStream.readUTF();
-                    System.out.println(input);
+                    System.out.println("bank voroodi gereft " +input);
                     if (input.startsWith("create_account")) {
                         String[] inputs = input.split("\\s");
                         String firstName = inputs[1];
@@ -423,9 +425,13 @@ public class BankServer {
         }
 
         private void getBalanceByToken(String token) {
+            System.out.println("avvale");
             String username = tokenPerAccount.get(token);
-            BankAccount temp = new BankAccount(null,null,null,null);
+            System.out.println("bia in usernamet " + username);
+            BankAccount temp = new BankAccount("temp","temp","temp","temp");
+            System.out.println("moshkel az sakhte bank nis");
             String balance = Double.toString(temp.getValueByUsername(username));
+            System.out.println("ine balancet " + balance);
             try {
                 outputStream.writeUTF(balance);
                 outputStream.flush();

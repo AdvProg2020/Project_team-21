@@ -555,4 +555,8 @@ public class Control {
     public void setCommission(int commission) {
         this.commission = commission;
     }
+
+    public double calculateFinalAfterCommission(double amount){
+        return amount - (amount*commission/100);
+    }
 }

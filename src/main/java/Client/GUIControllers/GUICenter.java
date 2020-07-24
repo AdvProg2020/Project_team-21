@@ -287,6 +287,9 @@ public class GUICenter {
         else if(page.equals(Page.FINANCIAL)){
             template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/Financial.fxml"));
         }
+        else if(page.equals(Page.MANAGEBUYLOGS)){
+            template = FXMLLoader.load(getClass().getResource("/fxml/ManagerAccount/ManageBuyLogs.fxml"));
+        }
 //        result =  new Scene(template,currentMenu.getWidth(),currentMenu.getHeight());
         result =  new Scene(template,currentScene.getWidth(),currentScene.getHeight());
         return result;

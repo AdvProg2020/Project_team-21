@@ -17,6 +17,7 @@ public class BuyLog extends Log implements Serializable {
 
     private static HashMap<String, BuyLog> allBuyLogs = new HashMap<>();
     private ArrayList<String> sellersUsernames = new ArrayList<>();
+    private boolean delivered;
 
     public BuyLog(String logId, LocalDateTime date, double totalDiscountAmount, double totalAmount, ArrayList<Product> allProducts, String sellerUserName, String receiverUserName
             , String receiverName, String receiverAddress, String receiverPhoneNo, String receiverPostalCode,ArrayList<String> sellersUsernames)
@@ -32,16 +33,10 @@ public class BuyLog extends Log implements Serializable {
                 customer.addBuyLogs(this);
             }
         }
+        delivered = false;
         SaveData.saveData(this, getLogId(), SaveData.buyLogFile);
     }
-    //    public static void rewriteFiles(){
-//        for (String s : BuyLog.getAllBuyLogs().keySet()) {
-//            BuyLog log = BuyLog.getAllBuyLogs().get(s);
-//            File file = new File(s+".json");
-//            file.delete();
-//            SaveData.saveData(log, s, SaveData.buyLogFile);
-//        }
-//    }
+
     public static void rewriteFiles(){
         for (String s : BuyLog.getAllBuyLogs().keySet()) {
             BuyLog log = BuyLog.getAllBuyLogs().get(s);
@@ -74,6 +69,14 @@ public class BuyLog extends Log implements Serializable {
         for (BuyLog buyLog : buyLogs) {
             allBuyLogs.put(buyLog.getLogId(), buyLog);
         }
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+
+    public boolean isDelivered() {
+        return delivered;
     }
 
     public static HashMap<String, BuyLog> getAllBuyLogs() {

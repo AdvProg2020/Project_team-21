@@ -185,8 +185,8 @@ public class ControlCustomer {
 
             new SellLog(Control.getInstance().randomString(10),LocalDateTime.now(),totalOffMoneyPerSeller,calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller),
                     products,seller.getUsername(),customer.getUsername(),receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
-//            seller.setCredit(seller.getCredit() + );
-            seller.increaseToWallet(calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller));
+
+            seller.getWallet().depositMoney(Control.getInstance().calculateFinalAfterCommission(calculateTotalPrice(productsNumbers,totalOffMoneyPerSeller)));
         }
         cart.clearShoppingCart();
         return logID;
@@ -209,7 +209,7 @@ public class ControlCustomer {
                 products,seller.getUsername(),customer.getUsername(),customer.getFirstName() + " " + customer.getLastName(),
                 customer.getAddress(),customer.getPhoneNumber(),"Postal code");
 //        seller.setCredit(seller.getCredit() +  amount);
-        seller.getWallet().depositMoney(amount);
+        seller.getWallet().depositMoney(Control.getInstance().calculateFinalAfterCommission(amount));
     }
 
     public boolean checkCustomerGotOrder(String orderID,Customer customer)

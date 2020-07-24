@@ -184,14 +184,6 @@ public class Seller extends Account implements Comparable<Seller>, Serializable 
         return getWallet().getMoney();
     }
 
-    public void decreaseFromWallet(double amount){
-        getWallet().withdrawMoney(amount);
-    }
-
-    public void increaseToWallet(double amount){
-        getWallet().depositMoney(amount);
-    }
-
     public String getBankAccountID() {
         return bankAccountID;
     }

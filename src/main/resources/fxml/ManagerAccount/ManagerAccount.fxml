@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="867.0" prefWidth="1199.0" style="-fx-background-color: #24282b#24282b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUIControllers.ManagerAccount.ManagerAccount">
    <children>
-      <AnchorPane layoutX="761.0" layoutY="139.0" prefHeight="709.0" prefWidth="397.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="139.0">
+      <AnchorPane layoutX="761.0" layoutY="139.0" prefHeight="612.0" prefWidth="397.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="761.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="80.0">
          <children>
             <Button layoutX="28.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#manageUsers" prefHeight="51.0" prefWidth="211.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Users" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="51.0">
                <font>
@@ -34,6 +34,11 @@
                </font>
             </Button>
             <Button layoutX="40.0" layoutY="612.0" mnemonicParsing="false" onMouseClicked="#manageCategories" prefHeight="51.0" prefWidth="280.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage Categories" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="450.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="52.0" layoutY="537.0" mnemonicParsing="false" onMouseClicked="#manageBuyLogs" prefHeight="51.0" prefWidth="246.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" text="Manage BuyLogs" textFill="#cfb936" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="541.0">
                <font>
                   <Font name="Hiragino Sans W2" size="25.0" />
                </font>

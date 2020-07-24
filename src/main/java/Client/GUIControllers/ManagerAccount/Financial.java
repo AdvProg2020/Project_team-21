@@ -24,8 +24,8 @@ public class Financial extends GraphicFather implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ClientCenter.getInstance().sendReqToServer(ServerRequest.GETCOMMISIONANDLEASTWALLET);
         String response = ClientCenter.getInstance().readMessageFromServer();
-        rnCommission.setText("Commission Now: "+ response.split("&")[0]);
-        rnLeastAmount.setText("Least Wallet Amount Now: " + " " + response.split("&")[1]);
+        rnCommission.setText("Commission Now: "+ response.split("&")[0] + "%");
+        rnLeastAmount.setText("Least Wallet Amount Now: " + " " + response.split("&")[1] + "$");
     }
 
     public void goToMoneyPage(MouseEvent mouseEvent) {
