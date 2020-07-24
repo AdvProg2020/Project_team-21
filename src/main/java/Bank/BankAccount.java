@@ -1,18 +1,20 @@
 package Bank;
 
 
+import Server.DatabaseHandler;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BankAccount {
+public class BankAccount implements Serializable {
     String firstName;
     String lastName;
     String userName;
     String passWord;
     Double value;
     int accountId;
-    static ArrayList<BankAccount> allAccounts = new ArrayList<>();
+    private static ArrayList<BankAccount> allAccounts = new ArrayList<>();
     ArrayList<Receipt> withdrawalTransactions;
     ArrayList<Receipt> depositTransactions;
     ArrayList<Receipt> allTransactions;
@@ -133,5 +135,16 @@ public class BankAccount {
             json += "*";
         }
         return json;
+    }
+
+    public static ArrayList<BankAccount> getAllBankAccounts(){
+        return allAccounts;
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<BankAccount> bankAccounts = new ArrayList<>(DatabaseHandler.selectFromBankAccount());
+        for (BankAccount bankAccount : bankAccounts) {
+            allAccounts.add(bankAccount);
+        }
     }
 }

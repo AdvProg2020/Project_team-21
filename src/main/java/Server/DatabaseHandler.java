@@ -1,5 +1,6 @@
 package Server;
 
+import Bank.BankAccount;
 import Server.Model.*;
 import Server.Model.Account.Customer;
 import Server.Model.Account.Manager;
@@ -159,6 +160,8 @@ public class DatabaseHandler {
                 pstmt = c.prepareStatement("INSERT INTO Supporter (supporterSerialized) VALUES(?)");
             } else if(type== DataTypeEnum.WALLET){
                 pstmt = c.prepareStatement("INSERT INTO Wallet (walletSerialized) VALUES(?)");
+            } else if(type== DataTypeEnum.BANKACCOUNT){
+                pstmt = c.prepareStatement("INSERT INTO BankAccount (bankAccountSerialized) VALUES(?)");
             }
 
             else if(type== DataTypeEnum.OFFATREQUEST) {
@@ -202,6 +205,7 @@ public class DatabaseHandler {
         DatabaseHandler.executeQuery("DELETE FROM ShoppingCart");
         DatabaseHandler.executeQuery("DELETE FROM Supporter");
         DatabaseHandler.executeQuery("DELETE FROM Wallet");
+        DatabaseHandler.executeQuery("DELETE FROM BankAccount");
     }
 
     public static void storeData(){
@@ -273,11 +277,13 @@ public class DatabaseHandler {
         for (Wallet wallet : Wallet.getAllWallets()) {
             insertIntoDatabase(wallet, DataTypeEnum.WALLET);
         }
+        for (BankAccount bankAccount : BankAccount.getAllBankAccounts()) {
+            insertIntoDatabase(bankAccount, DataTypeEnum.BANKACCOUNT);
+        }
     }
 
     public static void reloadAllDatabases(){
 
-        Category.reloadObjectsFromDatabase();
         Company.reloadObjectsFromDatabase();
         Customer.reloadObjectsFromDatabase();
         DiscountCode.reloadObjectsFromDatabase();
@@ -295,7 +301,9 @@ public class DatabaseHandler {
         Supporter.reloadObjectsFromDatabase();
         Auction.reloadObjectsFromDatabase();
         BuyLog.reloadObjectsFromDatabase();
+        Category.reloadObjectsFromDatabase();
         Wallet.reloadObjectsFromDatabase();
+        BankAccount.reloadObjectsFromDatabase();
     }
 
     public static ArrayList<Auction> selectFromAuction() {
@@ -845,6 +853,31 @@ public class DatabaseHandler {
                 // re-create the object
                 Wallet wallet = (Wallet) ois.readObject();
                 arr.add(wallet);
+            }
+            stmt.close();
+            rs.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return arr;
+    }
+
+    public static ArrayList<BankAccount> selectFromBankAccount() {
+        boolean found;
+        ArrayList<BankAccount> arr = new ArrayList<>();
+        try {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT bankAccountSerialized FROM BankAccount");
+            // loop through the result set
+            while (rs.next()) {
+                // fetch the serialized object to a byte array
+                byte[] st = (byte[])rs.getObject(1);
+                ByteArrayInputStream baip = new ByteArrayInputStream(st);
+                ObjectInputStream ois = new ObjectInputStream(baip);
+                // re-create the object
+                BankAccount bankAccount = (BankAccount) ois.readObject();
+                arr.add(bankAccount);
             }
             stmt.close();
             rs.close();

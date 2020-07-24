@@ -1,5 +1,6 @@
 package Server;
 
+import Bank.BankAccount;
 import Bank.BankServer;
 import Server.ChatServers.Group.Group_Server;
 import Server.ChatServers.TwoByTwo.ChatServer;
@@ -1948,5 +1949,7 @@ public class Server {
         Auction.reloadObjectsFromDatabase();
         BuyLog.reloadObjectsFromDatabase();
         Category.reloadObjectsFromDatabase();
+        Wallet.reloadObjectsFromDatabase();
+        BankAccount.reloadObjectsFromDatabase();
     }
 }
