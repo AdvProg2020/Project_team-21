@@ -10,6 +10,7 @@ public class BuyLog {
     private String receiverPhoneNo;
     private String receiverAddress;
     private String receiverName;
+    private boolean delivered;
 
     private ArrayList<Product> allProducts = new ArrayList<>();
 
@@ -57,5 +58,13 @@ public class BuyLog {
 
     public void addProduct(Product product){
         allProducts.add(product);
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+
+    public boolean isDelivered() {
+        return delivered;
     }
 }

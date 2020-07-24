@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,15 +32,18 @@ public class ManageBuyLogs extends GraphicFather implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETBUYLOGS);
+        ClientCenter.getInstance().sendReqToServer(ServerRequest.GETALLBUYLOGS);
         String response = ClientCenter.getInstance().readMessageFromServer();
         if(!response.equalsIgnoreCase("NONE")){
             String[] allBuyLogs = response.split(" - ");
-
             int i = 0;
             for (String buyLog : allBuyLogs) {
                 String[] parsedData = buyLog.split("&");
                 BuyLog log = new BuyLog(parsedData[0],parsedData[1],parsedData[2],parsedData[3],parsedData[4],parsedData[5],parsedData[6]);
+                if(parsedData[7].equalsIgnoreCase("true"))
+                    log.setDelivered(true);
+                else
+                    log.setDelivered(false);
                 ClientCenter.getInstance().sendReqToServer(ServerRequest.GETBUYLOGPRODUCTS,parsedData[0]);
                 String message = ClientCenter.getInstance().readMessageFromServer();
                 if(!message.equalsIgnoreCase("NONE")){
@@ -128,6 +132,22 @@ public class ManageBuyLogs extends GraphicFather implements Initializable {
 
             vBoxFather.getChildren().add(hBox);
 
+            Button viewProductsButton = new Button();
+            viewProductsButton.setText("View Log");
+            viewProductsButton.getStyleClass().add("viewOffBtn");
+            hBox.getChildren().add(viewProductsButton);
+
+            Button deliveredButton = new Button();
+            if(buyLog.isDelivered()){
+                deliveredButton.setText("Delivered");
+                deliveredButton.getStyleClass().add("deliveredBtn");
+                deliveredButton.setDisable(true);
+            }else{
+                deliveredButton.setText("Waiting");
+                deliveredButton.getStyleClass().add("notDeliveredBtn");
+            }
+            hBox.getChildren().add(deliveredButton);
+
 
             // action event
             EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
@@ -141,12 +161,20 @@ public class ManageBuyLogs extends GraphicFather implements Initializable {
                 }
             };
 
+            EventHandler<ActionEvent> eventDeliver = new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e)
+                {
+                    try {
+                        deliver(e,deliveredButton);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
 
-            Button viewProductsButton = new Button();
-            viewProductsButton.setText("View Log");
-            viewProductsButton.getStyleClass().add("viewOffBtn");
-            hBox.getChildren().add(viewProductsButton);
+
             viewProductsButton.setOnAction(event);
+            deliveredButton.setOnAction(eventDeliver);
 
             this.getChildren().add(vBoxFather);
 
@@ -158,6 +186,14 @@ public class ManageBuyLogs extends GraphicFather implements Initializable {
             BuyLogsPagePrime.setProducts(productArrayList);
             BuyLogsPagePrime.setBuyLog(buyLog);
             new GraphicFather().goToNextPage(Page.BUYLOGSPRIMEPAGE,actionEvent);
+        }
+
+        public void deliver(ActionEvent actionEvent,Button button) throws IOException {
+            ClientCenter.getInstance().sendReqToServer(ServerRequest.UPDATEDELIVERLOG,buyLog.getLogId());
+            buyLog.setDelivered(true);
+            button.setText("Delivered");
+            button.getStyleClass().add("deliveredBtn");
+            button.setDisable(true);
         }
     }
 }
