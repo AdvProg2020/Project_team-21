@@ -1,8 +1,11 @@
 package Server.Model;
 
+import Server.DatabaseHandler;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Wallet {
+public class Wallet implements Serializable {
 
     private double money;
     private String account;
@@ -34,5 +37,12 @@ public class Wallet {
 
     public static ArrayList<Wallet> getAllWallets() {
         return allWallets;
+    }
+
+    public static void reloadObjectsFromDatabase(){
+        ArrayList<Wallet> wallets = new ArrayList<>(DatabaseHandler.selectFromWallet());
+        for (Wallet wallet : wallets) {
+            allWallets.add(wallet);
+        }
     }
 }

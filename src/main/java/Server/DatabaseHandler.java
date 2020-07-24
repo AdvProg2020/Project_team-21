@@ -157,6 +157,8 @@ public class DatabaseHandler {
                 pstmt = c.prepareStatement("INSERT INTO ShoppingCart (shoppingCartSerialized) VALUES(?)");
             } else if(type== DataTypeEnum.SUPPORTER){
                 pstmt = c.prepareStatement("INSERT INTO Supporter (supporterSerialized) VALUES(?)");
+            } else if(type== DataTypeEnum.WALLET){
+                pstmt = c.prepareStatement("INSERT INTO Wallet (walletSerialized) VALUES(?)");
             }
 
             else if(type== DataTypeEnum.OFFATREQUEST) {
@@ -199,6 +201,7 @@ public class DatabaseHandler {
         DatabaseHandler.executeQuery("DELETE FROM SellerRequest");
         DatabaseHandler.executeQuery("DELETE FROM ShoppingCart");
         DatabaseHandler.executeQuery("DELETE FROM Supporter");
+        DatabaseHandler.executeQuery("DELETE FROM Wallet");
     }
 
     public static void storeData(){
@@ -267,6 +270,9 @@ public class DatabaseHandler {
         for (Seller seller : SellerRequest.getRequestedSellers().values()) {
             insertIntoDatabase(seller, DataTypeEnum.SELLERREQUEST);
         }
+        for (Wallet wallet : Wallet.getAllWallets()) {
+            insertIntoDatabase(wallet, DataTypeEnum.WALLET);
+        }
     }
 
     public static void reloadAllDatabases(){
@@ -289,6 +295,7 @@ public class DatabaseHandler {
         Supporter.reloadObjectsFromDatabase();
         Auction.reloadObjectsFromDatabase();
         BuyLog.reloadObjectsFromDatabase();
+        Wallet.reloadObjectsFromDatabase();
     }
 
     public static ArrayList<Auction> selectFromAuction() {
@@ -813,6 +820,31 @@ public class DatabaseHandler {
                 // re-create the object
                 Seller seller = (Seller) ois.readObject();
                 arr.add(seller);
+            }
+            stmt.close();
+            rs.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return arr;
+    }
+
+    public static ArrayList<Wallet> selectFromWallet() {
+        boolean found;
+        ArrayList<Wallet> arr = new ArrayList<>();
+        try {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT walletSerialized FROM Wallet");
+            // loop through the result set
+            while (rs.next()) {
+                // fetch the serialized object to a byte array
+                byte[] st = (byte[])rs.getObject(1);
+                ByteArrayInputStream baip = new ByteArrayInputStream(st);
+                ObjectInputStream ois = new ObjectInputStream(baip);
+                // re-create the object
+                Wallet wallet = (Wallet) ois.readObject();
+                arr.add(wallet);
             }
             stmt.close();
             rs.close();
