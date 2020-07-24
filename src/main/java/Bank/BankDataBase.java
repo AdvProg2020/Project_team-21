@@ -12,7 +12,7 @@
 //import java.util.HashMap;
 //
 //
-//public class BankDataBase {
+public class BankDataBase {
 //
 //    private HashMap allAccounts;
 //    private ArrayList allAccountIDs;
@@ -144,4 +144,4 @@
 //        }
 //        return null;
 //    }
-//}
+}
