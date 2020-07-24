@@ -106,6 +106,7 @@ public class ServerCenter {
 
     public String getBalanceBank(String username, String password){
         String token = getTokenBank(username,password);
+        System.out.println("avvale balance " + token);
         sendMessageToBank("get_balance",token);
         String response = readMessageFromBank();
         return response;
