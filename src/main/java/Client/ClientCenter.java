@@ -30,6 +30,8 @@ public class ClientCenter {
     private String discountCodeToView;
     private String discountCodeToEdit;
     private String requestToView;
+    private int remainingAttempts;
+    private long startedLoginError;
 
     public static ClientCenter getInstance() {
         if(instance == null)
@@ -328,4 +330,19 @@ public class ClientCenter {
         return result;
     }
 
+    public void setRemainingAttempts(int remainingAttempts) {
+        this.remainingAttempts = remainingAttempts;
+    }
+
+    public int getRemainingAttempts() {
+        return remainingAttempts;
+    }
+
+    public void setStartedLoginError(long startedLoginError) {
+        this.startedLoginError = startedLoginError;
+    }
+
+    public long getStartedLoginError() {
+        return startedLoginError;
+    }
 }

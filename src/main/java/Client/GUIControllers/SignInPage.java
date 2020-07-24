@@ -3,10 +3,12 @@ package Client.GUIControllers;
 import Client.ClientCenter;
 import Client.ServerRequest;
 import javafx.event.Event;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -19,14 +21,21 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.time.StopWatch;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalTime;
+import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class SignInPage extends GraphicFather {
+public class SignInPage extends GraphicFather implements Initializable {
 
     public TextField password;
     public TextField username;
     public Label AlertLabel;
+    public Button loginButton;
     String name = "";
 
     private void showPopupLogin(Event event) throws IOException {
@@ -60,7 +69,23 @@ public class SignInPage extends GraphicFather {
                 showPopupLogin(mouseEvent);
             }
             else{
-                showError(AlertLabel,message,Error.NEGATIVE);
+                int remainingAttempts = ClientCenter.getInstance().getRemainingAttempts();
+                if(remainingAttempts < 5){
+                    showError(AlertLabel,message + "\n" + "Your Remaining Attempts: " + (5-remainingAttempts),Error.NEGATIVE);
+                    ClientCenter.getInstance().setRemainingAttempts(remainingAttempts + 1);
+                }else{
+                    ClientCenter.getInstance().setStartedLoginError(System.currentTimeMillis() + 120000);
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            ClientCenter.getInstance().setRemainingAttempts(0);
+                            loginButton.setDisable(false);
+                        }
+                    }, 2*60*1000);
+                    showError(AlertLabel,"You can try again in " + ((ClientCenter.getInstance().getStartedLoginError() - System.currentTimeMillis())/1000)+ " seconds",Error.NEGATIVE);
+                    loginButton.setDisable(true);
+                }
             }
         } catch (IOException e) {
             System.out.println("error in login");
@@ -68,4 +93,11 @@ public class SignInPage extends GraphicFather {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(ClientCenter.getInstance().getRemainingAttempts() >= 5){
+            loginButton.setDisable(true);
+            showError(AlertLabel,"You can try again in " + ((ClientCenter.getInstance().getStartedLoginError() - System.currentTimeMillis())/1000)+ " seconds",Error.NEGATIVE);
+        }
+    }
 }
