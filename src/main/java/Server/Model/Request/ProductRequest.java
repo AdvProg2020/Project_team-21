@@ -26,16 +26,16 @@ public class ProductRequest extends Request implements Serializable {
 
         setProviderUsername(provider.getUsername());
         setRequestId(requestId);
-        SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
-        SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
+//        SaveData.saveData(product, (getRequestId()+product.getProductId()), SaveData.productRequestFile);
+//        SaveData.saveData(this, getRequestId(), SaveData.productReqFile);
     }
 
-    public static void rewriteFiles(){
-        for (String s : requestedProducts.keySet()) {
-            Product product = requestedProducts.get(s);
-            SaveData.saveDataRunning(product, s+product.getProductId(), SaveData.productRequestFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : requestedProducts.keySet()) {
+//            Product product = requestedProducts.get(s);
+//            SaveData.saveDataRunning(product, s+product.getProductId(), SaveData.productRequestFile);
+//        }
+//    }
 
     public void setEditField(String editField) {
         this.editField = editField;
@@ -57,10 +57,10 @@ public class ProductRequest extends Request implements Serializable {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File("Database/" + requestId +(requestedProducts.get(requestId).getProductId())+".json");
-        file.delete();
-        File file1 = new File("Database/" + requestId+".json");
-        file1.delete();
+//        File file = new File("Database/" + requestId +(requestedProducts.get(requestId).getProductId())+".json");
+//        file.delete();
+//        File file1 = new File("Database/" + requestId+".json");
+//        file1.delete();
         requestedProducts.remove(requestId);
         Request.getAllRequests().remove(requestId);
     }
@@ -104,17 +104,17 @@ public class ProductRequest extends Request implements Serializable {
         return "Product Request";
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productRequestFile)));
-        for (Object object : objects) {
-            getRequestedProducts().put(((Product)object).getRequestID() ,(Product) (object));
-        }
-
-        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.productReqFile)));
-        for (Object object : objects2) {
-            getAllRequests().put(((ProductRequest)object).getRequestId() ,(ProductRequest) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productRequestFile)));
+//        for (Object object : objects) {
+//            getRequestedProducts().put(((Product)object).getRequestID() ,(Product) (object));
+//        }
+//
+//        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.productReqFile)));
+//        for (Object object : objects2) {
+//            getAllRequests().put(((ProductRequest)object).getRequestId() ,(ProductRequest) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Product> products = new ArrayList<>(DatabaseHandler.selectFromProductAtRequest());

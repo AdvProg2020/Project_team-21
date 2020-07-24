@@ -33,13 +33,13 @@ public class Category implements Comparable<Category>, Serializable {
         setName(name);
         if(!name.equals("AllProducts"))
             allCategories.add(this);
-        SaveData.saveData(this, getName()+"category", SaveData.categoryFile);
+//        SaveData.saveData(this, getName()+"category", SaveData.categoryFile);
     }
-    public static void rewriteFiles(){
-        for (Category category : allCategories) {
-            SaveData.saveDataRunning(category, category.getName()+"category", SaveData.categoryFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (Category category : allCategories) {
+//            SaveData.saveDataRunning(category, category.getName()+"category", SaveData.categoryFile);
+//        }
+//    }
 
     public String getName() {
         return name;
@@ -86,15 +86,15 @@ public class Category implements Comparable<Category>, Serializable {
         allCategories.remove(category);
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.categoryFile)));
-        for (Object object : objects) {
-            initialAllCategories.put(((Category)object).getName(),(Category)object);
-        }
-        for (String s : initialAllCategories.keySet()) {
-            allCategories.add(initialAllCategories.get(s));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.categoryFile)));
+//        for (Object object : objects) {
+//            initialAllCategories.put(((Category)object).getName(),(Category)object);
+//        }
+//        for (String s : initialAllCategories.keySet()) {
+//            allCategories.add(initialAllCategories.get(s));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Category> categories  = new ArrayList<>(DatabaseHandler.selectFromCategory());
@@ -111,8 +111,8 @@ public class Category implements Comparable<Category>, Serializable {
             product.setCategory(allProducts);
         }
         allCategories.remove(category);
-        File file = new File("Database/" + category.getName() + "category" +".json");
-        file.delete();
+//        File file = new File("Database/" + category.getName() + "category" +".json");
+//        file.delete();
     }
 
     public void setName(String name){

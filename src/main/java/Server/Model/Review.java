@@ -26,14 +26,14 @@ public class Review implements Comparable<Review>, Serializable {
         setHasBought(hasBought);
         allReviews.add(this);
         setReviewID(Control.getInstance().randomString(5));
-        SaveData.saveData(this, getReviewText(), SaveData.reviewFile);
+//        SaveData.saveData(this, getReviewText(), SaveData.reviewFile);
     }
 
-    public static void rewriteFiles(){
-        for (Review review : allReviews) {
-            SaveData.saveDataRunning(review, review.getReviewText(), SaveData.reviewFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (Review review : allReviews) {
+//            SaveData.saveDataRunning(review, review.getReviewText(), SaveData.reviewFile);
+//        }
+//    }
 
     public void setReviewID(String reviewID) {
         this.reviewID = reviewID;
@@ -79,12 +79,12 @@ public class Review implements Comparable<Review>, Serializable {
         return allReviews;
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.reviewFile)));
-        for (Object object : objects) {
-            allReviews.add((Review) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.reviewFile)));
+//        for (Object object : objects) {
+//            allReviews.add((Review) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Review> reviews  = new ArrayList<>(DatabaseHandler.selectFromReview());

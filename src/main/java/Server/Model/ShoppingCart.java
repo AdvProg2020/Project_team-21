@@ -23,14 +23,14 @@ public class ShoppingCart {
             setCustomer(customer);
         allShoppingCarts.add(this);
         cartID = id;
-        SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
+//        SaveData.saveData(this, customer.getUsername()+"ShoppingCart", SaveData.shoppingCartFile);
     }
 
-    public static void rewriteFiles(){
-        for (ShoppingCart shoppingCart : ShoppingCart.getAllShoppingCarts()) {
-            SaveData.saveDataRunning(shoppingCart, shoppingCart.getCustomer().getUsername() + "ShoppingCart", SaveData.shoppingCartFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (ShoppingCart shoppingCart : ShoppingCart.getAllShoppingCarts()) {
+//            SaveData.saveDataRunning(shoppingCart, shoppingCart.getCustomer().getUsername() + "ShoppingCart", SaveData.shoppingCartFile);
+//        }
+//    }
 
     public void setCustomer(Account customer){
         this.customer = customer.getUsername();
@@ -118,12 +118,12 @@ public class ShoppingCart {
         return allShoppingCarts;
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
-        for (Object object : objects) {
-            allShoppingCarts.add((ShoppingCart)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.shoppingCartFile)));
+//        for (Object object : objects) {
+//            allShoppingCarts.add((ShoppingCart)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<ShoppingCart> shoppingCarts  = new ArrayList<>(DatabaseHandler.selectFromShoppingCart());

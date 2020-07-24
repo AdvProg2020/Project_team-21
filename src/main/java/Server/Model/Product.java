@@ -51,11 +51,11 @@ public class Product implements Comparable<Product>, Serializable {
         addProductsWithOff();
         this.imagePath = imagePath;
     }
-    public static void rewriteFiles(){
-        for (String s : allProducts.keySet()) {
-            SaveData.saveDataRunning(allProducts.get(s), s, SaveData.productFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : allProducts.keySet()) {
+//            SaveData.saveDataRunning(allProducts.get(s), s, SaveData.productFile);
+//        }
+//    }
 
     public void setScoresList(ArrayList<String> scoresList) {
         this.scoresList = scoresList;
@@ -106,7 +106,7 @@ public class Product implements Comparable<Product>, Serializable {
             seller.addProduct(product);
         }
 
-        SaveData.saveData(product, product.getProductId(), SaveData.productFile);
+//        SaveData.saveData(product, product.getProductId(), SaveData.productFile);
     }
 
     public static void removeProduct(Product product)
@@ -149,12 +149,12 @@ public class Product implements Comparable<Product>, Serializable {
         }
 
         System.out.println("8");
-        File file = new File(product.getProductId()+".json");
-        if(file.delete()){
+//        File file = new File(product.getProductId()+".json");
+//        if(file.delete()){
 //            System.out.println("yes");
-        } else {
+//        } else {
 //            System.out.println("hah");
-        }
+//        }
     }
 
     public void setOff(Off off) {
@@ -379,13 +379,13 @@ public class Product implements Comparable<Product>, Serializable {
         this.buyersAverageScore = calculateScore();
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productFile)));
-        for (Object object : objects) {
-            allProducts.put(((Product)object).getProductId() ,(Product) (object));
-            allProductsList.add((Product)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.productFile)));
+//        for (Object object : objects) {
+//            allProducts.put(((Product)object).getProductId() ,(Product) (object));
+//            allProductsList.add((Product)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Product> products  = new ArrayList<>(DatabaseHandler.selectFromProduct());

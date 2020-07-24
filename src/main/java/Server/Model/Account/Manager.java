@@ -16,23 +16,23 @@ public class Manager extends Account implements Comparable<Manager>, Serializabl
     public Manager(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewManager(this);
-        SaveData.saveData(this, getUsername(), SaveData.managerFile);
+//        SaveData.saveData(this, getUsername(), SaveData.managerFile);
         this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
 
-    public static void rewriteFiles(){
-        for (Manager manager : Manager.getAllManagers()) {
-            SaveData.saveDataRunning(manager, manager.getUsername(), SaveData.managerFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (Manager manager : Manager.getAllManagers()) {
+//            SaveData.saveDataRunning(manager, manager.getUsername(), SaveData.managerFile);
+//        }
+//    }
     public String getType(){
         return "Manager";
     }
 
     public static void removeManager (Manager manager){
         allManagers.remove(manager);
-        File file = new File("Database/" + manager.getUsername()+".json");
-        file.delete();
+//        File file = new File("Database/" + manager.getUsername()+".json");
+//        file.delete();
     }
 
     public static ArrayList<Manager> getAllManagers() {
@@ -48,14 +48,14 @@ public class Manager extends Account implements Comparable<Manager>, Serializabl
         return getUsername().compareTo(o.getUsername());
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.managerFile)));
-        for (Object object : objects) {
-            allManagers.add((Manager) (object));
-
-            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.managerFile)));
+//        for (Object object : objects) {
+//            allManagers.add((Manager) (object));
+//
+//            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Manager> managers = new ArrayList<>(DatabaseHandler.selectFromManager());

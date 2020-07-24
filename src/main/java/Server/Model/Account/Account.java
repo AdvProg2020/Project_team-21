@@ -38,7 +38,7 @@ public abstract class Account implements Serializable {
         bankAccountId = "";
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
-        SaveData.saveData(this, getUsername()+getPassword(), SaveData.accountFile);
+//        SaveData.saveData(this, getUsername()+getPassword(), SaveData.accountFile);
     }
 
 //    public static void rewriteFiles(){
@@ -50,12 +50,12 @@ public abstract class Account implements Serializable {
 //        }
 //    }
 
-    public static void rewriteFiles(){
-        for (String s : Account.getAllAccounts().keySet()) {
-            Account account = Account.getAllAccounts().get(s);
-            SaveData.saveDataRunning(account, (s+account.getPassword()), SaveData.accountFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : Account.getAllAccounts().keySet()) {
+//            Account account = Account.getAllAccounts().get(s);
+//            SaveData.saveDataRunning(account, (s+account.getPassword()), SaveData.accountFile);
+//        }
+//    }
 
     public String getAddress() {
         return address;
@@ -170,12 +170,12 @@ public abstract class Account implements Serializable {
 //        Account.setAllAccounts((HashMap<String, Account>) Sort.sortAccountHashMap(getAllAccounts()));
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.accountFile)));
-        for (Object object : objects) {
-            allAccounts.put(((Account)object).getUsername() ,(Account)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.accountFile)));
+//        for (Object object : objects) {
+//            allAccounts.put(((Account)object).getUsername() ,(Account)(object));
+//        }
+//    }
 
     public static Account getAccountFromUserName(String user){
         for (Account account : allAccounts.values()) {

@@ -38,27 +38,27 @@ public class Server {
     }
     static void readFilesFromDatabase(){
         Control.getInstance().fillAllFiles();
-        new SaveData();
-        SaveData.createAllFiles();
-        BuyLog.getObjectFromDatabase();
-        Log.getObjectFromDatabase();
-        SellLog.getObjectFromDatabase();
-        Category.getObjectFromDatabase();
-        DiscountCode.getObjectFromDatabase();
-        Off.getObjectFromDatabase();
-        Product.getObjectFromDatabase();
-        Customer.getObjectFromDatabase();
-        Manager.getObjectFromDatabase();
-        Supporter.getObjectFromDatabase();
-        Seller.getObjectFromDatabase();
-        OffRequest.getObjectFromDatabase();
-        ProductRequest.getObjectFromDatabase();
-        SellerRequest.getObjectFromDatabase();
-        Company.getObjectFromDatabase();
-        Score.getObjectFromDatabase();
-        Review.getObjectFromDatabase();
-        ShoppingCart.getObjectFromDatabase();
-        Auction.getObjectFromDatabase();
+//        new SaveData();
+//        SaveData.createAllFiles();
+//        BuyLog.getObjectFromDatabase();
+//        Log.getObjectFromDatabase();
+//        SellLog.getObjectFromDatabase();
+//        Category.getObjectFromDatabase();
+//        DiscountCode.getObjectFromDatabase();
+//        Off.getObjectFromDatabase();
+//        Product.getObjectFromDatabase();
+//        Customer.getObjectFromDatabase();
+//        Manager.getObjectFromDatabase();
+//        Supporter.getObjectFromDatabase();
+//        Seller.getObjectFromDatabase();
+//        OffRequest.getObjectFromDatabase();
+//        ProductRequest.getObjectFromDatabase();
+//        SellerRequest.getObjectFromDatabase();
+//        Company.getObjectFromDatabase();
+//        Score.getObjectFromDatabase();
+//        Review.getObjectFromDatabase();
+//        ShoppingCart.getObjectFromDatabase();
+//        Auction.getObjectFromDatabase();
         putToAbstract();
     }
 
@@ -169,15 +169,15 @@ public class Server {
         }
 
         private void rewriteFilesRequest(){
-            Seller.rewriteFiles();
-            Account.rewriteFiles();
-            Product.rewriteFiles();
-            Off.rewriteFiles();
-            ProductRequest.rewriteFiles();
-            OffRequest.rewriteFiles();
-            Seller.rewriteFiles();
-            Category.rewriteFiles();
-            Company.rewriteFiles();
+//            Seller.rewriteFiles();
+//            Account.rewriteFiles();
+//            Product.rewriteFiles();
+//            Off.rewriteFiles();
+//            ProductRequest.rewriteFiles();
+//            OffRequest.rewriteFiles();
+//            Seller.rewriteFiles();
+//            Category.rewriteFiles();
+//            Company.rewriteFiles();
         }
 
         HandleClient(Socket clientSocket, DataOutputStream dataOutputStream, DataInputStream dataInputStream,ServerSocket serverSocket,InputStream inputStream,OutputStream outputStream){
@@ -336,9 +336,9 @@ public class Server {
                         int score = Integer.parseInt(parsedData[1]);
                         product.addScore(new Score(customer,product,score));
                         sendMessageToClient(ServerRequest.DONE.toString() + "&" + product.getBuyersAverageScore());
-                        Product.rewriteFiles();
-                        Score.rewriteFiles();
-                        Customer.rewriteFiles();
+//                        Product.rewriteFiles();
+//                        Score.rewriteFiles();
+//                        Customer.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.UPDATEADDPRODUCTTOCART.toString())){
                         Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
@@ -378,9 +378,9 @@ public class Server {
                         Product product = Product.getAllProducts().get(parsedData[0]);
                         product.addReview(new Review(customer,product,parsedData[1],customer.hasBought(product)));
                         sendMessageToClient(ServerRequest.DONE.toString());
-                        Product.rewriteFiles();
-                        Review.rewriteFiles();
-                        Customer.rewriteFiles();
+//                        Product.rewriteFiles();
+//                        Review.rewriteFiles();
+//                        Customer.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.UPDATEINCREASECART.toString())){
                         Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
@@ -476,9 +476,9 @@ public class Server {
                         try {
                             String reqID = ControlSeller.getInstance().sendRemoveProductReq(data,token);
                             sendError(reqID,false);
-                            Product.rewriteFiles();
-                            ProductRequest.rewriteFiles();
-                            Manager.rewriteFiles();
+//                            Product.rewriteFiles();
+//                            ProductRequest.rewriteFiles();
+//                            Manager.rewriteFiles();
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
@@ -498,8 +498,8 @@ public class Server {
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
-                        ProductRequest.rewriteFiles();
-                        Product.rewriteFiles();
+//                        ProductRequest.rewriteFiles();
+//                        Product.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETPRODUCT.toString())){
                         Product product = Product.getAllProducts().get(data);
@@ -519,10 +519,10 @@ public class Server {
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
-                        Product.rewriteFiles();
-                        ProductRequest.rewriteFiles();
-                        Manager.rewriteFiles();
-                        Seller.rewriteFiles();
+//                        Product.rewriteFiles();
+//                        ProductRequest.rewriteFiles();
+//                        Manager.rewriteFiles();
+//                        Seller.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETBUYERSPRODUCT.toString())){
                         String productId = data;
@@ -688,10 +688,10 @@ public class Server {
                             else if(field.equalsIgnoreCase("password"))
                                 account.setPassword(newValue);
                         }
-                        Account.rewriteFiles();
-                        Customer.rewriteFiles();
-                        Seller.rewriteFiles();
-                        Manager.rewriteFiles();
+//                        Account.rewriteFiles();
+//                        Customer.rewriteFiles();
+//                        Seller.rewriteFiles();
+//                        Manager.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLCATEGORIES.toString())){
                         String output = "NONE";
@@ -758,7 +758,7 @@ public class Server {
                         try {
                             ControlManager.getInstance().addCategory(name,productsExist);
                             sendError(notExist,false);
-                            Product.rewriteFiles();
+//                            Product.rewriteFiles();
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
@@ -829,8 +829,8 @@ public class Server {
                         }
                         sendMessageToClient(output);
 
-                        Category.rewriteFiles();
-                        Product.rewriteFiles();
+//                        Category.rewriteFiles();
+//                        Product.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLACCOUNTS.toString())){
                         String output = "NONE";
@@ -860,10 +860,10 @@ public class Server {
                         try{
                             Control.getInstance().deleteUser(data,token);
                             sendError("Deleted",false);
-                            Account.rewriteFiles();
-                            Customer.rewriteFiles();
-                            Manager.rewriteFiles();
-                            Seller.rewriteFiles();
+//                            Account.rewriteFiles();
+//                            Customer.rewriteFiles();
+//                            Manager.rewriteFiles();
+//                            Seller.rewriteFiles();
                         }catch (Exception e){
                             sendError(e.getMessage(),true);
                         }
@@ -1033,7 +1033,7 @@ public class Server {
                         try {
                             ControlManager.getInstance().removeDiscountCode(data);
                             sendError("Done",false);
-                            Customer.rewriteFiles();
+//                            Customer.rewriteFiles();
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
@@ -1087,8 +1087,8 @@ public class Server {
                                 i++;
                             }
                             sendMessageToClient(ServerRequest.DONE.toString() + " - " + discountCode + " - " + notExist + " - " + notCustomer);
-                            Customer.rewriteFiles();
-                            Product.rewriteFiles();
+//                            Customer.rewriteFiles();
+//                            Product.rewriteFiles();
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
@@ -1173,9 +1173,9 @@ public class Server {
                                 i++;
                             }
                             sendMessageToClient(oksString + " - " + errorsString);
-                            Customer.rewriteFiles();
-                            DiscountCode.rewriteFiles();
-                            Product.rewriteFiles();
+//                            Customer.rewriteFiles();
+//                            DiscountCode.rewriteFiles();
+//                            Product.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLPRODUCTS.toString())){
                         String output = "NONE";
@@ -1198,10 +1198,10 @@ public class Server {
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
-                        Category.rewriteFiles();
-                        Company.rewriteFiles();
-                        Seller.rewriteFiles();
-                        Customer.rewriteFiles();
+//                        Category.rewriteFiles();
+//                        Company.rewriteFiles();
+//                        Seller.rewriteFiles();
+//                        Customer.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLREQUESTS.toString())){
                         String output = "NONE";
@@ -1355,11 +1355,11 @@ public class Server {
 
                             sendMessageToClient(ServerRequest.DONE.toString() + "&" + reqID + "&" + output);
 
-                            Off.rewriteFiles();
-                            OffRequest.rewriteFiles();
-                            Product.rewriteFiles();
-                            Seller.rewriteFiles();
-                            Manager.rewriteFiles();
+//                            Off.rewriteFiles();
+//                            OffRequest.rewriteFiles();
+//                            Product.rewriteFiles();
+//                            Seller.rewriteFiles();
+//                            Manager.rewriteFiles();
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }
@@ -1390,9 +1390,9 @@ public class Server {
                                     account.getCompany().setLocation(newValue);
                             }
                         }
-                        Seller.rewriteFiles();
-                        Account.rewriteFiles();
-                        Company.rewriteFiles();
+//                        Seller.rewriteFiles();
+//                        Account.rewriteFiles();
+//                        Company.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.UPDATEEDITOFFREQ.toString())){
                         Seller seller = (Seller) ServerCenter.getInstance().getAccountFromToken(token);
@@ -1483,11 +1483,11 @@ public class Server {
                         }
                         sendMessageToClient(oksString + " - " + errorsString + " - " + reqIDsString);
 
-                        Off.rewriteFiles();
-                        OffRequest.rewriteFiles();
-                        Manager.rewriteFiles();
-                        Seller.rewriteFiles();
-                        Product.rewriteFiles();
+//                        Off.rewriteFiles();
+//                        OffRequest.rewriteFiles();
+//                        Manager.rewriteFiles();
+//                        Seller.rewriteFiles();
+//                        Product.rewriteFiles();
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.POSTPAYMENT.toString())){
                         Customer customer = (Customer) ServerCenter.getInstance().getAccountFromToken(token);
@@ -1495,11 +1495,11 @@ public class Server {
                         try {
                             String logID = ControlCustomer.getInstance().purchase(customer,parsedData[0],parsedData[1],parsedData[2],parsedData[3],parsedData[4]);
                             sendMessageToClient(ServerRequest.DONE.toString() + " - " + logID + " - " + customer.getBalance());
-                            Customer.rewriteFiles();
-                            Account.rewriteFiles();
-                            Product.rewriteFiles();
-                            Seller.rewriteFiles();
-                            Category.rewriteFiles();
+//                            Customer.rewriteFiles();
+//                            Account.rewriteFiles();
+//                            Product.rewriteFiles();
+//                            Seller.rewriteFiles();
+//                            Category.rewriteFiles();
                         } catch (Exception e) {
                             sendError(e.getMessage(),true);
                         }

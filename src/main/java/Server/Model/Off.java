@@ -36,11 +36,11 @@ public class Off implements Comparable<Off>, Serializable {
         setOffAmount(offAmount);
     }
 
-    public static void rewriteFiles(){
-        for (String s : allOffs.keySet()) {
-            SaveData.saveDataRunning(allOffs.get(s), s, SaveData.offFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : allOffs.keySet()) {
+//            SaveData.saveDataRunning(allOffs.get(s), s, SaveData.offFile);
+//        }
+//    }
 
     public String getRequestID() {
         return requestID;
@@ -58,14 +58,14 @@ public class Off implements Comparable<Off>, Serializable {
     {
         allOffs.put(off.getOffId(),off);
         allOffsList.add(off);
-        SaveData.saveData(off, off.getOffId(), SaveData.offFile);
+//        SaveData.saveData(off, off.getOffId(), SaveData.offFile);
     }
     public static void removeOff(Off off)
     {
         allOffs.remove(off.getOffId());
         allOffsList.remove(off);
-        File file = new File("Database/" + off.getOffId()+".json");
-        file.delete();
+//        File file = new File("Database/" + off.getOffId()+".json");
+//        file.delete();
     }
 
     public ArrayList<Product> getProductsList() {
@@ -165,13 +165,13 @@ public class Off implements Comparable<Off>, Serializable {
         return offHashMap;
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offFile)));
-        for (Object object : objects) {
-            allOffs.put(((Off)object).getOffId() ,(Off) (object));
-            allOffsList.add((Off) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offFile)));
+//        for (Object object : objects) {
+//            allOffs.put(((Off)object).getOffId() ,(Off) (object));
+//            allOffsList.add((Off) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Off> offs  = new ArrayList<>(DatabaseHandler.selectFromOff());

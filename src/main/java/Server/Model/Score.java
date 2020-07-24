@@ -26,13 +26,13 @@ public class Score implements Comparable<Score>, Serializable {
         setScore(score);
         allScores.add(this);
         setScoreID(Control.getInstance().randomString(5));
-        SaveData.saveData(this, (getScore()+getUser().getFirstName()), SaveData.scoreFile);
+//        SaveData.saveData(this, (getScore()+getUser().getFirstName()), SaveData.scoreFile);
     }
-    public static void rewriteFiles(){
-        for (Score score : allScores) {
-            SaveData.saveDataRunning(score, score.getScore() + score.getUser().getFirstName(), SaveData.scoreFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (Score score : allScores) {
+//            SaveData.saveDataRunning(score, score.getScore() + score.getUser().getFirstName(), SaveData.scoreFile);
+//        }
+//    }
 
     public void setScoreID(String scoreID) {
         this.scoreID = scoreID;
@@ -71,12 +71,12 @@ public class Score implements Comparable<Score>, Serializable {
         return score;
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.scoreFile)));
-        for (Object object : objects) {
-            allScores.add((Score) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.scoreFile)));
+//        for (Object object : objects) {
+//            allScores.add((Score) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Score> scores  = new ArrayList<>(DatabaseHandler.selectFromScore());

@@ -37,13 +37,13 @@ public class DiscountCode implements Serializable {
         setMaxDiscountAmount(maxDiscountAmount);
         setDiscountNumberForEachUser(discountNumberForEachUser);
         allDiscountCodes.put(discountId,this);
-        SaveData.saveData(this, getDiscountId(), SaveData.discountCodeFile);
+//        SaveData.saveData(this, getDiscountId(), SaveData.discountCodeFile);
     }
-    public static void rewriteFiles(){
-        for (String s : allDiscountCodes.keySet()) {
-            SaveData.saveDataRunning(allDiscountCodes.get(s), s, SaveData.discountCodeFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : allDiscountCodes.keySet()) {
+//            SaveData.saveDataRunning(allDiscountCodes.get(s), s, SaveData.discountCodeFile);
+//        }
+//    }
 
 
     public static HashMap<String, DiscountCode> getAllDiscountCodes() {
@@ -75,8 +75,8 @@ public class DiscountCode implements Serializable {
     public static void removeDiscountCode (String code){
         allDiscountCodes.remove(code);
 
-        File file = new File(code+".json");
-        file.delete();
+//        File file = new File(code+".json");
+//        file.delete();
     }
 
     public HashMap<String, Customer> getDiscountOwners() {
@@ -143,12 +143,12 @@ public class DiscountCode implements Serializable {
         return discountCodeHashMap;
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.discountCodeFile)));
-        for (Object object : objects) {
-            allDiscountCodes.put(((DiscountCode)object).getDiscountId() ,(DiscountCode) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.discountCodeFile)));
+//        for (Object object : objects) {
+//            allDiscountCodes.put(((DiscountCode)object).getDiscountId() ,(DiscountCode) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<DiscountCode> discountCodes  = new ArrayList<>(DatabaseHandler.selectFromDiscountCode());

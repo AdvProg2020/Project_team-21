@@ -32,8 +32,8 @@ public class OffRequest extends Request implements Serializable {
         this.provider = provider.getUsername();
         setProviderUsername(provider.getUsername());
         setRequestId(requestId);
-        SaveData.saveData(this, getRequestId(), SaveData.offReqFile);
-        SaveData.saveData(off, (getRequestId()+off.getOffId()), SaveData.offRequestFile);
+//        SaveData.saveData(this, getRequestId(), SaveData.offReqFile);
+//        SaveData.saveData(off, (getRequestId()+off.getOffId()), SaveData.offRequestFile);
     }
 
     //    public static void rewriteFiles(){
@@ -55,21 +55,21 @@ public class OffRequest extends Request implements Serializable {
 //            SaveData.saveData(off, s+off.getOffId(), SaveData.offRequestFile);
 //        }
 //    }
-    public static void rewriteFiles(){
-        for (String s : getAllRequests().keySet()) {
-            Request req = getAllRequests().get(s);
-            if(req.getType().equalsIgnoreCase("Off Request"))
-                SaveData.saveDataRunning(req, s, SaveData.offReqFile);
-            else if(req.getType().equalsIgnoreCase("Product Request"))
-                SaveData.saveDataRunning(req, s, SaveData.productReqFile);
-            else if(req.getType().equalsIgnoreCase("Seller Request"))
-                SaveData.saveDataRunning(req, s, SaveData.sellerReqFile);
-        }
-        for (String s : requestedOffs.keySet()) {
-            Off off = requestedOffs.get(s);
-            SaveData.saveDataRunning(off, s+off.getOffId(), SaveData.offRequestFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : getAllRequests().keySet()) {
+//            Request req = getAllRequests().get(s);
+//            if(req.getType().equalsIgnoreCase("Off Request"))
+//                SaveData.saveDataRunning(req, s, SaveData.offReqFile);
+//            else if(req.getType().equalsIgnoreCase("Product Request"))
+//                SaveData.saveDataRunning(req, s, SaveData.productReqFile);
+//            else if(req.getType().equalsIgnoreCase("Seller Request"))
+//                SaveData.saveDataRunning(req, s, SaveData.sellerReqFile);
+//        }
+//        for (String s : requestedOffs.keySet()) {
+//            Off off = requestedOffs.get(s);
+//            SaveData.saveDataRunning(off, s+off.getOffId(), SaveData.offRequestFile);
+//        }
+//    }
 
     public void setEditField(String editField) {
         this.editField = editField;
@@ -97,10 +97,10 @@ public class OffRequest extends Request implements Serializable {
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File("Database/" + requestId +(requestedOffs.get(requestId).getOffId())+".json");
-        file.delete();
-        File file1 = new File("Database/" + requestId+".json");
-        file1.delete();
+//        File file = new File("Database/" + requestId +(requestedOffs.get(requestId).getOffId())+".json");
+//        file.delete();
+//        File file1 = new File("Database/" + requestId+".json");
+//        file1.delete();
         requestedOffs.remove(requestId);
         Request.getAllRequests().remove(requestId);
     }
@@ -164,17 +164,17 @@ public class OffRequest extends Request implements Serializable {
         return "Off Request";
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offRequestFile)));
-        for (Object object : objects) {
-            getRequestedOffs().put(((Off)object).getRequestID() ,(Off) (object));
-        }
-
-        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.offReqFile)));
-        for (Object object : objects2) {
-            getAllRequests().put(((OffRequest)object).getRequestId() ,(OffRequest) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.offRequestFile)));
+//        for (Object object : objects) {
+//            getRequestedOffs().put(((Off)object).getRequestID() ,(Off) (object));
+//        }
+//
+//        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.offReqFile)));
+//        for (Object object : objects2) {
+//            getAllRequests().put(((OffRequest)object).getRequestId() ,(OffRequest) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Off> offs = new ArrayList<>(DatabaseHandler.selectFromOffAtRequest());

@@ -56,8 +56,8 @@ public class MoneyPage extends GraphicFather implements Initializable {
                 Customer customer = (Customer) Account.getAllAccounts().get(customerToAdd.getText());
                 customer.addBalance(Double.parseDouble(amountMoney.getText()));
                 showError(alertLabel,"Money added to balance successfully.",Error.POSITIVE);
-                Customer.rewriteFiles();
-                Account.rewriteFiles();
+//                Customer.rewriteFiles();
+//                Account.rewriteFiles();
             }
         }
         else{

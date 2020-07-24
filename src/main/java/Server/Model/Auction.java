@@ -31,7 +31,7 @@ public class Auction implements Serializable {
         setEndTime(endTime);
         setSeller(seller);
         allAuctions.add(this);
-        SaveData.saveData(this, "Auction:" + auctionId, SaveData.auctionFile);
+//        SaveData.saveData(this, "Auction:" + auctionId, SaveData.auctionFile);
     }
 
     private void setAuctionId(String auctionId) {
@@ -126,12 +126,12 @@ public class Auction implements Serializable {
         return LocalDateTime.now().isAfter(endTime);
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.auctionFile)));
-        for (Object object : objects) {
-            allAuctions.add((Auction)object);
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.auctionFile)));
+//        for (Object object : objects) {
+//            allAuctions.add((Auction)object);
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Auction> auctions = new ArrayList<>(DatabaseHandler.selectFromAuction());
