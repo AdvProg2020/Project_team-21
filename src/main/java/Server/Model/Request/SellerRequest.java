@@ -7,9 +7,10 @@ import Server.Model.SaveData;
 import Server.ServerCenter;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SellerRequest extends Request {
+public class SellerRequest extends Request implements Serializable {
 
     public SellerRequest(String requestId,String userName, String firstName, String lastName, String email, String phoneNumber, String password, Company company,RequestType requestType,String photo)
     {
