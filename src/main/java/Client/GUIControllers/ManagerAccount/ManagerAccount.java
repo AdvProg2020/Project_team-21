@@ -96,5 +96,6 @@ public class ManagerAccount extends GraphicFather implements Initializable {
     }
 
     public void manageBuyLogs(MouseEvent mouseEvent) {
+        goToNextPage(Page.MANAGEBUYLOGS,mouseEvent);
     }
 }
