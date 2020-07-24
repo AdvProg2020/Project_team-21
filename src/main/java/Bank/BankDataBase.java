@@ -1,4 +1,4 @@
-//package Bank;
+package Bank;
 //
 //import com.gilecode.yagson.YaGson;
 //import com.gilecode.yagson.YaGsonBuilder;
