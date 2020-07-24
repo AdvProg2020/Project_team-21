@@ -27,10 +27,10 @@ public class BankDataBase {
     }
 
     public void dataSavor () {
-        writeHashMapToFile(allAccounts , "src/main/java/Bank/bankDataBase/allAccounts.json");
-        writeArrayToFile(allAccountIDs , "src/main/java/Bank/bankDataBase/allAccountIds.json");
-        writeArrayToFile(bankAccount.getAllAccounts() , "src/main/java/Bank/bankDataBase/allBankAccounts.json");
-        writeArrayToFile(receipt.getAllReceipts() , "src/main/java/Bank/bankDataBase/allReceipts.json");
+        writeHashMapToFile(allAccounts , "./Bank/bankDataBase/allAccounts.json");
+        writeArrayToFile(allAccountIDs , "./Bank/bankDataBase/allAccountIds.json");
+        writeArrayToFile(bankAccount.getAllAccounts() , "./Bank/bankDataBase/allBankAccounts.json");
+        writeArrayToFile(receipt.getAllReceipts() , "./Bank/bankDataBase/allReceipts.json");
     }
 
     public void dataReader() {
@@ -42,7 +42,7 @@ public class BankDataBase {
     }
 
     private <T> void reader(ArrayList<T> main, String path, Class<T[]> tClass){
-        File file = new File("src/main/java/Bank/bankDataBase/"+path+".json");
+        File file = new File("./Bank/bankDataBase/"+path+".json");
         if (!file.exists()) {
             file.getParentFile().mkdir();
             try {
@@ -61,7 +61,7 @@ public class BankDataBase {
     }
 
     public HashMap<String,String> readAllAccounts () {
-        return jsonToMapStringString("src/main/java/Bank/bankDataBase/allAccounts.json");
+        return jsonToMapStringString("./Bank/bankDataBase/allAccounts.json");
     }
 
     public ArrayList<Integer> readAllAccountIds () {
@@ -87,7 +87,7 @@ public class BankDataBase {
     }
 
     public ArrayList<Integer> readArrayListData(){
-        File file = new File("src/main/java/Bank/bankDataBase/allAccountIds.json");
+        File file = new File("./Bank/bankDataBase/allAccountIds.json");
         if (!file.exists()) {
             file.getParentFile().mkdir();
             try {
@@ -100,7 +100,7 @@ public class BankDataBase {
         ArrayList<Integer> patterns = new ArrayList<>();
         JsonParser jsonParser = new JsonParser();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/java/Bank/bankDataBase/allAccountIds.json"));
+            BufferedReader br = new BufferedReader(new FileReader("./Bank/bankDataBase/allAccountIds.json"));
             JsonElement jsonElement = jsonParser.parse(br);
             Type type = new TypeToken<ArrayList<Integer>>() {}.getType();
             return gson.fromJson(jsonElement, type);
