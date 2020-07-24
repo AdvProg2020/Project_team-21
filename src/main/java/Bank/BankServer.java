@@ -25,13 +25,19 @@ public class BankServer {
             try {
                 ServerSocket serverSocket = new ServerSocket(8585);
                 BankAccount shop;
-                File file = new File ("src/main/java/Bank/bankDataBase/allBankAccounts.json");
-                if (!file.exists()){
+                if(BankAccount.getAllBankAccounts().isEmpty()){
                     shop = new BankAccount("shop" , "shop" , "shop" , "shop");
-                }else {
+                }else{
                     BankAccount bankAccount = new BankAccount("temp" , "temp" , "temp" , "temp");
                     shop = bankAccount.getAccountByUsername("shop");
                 }
+//                File file = new File ("src/main/java/Bank/bankDataBase/allBankAccounts.json");
+//                if (!file.exists()){
+//                    shop = new BankAccount("shop" , "shop" , "shop" , "shop");
+//                }else {
+//                    BankAccount bankAccount = new BankAccount("temp" , "temp" , "temp" , "temp");
+//                    shop = bankAccount.getAccountByUsername("shop");
+//                }
 
                 while (true) {
                     Socket clientSocket;
@@ -59,10 +65,12 @@ public class BankServer {
         DataInputStream inputStream;
         BankAccount shoppingCenter;
         Socket clientSocket;
-        HashMap<String, String> allAccounts;
+        //jadid
+//        HashMap<String, String> allAccounts;
         HashMap<String, LocalDateTime> validTokens;
         HashMap<String,String> tokenPerAccount;
-        ArrayList<Integer> allAccountIds;
+        //jadid
+//        ArrayList<Integer> allAccountIds;
         private static final SecureRandom secureRandom = new SecureRandom();
         private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
@@ -71,16 +79,22 @@ public class BankServer {
             this.inputStream = inputStream;
             this.clientSocket = clientSocket;
             this.shoppingCenter = shop;
-            allAccounts = new HashMap<>();
+            //jadid
+//            allAccounts = new HashMap<>();
             validTokens = new HashMap<>();
             tokenPerAccount = new HashMap<>();
-            allAccountIds = new ArrayList<>();
+
+            //jadid
+//            allAccountIds = new ArrayList<>();
 //            BankDataBase bankDataBase = new BankDataBase(allAccounts,allAccountIds);
 //            File file = new File("src/main/java/Bank/bankDataBase/allBankAccounts.json");
-            if(allAccounts.isEmpty()){
-                allAccounts.put("shop", "shop");
-                allAccountIds.add(1);
-            }
+            //jadid
+
+//            if(allAccounts.isEmpty()){
+//                allAccounts.put("shop", "shop");
+//                allAccountIds.add(1);
+//            }
+
 //            if (file.exists()) {
 ////                allAccountIds = bankDataBase.readAllAccountIds();
 ////                allAccounts = bankDataBase.readAllAccounts();
@@ -88,8 +102,8 @@ public class BankServer {
 //            } else {
 //
 //            }
-            System.out.println(allAccountIds.toString());
-            System.out.println(allAccounts.toString());
+//            System.out.println(allAccountIds.toString());
+//            System.out.println(allAccounts.toString());
         }
 
         private void handleClient() {
@@ -198,13 +212,16 @@ public class BankServer {
                 if (!password.equals(repeat)) {
                     outputStream.writeUTF("passwords do not match");
                     outputStream.flush();
-                } else if (allAccounts.containsKey(username)) {
+                }
+                else if (BankAccount.getAllAccountsByUserName().containsKey(username)) {
                     outputStream.writeUTF("username is not available");
                     outputStream.flush();
-                } else {
+                }
+                else {
                     BankAccount bankAccount = new BankAccount(firstName, lastName, username, password);
-                    allAccounts.put(username, password);
-                    allAccountIds.add(bankAccount.getAccountId());
+                    //jadid
+//                    allAccounts.put(username, password);
+//                    allAccountIds.add(bankAccount.getAccountId());
                     // Shomare hesab barmigardone
                     outputStream.writeUTF(Integer.toString(bankAccount.getAccountId()));
                     outputStream.flush();
@@ -216,11 +233,11 @@ public class BankServer {
 
         private void createToken(String username, String password) {
             try {
-                if (!allAccounts.containsKey(username)) {
+                if (!BankAccount.getAllAccountsByUserName().containsKey(username)) {
                     outputStream.writeUTF("invalid username or password");
                     outputStream.flush();
                 }
-                else if (!allAccounts.get(username).equals(password)){
+                else if (!BankAccount.getAllAccountsByUserName().get(username).equals(password)){
                     outputStream.writeUTF("invalid username or password");
                     outputStream.flush();
                 }
@@ -285,7 +302,7 @@ public class BankServer {
                     outputStream.writeUTF("invalid account id");
                     outputStream.flush();
                 }
-                else if (!allAccountIds.contains(Integer.parseInt(dest))) {
+                else if (!BankAccount.getAllAccountIDs().contains(Integer.parseInt(dest))) {
                     outputStream.writeUTF("dest account id is invalid");
                     outputStream.flush();
                 } else if (!validTokens.containsKey(token)) {
@@ -311,7 +328,7 @@ public class BankServer {
                     outputStream.writeUTF("invalid account id");
                     outputStream.flush();
                 }
-                else if (!allAccountIds.contains(Integer.parseInt(source))) {
+                else if (!BankAccount.getAllAccountIDs().contains(Integer.parseInt(source))) {
                     outputStream.writeUTF("source account id is invalid");
                     outputStream.flush();
                 } else if (!validTokens.containsKey(token)) {

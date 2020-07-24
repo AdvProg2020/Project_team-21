@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BankAccount implements Serializable {
     String firstName;
@@ -15,6 +16,9 @@ public class BankAccount implements Serializable {
     Double value;
     int accountId;
     private static ArrayList<BankAccount> allAccounts = new ArrayList<>();
+    // jadid
+    private static ArrayList<Integer> allAccountIDs = new ArrayList<>();
+    private static HashMap<String, String> allAccountsByUserName = new HashMap<>();
     ArrayList<Receipt> withdrawalTransactions;
     ArrayList<Receipt> depositTransactions;
     ArrayList<Receipt> allTransactions;
@@ -33,6 +37,10 @@ public class BankAccount implements Serializable {
         this.accountId = idSetter();
         if (!firstName.equals("temp"))
             allAccounts.add(this);
+        //jadid
+        allAccountIDs.add(accountId);
+        allAccountsByUserName.put(userName,passWord);
+
         withdrawalTransactions = new ArrayList<>();
         depositTransactions = new ArrayList<>();
         allTransactions = new ArrayList<>();
@@ -137,8 +145,20 @@ public class BankAccount implements Serializable {
         return json;
     }
 
+    public String getPassWord() {
+        return passWord;
+    }
+
     public static ArrayList<BankAccount> getAllBankAccounts(){
         return allAccounts;
+    }
+
+    public static ArrayList<Integer> getAllAccountIDs() {
+        return allAccountIDs;
+    }
+
+    public static HashMap<String, String> getAllAccountsByUserName() {
+        return allAccountsByUserName;
     }
 
     public static void reloadObjectsFromDatabase(){
@@ -146,5 +166,13 @@ public class BankAccount implements Serializable {
         for (BankAccount bankAccount : bankAccounts) {
             allAccounts.add(bankAccount);
         }
+        for (BankAccount bankAccount : bankAccounts) {
+            allAccountIDs.add(bankAccount.getAccountId());
+        }
+        for (BankAccount bankAccount : bankAccounts) {
+            allAccountsByUserName.put(bankAccount.getUserName(),bankAccount.getPassWord());
+        }
     }
+
+
 }
