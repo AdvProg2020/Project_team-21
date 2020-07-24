@@ -75,12 +75,12 @@ public class BankServer {
             validTokens = new HashMap<>();
             tokenPerAccount = new HashMap<>();
             allAccountIds = new ArrayList<>();
-            BankDataBase bankDataBase = new BankDataBase(allAccounts,allAccountIds);
+//            BankDataBase bankDataBase = new BankDataBase(allAccounts,allAccountIds);
             File file = new File("src/main/java/Bank/bankDataBase/allBankAccounts.json");
             if (file.exists()) {
-                allAccountIds = bankDataBase.readAllAccountIds();
-                allAccounts = bankDataBase.readAllAccounts();
-                bankDataBase.dataReader();
+//                allAccountIds = bankDataBase.readAllAccountIds();
+//                allAccounts = bankDataBase.readAllAccounts();
+//                bankDataBase.dataReader();
             } else {
                 allAccounts.put("shop", "shop");
                 allAccountIds.add(1);
@@ -157,9 +157,9 @@ public class BankServer {
                         String token = inputs[1];
                         getBalanceByToken(token);
                     } else if (input.equals("terminate")) {
-                        System.out.println(allAccounts.keySet().toString());
-                        BankDataBase bankDataBase = new BankDataBase(this.allAccounts,this.allAccountIds);
-                        bankDataBase.dataSavor();
+//                        System.out.println(allAccounts.keySet().toString());
+//                        BankDataBase bankDataBase = new BankDataBase(this.allAccounts,this.allAccountIds);
+//                        bankDataBase.dataSavor();
                     }else if (input.startsWith("exit")) {
                         outputStream.writeUTF("Successfully Logged out!");
                         outputStream.flush();
