@@ -144,6 +144,27 @@
     -fx-scale-x: 1.05 !important;
 }
 
+.deliveredBtn {
+    -fx-background-color: #23E142;
+    -fx-label-padding: 3 3 3 3;
+}
+
+.deliveredBtn:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+.notDeliveredBtn {
+    -fx-background-color: #F3D813;
+    -fx-label-padding: 3 3 3 3;
+}
+
+.notDeliveredBtn:hover {
+    -fx-scale-y: 1.05 !important;
+    -fx-scale-x: 1.05 !important;
+}
+
+
 .offDetailsCard {
     -fx-padding: 10 0 20 0;
 }

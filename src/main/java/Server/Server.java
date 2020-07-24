@@ -577,7 +577,23 @@ public class Server {
                         sendMessageToClient(output);
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETALLBUYLOGS.toString())){
-
+                        String output = "NONE";
+                        int i = 0;
+                        for (String s : BuyLog.getAllBuyLogs().keySet()) {
+                            BuyLog buyLog = BuyLog.getAllBuyLogs().get(s);
+                            if(i!=0)
+                                output+=" - ";
+                            else
+                                output = "";
+                            output += buyLog.getLogId() + "&" + buyLog.getTotalDiscountAmount() + "&" + buyLog.getPrice() + "&" + buyLog.getDate() + "&" + buyLog.getReceiverAddress() + "&" + buyLog.getReceiverPhoneNo() + "&" + buyLog.getReceiverName()
+                            + "&" + buyLog.isDelivered();
+                            i++;
+                        }
+                        sendMessageToClient(output);
+                    }
+                    else if(request.equalsIgnoreCase(ServerRequest.UPDATEDELIVERLOG.toString())){
+                        BuyLog buyLog = BuyLog.getAllBuyLogs().get(data);
+                        buyLog.setDelivered(true);
                     }
                     else if(request.equalsIgnoreCase(ServerRequest.GETBUYLOGPRODUCTS.toString())){
                         String output = "NONE";

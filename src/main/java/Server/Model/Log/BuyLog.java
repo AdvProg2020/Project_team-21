@@ -23,7 +23,7 @@ public class BuyLog extends Log implements Serializable {
             , String receiverName, String receiverAddress, String receiverPhoneNo, String receiverPostalCode,ArrayList<String> sellersUsernames)
     {
         super(logId, date, totalDiscountAmount, totalAmount, allProducts, sellerUserName, receiverUserName,receiverName,receiverAddress,receiverPhoneNo,receiverPostalCode);
-        addSellLog(this);
+        addSellLog(this,logId);
         for (String username : sellersUsernames) {
             this.sellersUsernames.add(username);
         }
@@ -48,9 +48,9 @@ public class BuyLog extends Log implements Serializable {
         return sellersUsernames;
     }
 
-    public void addSellLog(BuyLog buyLog)
+    public void addSellLog(BuyLog buyLog ,String logID)
     {
-        allBuyLogs.put(buyLog.getLogId(),buyLog);
+        allBuyLogs.put(logID,buyLog);
     }
     public void removeSellLog(BuyLog buyLog)
     {
