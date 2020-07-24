@@ -76,15 +76,18 @@ public class BankServer {
             tokenPerAccount = new HashMap<>();
             allAccountIds = new ArrayList<>();
 //            BankDataBase bankDataBase = new BankDataBase(allAccounts,allAccountIds);
-            File file = new File("src/main/java/Bank/bankDataBase/allBankAccounts.json");
-            if (file.exists()) {
-//                allAccountIds = bankDataBase.readAllAccountIds();
-//                allAccounts = bankDataBase.readAllAccounts();
-//                bankDataBase.dataReader();
-            } else {
+//            File file = new File("src/main/java/Bank/bankDataBase/allBankAccounts.json");
+            if(allAccounts.isEmpty()){
                 allAccounts.put("shop", "shop");
                 allAccountIds.add(1);
             }
+//            if (file.exists()) {
+////                allAccountIds = bankDataBase.readAllAccountIds();
+////                allAccounts = bankDataBase.readAllAccounts();
+////                bankDataBase.dataReader();
+//            } else {
+//
+//            }
             System.out.println(allAccountIds.toString());
             System.out.println(allAccounts.toString());
         }
@@ -98,10 +101,10 @@ public class BankServer {
                     System.out.println("bank voroodi gereft " +input);
                     if (input.startsWith("create_account")) {
                         String[] inputs = input.split("\\s");
-                        if (inputs.length != 6){
-                            outputStream.writeUTF("invalid input");
-                            outputStream.flush();
-                        }
+//                        if (inputs.length != 6){
+//                            outputStream.writeUTF("invalid input");
+//                            outputStream.flush();
+//                        }
                         String firstName = inputs[1];
                         String lastName = inputs[2];
                         String username = inputs[3];
@@ -110,19 +113,21 @@ public class BankServer {
                         createAccount(firstName, lastName, username, password, repeatedPassword);
                     } else if (input.startsWith("get_token")) {
                         String[] inputs = input.split("\\s");
-                        if (inputs.length != 3){
-                            outputStream.writeUTF("invalid input");
-                            outputStream.flush();
-                        }
+//                        if (inputs.length != 3){
+//                            System.out.println("get token vali ridm");
+//                            outputStream.writeUTF("invalid input");
+//                            outputStream.flush();
+//                        }
+                        System.out.println("get token vali naridm");
                         String username = inputs[1];
                         String password = inputs[2];
                         createToken(username, password);
                     } else if (input.startsWith("create_receipt")) {
                         String[] inputs = input.split("\\s");
-                        if (inputs.length != 7){
-                            outputStream.writeUTF("invalid parameters passed");
-                            outputStream.flush();
-                        }
+//                        if (inputs.length != 7){
+//                            outputStream.writeUTF("invalid parameters passed");
+//                            outputStream.flush();
+//                        }
                         String token = inputs[1];
                         String receiptType = inputs[2];
                         String money = inputs[3];
@@ -132,28 +137,28 @@ public class BankServer {
                         interpret(token,receiptType,money,sourceID,destID,description);
                     } else if (input.startsWith("get_transactions")) {
                         String[] inputs = input.split("\\s");
-                        if (inputs.length != 3){
-                            outputStream.writeUTF("invalid input");
-                            outputStream.flush();
-                        }
+//                        if (inputs.length != 3){
+//                            outputStream.writeUTF("invalid input");
+//                            outputStream.flush();
+//                        }
                         String token = inputs[1];
                         String type = inputs[2];
                         getTransactions(token,type);
                     } else if (input.startsWith("pay")) {
                         String[] inputs = input.split("\\s");
-                        if (inputs.length != 2){
-                            outputStream.writeUTF("invalid input");
-                            outputStream.flush();
-                        }
+//                        if (inputs.length != 2){
+//                            outputStream.writeUTF("invalid input");
+//                            outputStream.flush();
+//                        }
                         String receiptId = inputs[1];
                         performPayment(receiptId);
                         System.out.println(shoppingCenter.getValue());
                     } else if (input.startsWith("get_balance")) {
                         String[] inputs = input.split("\\s");
-                        if (inputs.length != 2){
-                            outputStream.writeUTF("invalid input");
-                            outputStream.flush();
-                        }
+//                        if (inputs.length != 2){
+//                            outputStream.writeUTF("invalid input");
+//                            outputStream.flush();
+//                        }
                         String token = inputs[1];
                         getBalanceByToken(token);
                     } else if (input.equals("terminate")) {
@@ -166,18 +171,20 @@ public class BankServer {
                         clientSocket.close();
                         System.out.println("Connection closed!!!");
                         break;
-                    }else {
-                        System.out.println("invalid input");
                     }
+//                    else {
+//                        System.out.println("too else");
+//                        System.out.println("invalid input");
+//                    }
                 }
             } catch (Exception e) {
 //                System.err.println(e.getMessage());
-                try {
-                    outputStream.writeUTF("database error");
-                    outputStream.flush();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+//                try {
+////                    outputStream.writeUTF("database error");
+////                    outputStream.flush();
+//                } catch (IOException ioException) {
+//                    ioException.printStackTrace();
+//                }
             }
         }
 

@@ -1803,7 +1803,9 @@ public class Server {
                             if(customer.getAccountBalance() >= amount){
                                 String receiptID = ServerCenter.getInstance().createReceiptBank("move",Double.toString(amount),customer.getBankAccountID(),"1","Charging wallet",
                                         customer.getUsername(),customer.getPassword());
+                                System.out.println("bia receipt " + receiptID);
                                 String result = ServerCenter.getInstance().payBank(receiptID);
+                                System.out.println("pay ham krd " + result);
                                 customer.getWallet().depositMoney(amount);
                                 sendError("Your wallet has been charged.",false);
                             }else{
