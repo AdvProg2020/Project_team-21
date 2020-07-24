@@ -72,6 +72,51 @@ public class Main extends Application {
 
     }
 
+//    private static void ConnectBankClient() throws IOException {
+//        Scanner scn = new Scanner(System.in);
+//        Socket bankSocket = new Socket("localhost", 8787);
+//        dis = new DataInputStream(bankSocket.getInputStream());
+//        dos = new DataOutputStream(bankSocket.getOutputStream());
+//        Thread sendMessage = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//
+//                    // read the message to deliver.
+//                    String msg = scn.nextLine();
+//                    try {
+//                        // write on the output stream
+//                        dos.writeUTF(msg);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//        // readMessage thread
+//        Thread readMessage = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                while (true) {
+//                    try {
+//                        // read the message sent to this client
+//                        String msg = dis.readUTF();
+//                        System.out.println(msg);
+//
+//                    } catch (IOException e) {
+//
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//
+//        readMessage.start();
+//        sendMessage.start();
+//    }
+
     private static void expireAfterShut(){
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
