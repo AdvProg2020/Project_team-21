@@ -8,13 +8,8 @@ import Server.Model.Off;
 import Server.Model.Filters.*;
 import Server.Model.Sorts.ProductsSort;
 import Server.ServerCenter;
-import javafx.scene.image.Image;
-
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Control {
@@ -25,11 +20,9 @@ public class Control {
     public static String currentUserSort = "";
     public static String currentRequestSort = "";
     private HashMap<String,File> allFiles = new HashMap<>();
-//    Account user = null;
-//    ShoppingCart signOutCart = new ShoppingCart(null,randomString(5));
     private static Control instance;
-
-
+    private int commission = 0;
+    private double leastAmountWallet = 0;
 
     private Control() {
 
@@ -119,15 +112,15 @@ public class Control {
 
     public void createAccount(String type, String username, String password, String firstName, String lastName, String email, String phoneNumber, String verifyPassword, Company company, boolean login, String photo,String token) throws Exception {
         //5 errors
-        if(!token.equalsIgnoreCase("NULL")){
-//            Account user = ServerCenter.getInstance().getAccountFromToken(token);
-            if (checkIfCustomer(token)) {
-                throw new Exception("You are a customer and can't make a new user");
-            }
-//            if (!(user instanceof Manager) && type.equalsIgnoreCase("manager") && !Manager.getAllManagers().isEmpty()) {
-//                throw new Exception("You should be a manager to create a manager account");
+//        if(!token.equalsIgnoreCase("NULL")){
+////            Account user = ServerCenter.getInstance().getAccountFromToken(token);
+//            if (checkIfCustomer(token)) {
+//                throw new Exception("You are a customer and can't make a new user");
 //            }
-        }
+////            if (!(user instanceof Manager) && type.equalsIgnoreCase("manager") && !Manager.getAllManagers().isEmpty()) {
+////                throw new Exception("You should be a manager to create a manager account");
+////            }
+//        }
         if (!verifyPassword.equals(password)) {
             throw new Exception("Your password doesn't match");
         }
@@ -547,4 +540,23 @@ public class Control {
         return allFiles;
     }
 
+    public double getLeastAmountWallet() {
+        return leastAmountWallet;
+    }
+
+    public void setLeastAmountWallet(double leastAmountWallet) {
+        this.leastAmountWallet = leastAmountWallet;
+    }
+
+    public int getCommission() {
+        return commission;
+    }
+
+    public void setCommission(int commission) {
+        this.commission = commission;
+    }
+
+    public double calculateFinalAfterCommission(double amount){
+        return amount - (amount*commission/100);
+    }
 }

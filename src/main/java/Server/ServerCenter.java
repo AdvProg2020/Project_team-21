@@ -3,6 +3,7 @@ package Server;
 import Server.Model.Account.Account;
 
 import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -62,6 +63,7 @@ public class ServerCenter {
         for (String s : data) {
             result += " " + s;
         }
+        System.out.println("also here " + result);
         try {
             bankOutput.writeUTF(result);
             bankOutput.flush();
@@ -70,28 +72,43 @@ public class ServerCenter {
         }
     }
 
-    public void createAccountBank(String firstName, String lastName, String username, String password, String repeat_password){
+    public String createAccountBank(String firstName, String lastName, String username, String password, String repeat_password){
         sendMessageToBank("create_account",firstName,lastName,username,password,repeat_password);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void getTokenBank(String username, String password){
+    public String getTokenBank(String username, String password){
         sendMessageToBank("get_token",username,password);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void createReceiptBank(String token, String receiptType, String money, String sourceID, String destID, String description){
+    public String createReceiptBank(String receiptType, String money, String sourceID, String destID, String description, String username, String password){
+        String token = getTokenBank(username,password);
         sendMessageToBank("create_receipt",token,receiptType,money,sourceID,destID,description);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void getTransactionsBank(String token, String type){
+    public String getTransactionsBank(String type, String username, String password){
+        String token = getTokenBank(username,password);
         sendMessageToBank("get_transactions",token,type);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void payBank(String receiptID){
+    public String payBank(String receiptID){
         sendMessageToBank("pay",receiptID);
+        String response = readMessageFromBank();
+        return response;
     }
 
-    public void getBalanceBank(String token){
+    public String getBalanceBank(String username, String password){
+        String token = getTokenBank(username,password);
         sendMessageToBank("get_balance",token);
+        String response = readMessageFromBank();
+        return response;
     }
 
     public String readMessageFromBank(){
@@ -102,5 +119,17 @@ public class ServerCenter {
             e.printStackTrace();
         }
         return response;
+    }
+
+    public void connectToBank(){
+        try {
+            Socket bankSocket = new Socket("localhost",8585);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(bankSocket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(bankSocket.getOutputStream()));
+            ServerCenter.getInstance().setBankOutput(dataOutputStream);
+            ServerCenter.getInstance().setBankInput(dataInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

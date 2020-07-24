@@ -3,9 +3,8 @@ package Server.Model.Account;
 import Server.Controller.Control;
 import Server.Controller.Sort;
 import Server.Model.*;
-//import Server.Model.BankPrime.BankAccount;
 import Server.Model.Log.BuyLog;
-
+import Server.ServerCenter;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,18 +20,17 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
     private ArrayList<String> buyLogs = new ArrayList<>();
     public ArrayList<String> offs = new ArrayList<>();
     private ArrayList<String> files = new ArrayList<>();
-    public double balance;
-    private Wallet wallet;
+    private String bankAccountID;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewCustomer(this);
 //        SaveData.saveData(this, getUsername(), SaveData.customerFile);
         String cartID = Control.getInstance().randomString(5);
-        ShoppingCart cart = new ShoppingCart(this, cartID);
+        new ShoppingCart(this, cartID);
         setShoppingCart(cartID);
-//        this.wallet = new Wallet(this , balance);
-//        this.bankAccount = new BankAccount(firstName , lastName , username , password);
+        new Wallet(Control.getInstance().getLeastAmountWallet(),username);
+        bankAccountID = ServerCenter.getInstance().createAccountBank(firstName,lastName,username,password,password);
     }
 
     //    public static void rewriteFiles(){
@@ -78,9 +76,6 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
                 shoppingCart = cart;
                 break;
             }
-//            if(cart.getCartID().equals(this.shoppingCart)){
-//
-//            }
         }
         return shoppingCart;
     }
@@ -135,15 +130,10 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         this.shoppingCart = id;
     }
 
-//    public void addOffs (Off off){
-//
-////    }
-//    public void removeOffs (Off off){
-//
-//    }
 
-    public double getBalance() {
-        return balance;
+    public double getAccountBalance() {
+        double result = Double.parseDouble(ServerCenter.getInstance().getBalanceBank(getUsername(),getPassword()));
+        return result;
     }
 
     @Override
@@ -151,8 +141,13 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         return "Customer";
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public String payWithBankAccount(double amount) throws Exception{
+        String receiptID = ServerCenter.getInstance().createReceiptBank("move",Double.toString(amount),getBankAccountID(),"1","Buying from payment page",
+                getUsername(),getPassword());
+        String result = ServerCenter.getInstance().payBank(receiptID);
+        if(!result.equalsIgnoreCase("done successfully"))
+            throw new Exception(result);
+        return "DONE";
     }
 
     @Override
@@ -172,9 +167,9 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         return allCustomer;
     }
 
-    public void sortBuyLogsByLogId(){
-        this.setBuyLogs(Sort.sortBuyLogArrayList(this.getBuyLogs()));
-    }
+//    public void sortBuyLogsByLogId(){
+//        this.setBuyLogs(Sort.sortBuyLogArrayList(this.getBuyLogs()));
+//    }
 
     private void setBuyLogs(ArrayList<BuyLog> buyLogs) {
         for (BuyLog log : buyLogs) {
@@ -198,16 +193,24 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         }
     }
 
-    public void addBalance(double amount){
-        balance += amount;
-    }
-
     public Wallet getWallet() {
+        Wallet wallet = null;
+        for (Wallet allWallet : Wallet.getAllWallets()) {
+            if(allWallet.getAccount().equals(this.getUsername())){
+                wallet = allWallet;
+                break;
+            }
+        }
         return wallet;
     }
 
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
+    public double getWalletBalance(){
+        System.out.println("dar wallet " + getWallet().getMoney());
+        return getWallet().getMoney();
+    }
+
+    public String getBankAccountID() {
+        return bankAccountID;
     }
 
     public ArrayList<String> getFiles() {
@@ -217,5 +220,13 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         files.add(file);
 //        rewriteFiles();
 //        Account.rewriteFiles();
+    }
+
+    public static boolean customerExists(String username){
+        for (Customer customer : allCustomer) {
+            if(customer.getUsername().equals(username))
+                return true;
+        }
+        return false;
     }
 }

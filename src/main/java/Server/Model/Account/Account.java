@@ -1,13 +1,7 @@
 package Server.Model.Account;
 
-//import Server.Model.BankPrime.BankAccount;
 import Bank.BankAccount;
-import Server.Model.DiscountCode;
-
-import Server.Controller.Sort;
 import Server.Model.SaveData;
-
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,11 +14,8 @@ public abstract class Account implements Serializable {
     private String email;
     private String phoneNumber;
     private String password;
-    private double credit;
     private String address = "--";
     private String imagePath;
-    protected String bankAccountId;
-    protected BankAccount bankAccount;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         this.username = username;
@@ -33,9 +24,7 @@ public abstract class Account implements Serializable {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.credit = 0;
         imagePath = photo;
-        bankAccountId = "";
         if(!(this instanceof Seller))
             allAccounts.put(username,this);
 //        SaveData.saveData(this, getUsername()+getPassword(), SaveData.accountFile);
@@ -65,14 +54,6 @@ public abstract class Account implements Serializable {
         if(address == null)
             address = "No Address";
         this.address = address;
-    }
-
-    public String getBankAccountId() {
-        return bankAccountId;
-    }
-
-    public void setBankAccountId(String bankAccountId) {
-        this.bankAccountId = bankAccountId;
     }
 
     public void setImagePath(String imagePath) {
@@ -109,13 +90,6 @@ public abstract class Account implements Serializable {
         return password;
     }
 
-    public double getCredit() {
-        return credit;
-    }
-
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
 
     public static HashMap<String, Account> getAllAccounts() {
         return allAccounts;
@@ -158,7 +132,6 @@ public abstract class Account implements Serializable {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
-                ", credit=" + credit +
                 '}';
     }
 

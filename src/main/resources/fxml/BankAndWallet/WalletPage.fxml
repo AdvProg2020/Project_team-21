@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.GUIControllers.Bank.BankGUIControllers.WalletPageControllers"
+            fx:controller="Client.GUIControllers.Bank.WalletPageControllers"
             prefHeight="400.0" prefWidth="600.0"
             stylesheets="@/css/walletStyle.css">
 
@@ -96,7 +96,7 @@
                     <Button
                             text="Change Wallet"
                             styleClass="changeWalletBtn"
-                            onAction="#ChangeWallet"
+                            onAction="#charge"
                     >
 
                     </Button>
@@ -124,6 +124,7 @@
                     <TextField
                             promptText="Amount"
                             styleClass="walletTextField"
+                            fx:id="withdrawWalletTextField"
                     >
 
                     </TextField>
@@ -133,6 +134,7 @@
                     <Button
                             text="Change Wallet"
                             styleClass="changeWalletBtn"
+                            onAction="#withdraw"
                     >
 
                     </Button>

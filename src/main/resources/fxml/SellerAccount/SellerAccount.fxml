@@ -51,7 +51,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="25.0" layoutY="187.0" prefHeight="439.0" prefWidth="592.0" style="-fx-border-color: White;">
+      <AnchorPane layoutX="25.0" layoutY="187.0" prefHeight="439.0" prefWidth="592.0" style="-fx-border-color: White;" AnchorPane.topAnchor="140.0">
          <children>
             <Line endX="259.4027099609375" endY="427.644287109375" startX="259.4027099609375" startY="15.8714599609375" stroke="#9e9191" AnchorPane.leftAnchor="275.0" />
             <Line endX="-19.999969482421875" endY="253.0098114013672" layoutX="27.0" layoutY="-159.0" startX="542.4276123046875" startY="253.00967407226562" stroke="#9e9191" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0" />
@@ -153,7 +153,7 @@
             <Font name="Hiragino Sans W2" size="30.0" />
          </font>
       </Button>
-      <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="297.0" layoutY="110.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="53.0" />
+      <Circle fx:id="photoCircle" fill="DODGERBLUE" layoutX="297.0" layoutY="110.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="10.0" />
       <Button layoutX="35.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="26.0" prefWidth="78.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Hiragino Sans W2" size="30.0" />
@@ -166,14 +166,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane layoutX="647.0" layoutY="458.0" prefHeight="174.0" prefWidth="489.0" style="-fx-border-color: WHITE;">
+      <AnchorPane layoutX="668.0" layoutY="478.0" prefHeight="142.0" prefWidth="234.0" style="-fx-border-color: WHITE;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="400.0">
          <children>
-            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="134.0" text="Balance:" textFill="#3ab214">
+            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="234.0" text="Account Balance" textFill="#3ab214" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font name="Futura Medium" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="balance" layoutX="192.0" layoutY="93.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE">
+            <Label fx:id="accountBalance" layoutX="192.0" layoutY="93.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="Futura Medium" size="35.0" />
                </font>
@@ -190,5 +190,31 @@
             <Font name="Futura Medium" size="25.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="657.0" layoutY="664.0" prefHeight="142.0" prefWidth="362.0" style="-fx-border-color: WHITE;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Label layoutX="39.0" layoutY="48.0" prefHeight="39.0" prefWidth="234.0" text="Wallet Balance" textFill="#3ab214" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Futura Medium" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="walletBalance" layoutX="192.0" layoutY="93.0" prefHeight="47.0" prefWidth="228.0" text="---" textFill="WHITE" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font name="Futura Medium" size="35.0" />
+               </font>
+            </Label>
+            <Button layoutX="345.0" layoutY="-14.0" mnemonicParsing="false" onMouseClicked="#goToWallet" prefHeight="72.0" prefWidth="94.0" styleClass="Button" stylesheets="@../../css/ManagerAccount.css" textFill="#cfb936" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Hiragino Sans W2" size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="60.0" fitWidth="74.0">
+                     <image>
+                        <Image url="@../../images/wallet_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

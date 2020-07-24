@@ -17,7 +17,7 @@ public class Manager extends Account implements Comparable<Manager>, Serializabl
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewManager(this);
 //        SaveData.saveData(this, getUsername(), SaveData.managerFile);
-        this.bankAccount = new BankAccount(firstName , lastName , username , password);
+//        this.bankAccount = new BankAccount(firstName , lastName , username , password);
     }
 
 //    public static void rewriteFiles(){

@@ -1,42 +1,38 @@
 package Server.Model;
 
+import java.util.ArrayList;
+
 public class Wallet {
 
     private double money;
-    private String bankAccountUsername;
-    private String bankAccountPassword;
-    private String currentBankToken;
-    private int accountId;
+    private String account;
+    private static ArrayList<Wallet> allWallets = new ArrayList<>();
 
-    public Wallet(double money, String bankAccountUsername, String bankAccountPassword, int id, String currentBankToken) {
+    public Wallet(double money, String account) {
         this.money = money;
-        this.bankAccountUsername = bankAccountUsername;
-        this.bankAccountPassword = bankAccountPassword;
-        this.currentBankToken = currentBankToken;
-        this.accountId = id;
+        this.account = account;
+        allWallets.add(this);
     }
 
     public double getMoney() {
         return money;
     }
 
-    public String getBankAccountUsername() {
-        return bankAccountUsername;
+    public void depositMoney(double amount){
+        System.out.println(amount + " deposit krd");
+        money += amount;
     }
 
-    public String getBankAccountPassword() {
-        return bankAccountPassword;
+    public void withdrawMoney(double amount){
+        System.out.println(amount + " withdraw krd");
+        money -= amount;
     }
 
-    public String getCurrentBankToken() {
-        return currentBankToken;
+    public String getAccount() {
+        return account;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public static ArrayList<Wallet> getAllWallets() {
+        return allWallets;
     }
 }

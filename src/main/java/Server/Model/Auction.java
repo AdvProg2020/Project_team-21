@@ -1,5 +1,6 @@
 package Server.Model;
 
+import Server.Controller.Control;
 import Server.Controller.ControlCustomer;
 import Server.DatabaseHandler;
 import Server.Model.Account.Account;
@@ -87,33 +88,16 @@ public class Auction implements Serializable {
     }
 
     public void addCustomersSuggestion(Customer customer, double amount) throws Exception{
-        if(customer.getBalance() < amount)
-            throw new Exception("You don't have enough balance.");
+        if(customer.getWalletBalance() - Control.getInstance().getLeastAmountWallet() < amount)
+            throw new Exception("You don't have enough money in your wallet.");
         if(amount <= maxSuggestedAmount)
             throw new Exception("You should place a higher bid.");
+        if(isExpired())
+            throw new Exception("Auction has been expired.");
         customersSuggestionAmount.put(customer.getUsername(), amount);
         maxSuggestedAmount = amount;
         auctionWinner = customer.getUsername();
     }
-//
-//    public void changeCustomersSuggestion(Customer customer, double amount) throws Exception{
-//        if(!canCustomerChangeAmount(customer, amount))
-//            throw new Exception("Your new suggestion should be higher.");
-//        if(canCustomerGiveSuggestion(customer,amount))
-//            throw new Exception("You don't have enough credit.");
-//        else{
-//            customersSuggestionAmount.replace(customer.getUsername(), amount);
-//            maxSuggestedAmount = amount;
-//            auctionWinner = customer.getUsername();
-//        }
-//    }
-
-//    public boolean canCustomerChangeAmount(Customer customer, double newAmount){
-//        if(customersSuggestionAmount.get(customer.getUsername())<newAmount && newAmount > maxSuggestedAmount) {
-//            return true;
-//        }
-//        return false;
-//    }
 
     public boolean isExpired(){
         if(LocalDateTime.now().isAfter(endTime) && !sold){
