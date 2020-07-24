@@ -184,7 +184,7 @@ public class ClientChatController extends GraphicFather implements Initializable
         VBox vBox2 = new VBox();
         contactButtons.clear();
         for (String client : client.allClientsArr) {
-            if(client.contains("supporter")){
+            if(client.contains("Support")){
                 VBox v = new VBox();
                 Button comment = new Button();
                 contactButtons.add(comment);
