@@ -26,7 +26,7 @@ public class SellLog extends Log implements Serializable {
                 seller.addSellLog(this);
             }
         }
-        SaveData.saveData(this, getLogId(), SaveData.sellLogFile);
+//        SaveData.saveData(this, getLogId(), SaveData.sellLogFile);
     }
     //    public static void rewriteFiles(){
 //        for (String s : SellLog.getAllSellLogs().keySet()) {
@@ -36,12 +36,12 @@ public class SellLog extends Log implements Serializable {
 //            SaveData.saveData(log, s, SaveData.sellLogFile);
 //        }
 //    }
-    public static void rewriteFiles(){
-        for (String s : SellLog.getAllSellLogs().keySet()) {
-            SellLog log = SellLog.getAllSellLogs().get(s);
-            SaveData.saveDataRunning(log, s, SaveData.sellLogFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : SellLog.getAllSellLogs().keySet()) {
+//            SellLog log = SellLog.getAllSellLogs().get(s);
+//            SaveData.saveDataRunning(log, s, SaveData.sellLogFile);
+//        }
+//    }
     public void addSellLog(SellLog sellLog)
     {
         allSellLogs.put(sellLog.getLogId(),sellLog);
@@ -51,12 +51,12 @@ public class SellLog extends Log implements Serializable {
         allSellLogs.remove(sellLog.getLogId(),sellLog);
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
-        for (Object object : objects) {
-            allSellLogs.put(((SellLog)object).getLogId() ,(SellLog) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
+//        for (Object object : objects) {
+//            allSellLogs.put(((SellLog)object).getLogId() ,(SellLog) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<SellLog> sellLogs = new ArrayList<>(DatabaseHandler.selectFromSellLog());

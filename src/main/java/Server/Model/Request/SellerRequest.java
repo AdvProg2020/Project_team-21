@@ -24,26 +24,26 @@ public class SellerRequest extends Request {
         seller.setRequestID(requestId);
         requestedSellers.put(requestId,seller);
         System.out.println("0");
-        SaveData.saveData(this, requestId, SaveData.sellerReqFile);
+//        SaveData.saveData(this, requestId, SaveData.sellerReqFile);
         System.out.println("1");
-        SaveData.saveData(seller, requestId+userName, SaveData.sellerRequestFile);
+//        SaveData.saveData(seller, requestId+userName, SaveData.sellerRequestFile);
         System.out.println("2");
     }
 
-    public static void rewriteFiles(){
-        for (String s : requestedSellers.keySet()) {
-            Seller seller = requestedSellers.get(s);
-            SaveData.saveDataRunning(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : requestedSellers.keySet()) {
+//            Seller seller = requestedSellers.get(s);
+//            SaveData.saveDataRunning(seller, s+seller.getUsername(), SaveData.sellerRequestFile);
+//        }
+//    }
 
     @Override
     public void declineReq(String requestId)
     {
-        File file = new File("Database/" + requestId+(requestedSellers.get(requestId).getUsername())+".json");
-        file.delete();
-        File file1 = new File("Database/" + requestId+".json");
-        file1.delete();
+//        File file = new File("Database/" + requestId+(requestedSellers.get(requestId).getUsername())+".json");
+//        file.delete();
+//        File file1 = new File("Database/" + requestId+".json");
+//        file1.delete();
         requestedSellers.remove(requestId);
         getAllRequests().remove(requestId);
     }
@@ -60,17 +60,17 @@ public class SellerRequest extends Request {
         return "Seller Request";
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerRequestFile)));
-        for (Object object : objects) {
-            requestedSellers.put(((Seller)object).getRequestID() ,(Seller) (object));
-        }
-
-        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.sellerReqFile)));
-        for (Object object : objects2) {
-            getAllRequests().put(((SellerRequest)object).getRequestId() ,(SellerRequest) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerRequestFile)));
+//        for (Object object : objects) {
+//            requestedSellers.put(((Seller)object).getRequestID() ,(Seller) (object));
+//        }
+//
+//        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.sellerReqFile)));
+//        for (Object object : objects2) {
+//            getAllRequests().put(((SellerRequest)object).getRequestId() ,(SellerRequest) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Seller> sellers = new ArrayList<>(DatabaseHandler.selectFromSellerAtRequest());

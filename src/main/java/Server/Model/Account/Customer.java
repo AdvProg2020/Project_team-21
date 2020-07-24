@@ -25,7 +25,7 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo) {
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewCustomer(this);
-        SaveData.saveData(this, getUsername(), SaveData.customerFile);
+//        SaveData.saveData(this, getUsername(), SaveData.customerFile);
         String cartID = Control.getInstance().randomString(5);
         new ShoppingCart(this, cartID);
         setShoppingCart(cartID);
@@ -33,11 +33,18 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         bankAccountID = ServerCenter.getInstance().createAccountBank(firstName,lastName,username,password,password);
     }
 
-    public static void rewriteFiles(){
-        for (Customer customer : Customer.getAllCustomer()) {
-            SaveData.saveDataRunning(customer, customer.getUsername(), SaveData.customerFile);
-        }
-    }
+    //    public static void rewriteFiles(){
+//        for (Customer customer : Customer.getAllCustomer()) {
+//            File file = new File(customer.getUsername()+".json");
+//            file.delete();
+//            SaveData.saveData(customer, customer.getUsername(), SaveData.customerFile);
+//        }
+//    }
+//    public static void rewriteFiles(){
+//        for (Customer customer : Customer.getAllCustomer()) {
+//            SaveData.saveDataRunning(customer, customer.getUsername(), SaveData.customerFile);
+//        }
+//    }
 
     public boolean hasBought(Product product){
         if(product.getBuyers().contains(this))
@@ -47,8 +54,8 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
 
     public static void removeCustomer (Customer customer){
         allCustomer.remove(customer);
-        File file = new File("Database/" + customer.getUsername()+".json");
-        file.delete();
+//        File file = new File("Database/" + customer.getUsername()+".json");
+//        file.delete();
     }
     public void addBuyLogs (BuyLog buyLog){
         buyLogs.add(buyLog.getLogId());
@@ -170,13 +177,13 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
         }
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.customerFile)));
-        for (Object object : objects) {
-            allCustomer.add((Customer) (object));
-            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.customerFile)));
+//        for (Object object : objects) {
+//            allCustomer.add((Customer) (object));
+//            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Customer> customers = new ArrayList<>(DatabaseHandler.selectFromCustomer());
@@ -211,8 +218,8 @@ public class Customer extends Account implements Comparable<Customer>, Serializa
     }
     public void addFile(String file){
         files.add(file);
-        rewriteFiles();
-        Account.rewriteFiles();
+//        rewriteFiles();
+//        Account.rewriteFiles();
     }
 
     public static boolean customerExists(String username){

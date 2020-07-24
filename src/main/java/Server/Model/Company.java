@@ -22,13 +22,13 @@ public class Company implements Serializable {
         this.name = name;
         this.location = location;
         allCompanies.put(name,this);
-        SaveData.saveData(this, getName(), SaveData.companyFile);
+//        SaveData.saveData(this, getName(), SaveData.companyFile);
     }
-    public static void rewriteFiles(){
-        for (String s : allCompanies.keySet()) {
-            SaveData.saveDataRunning(allCompanies.get(s), s, SaveData.companyFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (String s : allCompanies.keySet()) {
+//            SaveData.saveDataRunning(allCompanies.get(s), s, SaveData.companyFile);
+//        }
+//    }
 
     public static HashMap<String, Company> getAllCompanies() {
         return allCompanies;
@@ -71,12 +71,12 @@ public class Company implements Serializable {
         allSellers.add(seller.getUsername());
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.companyFile)));
-        for (Object object : objects) {
-            allCompanies.put(((Company)object).getName() ,(Company)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.companyFile)));
+//        for (Object object : objects) {
+//            allCompanies.put(((Company)object).getName() ,(Company)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Company> companies  = new ArrayList<>(DatabaseHandler.selectFromCompany());

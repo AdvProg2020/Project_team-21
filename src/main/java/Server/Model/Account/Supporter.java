@@ -14,7 +14,7 @@ public class Supporter extends Account implements Serializable {
     public Supporter(String username, String firstName, String lastName, String email, String phoneNumber, String password,String photo){
         super(username, firstName, lastName, email, phoneNumber, password,photo);
         addNewSupporter(this);
-        SaveData.saveData(this, getUsername(), SaveData.supportFile);
+//        SaveData.saveData(this, getUsername(), SaveData.supportFile);
     }
 
     @Override
@@ -32,17 +32,17 @@ public class Supporter extends Account implements Serializable {
 
     public static void removeSupport (Supporter supporter){
         allSupporters.remove(supporter);
-        File file = new File("Database/" + supporter.getUsername()+".json");
-        file.delete();
+//        File file = new File("Database/" + supporter.getUsername()+".json");
+//        file.delete();
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.supportFile)));
-        for (Object object : objects) {
-            allSupporters.add((Supporter) (object));
-            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.supportFile)));
+//        for (Object object : objects) {
+//            allSupporters.add((Supporter) (object));
+//            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Supporter> supporters = new ArrayList<>(DatabaseHandler.selectFromSupporter());

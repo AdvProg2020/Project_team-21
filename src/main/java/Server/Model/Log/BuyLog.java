@@ -34,15 +34,22 @@ public class BuyLog extends Log implements Serializable {
             }
         }
         delivered = false;
-        SaveData.saveData(this, getLogId(), SaveData.buyLogFile);
+//        SaveData.saveData(this, getLogId(), SaveData.buyLogFile);
     }
-
-    public static void rewriteFiles(){
-        for (String s : BuyLog.getAllBuyLogs().keySet()) {
-            BuyLog log = BuyLog.getAllBuyLogs().get(s);
-            SaveData.saveDataRunning(log, s, SaveData.buyLogFile);
-        }
-    }
+    //    public static void rewriteFiles(){
+//        for (String s : BuyLog.getAllBuyLogs().keySet()) {
+//            BuyLog log = BuyLog.getAllBuyLogs().get(s);
+//            File file = new File(s+".json");
+//            file.delete();
+//            SaveData.saveData(log, s, SaveData.buyLogFile);
+//        }
+//    }
+//    public static void rewriteFiles(){
+//        for (String s : BuyLog.getAllBuyLogs().keySet()) {
+//            BuyLog log = BuyLog.getAllBuyLogs().get(s);
+//            SaveData.saveDataRunning(log, s, SaveData.buyLogFile);
+//        }
+//    }
 
     public ArrayList<String> getSellersUsernames() {
         return sellersUsernames;
@@ -57,12 +64,12 @@ public class BuyLog extends Log implements Serializable {
         allBuyLogs.remove(buyLog.getLogId(),buyLog);
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
-        for (Object object : objects) {
-            allBuyLogs.put(((BuyLog)object).getLogId() ,(BuyLog) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
+//        for (Object object : objects) {
+//            allBuyLogs.put(((BuyLog)object).getLogId() ,(BuyLog) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<BuyLog> buyLogs = new ArrayList<>(DatabaseHandler.selectFromBuyLog());

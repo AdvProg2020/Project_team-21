@@ -155,18 +155,18 @@ public class Log implements Comparable<Log>, Serializable {
 //
 //    }
 
-    public static void getObjectFromDatabase(){
-
-        ArrayList<Object> objects1 = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
-        for (Object object : objects1) {
-            allLogs.put(((Log)object).getLogId() ,(Log) (object));
-        }
-
-        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
-        for (Object object : objects2) {
-            allLogs.put(((Log)object).getLogId() ,(Log) (object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//
+//        ArrayList<Object> objects1 = new ArrayList<>((SaveData.reloadObject(SaveData.sellLogFile)));
+//        for (Object object : objects1) {
+//            allLogs.put(((Log)object).getLogId() ,(Log) (object));
+//        }
+//
+//        ArrayList<Object> objects2 = new ArrayList<>((SaveData.reloadObject(SaveData.buyLogFile)));
+//        for (Object object : objects2) {
+//            allLogs.put(((Log)object).getLogId() ,(Log) (object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<BuyLog> buyLogs = new ArrayList<>(DatabaseHandler.selectFromBuyLog());

@@ -29,11 +29,11 @@ public class Seller extends Account implements Comparable<Seller>, Serializable 
         bankAccountID = ServerCenter.getInstance().createAccountBank(firstName,lastName,username,password,password);
     }
 
-    public static void rewriteFiles(){
-        for (Seller seller : Seller.getAllSeller()) {
-            SaveData.saveDataRunning(seller, seller.getUsername(), SaveData.sellerFile);
-        }
-    }
+//    public static void rewriteFiles(){
+//        for (Seller seller : Seller.getAllSeller()) {
+//            SaveData.saveDataRunning(seller, seller.getUsername(), SaveData.sellerFile);
+//        }
+//    }
 
     public String getRequestID() {
         return requestID;
@@ -45,8 +45,8 @@ public class Seller extends Account implements Comparable<Seller>, Serializable 
 
     public static void removeSeller (Seller seller){
         allSellers.remove(seller);
-        File file = new File("Database/" + seller.getUsername()+".json");
-        file.delete();
+//        File file = new File("Database/" + seller.getUsername()+".json");
+//        file.delete();
     }
     public void removeOff(Off off)
     {
@@ -60,7 +60,7 @@ public class Seller extends Account implements Comparable<Seller>, Serializable 
     public static void addNewSeller (Seller seller){
         Account.addAccount(seller);
         allSellers.add(seller);
-        SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
+//        SaveData.saveData(seller, seller.getUsername(), SaveData.sellerFile);
     }
 
     public Company getCompany() {
@@ -152,14 +152,14 @@ public class Seller extends Account implements Comparable<Seller>, Serializable 
         this.setSellLogs(Sort.sortSellLogArrayList(this.getSellLogs()));
     }
 
-    public static void getObjectFromDatabase(){
-        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerFile)));
-        for (Object object : objects) {
-            allSellers.add((Seller) (object));
-
-            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
-        }
-    }
+//    public static void getObjectFromDatabase(){
+//        ArrayList<Object> objects = new ArrayList<>((SaveData.reloadObject(SaveData.sellerFile)));
+//        for (Object object : objects) {
+//            allSellers.add((Seller) (object));
+//
+//            getAllAccounts().put(((Account)object).getUsername() ,(Account)(object));
+//        }
+//    }
 
     public static void reloadObjectsFromDatabase(){
         ArrayList<Seller> sellers = new ArrayList<>(DatabaseHandler.selectFromSeller());
