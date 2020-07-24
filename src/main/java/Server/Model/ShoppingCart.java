@@ -6,10 +6,11 @@ import Server.Model.Account.Customer;
 import Server.Model.Account.Seller;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
 
     private static ArrayList<ShoppingCart> allShoppingCarts = new ArrayList<>();
     private HashMap<String, Integer> productsQuantity = new HashMap<>();

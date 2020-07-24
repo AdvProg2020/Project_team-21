@@ -1,8 +1,9 @@
 package Bank;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Receipt {
+public class Receipt implements Serializable {
     String token;
     String receiptType;
     String sourceAccountID;
