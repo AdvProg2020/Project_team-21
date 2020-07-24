@@ -154,16 +154,4 @@ public class Main extends Application {
         }
         stage.show();
     }
-
-//    public static String BankButtonTest(String msg){
-//        String res="";
-//        try {
-//            dos.writeUTF(msg);
-//            res = dis.readUTF();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return res;
-//    }
-
 }
